@@ -2,12 +2,15 @@ from django.db import models
 from django.contrib.auth.models import User
 
 # Create your models here.
+# 引入这个 Field，其它的不要变
+from DjangoUeditor.models import UEditorField
 
 
 class Topic(models.Model):
     '''用户学习的主题'''
     text = models.CharField(max_length=200)
     date_added = models.DateTimeField(auto_now_add=True)
+    date_update = models.DateTimeField(auto_now=True)
     owner=models.ForeignKey(User)
 
     def __str__(self):
@@ -18,8 +21,12 @@ class Topic(models.Model):
 class Entry(models.Model):
     '''学到的有关某个主题的具体知识'''
     topic = models.ForeignKey(Topic)
-    text = models.TextField()
+    text = UEditorField('内容', height=300, width=1000,
+        default=u'', blank=True, imagePath="uploads/images/",
+        toolbars='besttome', filePath='uploads/files/')
+
     date_added = models.DateTimeField(auto_now_add=True)
+    date_update = models.DateTimeField(auto_now=True)
 
     class Meta:
         verbose_name_plural = 'entries'
