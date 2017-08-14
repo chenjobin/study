@@ -20,8 +20,9 @@
     				</small>
     			</h3>
     		</div>
-    		<div class="panel-body">
-    			{{entry.text|linebreaks}}    			
+    		<div class="panel-body" style="word-wrap:break-word ">
+					{{entry.text|safe}}   
+    			 			
     		</div>
     	</div>
     {%empty%}

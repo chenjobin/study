@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 
 from .models import Topic,Entry
 from .forms import TopicForm,EntryForm
+from DjangoUeditor.models import UEditorField
 
 # Create your views here.
 def index(request):
