@@ -13,6 +13,7 @@ urlpatterns=[
 
     #特定主题的详细页面
     url(r'^topics/(?P<topic_id>\d+)/$',views.topic,name='topic'),
+    url(r'^tag/(?P<tag_id>\d+)$',views.tag,name='tag'),
 
     #用于添加新主题的网页
     url(r'^new_topic/$',views.new_topic,name='new_topic'),
@@ -22,4 +23,7 @@ urlpatterns=[
 
     #用于编辑条目的页面
     url(r'^edit_entry/(?P<entry_id>\d+)/$',views.edit_entry,name='edit_entry'),
+
+    #用于详细条目内容的页面
+    url(r'^detail_entry/(?P<entry_id>\d+)/$',views.detail_entry,name='detail_entry'),
 ]

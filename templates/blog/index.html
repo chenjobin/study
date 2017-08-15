@@ -1,4 +1,4 @@
-{% extends 'blog/base.html' %}
+{% extends 'base.html' %}
 
 {% block header %}	
       <div class="jumbotron">
@@ -17,4 +17,12 @@
 	你自己打的Blog,并列出所有的主题
 </h2>
 <h2>Learning Log helps you keep track of your learning,for any topic you're learning about.这是一段Learning Log简介</h2>
+<div id="tags">
+    {% for tag in tags%}
+            <a href="{% url 'blog:tag' tag.id %}">{{tag}}</a>
+    {%empty%}
+  			
+    {%endfor%}
+</div>    
+    
 {% endblock content %}

@@ -3,15 +3,36 @@ from django.http import HttpResponseRedirect,Http404
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 
-from .models import Topic,Entry
+from .models import Topic,Entry,Tag
 from .forms import TopicForm,EntryForm
-from DjangoUeditor.models import UEditorField
+from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
 
 # Create your views here.
 def index(request):
     '''Blog的主页'''
-    # return render(request,'learning_logs/index.html')    制作多个项目时，index,base等放templates根目录
-    return render(request,'blog/index.html')
+    # return render(request,'blog/index.html') # 制作多个项目时，index,base等放templates根目录
+    tags=Tag.objects.order_by('date_added')
+    context={'tags':tags}
+    return render(request,'blog/index.html',context)
+
+def tag(request,tag_id):
+    '''显示特定tag及其所有的条目'''
+    limit = 7  # 每页显示的记录数
+    tag=Tag.objects.get(id=tag_id)
+
+    entries=tag.entry_set.order_by('-date_added')
+    pages = Paginator(entries, limit)  # 实例化一个分页对象
+
+    page = request.GET.get('page',1)  # 获取GET请求的参数，得到当前页码。若没有该参数，默认为1
+    try:
+        entries = pages.page(page)  # 获取某页对应的记录
+    except PageNotAnInteger:  # 如果页码不是个整数
+        entries = pages.page(1)  # 取第一页的记录
+    except EmptyPage:  # 如果页码太大，没有相应的记录
+        entries = pages.page(pages.num_pages)  # 取最后一页的记录
+
+    context={'tag':tag,'entries':entries,'pages':pages}
+    return render(request,'blog/tag.html',context)
 
 @login_required
 def topics(request):
@@ -23,12 +44,25 @@ def topics(request):
 @login_required
 def topic(request,topic_id):
     '''显示特定主题及其所有的条目'''
+    limit = 7  # 每页显示的记录数
     topic=Topic.objects.get(id=topic_id)
-    #确认请求的主题属于当前用户
+        #确认请求的主题属于当前用户
     if topic.owner !=request.user:
         raise Http404
+
     entries=topic.entry_set.order_by('-date_added')
-    context={'topic':topic,'entries':entries}
+    pages = Paginator(entries, limit)  # 实例化一个分页对象
+
+    page = request.GET.get('page',1)  # 获取GET请求的参数，得到当前页码。若没有该参数，默认为1
+    try:
+        entries = pages.page(page)  # 获取某页对应的记录
+    except PageNotAnInteger:  # 如果页码不是个整数
+        entries = pages.page(1)  # 取第一页的记录
+    except EmptyPage:  # 如果页码太大，没有相应的记录
+        entries = pages.page(pages.num_pages)  # 取最后一页的记录
+
+
+    context={'topic':topic,'entries':entries,'pages':pages}
     return render(request,'blog/topic.html',context)
 
 @login_required
@@ -91,3 +125,11 @@ def edit_entry(request,entry_id):
 
     context={'entry':entry,'topic':topic,'form':form}
     return render(request,'blog/edit_entry.html',context)
+
+def detail_entry(request,entry_id):
+    entry=Entry.objects.get(id=entry_id)
+    topic=entry.topic
+    entry.increase_read_num()
+
+    context={'topic':topic,'entry':entry}
+    return render(request,'blog/detail_entry.html',context)
