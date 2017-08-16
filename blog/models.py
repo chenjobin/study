@@ -42,7 +42,7 @@ class Entry(models.Model):
         default=u'', blank=True, imagePath="uploads/images/",
         toolbars='besttome', filePath='uploads/files/')
     author = models.ForeignKey(User, blank=True, null=True, verbose_name='作者')
-    tags = models.ManyToManyField(Tag,blank=True) #多对多字段，绑定下面的Tag模型
+    tags = models.ManyToManyField(Tag,blank=True,verbose_name='标签') #多对多字段，绑定下面的Tag模型
     date_added = models.DateTimeField('发布时间',auto_now_add=True)
     date_update = models.DateTimeField('更新时间',auto_now=True)
     recommend = models.BooleanField('推荐',default=False) #布尔字段，我用于标记是否是推荐博文

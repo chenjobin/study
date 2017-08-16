@@ -1,6 +1,41 @@
 {% extends 'base.html' %}
 
+{# 导入评论库模块的模版标签 #}
+{% load comments %}
+
 {%block header%}
+	    {#设置提交评论#}
+    <script type="text/javascript">
+        $(document).ready(function() {
+        $('#comment_form').submit(function() {
+        	if ($("#id_honeypot").val().length!=0) {
+                        alert("Stop!垃圾评论");
+                        return false;
+            };
+            if ($("#id_comment").val().trim().length==0){
+                alert("Error:请输入您的评论");
+                $("#id_comment").focus();
+                return false;
+            };
+ 
+            $("#id_timestamp").value=event.timeStamp;
+            $.ajax({
+                type: "POST",
+                data: $('#comment_form').serialize(),
+                url: "{% comment_form_target %}",
+                cache: false,
+                dataType: "html",
+                success: function(html, textStatus) {
+                    window.location.reload();
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert("评论出错，" + errorThrown);
+                }
+            });
+            return false;
+            });
+        });
+    </script>
 {%endblock header%}
 
 
@@ -10,7 +45,7 @@
     	<div class="">
                 <h2>{{entry.title}}</h2>
                 <ul class="list-inline">
-                    <li>发布时间：{{entry.date_added|date:'M d, Y H:i'}}</li>
+                    <li>发布时间：{{entry.date_added|date:'Y-m-d, H:i'}}</li>
                     <li>作者：{{entry.author}}</li> 
                     <li>阅读({{entry.read_num}})</li>
                     <li>评论(0)</li>
@@ -31,13 +66,81 @@
            </div>
     </div>
     <div class="panel-body" style="word-wrap:break-word ">
-		{{entry.text|safe}}}       			 			
+		{{entry.text|safe}}       			 			
     </div>
     <div class="panel-footer">
     	<a href="{% url 'blog:new_entry' topic.id %}">add new entry1</a>
     	<a href="{% url 'blog:edit_entry' entry.id %}">edit entry</a>
     </div>
 </div>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4>评论列表</h4>
+    </div>
+ 
+    <div class="panel-body">
+        {% get_comment_list for entry as comments %}
+        {% get_comment_count for entry as comment_count %}
+        {% for comment in comments %}
+            <div class="blog_comment" name="F{{comment.id}}">
+                <p class="comment_title">
+                    #{{ comment.submit_date|date:"Y-m-d H:i"}} @ {{ comment.user_name }}：
+                </p>
+                <p class="comment_content">{{ comment.comment }}</p>
+            </div>            
+        {% empty %}
+            <span>飘过的大虾，留个名呗</span>
+        {% endfor %}
+    </div>
+	<div class="panel-footer">
+		<h4>新的评论</h4>
+		{% get_comment_form for entry as blog_form %}
+		 
+		<form id="comment_form" 
+		      class="form-horizontal" 
+		      action="{% comment_form_target %}" 
+		      method="post"
+		>
+		    {% csrf_token %}
+		 
+		    {# 必须的字段 #}
+		    {{ blog_form.object_pk }}
+		    {{ blog_form.content_type }}
+		    {{ blog_form.timestamp }}
+		    {{ blog_form.site }}
+		    {{ blog_form.submit_date }}
+		    {{ blog_form.security_hash }}
+		 	
+		 	{% if user.is_authenticated %}
+			    {# 评论内容 #}
+			    <a name="newcomment" id="newcomment"></a>
+			    <div class="control-group">
+			        <div class="controls">
+			            <textarea rows="5" style="width:100%" id="id_comment" name="comment" >
+			            </textarea>
+			        </div>
+			    </div>
+			    {# 表单按钮 #}
+			    <div class="controls">
+			        <div class="form-actions">
+			            <input class="btn btn-info" id="submit_btn" type="submit" name="submit" value="提交"/>
+			            <input type="hidden" name="next" value="{%url 'blog:detail_entry' entry.id%}"/>
+			        </div>
+			    </div>
+			{% else %}
+			    {# 防垃圾评论 #}
+				<p style="display:none;">
+        			<label for="id_honeypot">如果你在该字段中输入任何内容，你的评论就会被视为垃圾评论。</label>
+        			<input type="text" name="honeypot" id="id_honeypot">
+    			</p>
+    			<p>
+    				<label for="id_honeypot">需要登录才可以评论哦。</label>
+			        <a href="{% url 'users:register' %}">点击注册</a>&nbsp;&nbsp;&nbsp;
+       				<a href="{% url 'users:login' %}">点击登录</a>
+			    </p>   
+			{% endif %}
+		 </form>
+	</div>
+</div>  
 
-    
 {%endblock content%}

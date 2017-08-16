@@ -34,21 +34,22 @@ def tag(request,tag_id):
     context={'tag':tag,'entries':entries,'pages':pages}
     return render(request,'blog/tag.html',context)
 
-@login_required
+# @login_required
 def topics(request):
     '''显示所有的主题'''
-    topics=Topic.objects.filter(owner=request.user).order_by('date_added')
+    # topics=Topic.objects.filter(owner=request.user).order_by('date_added')
+    topics=Topic.objects.order_by('date_added')
     context={'topics':topics}
     return render(request,'blog/topics.html',context)
 
-@login_required
+# @login_required
 def topic(request,topic_id):
     '''显示特定主题及其所有的条目'''
     limit = 7  # 每页显示的记录数
     topic=Topic.objects.get(id=topic_id)
-        #确认请求的主题属于当前用户
-    if topic.owner !=request.user:
-        raise Http404
+    #确认请求的主题属于当前用户
+    # if topic.owner !=request.user:
+    #     raise Http404
 
     entries=topic.entry_set.order_by('-date_added')
     pages = Paginator(entries, limit)  # 实例化一个分页对象
@@ -65,7 +66,7 @@ def topic(request,topic_id):
     context={'topic':topic,'entries':entries,'pages':pages}
     return render(request,'blog/topic.html',context)
 
-@login_required
+# @login_required
 def new_topic(request):
     '''添加新主题'''
     if request.method != 'POST':
@@ -84,7 +85,7 @@ def new_topic(request):
     context={'form':form}
     return render(request,'blog/new_topic.html',context)
 
-@login_required
+# @login_required
 def new_entry(request,topic_id):
     '''在特定的主题中添加新条目'''
     topic=Topic.objects.get(id=topic_id)
@@ -111,7 +112,8 @@ def edit_entry(request,entry_id):
     topic=entry.topic
 
     if topic.owner !=request.user:
-        raise Http404
+        # raise Http404
+        return render(request,'blog/404_edit.html')
 
     if request.method != 'POST':
         #初次请求，使用当前条目填充表单

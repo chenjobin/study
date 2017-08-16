@@ -40,11 +40,15 @@ INSTALLED_APPS = [
 
     'bootstrap3',
     'DjangoUeditor',
+    'django_comments',
+    'django.contrib.sites',
 
     'blog',
     'users',
 
 ]
+
+SITE_ID = 1 #django-contrib-comments模块引入
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
