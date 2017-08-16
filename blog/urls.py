@@ -26,4 +26,7 @@ urlpatterns=[
 
     #用于详细条目内容的页面
     url(r'^detail_entry/(?P<entry_id>\d+)/$',views.detail_entry,name='detail_entry'),
+
+    #搜索框
+    url(r'^search/$',views.search,name='search'),
 ]

@@ -71,8 +71,24 @@
     <div class="panel-footer">
     	<a href="{% url 'blog:new_entry' topic.id %}">add new entry1</a>
     	<a href="{% url 'blog:edit_entry' entry.id %}">edit entry</a>
+    	<p>
+		    {% if pre_entry %}
+		        <a href="{%url 'blog:detail_entry' pre_entry.id%}">上一篇：{{pre_entry.title}}</a>
+		    {% else %}
+		         	上一篇：没有了
+		    {% endif %}
+		</p>
+		<p>
+		    {% if next_entry %}
+		        <a href="{%url 'blog:detail_entry' next_entry.id%}">下一篇：{{next_entry.title}}</a>
+		    {% else %}
+		        	下一篇：没有了
+		    {% endif %}
+		</p>
     </div>
+
 </div>
+{# 评论功能 #}
 <div class="panel panel-default">
     <div class="panel-heading">
         <h4>评论列表</h4>
@@ -122,8 +138,8 @@
 			    </div>
 			    {# 表单按钮 #}
 			    <div class="controls">
-			        <div class="form-actions">
-			            <input class="btn btn-info" id="submit_btn" type="submit" name="submit" value="提交"/>
+			        <div class="form-actions text-right">
+			            <input class="btn btn-info" id="submit_btn" type="submit" name="submit" value="提  交"/>
 			            <input type="hidden" name="next" value="{%url 'blog:detail_entry' entry.id%}"/>
 			        </div>
 			    </div>
