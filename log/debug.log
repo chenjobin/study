@@ -115,3 +115,108 @@ Traceback (most recent call last):
   File "F:\Django\study\users\views.py", line 26, in register
     password = form.cleaned_data['password']
 KeyError: 'password'
+2017-08-17 15:34:29,669 [Thread-6:6540] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /users/register/
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Django\study\users\views.py", line 38, in register
+    send_active_email(email,active_code)
+  File "F:\Django\study\users\views.py", line 58, in send_active_email
+    url='http://127.0.0.1%s' % (reverse('user_active',args=(active_code,)))
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\urls\base.py", line 91, in reverse
+    return force_text(iri_to_uri(resolver._reverse_with_prefix(view, prefix, *args, **kwargs)))
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\urls\resolvers.py", line 497, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'user_active' not found. 'user_active' is not a valid view function or pattern name.
+2017-08-17 15:38:13,476 [Thread-3:3276] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /users/register/
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Django\study\users\views.py", line 32, in register
+    new_user = User.objects.create_user(username, email, password,is_active)
+TypeError: create_user() takes from 2 to 4 positional arguments but 5 were given
+2017-08-17 15:40:25,676 [Thread-2:6392] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /users/register/
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Django\study\users\views.py", line 32, in register
+    new_user = User.objects.create_user(username, email, password,is_active)
+TypeError: create_user() takes from 2 to 4 positional arguments but 5 were given
+2017-08-17 15:42:28,261 [Thread-2:11640] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /users/register/
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Django\study\users\views.py", line 39, in register
+    send_active_email(email,active_code)
+  File "F:\Django\study\users\views.py", line 59, in send_active_email
+    url='http://127.0.0.1%s' % (reverse('user_active',args=(active_code,)))
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\urls\base.py", line 91, in reverse
+    return force_text(iri_to_uri(resolver._reverse_with_prefix(view, prefix, *args, **kwargs)))
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\urls\resolvers.py", line 497, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'user_active' not found. 'user_active' is not a valid view function or pattern name.
+2017-08-17 15:46:04,574 [Thread-4:4844] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /users/register/
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Django\study\users\views.py", line 39, in register
+    send_active_email(email,active_code)
+  File "F:\Django\study\users\views.py", line 59, in send_active_email
+    url='http://127.0.0.1%s' % (reverse('user_active',args=(active_code,)))
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\urls\base.py", line 91, in reverse
+    return force_text(iri_to_uri(resolver._reverse_with_prefix(view, prefix, *args, **kwargs)))
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\urls\resolvers.py", line 497, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'user_active' not found. 'user_active' is not a valid view function or pattern name.
+2017-08-17 15:47:27,407 [Thread-3:3412] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /users/register/
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Django\study\users\views.py", line 39, in register
+    send_active_email(email,active_code)
+  File "F:\Django\study\users\views.py", line 59, in send_active_email
+    url='http://127.0.0.1%s' % (reverse('user_active',args=(active_code,)))
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\urls\base.py", line 91, in reverse
+    return force_text(iri_to_uri(resolver._reverse_with_prefix(view, prefix, *args, **kwargs)))
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\urls\resolvers.py", line 497, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'user_active' not found. 'user_active' is not a valid view function or pattern name.
+2017-08-17 15:49:56,732 [Thread-2:11312] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /users/register/
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Django\study\users\views.py", line 44, in register
+    login(request,authenticated_user)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\contrib\auth\__init__.py", line 154, in login
+    request.session[SESSION_KEY] = user._meta.pk.value_to_string(user)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\utils\functional.py", line 239, in inner
+    return func(self._wrapped, *args)
+AttributeError: 'AnonymousUser' object has no attribute '_meta'
