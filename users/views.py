@@ -1,5 +1,5 @@
 from django.shortcuts import render,render_to_response
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect,HttpResponse
 from django.core.urlresolvers import reverse
 from django.contrib.auth import login,logout,authenticate
 from django.contrib.auth.forms import UserCreationForm
@@ -7,7 +7,7 @@ from django.contrib.auth.forms import UserCreationForm
 from .forms import RegisterForm
 from django.contrib.auth.models import User
 from django.core.mail import EmailMultiAlternatives   #发送邮件
-import time, re
+import time, re,json
 
 def logout_view(request):
     '''注销用户'''
@@ -42,7 +42,9 @@ def register(request):
             #让用户自动登录，再重定向到主页
             # authenticated_user=authenticate(username=new_user.username,password=request.POST['password1'])
             # login(request,authenticated_user)
-            return HttpResponseRedirect(reverse('blog:index'))
+            # return HttpResponseRedirect(reverse('blog:index'))
+            response_data={'success': u'注册成功,请前往邮箱激活后登录,Check Email to Active your account'}
+            return HttpResponse(json.dumps(response_data,ensure_ascii = False), content_type="application/json")
 
     context={'form':form}
     return render(request,'users/register.html',context)

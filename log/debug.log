@@ -220,3 +220,14 @@ Traceback (most recent call last):
   File "C:\Anaconda3\envs\web\lib\site-packages\django\utils\functional.py", line 239, in inner
     return func(self._wrapped, *args)
 AttributeError: 'AnonymousUser' object has no attribute '_meta'
+2017-08-17 16:23:46,622 [Thread-26:10796] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /users/register/
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Django\study\users\views.py", line 46, in register
+    response_data['success'] = '×¢²á³É¹¦,ÇëÇ°ÍùÓÊÏä¼¤»îºóµÇÂ¼'
+NameError: name 'response_data' is not defined
