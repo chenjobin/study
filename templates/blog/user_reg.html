@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{%block content%}
+
+<!-- 注册模态框（Modal） -->
+<div class="" id="RegModal" tabindex="-1" role="dialog" aria-labelledby="RegModalLabel" aria-hidden="true">
+   <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <form id="reg_form" action="#" method="POST">
+                
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                          ×
+                    </button>
+                    <h4 class="modal-title" id="RegModalLabel">
+                       注册 <small>是新的开始</small>
+                    </h4>
+                </div>
+ 
+                <div class="modal-body" style="text-align:center;">
+                    <div id="reg_control">
+                        <div class="control-group">
+                            <label class="control-label" for="reg_name">邮箱：</label>
+                            <input id="reg_name" class="input-xlarge" name="reg_name" placeholder="请输入邮箱" autocomplete="off" type="text">
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="reg_pwd">密码：</label>
+                            <input id="reg_pwd" class="input-xlarge" name="reg_pwd" placeholder="请输入密码" autocomplete="off" type="password">
+                        </div>
+                    </div>
+                    <p id="reg_tip" style="color:red;"></p>
+                </div>
+ 
+                <div class="modal-footer">
+                    <input class="btn btn-primary" value="注册" type="submit">
+                    <input class="btn btn-default" data-dismiss="modal" value="关闭" type="button">
+                </div>
+            </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+{%endblock content%}

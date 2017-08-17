@@ -61,3 +61,57 @@ Traceback (most recent call last):
   File "C:\Anaconda3\envs\web\lib\smtplib.py", line 867, in sendmail
     raise SMTPSenderRefused(code, resp, from_addr)
 smtplib.SMTPSenderRefused: (501, b'mail from address must be same as authorization user', 'chenjobin@163.com')
+2017-08-17 15:02:05,299 [Thread-12:11100] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /users/register/
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Django\study\users\views.py", line 23, in register
+    if form.is_valid():
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\forms\forms.py", line 183, in is_valid
+    return self.is_bound and not self.errors
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\forms\forms.py", line 175, in errors
+    self.full_clean()
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\forms\forms.py", line 385, in full_clean
+    self._clean_form()
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\forms\forms.py", line 412, in _clean_form
+    cleaned_data = self.clean()
+  File "F:\Django\study\users\forms.py", line 19, in clean
+    elif self.cleaned_data['password2'] != self.cleaned_data['password']:
+KeyError: 'password'
+2017-08-17 15:06:28,125 [Thread-11:9444] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /users/register/
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Django\study\users\views.py", line 27, in register
+    email=request['email'])
+TypeError: 'WSGIRequest' object is not subscriptable
+2017-08-17 15:08:25,942 [Thread-41:5244] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /users/register/
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Django\study\users\views.py", line 27, in register
+    email=request['email'])
+TypeError: 'WSGIRequest' object is not subscriptable
+2017-08-17 15:17:12,064 [Thread-8:11880] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /users/register/
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Django\study\users\views.py", line 26, in register
+    password = form.cleaned_data['password']
+KeyError: 'password'
