@@ -45,41 +45,7 @@
             });            
             return false;
         	});
-        	
-	        //绑定回复提交事件
-			$('#reply_update_form').submit(function() {
-			    if ($("#id_honeypot_reply").val().length!=0) {alert("Stop!垃圾评论");return false;};
-			    if ($("#id_comment_reply").val().length==0) {alert("Error:请输入您的回复内容");$("#id_comment").focus();return false;};
-			 
-			    $("#id_timestamp").val(event.timeStamp);
-			 
-			    $.ajax({
-			        type: "POST",
-			        data: $('#reply_update_form').serialize(),
-			        url: "{% comment_form_target %}",
-			        cache: false,
-			        dataType: "json",
-			        success: function(json, textStatus) {
-			            if(json['success']){
-			                window.location.reload();
-			            }else{
-			                if(json['code']==501){
-			                    alert('您尚未登录，请先登录才能评论。');
-			                }else if(json['code']==502){
-			                    alert('您尚未激活，请先激活您的账户才能评论。');
-			                }else{
-								$("#demo").prepend(json['message']);
-			                    alert('评论出错，请刷新重试\n'+json['message']);
-			                }
-			            }
-			        },
-			        error: function (XMLHttpRequest, textStatus, errorThrown) {
-			            alert("评论出错\n请检查是否登录了或者刷新试试\n" + errorThrown);
-			        }
-			    });
-			    return false;
-			});
-			
+        		        
 			//绑定回复按钮的鼠标经过事件
 			$(".comment_content,.comment_reply li").each(function(){
 			    $(this).hover(function(){
@@ -88,6 +54,19 @@
 			        $(this).children(".reply_button").remove();
 			    });
 			});
+			
+			//取消回复-按钮
+	        $("#reply_cancel").click(function(){
+	            //设置相关数据
+	            $("#reply_to").val('0');
+	            $("#root_id").val('0');
+	            $("#reply_name").val("");
+	
+	            //调整页面显示
+	            $("#comment_title").text("新的评论");
+	            $("#reply_text_pre").hide();
+	            $("#reply_cancel").hide();
+	        });
         });
 		 
 		//回复按钮点击触发的方法
@@ -100,18 +79,43 @@
 		    var role=$c.attr("role");
 		    var base=$c.attr("base");
 		 
-		    //显示回复面板
-		    $("#reply_form").hide();
-		    $c.after($("#reply_form"));
-		    $("#reply_form").slideDown(200);
-		 
 		    //设置回复表单相关值
 		    $("#reply_to").val(role);
 		    $("#root_id").val(root);
 		    $("#reply_name").val(base);
+		  	
+		  	//显示回复的相关内容
+            $("#comment_title").text("回复：" + base);
+            $("#reply_text_pre").html($("#comment_"+role).html()); //显示要回复的评论内容
+            $("#reply_text_pre").show();
+            $("#reply_cancel").show();
+
+            //评论库获得焦点
+            $("#id_comment").focus();
+
 		    return false;
 		}
+
     </script>
+    <style>
+		    	/*评论*/
+		.blog_comment{
+		    border-bottom: 1px solid #ddd;
+		}
+		.blog_comment .comment_title{
+		    margin-top: 0.5em;
+		}
+		.blog_comment .comment_content{
+		    padding: 0.5em;
+		    border-radius: 6px;
+		    background-color: #efefef;
+		}
+		/*回复*/
+		.blog_comment .comment_reply{
+		    text-indent: 0.5em;
+		}
+    	
+    </style>
 
 {%endblock header%}
 
@@ -182,7 +186,8 @@
 		        <p class="comment_content"
 		           root='{{comment.id}}'
 		           role='{{comment.id}}'
-		           base='{{comment.user_name}}'>
+		           base='{{comment.user_name}}'
+		           id='comment_{{comment.id}}'>
 		           {{ comment.comment }}
 		        </p>
 		 
@@ -190,7 +195,8 @@
 		            {% for reply in comment.replies %}
 		                <li root='{{reply.root_id}}'
 		                    role='{{reply.id}}'
-		                    base='{{reply.user_name}}'>
+		                    base='{{reply.user_name}}'
+		                    id='comment_{{comment.id}}'>
 		                    {{reply.user_name}} 回复 {{reply.reply_name}} ({{ reply.submit_date|date:"Y-m-d H:i"}})：{{ reply.comment }}
 		                </li>
 		            {% endfor %}
@@ -200,10 +206,23 @@
             <span>飘过的大虾，留个名呗</span>
         {% endfor %}
     </div>
-	<div class="panel-footer">
-		<h4>新的评论</h4>
+</div>
+<div class="panel panel-default">
+
+	<div class="panel-heading">
+		<div class="row">
+		<div class="col-md-5 col-lg-5 col-sm-5 col-xs-5">
+			<h4 id="comment_title">新的评论</h4>
+		</div> 
+        <div class="text-right ">
+            <button id="reply_cancel" class="btn btn-warning comment_title_btn " 
+            	style="display:none;position:relative;left:-10px;">取消回复</button>
+        </div>
+       </div>
+            <p id="reply_text_pre" style="display:none"></p>
+    </div>
 		{% get_comment_form for entry as blog_form %}
-		 
+	<div class="panel-body">	 
 		<form id="comment_form" 
 		      class="form-horizontal" 
 		      method="post"
@@ -231,6 +250,9 @@
 			        <div class="form-actions text-right">
 			            <input class="btn btn-info" id="submit_btn" type="submit" name="submit" value="提  交"/>
 			            <input type="hidden" name="next" value="{%url 'blog:detail_entry' entry.id%}"/>
+			            <input id="reply_to" type="hidden" name="reply_to" value="0" />
+				        <input id="root_id" type="hidden" name="root_id" value="0" />
+				        <input id="reply_name" type="hidden" name="reply_name" value="">
 			            <input class="btn" id="reset_btn" type="reset" name="submit" value="清空"/>
 			        </div>
 			    </div>
@@ -242,41 +264,10 @@
     			</p>
 
 		 </form>
-		 <div id="reply_form" style="display:none;text-indent:0;">
-		 	{% get_comment_form for entry as blog_form2 %}			 
-			<form id="reply_update_form" class="form-horizontal" method="post">
-			    {% csrf_token %}
-			 
-			    {# 必须的字段 #}
-			    {{ blog_form2.object_pk }}
-			    {{ blog_form2.content_type }}
-			    {{ blog_form2.timestamp }}
-			    {{ blog_form2.site }}
-			    {{ blog_form2.submit_date }}
-			    {{ blog_form2.security_hash }}
-			 	
-			 	<input type="hidden" name="next" value="{%url 'blog:detail_entry' entry.id%}"/>
-		        <input id="reply_to" type="hidden" name="reply_to" value="0" />
-		        <input id="root_id" type="hidden" name="root_id" value="0" />
-		        <input id="reply_name" type="hidden" name="reply_name" value="">
-
-		        <div class="row">
-		            <div class="col-md-12">
-		                <textarea class="input-xlarge comment_text" id="id_comment_reply" name="comment" placeholder="请输入回复内容"></textarea>
-		 
-		                <!--如果你在该字段中输入任何内容，你的评论就会被视为垃圾评论-->
-		                <input type="text" style="display:none;" id="id_honeypot_reply" name="honeypot">
-		            </div>
-		        </div>
-		 
-		        <div class="row">
-		              <div class="form-actions comment_button">
-		                <input class="btn btn-info" id="submit_reply" type="submit" name="submit" value="回复"/>
-		                <input class="btn" id="reset_btn" type="reset" name="submit" value="清空"/>
-		              </div>
-		        </div>
-		    </form>
-		</div>
+	</div>
+	
+	<div class="panel-footer">
+		
 	</div>
 </div>  
 
