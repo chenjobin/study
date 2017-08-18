@@ -87,6 +87,7 @@ class BaseCommentNode(template.Node):
             content_type=ctype,
             object_pk=smart_text(object_pk),
             site__pk=site_id,
+            root_id=0, #change jobin
         )
 
         # The is_public and is_removed fields are implementation details of the
@@ -100,6 +101,16 @@ class BaseCommentNode(template.Node):
             qs = qs.filter(is_removed=False)
         if 'user' in field_names:
             qs = qs.select_related('user')
+        #change : get sub comments
+        for q in qs:  #这里利用python的语言特性，动态加了replies属性，该属性用于获取该评论的所有回复。
+            q.replies=self.comment_model.objects.filter(
+                content_type=ctype,
+                object_pk=smart_text(object_pk),
+                site__pk=settings.SITE_ID,
+                root_id=q.id,
+                is_public=True,
+                is_removed=False,
+            ).order_by('submit_date')
         return qs
 
     def get_target_ctype_pk(self, context):

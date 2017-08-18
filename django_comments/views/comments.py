@@ -29,6 +29,12 @@ class CommentPostBadRequest(http.HttpResponseBadRequest):
             self.content = render_to_string("comments/400-debug.html", {"why": why})
 
 
+#添加返回json的方法，json结构有3个参数（code:返回码,is_success:是否处理成功,message:消息内容）
+def ResponseJson(code, is_success, message):
+    data = {'code':code, 'success':is_success, 'message':message}
+    return http.JsonResponse(data)
+
+
 @csrf_protect
 @require_POST
 def post_comment(request, next=None, using=None):
@@ -49,29 +55,51 @@ def post_comment(request, next=None, using=None):
             data["name"] = request.user.get_full_name() or request.user.get_username()
         if not data.get('email', ''):
             data["email"] = request.user.email
+    #add 2017-08-18 Jobin refer ysh
+    else:
+        return ResponseJson(501, False, 'No Login')
+
+    #add 2017-08-18 Jobin refer ysh
+    if not request.user.is_active:
+        return ResponseJson(502, False, 'User is Not Active')
 
     # Look up the object we're trying to comment about
     ctype = data.get("content_type")
     object_pk = data.get("object_pk")
     if ctype is None or object_pk is None:
-        return CommentPostBadRequest("Missing content_type or object_pk field.")
+        #change 2017-08-18 Jobin refer ysh
+        # return CommentPostBadRequest("Missing content_type or object_pk field.")
+        return ResponseJson(503, False, 'Missing content_type or object_pk field.')
     try:
         model = apps.get_model(*ctype.split(".", 1))
         target = model._default_manager.using(using).get(pk=object_pk)
     except TypeError:
-        return CommentPostBadRequest(
-            "Invalid content_type value: %r" % escape(ctype))
+        #change 2017-08-18 Jobin refer ysh
+        # return CommentPostBadRequest(
+        #     "Invalid content_type value: %r" % escape(ctype))
+        return ResponseJson(504, False, "Invalid content_type value: %r" % escape(ctype))
     except AttributeError:
-        return CommentPostBadRequest(
+        #change 2017-08-18 Jobin refer ysh
+        # return CommentPostBadRequest(
+        #     "The given content-type %r does not resolve to a valid model." % escape(ctype))
+        return ResponseJson(505, False,
             "The given content-type %r does not resolve to a valid model." % escape(ctype))
     except ObjectDoesNotExist:
-        return CommentPostBadRequest(
-            "No object matching content-type %r and object PK %r exists." % (
-                escape(ctype), escape(object_pk)))
+        #change 2017-08-18 Jobin refer ysh
+        # return CommentPostBadRequest(
+        #     "No object matching content-type %r and object PK %r exists." % (
+        #         escape(ctype), escape(object_pk)))
+        return ResponseJson(506, False,
+            "No object matching content-type %r and object PK %r exists." % (escape(ctype),
+                escape(object_pk)))
     except (ValueError, ValidationError) as e:
-        return CommentPostBadRequest(
-            "Attempting go get content-type %r and object PK %r exists raised %s" % (
-                escape(ctype), escape(object_pk), e.__class__.__name__))
+        #change 2017-08-18 Jobin refer ysh
+        # return CommentPostBadRequest(
+        #     "Attempting go get content-type %r and object PK %r exists raised %s" % (
+        #         escape(ctype), escape(object_pk), e.__class__.__name__))
+        return ResponseJson(507, False,
+            "Attempting go get content-type %r and object PK %r exists raised %s" % (escape(ctype),
+                escape(object_pk), e.__class__.__name__))
 
     # Do we want to preview the comment?
     preview = "preview" in data
@@ -81,8 +109,10 @@ def post_comment(request, next=None, using=None):
 
     # Check security information
     if form.security_errors():
-        return CommentPostBadRequest(
-            "The comment form failed security verification: %s" % escape(str(form.security_errors())))
+        #change 2017-08-18 Jobin refer ysh
+        # return CommentPostBadRequest(
+        #     "The comment form failed security verification: %s" % escape(str(form.security_errors())))
+        return ResponseJson(508, False, "The comment form failed security verification: %s" % escape(str(form.security_errors())))
 
     # If there are errors or if we requested a preview show the comment
     if form.errors or preview:
@@ -97,16 +127,24 @@ def post_comment(request, next=None, using=None):
             "comments/%s/preview.html" % model._meta.app_label,
             "comments/preview.html",
         ]
-        return render(request, template_list, {
-                "comment": form.data.get("comment", ""),
-                "form": form,
-                "next": data.get("next", next),
-            },
-        )
+        #change 2017-08-18 Jobin refer ysh
+        # return render(request, template_list, {
+        #         "comment": form.data.get("comment", ""),
+        #         "form": form,
+        #         "next": data.get("next", next),
+        #     },
+        # )
+        return ResponseJson(509, False, form.data.get("comment", ""))
 
     # Otherwise create the comment
     comment = form.get_comment_object(site_id=get_current_site(request).id)
     comment.ip_address = request.META.get("REMOTE_ADDR", None)
+
+    #add 2017-08-18 Jobin refer ysh
+    comment.root_id = data.get('root_id',0)
+    comment.reply_to = data.get('reply_to',0)
+    comment.reply_name = data.get('reply_name','')
+
     if user_is_authenticated:
         comment.user = request.user
 
@@ -119,9 +157,11 @@ def post_comment(request, next=None, using=None):
 
     for (receiver, response) in responses:
         if response is False:
-            return CommentPostBadRequest(
+            #change 2017-08-18 Jobin refer ysh
+            # return CommentPostBadRequest(
+            #     "comment_will_be_posted receiver %r killed the comment" % receiver.__name__)
+            return ResponseJson(510, False,
                 "comment_will_be_posted receiver %r killed the comment" % receiver.__name__)
-
     # Save the comment and signal that it was saved
     comment.save()
     signals.comment_was_posted.send(
@@ -129,9 +169,10 @@ def post_comment(request, next=None, using=None):
         comment=comment,
         request=request
     )
-
-    return next_redirect(request, fallback=next or 'comments-comment-done',
-                         c=comment._get_pk_val())
+    #change 2017-08-18 Jobin refer ysh
+    # return next_redirect(request, fallback=next or 'comments-comment-done',
+    #                      c=comment._get_pk_val())
+    return ResponseJson(200, True, 'comment success')
 
 
 comment_done = confirmation_view(

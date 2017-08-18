@@ -79,6 +79,11 @@ class CommentAbstractModel(BaseCommentAbstractModel):
                                                  'A "This comment has been removed" message will '
                                                  'be displayed instead.'))
 
+    #回复评论reply fields
+    root_id = models.IntegerField(default=0)
+    reply_to = models.IntegerField(default=0)
+    reply_name = models.CharField(max_length=50, blank=True)
+
     # Manager
     objects = CommentManager()
 
