@@ -15,6 +15,8 @@ import django_comments
 from django_comments import signals
 from django_comments.views.utils import next_redirect, confirmation_view
 
+from my_plug.email import send_email_by_template  #导入当前文件夹的email.py
+
 
 class CommentPostBadRequest(http.HttpResponseBadRequest):
     """
@@ -169,6 +171,46 @@ def post_comment(request, next=None, using=None):
         comment=comment,
         request=request
     )
+
+    #add 2017-08-18 Jobin refer ysh
+    try:
+        #判断评论对象是否为博文
+        # 判断评论对象错误了，不知原因，所以取消了判断对象
+        if str(comment.content_type) == '文章':
+            #设置模版对应的参数
+            email_data = {
+                'comment_name' : data["name"],
+                'comment_content' : comment.comment,
+                'comment_url' : u'http://chenzhibin.vip/detail_entry/%s#F%s' % (comment.object_pk, comment.id)}
+            subject = ''    #邮件主题
+            template = ''   #使用的模版
+            to_list = []        #收件人
+
+            if int(comment.root_id) == 0:
+                subject = u'[陈志斌的博客]博文评论'
+                template = 'email/comment.html'
+                #发送给自己（可以写其他邮箱）
+                to_list.append(settings.DEFAULT_FROM_EMAIL)
+            else:
+                subject = u'[陈志斌的博客]评论回复'
+                template = 'email/reply.html'
+                #获取评论对象，找到回复对应的评论
+                comment_model = django_comments.get_model()
+                cams = comment_model.objects.filter(id = comment.reply_to)
+                if cams:
+                    to_list.append(cams[0].user_email)
+                else:
+                    #没有找到评论，就发给自己（可以修改其他邮箱）
+                    to_list.append(settings.DEFAULT_FROM_EMAIL)
+
+            #根据模版发送邮件
+            send_email_by_template(subject, template, email_data, to_list)
+        else:
+            # 其他类型的评论暂不处理
+            pass
+    except Exception as e:
+        #ResponseJson方法是我前面自己加的，可以参考上一篇博文
+        return ResponseJson(200, True, e.message)
     #change 2017-08-18 Jobin refer ysh
     # return next_redirect(request, fallback=next or 'comments-comment-done',
     #                      c=comment._get_pk_val())

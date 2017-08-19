@@ -67,6 +67,18 @@
 	            $("#reply_text_pre").hide();
 	            $("#reply_cancel").hide();
 	        });
+	        
+	        //定位到评论位置
+			if(window.location.hash!=""){
+			    //根据名称获取元素
+			    obj = document.getElementsByName(window.location.hash.split("#")[1])[0];
+			    //DOM对象转为jQuery对象
+			    var $obj = $(obj);
+			    //定位到评论或回复的位置
+			    $("body,html").animate({
+			      scrollTop: $obj.offset().top - 70
+			    }, 0);
+			}
         });
 		 
 		//回复按钮点击触发的方法
@@ -196,7 +208,8 @@
 		                <li root='{{reply.root_id}}'
 		                    role='{{reply.id}}'
 		                    base='{{reply.user_name}}'
-		                    id='comment_{{comment.id}}'>
+		                    id='comment_{{reply.id}}'
+		                    name="F{{reply.id}}">
 		                    {{reply.user_name}} 回复 {{reply.reply_name}} ({{ reply.submit_date|date:"Y-m-d H:i"}})：{{ reply.comment }}
 		                </li>
 		            {% endfor %}
