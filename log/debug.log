@@ -366,3 +366,73 @@ Traceback (most recent call last):
   File "C:\Anaconda3\envs\web1\lib\site-packages\django\urls\resolvers.py", line 497, in _reverse_with_prefix
     raise NoReverseMatch(msg)
 django.urls.exceptions.NoReverseMatch: Reverse for 'detailblog' not found. 'detailblog' is not a valid view function or pattern name.
+2017-08-19 21:08:28,898 [Thread-6:15352] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /users/user_info
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Django\study\users\views.py", line 170, in user_info
+    data['comments_count'] = comments_count.get_comments_count(user.id)
+  File "F:\Django\study\my_plug\comments_count.py", line 5, in get_comments_count
+    comments=Comment.objects.filter(root_id=0).get(user_id=user_id)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\db\models\manager.py", line 190, in __get__
+    cls._meta.object_name,
+AttributeError: Manager isn't available; CommentAbstractModel is abstract
+2017-08-19 21:11:28,986 [Thread-9:6804] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /users/user_info
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Django\study\users\views.py", line 170, in user_info
+    data['comments_count'] = comments_count.get_comments_count(user.id)
+  File "F:\Django\study\my_plug\comments_count.py", line 5, in get_comments_count
+    comments=Comment.objects.filter(root_id=0).get(user_id=user_id)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\db\models\manager.py", line 190, in __get__
+    cls._meta.object_name,
+AttributeError: Manager isn't available; CommentAbstractModel is abstract
+2017-08-19 21:35:21,076 [Thread-2:8336] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /users/user_info
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\db\backends\utils.py", line 65, in execute
+    return self.cursor.execute(sql, params)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\db\backends\sqlite3\base.py", line 328, in execute
+    return Database.Cursor.execute(self, query, params)
+sqlite3.OperationalError: no such table: blog_blog
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Django\study\users\views.py", line 174, in user_info
+    data['all_talk_about'] = comments_count.all_talk_about(user.id)
+  File "F:\Django\study\my_plug\comments_count.py", line 88, in all_talk_about
+    blogs=list(Entry.objects.raw(sql))   #raw_query对象是一个生成器
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\db\models\query.py", line 1233, in __iter__
+    query = iter(self.query)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\db\models\sql\query.py", line 80, in __iter__
+    self._execute_query()
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\db\models\sql\query.py", line 114, in _execute_query
+    self.cursor.execute(self.sql, params)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\db\backends\utils.py", line 80, in execute
+    return super(CursorDebugWrapper, self).execute(sql, params)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\db\backends\utils.py", line 65, in execute
+    return self.cursor.execute(sql, params)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\db\utils.py", line 94, in __exit__
+    six.reraise(dj_exc_type, dj_exc_value, traceback)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\utils\six.py", line 685, in reraise
+    raise value.with_traceback(tb)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\db\backends\utils.py", line 65, in execute
+    return self.cursor.execute(sql, params)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\db\backends\sqlite3\base.py", line 328, in execute
+    return Database.Cursor.execute(self, query, params)
+django.db.utils.OperationalError: no such table: blog_blog

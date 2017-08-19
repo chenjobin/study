@@ -61,7 +61,7 @@
           </ul>
           <ul class="nav navbar-nav navbar-right">
             {% if user.is_authenticated %}
-            		<li><a href="#">Hello,{{user.username}}.</a></li>
+            		<li><a href="{%url 'users:user_info'%}">Hello,{{user.username}}.</a></li>
         				<li>        					
         					<a href="{%url 'users:logout'%}">Log out</a>        					
         				</li>

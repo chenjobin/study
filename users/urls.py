@@ -13,4 +13,8 @@ urlpatterns = [
     url(r'^register/$',views.register,name='register'),
 
     url(r'^user_active/([a-zA-Z]+)$',views.user_active,name='user_active'),
+
+    url(r'^user_info$',views.user_info,name='user_info'),
+
+    # url(r'^check_is_login$',views.check_is_login,name='check_is_login'),
 ]

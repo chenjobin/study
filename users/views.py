@@ -8,6 +8,7 @@ from .forms import RegisterForm
 from django.contrib.auth.models import User
 from django.core.mail import EmailMultiAlternatives   #发送邮件
 import time, re,json
+from my_plug import comments_count
 
 def logout_view(request):
     '''注销用户'''
@@ -157,3 +158,25 @@ def user_active(request,active_code):
         data['goto_url']='/'
         data['goto_time']=3000
         return render_to_response('message.html',data)
+
+#添加用户中心的响应方法
+def user_info(request):
+    '''show the user infomations'''
+    data={}
+    user = request.user
+    #判断是否登录了
+    if request.user.is_authenticated():
+        data['user'] = user
+        data['comments_count'] = comments_count.get_comments_count(user.id)
+        data['replies_count'] = comments_count.get_replies_count(user.id)
+        data['replyed_count'] = comments_count.get_to_reply_count(user.id)
+        data['last_talk_about'] = comments_count.last_talk_about(user.id)
+        data['all_talk_about'] = comments_count.all_talk_about(user.id)
+        return render_to_response('users/index.html',data)
+    else:
+        data['message'] = u'您尚未登录，请先登录' #提示消息
+        data['goto_page'] = True #是否跳转
+        data['goto_url'] = '/'  #跳转页面
+        data['goto_time'] = 3000  #等待多久才跳转
+        return render_to_response('message.html',data)
+
