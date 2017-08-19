@@ -9,6 +9,7 @@ db.sqlite3
 *.so
 *.egg
 *.egg-info
+*.sqlite3
 dist
 build
 .idea
