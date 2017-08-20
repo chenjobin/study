@@ -523,3 +523,659 @@ Traceback (most recent call last):
   File "C:\Anaconda3\envs\web1\lib\site-packages\django\urls\resolvers.py", line 497, in _reverse_with_prefix
     raise NoReverseMatch(msg)
 django.urls.exceptions.NoReverseMatch: Reverse for 'user_info' not found. 'user_info' is not a valid view function or pattern name.
+2017-08-20 14:13:42,583 [Thread-4:10252] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /users/logout/
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Django\study\users\views.py", line 20, in logout_view
+    redirect_to = request.get('next', request.GET.get('next', ''))
+AttributeError: 'WSGIRequest' object has no attribute 'get'
+2017-08-20 14:13:44,334 [Thread-5:10316] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /users/logout/
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Django\study\users\views.py", line 20, in logout_view
+    redirect_to = request.get('next', request.GET.get('next', ''))
+AttributeError: 'WSGIRequest' object has no attribute 'get'
+2017-08-20 14:13:45,144 [Thread-6:10644] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /users/logout/
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Django\study\users\views.py", line 20, in logout_view
+    redirect_to = request.get('next', request.GET.get('next', ''))
+AttributeError: 'WSGIRequest' object has no attribute 'get'
+2017-08-20 14:13:58,264 [Thread-11:14216] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /users/logout/
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Django\study\users\views.py", line 20, in logout_view
+    redirect_to = request.get('next', request.GET.get('next', ''))
+AttributeError: 'WSGIRequest' object has no attribute 'get'
+2017-08-20 14:13:59,358 [Thread-12:13432] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /users/logout/
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Django\study\users\views.py", line 20, in logout_view
+    redirect_to = request.get('next', request.GET.get('next', ''))
+AttributeError: 'WSGIRequest' object has no attribute 'get'
+2017-08-20 14:18:29,822 [Thread-6:14168] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /users/logout/
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Django\study\users\views.py", line 23, in logout_view
+    return HttpResponseRedirect(reverse('redirect_to'))
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\urls\base.py", line 91, in reverse
+    return force_text(iri_to_uri(resolver._reverse_with_prefix(view, prefix, *args, **kwargs)))
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\urls\resolvers.py", line 497, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'redirect_to' not found. 'redirect_to' is not a valid view function or pattern name.
+2017-08-20 14:18:31,850 [Thread-7:15200] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /users/logout/
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Django\study\users\views.py", line 23, in logout_view
+    return HttpResponseRedirect(reverse('redirect_to'))
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\urls\base.py", line 91, in reverse
+    return force_text(iri_to_uri(resolver._reverse_with_prefix(view, prefix, *args, **kwargs)))
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\urls\resolvers.py", line 497, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'redirect_to' not found. 'redirect_to' is not a valid view function or pattern name.
+2017-08-20 15:14:28,372 [Thread-3:13060] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Django\study\blog\views.py", line 18, in index
+    return render(request,'blog/index.html',context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\shortcuts.py", line 30, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\loader.py", line 68, in render_to_string
+    return template.render(context, request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\backends\django.py", line 66, in render
+    return self.template.render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 207, in render
+    return self._render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 990, in render
+    bit = node.render_annotated(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 957, in render_annotated
+    return self.render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\loader_tags.py", line 177, in render
+    return compiled_parent._render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 990, in render
+    bit = node.render_annotated(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 957, in render_annotated
+    return self.render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\defaulttags.py", line 322, in render
+    return nodelist.render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 990, in render
+    bit = node.render_annotated(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 957, in render_annotated
+    return self.render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\defaulttags.py", line 458, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\urls\base.py", line 91, in reverse
+    return force_text(iri_to_uri(resolver._reverse_with_prefix(view, prefix, *args, **kwargs)))
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\urls\resolvers.py", line 436, in _reverse_with_prefix
+    self._populate()
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\urls\resolvers.py", line 309, in _populate
+    dict(defaults, **pattern.default_kwargs),
+TypeError: 'function' object is not iterable
+2017-08-20 15:14:28,647 [Thread-5:8212] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Django\study\blog\views.py", line 18, in index
+    return render(request,'blog/index.html',context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\shortcuts.py", line 30, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\loader.py", line 68, in render_to_string
+    return template.render(context, request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\backends\django.py", line 66, in render
+    return self.template.render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 207, in render
+    return self._render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 990, in render
+    bit = node.render_annotated(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 957, in render_annotated
+    return self.render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\loader_tags.py", line 177, in render
+    return compiled_parent._render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 990, in render
+    bit = node.render_annotated(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 957, in render_annotated
+    return self.render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\defaulttags.py", line 322, in render
+    return nodelist.render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 990, in render
+    bit = node.render_annotated(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 957, in render_annotated
+    return self.render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\defaulttags.py", line 458, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\urls\base.py", line 91, in reverse
+    return force_text(iri_to_uri(resolver._reverse_with_prefix(view, prefix, *args, **kwargs)))
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\urls\resolvers.py", line 436, in _reverse_with_prefix
+    self._populate()
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\urls\resolvers.py", line 309, in _populate
+    dict(defaults, **pattern.default_kwargs),
+TypeError: 'function' object is not iterable
+2017-08-20 15:14:29,836 [Thread-7:10396] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Django\study\blog\views.py", line 18, in index
+    return render(request,'blog/index.html',context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\shortcuts.py", line 30, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\loader.py", line 68, in render_to_string
+    return template.render(context, request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\backends\django.py", line 66, in render
+    return self.template.render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 207, in render
+    return self._render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 990, in render
+    bit = node.render_annotated(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 957, in render_annotated
+    return self.render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\loader_tags.py", line 177, in render
+    return compiled_parent._render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 990, in render
+    bit = node.render_annotated(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 957, in render_annotated
+    return self.render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\defaulttags.py", line 322, in render
+    return nodelist.render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 990, in render
+    bit = node.render_annotated(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 957, in render_annotated
+    return self.render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\defaulttags.py", line 458, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\urls\base.py", line 91, in reverse
+    return force_text(iri_to_uri(resolver._reverse_with_prefix(view, prefix, *args, **kwargs)))
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\urls\resolvers.py", line 436, in _reverse_with_prefix
+    self._populate()
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\urls\resolvers.py", line 309, in _populate
+    dict(defaults, **pattern.default_kwargs),
+TypeError: 'function' object is not iterable
+2017-08-20 15:15:03,655 [Thread-8:10768] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /users/login/
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 172, in _get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\urls\resolvers.py", line 364, in resolve
+    sub_match = pattern.resolve(new_path)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\urls\resolvers.py", line 364, in resolve
+    sub_match = pattern.resolve(new_path)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\urls\resolvers.py", line 198, in resolve
+    kwargs.update(self.default_args)
+TypeError: 'function' object is not iterable
+2017-08-20 15:15:05,378 [Thread-9:756] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /topics/9/
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Django\study\blog\views.py", line 69, in topic
+    return render(request,'blog/topic.html',context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\shortcuts.py", line 30, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\loader.py", line 68, in render_to_string
+    return template.render(context, request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\backends\django.py", line 66, in render
+    return self.template.render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 207, in render
+    return self._render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 990, in render
+    bit = node.render_annotated(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 957, in render_annotated
+    return self.render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\loader_tags.py", line 177, in render
+    return compiled_parent._render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 990, in render
+    bit = node.render_annotated(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 957, in render_annotated
+    return self.render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\defaulttags.py", line 322, in render
+    return nodelist.render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 990, in render
+    bit = node.render_annotated(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 957, in render_annotated
+    return self.render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\defaulttags.py", line 458, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\urls\base.py", line 91, in reverse
+    return force_text(iri_to_uri(resolver._reverse_with_prefix(view, prefix, *args, **kwargs)))
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\urls\resolvers.py", line 436, in _reverse_with_prefix
+    self._populate()
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\urls\resolvers.py", line 309, in _populate
+    dict(defaults, **pattern.default_kwargs),
+TypeError: 'function' object is not iterable
+2017-08-20 15:15:05,864 [Thread-10:14116] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /topics/
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Django\study\blog\views.py", line 45, in topics
+    return render(request,'blog/topics.html',context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\shortcuts.py", line 30, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\loader.py", line 68, in render_to_string
+    return template.render(context, request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\backends\django.py", line 66, in render
+    return self.template.render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 207, in render
+    return self._render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 990, in render
+    bit = node.render_annotated(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 957, in render_annotated
+    return self.render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\loader_tags.py", line 177, in render
+    return compiled_parent._render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 990, in render
+    bit = node.render_annotated(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 957, in render_annotated
+    return self.render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\defaulttags.py", line 322, in render
+    return nodelist.render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 990, in render
+    bit = node.render_annotated(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 957, in render_annotated
+    return self.render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\defaulttags.py", line 458, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\urls\base.py", line 91, in reverse
+    return force_text(iri_to_uri(resolver._reverse_with_prefix(view, prefix, *args, **kwargs)))
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\urls\resolvers.py", line 436, in _reverse_with_prefix
+    self._populate()
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\urls\resolvers.py", line 309, in _populate
+    dict(defaults, **pattern.default_kwargs),
+TypeError: 'function' object is not iterable
+2017-08-20 15:15:06,042 [Thread-11:6568] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /users/login/
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 172, in _get_response
+    resolver_match = resolver.resolve(request.path_info)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\urls\resolvers.py", line 364, in resolve
+    sub_match = pattern.resolve(new_path)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\urls\resolvers.py", line 364, in resolve
+    sub_match = pattern.resolve(new_path)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\urls\resolvers.py", line 198, in resolve
+    kwargs.update(self.default_args)
+TypeError: 'function' object is not iterable
+2017-08-20 15:15:08,039 [Thread-12:14404] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Django\study\blog\views.py", line 18, in index
+    return render(request,'blog/index.html',context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\shortcuts.py", line 30, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\loader.py", line 68, in render_to_string
+    return template.render(context, request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\backends\django.py", line 66, in render
+    return self.template.render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 207, in render
+    return self._render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 990, in render
+    bit = node.render_annotated(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 957, in render_annotated
+    return self.render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\loader_tags.py", line 177, in render
+    return compiled_parent._render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 990, in render
+    bit = node.render_annotated(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 957, in render_annotated
+    return self.render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\defaulttags.py", line 322, in render
+    return nodelist.render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 990, in render
+    bit = node.render_annotated(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 957, in render_annotated
+    return self.render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\defaulttags.py", line 458, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\urls\base.py", line 91, in reverse
+    return force_text(iri_to_uri(resolver._reverse_with_prefix(view, prefix, *args, **kwargs)))
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\urls\resolvers.py", line 436, in _reverse_with_prefix
+    self._populate()
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\urls\resolvers.py", line 309, in _populate
+    dict(defaults, **pattern.default_kwargs),
+TypeError: 'function' object is not iterable
+2017-08-20 15:15:11,336 [Thread-13:5872] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Django\study\blog\views.py", line 18, in index
+    return render(request,'blog/index.html',context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\shortcuts.py", line 30, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\loader.py", line 68, in render_to_string
+    return template.render(context, request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\backends\django.py", line 66, in render
+    return self.template.render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 207, in render
+    return self._render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 990, in render
+    bit = node.render_annotated(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 957, in render_annotated
+    return self.render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\loader_tags.py", line 177, in render
+    return compiled_parent._render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 990, in render
+    bit = node.render_annotated(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 957, in render_annotated
+    return self.render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\defaulttags.py", line 322, in render
+    return nodelist.render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 990, in render
+    bit = node.render_annotated(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 957, in render_annotated
+    return self.render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\defaulttags.py", line 458, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\urls\base.py", line 91, in reverse
+    return force_text(iri_to_uri(resolver._reverse_with_prefix(view, prefix, *args, **kwargs)))
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\urls\resolvers.py", line 436, in _reverse_with_prefix
+    self._populate()
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\urls\resolvers.py", line 309, in _populate
+    dict(defaults, **pattern.default_kwargs),
+TypeError: 'function' object is not iterable
+2017-08-20 15:15:27,911 [Thread-15:15380] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Django\study\blog\views.py", line 18, in index
+    return render(request,'blog/index.html',context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\shortcuts.py", line 30, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\loader.py", line 68, in render_to_string
+    return template.render(context, request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\backends\django.py", line 66, in render
+    return self.template.render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 207, in render
+    return self._render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 990, in render
+    bit = node.render_annotated(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 957, in render_annotated
+    return self.render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\loader_tags.py", line 177, in render
+    return compiled_parent._render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 990, in render
+    bit = node.render_annotated(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 957, in render_annotated
+    return self.render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\defaulttags.py", line 322, in render
+    return nodelist.render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 990, in render
+    bit = node.render_annotated(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 957, in render_annotated
+    return self.render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\defaulttags.py", line 458, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\urls\base.py", line 91, in reverse
+    return force_text(iri_to_uri(resolver._reverse_with_prefix(view, prefix, *args, **kwargs)))
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\urls\resolvers.py", line 436, in _reverse_with_prefix
+    self._populate()
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\urls\resolvers.py", line 309, in _populate
+    dict(defaults, **pattern.default_kwargs),
+TypeError: 'function' object is not iterable
+2017-08-20 15:16:00,539 [Thread-16:2764] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Django\study\blog\views.py", line 18, in index
+    return render(request,'blog/index.html',context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\shortcuts.py", line 30, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\loader.py", line 68, in render_to_string
+    return template.render(context, request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\backends\django.py", line 66, in render
+    return self.template.render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 207, in render
+    return self._render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 990, in render
+    bit = node.render_annotated(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 957, in render_annotated
+    return self.render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\loader_tags.py", line 177, in render
+    return compiled_parent._render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 990, in render
+    bit = node.render_annotated(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 957, in render_annotated
+    return self.render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\defaulttags.py", line 322, in render
+    return nodelist.render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 990, in render
+    bit = node.render_annotated(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 957, in render_annotated
+    return self.render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\defaulttags.py", line 458, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\urls\base.py", line 91, in reverse
+    return force_text(iri_to_uri(resolver._reverse_with_prefix(view, prefix, *args, **kwargs)))
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\urls\resolvers.py", line 436, in _reverse_with_prefix
+    self._populate()
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\urls\resolvers.py", line 309, in _populate
+    dict(defaults, **pattern.default_kwargs),
+TypeError: 'function' object is not iterable
+2017-08-20 15:16:41,457 [Thread-2:3352] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Django\study\blog\views.py", line 18, in index
+    return render(request,'blog/index.html',context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\shortcuts.py", line 30, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\loader.py", line 68, in render_to_string
+    return template.render(context, request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\backends\django.py", line 66, in render
+    return self.template.render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 207, in render
+    return self._render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 990, in render
+    bit = node.render_annotated(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 957, in render_annotated
+    return self.render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\loader_tags.py", line 177, in render
+    return compiled_parent._render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 990, in render
+    bit = node.render_annotated(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 957, in render_annotated
+    return self.render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\defaulttags.py", line 322, in render
+    return nodelist.render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 990, in render
+    bit = node.render_annotated(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 957, in render_annotated
+    return self.render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\defaulttags.py", line 458, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\urls\base.py", line 91, in reverse
+    return force_text(iri_to_uri(resolver._reverse_with_prefix(view, prefix, *args, **kwargs)))
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\urls\resolvers.py", line 436, in _reverse_with_prefix
+    self._populate()
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\urls\resolvers.py", line 309, in _populate
+    dict(defaults, **pattern.default_kwargs),
+TypeError: 'function' object is not iterable
+2017-08-20 15:19:24,876 [Thread-3:6592] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /users/login/
+Traceback (most recent call last):
+  File "F:\Django\study\users\views.py", line 22, in login_view
+    if len(username)*len(password)==0:
+TypeError: object of type 'NoneType' has no len()
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "F:\Django\study\users\views.py", line 37, in login_view
+    response_data['message'] = e.message
+AttributeError: 'TypeError' object has no attribute 'message'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Django\study\users\views.py", line 42, in login_view
+    return render(request,'users/login.html',context)
+NameError: name 'context' is not defined
+2017-08-20 15:19:26,042 [Thread-4:9260] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /users/login/
+Traceback (most recent call last):
+  File "F:\Django\study\users\views.py", line 22, in login_view
+    if len(username)*len(password)==0:
+TypeError: object of type 'NoneType' has no len()
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "F:\Django\study\users\views.py", line 37, in login_view
+    response_data['message'] = e.message
+AttributeError: 'TypeError' object has no attribute 'message'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Django\study\users\views.py", line 42, in login_view
+    return render(request,'users/login.html',context)
+NameError: name 'context' is not defined
+2017-08-20 15:19:26,864 [Thread-5:9320] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /users/login/
+Traceback (most recent call last):
+  File "F:\Django\study\users\views.py", line 22, in login_view
+    if len(username)*len(password)==0:
+TypeError: object of type 'NoneType' has no len()
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "F:\Django\study\users\views.py", line 37, in login_view
+    response_data['message'] = e.message
+AttributeError: 'TypeError' object has no attribute 'message'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Django\study\users\views.py", line 42, in login_view
+    return render(request,'users/login.html',context)
+NameError: name 'context' is not defined

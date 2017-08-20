@@ -12,8 +12,12 @@ from my_plug import comments_count
 
 def logout_view(request):
     '''注销用户'''
+    #记住来源的url，如果没有则设置为首页('/')
+    returnPath=request.META.get('HTTP_REFERER', '/')
     logout(request)
-    return HttpResponseRedirect(reverse('blog:index'))
+    # return HttpResponseRedirect(reverse('blog:index'))
+    return HttpResponseRedirect(returnPath)
+
 
 def register(request):
     '''注册新用户'''
