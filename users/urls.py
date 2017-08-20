@@ -19,4 +19,7 @@ urlpatterns = [
     url(r'^nickname_change$',views.nickname_change,name='nickname_change'),
 
     url(r'^password_change$',views.password_change,name='password_change'),
+    # 密码找回
+    url(r'password_lost', views.password_lost, name='password_lost'),
+    url(r'get_email_code', views.get_email_code, name='get_email_code'),
 ]

@@ -4,11 +4,14 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth import login,logout,authenticate
 # from django.contrib.auth.forms import UserCreationForm
 
-from .forms import RegisterForm,ChangeNickForm,ChangePwdForm
+from .forms import RegisterForm,ChangeNickForm,ChangePwdForm,ForgetPwdForm
 from django.contrib.auth.models import User
 from django.core.mail import EmailMultiAlternatives   #发送邮件
-import time, re,json
 from my_plug import comments_count
+
+import json, time, datetime, random, string,re
+from .models import User_ex
+from django.utils import timezone
 
 def logout_view(request):
     '''注销用户'''
@@ -275,3 +278,131 @@ def password_change(request):
         form = ChangePwdForm(initial={'username':username})
     data['form'] = form
     return render(request, 'users/nickname_or_password_change.html', data)
+
+#  get_email_code(request):两个为用户忘记密码时候，找回密码所用
+def password_lost(request):
+    """forgot password deals"""
+    data = {}
+    data['form_title'] = u'重置密码'
+    data['submit_name'] = u'　确定　'
+
+    if request.method == 'POST':
+        #表单提交
+        form = ForgetPwdForm(request.POST)
+
+        #验证是否合法
+        if form.is_valid():
+            #修改数据库
+            email = form.cleaned_data['email']
+            pwd = form.cleaned_data['pwd_2']
+            user = User.objects.get(email = email)
+            user.set_password(pwd)
+            user.save()
+
+            #删除验证码
+            ex = User_ex.objects.filter(user=user)
+            if ex.count() > 0:
+                ex.delete()
+
+            #如果是未激活账户找回密码，则发送激活邮件
+            if user.is_active == 0:
+                active_code=get_active_code(email)
+                send_active_email(email,active_code)
+
+            #重新登录
+            user = authenticate(username=user.username, password=pwd)
+            if user is not None:
+                login(request, user)
+
+            #页面提示
+            data['goto_url'] = reverse('users:user_info')
+            data['goto_time'] = 3000
+            data['goto_page'] = True
+            data['message'] = u'重置密码成功，请牢记新密码'
+            return render_to_response('message.html',data)
+    else:
+        #正常加载
+        form = ForgetPwdForm()
+    data['form'] = form
+    return render(request, 'users/pwd_forget.html', data)
+
+def get_email_code(request):
+    """get email code"""
+    email = request.GET.get('email', '')
+    # 验证码生成，原先的用了就不行，原因以后再看
+    # code = ''.join(random.sample(string.digits + string.letters, 6))
+    code=generate_verification_code()
+
+    data = {}
+    data['success'] = False
+    data['message'] = ''
+
+    try:
+        #检查邮箱
+        users = User.objects.filter(email = email)
+        if len(users)==0:
+            data['success'] = False
+            data['message'] = u'此邮箱未注册'
+            # raise Exception, data['message']
+            raise Exception(data['message'])
+
+        user = users[0]
+
+        #检查短时间内是否有生成过验证码
+        user_ex = User_ex.objects.filter(user = user)
+        if len(user_ex)>0:
+            user_ex = user_ex[0]
+
+            #两个datetime相减，得到datetime.timedelta类型
+            create_time = user_ex.valid_time
+            td = timezone.now() - create_time
+            if td.seconds < 60:
+                data['message'] = u'1分钟内发送过一次验证码'
+                # raise Exception, data['message']
+                raise Exception(data['message'])
+        else:
+            #没有则新建
+            user_ex = User_ex(user = user)
+
+        #写入数据库
+        user_ex.valid_code = code
+        user_ex.valid_time = timezone.now()
+        user_ex.save()
+
+        #发送邮件
+        subject=u'[chenzhibin.vip]重置您的帐号'
+        message=u"""
+            <h2>陈志斌的博客(<a href='http://chenzhibin.vip/' target=_blank>chenzbibin.vip</a>)<h2><br />
+            <p>重置密码的验证码(有效期10分钟)：%s</p>
+            <p><br/>(请保管好您的验证码)</p>
+            """ % code
+
+        send_to=[email]
+        fail_silently=True  #发送异常不报错
+
+        msg=EmailMultiAlternatives(subject=subject,body=message,to=send_to)
+        msg.attach_alternative(message, "text/html")
+        msg.send(fail_silently)
+
+        data['success'] = True
+        data['message'] = 'OK'
+    except Exception as e:
+        pass
+    finally:
+        return JsonResponse(data)
+        # return HttpResponse(json.dumps(data), content_type="application/json")
+
+def generate_verification_code():
+    ''' 随机生成6位的验证码 '''
+    code_list = []
+    for i in range(10): # 0-9数字
+        code_list.append(str(i))
+    for i in range(65, 91): # A-Z
+        code_list.append(chr(i))
+    for i in range(97, 123): # a-z
+        code_list.append(chr(i))
+    myslice = random.sample(code_list, 6)  # 从list中随机获取6个元素，作为一个片断返回
+    verification_code = ''.join(myslice) # list to string
+    # print code_list
+    # print type(myslice)
+    return verification_code

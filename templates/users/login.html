@@ -21,5 +21,6 @@
 		<input type="hidden" name="next" value="{% url 'blog:index' %}" />
 
 	</form>
-
+	<a href="{% url 'users:password_lost' %}">忘记密码？</a>
+	<B>Tips</B>:<small>若是激活邮件过期的账户，也可以通过忘记密码来找回密码然后激活</small>
 {%endblock content%}
