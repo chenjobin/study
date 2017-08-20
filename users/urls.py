@@ -16,5 +16,5 @@ urlpatterns = [
 
     url(r'^user_info$',views.user_info,name='user_info'),
 
-    # url(r'^check_is_login$',views.check_is_login,name='check_is_login'),
+    url(r'^nickname_change$',views.nickname_change,name='nickname_change'),
 ]

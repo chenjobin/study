@@ -4,7 +4,7 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth import login,logout,authenticate
 from django.contrib.auth.forms import UserCreationForm
 
-from .forms import RegisterForm
+from .forms import RegisterForm,ChangeNickForm
 from django.contrib.auth.models import User
 from django.core.mail import EmailMultiAlternatives   #发送邮件
 import time, re,json
@@ -180,3 +180,51 @@ def user_info(request):
         data['goto_time'] = 3000  #等待多久才跳转
         return render_to_response('message.html',data)
 
+#装饰器，登录判断
+def check_login(func):
+    def wrapper(request):
+        #登录判断，若没登录则跳转到前面写的信息提示页面
+        if not request.user.is_authenticated():
+            data = {}
+            data['goto_url'] = '/'
+            data['goto_time'] = 3000
+            data['goto_page'] = True
+            data['message'] = u'您尚未登录，请先登录'
+            return render_to_response('message.html',data)
+        else:
+            return func(request)
+    return wrapper
+
+@check_login
+def nickname_change(request):
+    data = {}
+    data['form_title'] = u'修改昵称'
+    data['submit_name'] = u'　确定　'
+
+    if request.method == 'POST':
+        #表单提交
+        form = ChangeNickForm(request.POST)
+
+        #验证是否合法
+        if form.is_valid():
+            #修改数据库
+            nickname = form.cleaned_data['nickname']
+            request.user.first_name = nickname
+            request.user.save()
+
+            #页面提示
+            data['goto_url'] = reverse('users:user_info')
+            data['goto_time'] = 3000
+            data['goto_page'] = True
+            data['message'] = u'修改昵称成功，修改为“%s”' % nickname
+            return render_to_response('message.html',data)
+    else:
+        #正常加载
+        nickname = request.user.first_name or request.user.username
+        #用initial给表单填写初始值
+        form = ChangeNickForm(initial={
+            'old_nickname': nickname,
+            'nickname': nickname,
+            })
+    data['form'] = form
+    return render(request, 'users/nickname_change.html', data)

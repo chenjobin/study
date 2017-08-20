@@ -436,3 +436,39 @@ Traceback (most recent call last):
   File "C:\Anaconda3\envs\web1\lib\site-packages\django\db\backends\sqlite3\base.py", line 328, in execute
     return Database.Cursor.execute(self, query, params)
 django.db.utils.OperationalError: no such table: blog_blog
+2017-08-20 10:44:29,724 [Thread-4:3328] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /users/nickname_change
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Django\study\users\views.py", line 195, in wrapper
+    return func(request)
+  File "F:\Django\study\users\views.py", line 230, in nickname_change
+    return render(request, 'nickname_change.html', data)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\shortcuts.py", line 30, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\loader.py", line 67, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\loader.py", line 25, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: nickname_change.html
+2017-08-20 10:47:57,487 [Thread-7:13376] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /users/nickname_change
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Django\study\users\views.py", line 195, in wrapper
+    return func(request)
+  File "F:\Django\study\users\views.py", line 216, in nickname_change
+    data['goto_url'] = reverse('user_info')
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\urls\base.py", line 91, in reverse
+    return force_text(iri_to_uri(resolver._reverse_with_prefix(view, prefix, *args, **kwargs)))
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\urls\resolvers.py", line 497, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'user_info' not found. 'user_info' is not a valid view function or pattern name.
