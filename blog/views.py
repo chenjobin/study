@@ -170,15 +170,71 @@ def search(request):
     return render_to_response('blog/blog_search.html',context)
     # return render(request,'blog/blog_search.html',context)
 
-def getPages(request,list,limit=7): # limit 每页显示的记录数
+def getPages(request,list1,limit=7): # limit 每页显示的记录数
+    # 未优化前
+    # pages = Paginator(list1, limit)  # 实例化一个分页对象
+    # page = request.GET.get('page',1)  # 获取GET请求的参数，得到当前页码。若没有该参数，默认为1
+    # try:
+    #     list1 = pages.page(page)  # 获取某页对应的记录
+    # except PageNotAnInteger:  # 如果页码不是个整数
+    #     list1 = pages.page(1)  # 取第一页的记录
+    # except EmptyPage:  # 如果页码太大，没有相应的记录
+    #     list1 = pages.page(pages.num_pages)  # 取最后一页的记录
+    # return pages,list1
 
-    pages = Paginator(list, limit)  # 实例化一个分页对象
-    page = request.GET.get('page',1)  # 获取GET请求的参数，得到当前页码。若没有该参数，默认为1
+    # 优化后
+    currentPage = request.GET.get('page', 1)
+    paginator = Paginator(list1,limit)
     try:
-        list = pages.page(page)  # 获取某页对应的记录
+        list1 = paginator.page(currentPage)  # 获取某页对应的记录
     except PageNotAnInteger:  # 如果页码不是个整数
-        list = pages.page(1)  # 取第一页的记录
+        list1 = paginator.page(1)  # 取第一页的记录
     except EmptyPage:  # 如果页码太大，没有相应的记录
-        list = pages.page(pages.num_pages)  # 取最后一页的记录
+        list1 = paginator.page(paginator.num_pages)  # 取最后一页的记录
+    page_range = []
+    current = list1.number     #当前页码
+    page_all = paginator.num_pages  #总页数
+    mid_pages = 3                   #中间段显示的页码数
+    page_goto = 1                    #默认跳转的页码
 
-    return pages,list
+    #获取优化显示的页码列表
+    if page_all <= 5+ mid_pages:
+        #页码数少于6页就无需分析哪些地方需要隐藏
+        page_range = paginator.page_range
+    else:
+        #添加应该显示的页码
+        page_range += [1, page_all]
+        page_range += [current-2, current, current+2]
+
+        #若当前页是头尾，范围拓展多1页
+        if current == 1 or current == page_all:
+            page_range += [current+2, current-2]
+
+        #去掉超出范围的页码
+        page_range = filter(lambda x: x>=1 and x<=page_all, page_range)
+
+        #排序去重
+        #此处list踩坑，原先list与形参list则会到会使list()优先形参解释，导致错误
+        page_range = sorted(list(set(page_range)))
+
+        #查漏补缺
+        #从第2个开始遍历，查看页码间隔，若间隔为0则是连续的
+        #若间隔为1则补上页码；间隔超过1，则补上省略号
+        t = 1
+        for i in range(len(page_range)-1):
+            step = page_range[t]-page_range[t-1]
+            if step>=2:
+                if step==2:
+                    page_range.insert(t,page_range[t]-1)
+                else:
+                    page_goto = page_range[t-1] + 1
+                    page_range.insert(t,'...')
+                t+=1
+            t+=1
+
+    #优化结果之后的页码列表
+    paginator.page_range_ex = page_range
+    #默认跳转页的值
+    paginator.page_goto = page_goto
+
+    return paginator,list1

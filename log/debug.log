@@ -1529,3 +1529,276 @@ Traceback (most recent call last):
   File "C:\Anaconda3\envs\web1\lib\site-packages\django\urls\resolvers.py", line 497, in _reverse_with_prefix
     raise NoReverseMatch(msg)
 django.urls.exceptions.NoReverseMatch: Reverse for 'user_info' not found. 'user_info' is not a valid view function or pattern name.
+2017-08-20 20:11:04,080 [Thread-6:2068] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /topics/7/
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Django\study\blog\views.py", line 66, in topic
+    pages,entries=getPages(request,entries)  #将Paginator封装成函数了
+  File "F:\Django\study\blog\views.py", line 189, in getPages
+    list = paginator.page(page)  # 获取某页对应的记录
+NameError: name 'page' is not defined
+2017-08-20 20:11:05,812 [Thread-7:12728] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /topics/7/
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Django\study\blog\views.py", line 66, in topic
+    pages,entries=getPages(request,entries)  #将Paginator封装成函数了
+  File "F:\Django\study\blog\views.py", line 189, in getPages
+    list = paginator.page(page)  # 获取某页对应的记录
+NameError: name 'page' is not defined
+2017-08-20 20:17:05,241 [Thread-168:1440] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /topics/7/
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Django\study\blog\views.py", line 66, in topic
+    pages,entries=getPages(request,entries)  #将Paginator封装成函数了
+  File "F:\Django\study\blog\views.py", line 217, in getPages
+    page_range = sorted(list(set(page_range)))
+TypeError: 'Page' object is not callable
+2017-08-20 20:17:18,385 [Thread-170:5944] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /topics/7/
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Django\study\blog\views.py", line 66, in topic
+    pages,entries=getPages(request,entries)  #将Paginator封装成函数了
+  File "F:\Django\study\blog\views.py", line 217, in getPages
+    page_range = sorted(list(set(page_range)))
+TypeError: 'Page' object is not callable
+2017-08-20 20:17:36,379 [Thread-172:12412] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /topics/7/
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Django\study\blog\views.py", line 66, in topic
+    pages,entries=getPages(request,entries)  #将Paginator封装成函数了
+  File "F:\Django\study\blog\views.py", line 217, in getPages
+    page_range = sorted(list(set(page_range)))
+TypeError: 'Page' object is not callable
+2017-08-20 20:22:52,427 [Thread-174:12452] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /topics/7/
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Django\study\blog\views.py", line 66, in topic
+    pages,entries=getPages(request,entries)  #将Paginator封装成函数了
+  File "F:\Django\study\blog\views.py", line 217, in getPages
+    page_range = sorted(list(set(page_range)))
+TypeError: 'Page' object is not callable
+2017-08-20 20:31:29,655 [Thread-182:12244] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /topics/7/
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Django\study\blog\views.py", line 66, in topic
+    pages,entries=getPages(request,entries)  #将Paginator封装成函数了
+  File "F:\Django\study\blog\views.py", line 217, in getPages
+    page_range = sorted(list(set(page_range)))
+TypeError: 'Page' object is not callable
+2017-08-20 20:33:51,027 [Thread-2:12580] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /topics/7/
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Django\study\blog\views.py", line 66, in topic
+    pages,entries=getPages(request,entries)  #将Paginator封装成函数了
+  File "F:\Django\study\blog\views.py", line 217, in getPages
+    page_range = sorted(list(set(page_range)))
+TypeError: 'Page' object is not callable
+2017-08-20 20:39:29,024 [Thread-2:13652] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /topics/7/
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Django\study\blog\views.py", line 66, in topic
+    pages,entries=getPages(request,entries)  #将Paginator封装成函数了
+  File "F:\Django\study\blog\views.py", line 217, in getPages
+    page_range = sorted(list(set(page_range)))
+TypeError: 'Page' object is not callable
+2017-08-20 20:40:23,685 [Thread-2:14924] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /topics/7/
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Django\study\blog\views.py", line 66, in topic
+    pages,entries=getPages(request,entries)  #将Paginator封装成函数了
+  File "F:\Django\study\blog\views.py", line 217, in getPages
+    page_range = sorted(list(set(page_range)))
+TypeError: 'Page' object is not callable
+2017-08-20 20:44:28,501 [Thread-3:12452] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /topics/7/
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Django\study\blog\views.py", line 66, in topic
+    pages,entries=getPages(request,entries)  #将Paginator封装成函数了
+  File "F:\Django\study\blog\views.py", line 217, in getPages
+    page_range = sorted(list(set(page_range)))
+TypeError: 'Page' object is not callable
+2017-08-20 20:49:04,551 [Thread-4:16008] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /topics/7/
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Django\study\blog\views.py", line 66, in topic
+    pages,entries=getPages(request,entries)  #将Paginator封装成函数了
+  File "F:\Django\study\blog\views.py", line 217, in getPages
+    page_range = sorted(list(set(page_range)))
+TypeError: 'Page' object is not callable
+2017-08-20 20:51:47,586 [Thread-3:8456] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /topics/7/
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Django\study\blog\views.py", line 66, in topic
+    pages,entries=getPages(request,entries)  #将Paginator封装成函数了
+  File "F:\Django\study\blog\views.py", line 217, in getPages
+    page_range = sorted(list(set(page_range)))
+TypeError: 'Page' object is not callable
+2017-08-20 20:55:28,449 [Thread-2:9184] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /topics/7/
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Django\study\blog\views.py", line 66, in topic
+    pages,entries=getPages(request,entries)  #将Paginator封装成函数了
+  File "F:\Django\study\blog\views.py", line 217, in getPages
+    page_range = sorted(list(set(page_range)))
+TypeError: 'Page' object is not callable
+2017-08-20 20:55:30,040 [Thread-3:14784] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /topics/7/
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Django\study\blog\views.py", line 66, in topic
+    pages,entries=getPages(request,entries)  #将Paginator封装成函数了
+  File "F:\Django\study\blog\views.py", line 217, in getPages
+    page_range = sorted(list(set(page_range)))
+TypeError: 'Page' object is not callable
+2017-08-20 20:56:54,633 [Thread-2:5360] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /topics/7/
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Django\study\blog\views.py", line 66, in topic
+    pages,entries=getPages(request,entries)  #将Paginator封装成函数了
+  File "F:\Django\study\blog\views.py", line 217, in getPages
+    page_range = sorted(list(set(page_range)))
+TypeError: 'Page' object is not callable
+2017-08-20 20:56:58,981 [Thread-4:9564] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /topics/7/
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Django\study\blog\views.py", line 66, in topic
+    pages,entries=getPages(request,entries)  #将Paginator封装成函数了
+  File "F:\Django\study\blog\views.py", line 217, in getPages
+    page_range = sorted(list(set(page_range)))
+TypeError: 'Page' object is not callable
+2017-08-20 21:02:36,050 [Thread-4:15636] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /topics/7/
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Django\study\blog\views.py", line 66, in topic
+    pages,entries=getPages(request,entries)  #将Paginator封装成函数了
+  File "F:\Django\study\blog\views.py", line 218, in getPages
+    page_range = list(set(page_range))
+TypeError: 'Page' object is not callable
+2017-08-20 21:03:23,188 [Thread-3:15744] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /topics/7/
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Django\study\blog\views.py", line 66, in topic
+    pages,entries=getPages(request,entries)  #将Paginator封装成函数了
+  File "F:\Django\study\blog\views.py", line 218, in getPages
+    page_range = list(set(page_range))
+TypeError: 'Page' object is not callable
+2017-08-20 21:03:23,504 [Thread-4:7200] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /topics/7/
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Django\study\blog\views.py", line 66, in topic
+    pages,entries=getPages(request,entries)  #将Paginator封装成函数了
+  File "F:\Django\study\blog\views.py", line 218, in getPages
+    page_range = list(set(page_range))
+TypeError: 'Page' object is not callable
+2017-08-20 21:03:56,337 [Thread-3:8880] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /topics/7/
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Django\study\blog\views.py", line 66, in topic
+    pages,entries=getPages(request,entries)  #将Paginator封装成函数了
+  File "F:\Django\study\blog\views.py", line 219, in getPages
+    page_range.sort()
+AttributeError: 'set' object has no attribute 'sort'
