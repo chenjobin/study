@@ -487,3 +487,39 @@ Traceback (most recent call last):
   File "C:\Anaconda3\envs\web1\lib\site-packages\django\http\response.py", line 301, in __init__
     super(HttpResponse, self).__init__(*args, **kwargs)
 TypeError: __init__() got an unexpected keyword argument 'ensure_ascii'
+2017-08-20 13:43:30,471 [Thread-7:13648] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /users/password_change
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Django\study\users\views.py", line 202, in wrapper
+    return func(request)
+  File "F:\Django\study\users\views.py", line 273, in password_change
+    return render(request, 'users/password_change$.html', data)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\shortcuts.py", line 30, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\loader.py", line 67, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\loader.py", line 25, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: users/password_change$.html
+2017-08-20 13:44:13,390 [Thread-5:13304] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /users/password_change
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Django\study\users\views.py", line 202, in wrapper
+    return func(request)
+  File "F:\Django\study\users\views.py", line 263, in password_change
+    data['goto_url'] = reverse('user_info')
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\urls\base.py", line 91, in reverse
+    return force_text(iri_to_uri(resolver._reverse_with_prefix(view, prefix, *args, **kwargs)))
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\urls\resolvers.py", line 497, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'user_info' not found. 'user_info' is not a valid view function or pattern name.

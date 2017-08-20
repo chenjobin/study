@@ -13,17 +13,17 @@
                     <div class="">
                         <h4 class="user-name">{% if user.first_name %}{{user.first_name}}{%else%}{{user.username}}{%endif%}</h4>
                         <span><a href="{% url 'users:nickname_change' %}">修改昵称</a></span>
-                        <span><a href="#">修改密码</a></span>
+                        <span><a href="{% url 'users:password_change' %}">修改密码</a></span>
                     </div>
  
                     <ul class="user-info">
                         <li>
                             <span>注册邮箱：</span>
-                            <span>{{user.username}}</span>
+                            <span>{{user.email}}</span>
                         </li>
                         <li>
-                            <span>注册日期：</span>
-                            <span>{{user.date_joined|date:"Y-m-d H:i"}}</span>
+                            <span>注册用户：</span>
+                            <span>{{user.username}}</span>
                         </li>
                         <li>
                             <span>最近登录：</span>

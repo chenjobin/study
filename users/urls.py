@@ -17,4 +17,6 @@ urlpatterns = [
     url(r'^user_info$',views.user_info,name='user_info'),
 
     url(r'^nickname_change$',views.nickname_change,name='nickname_change'),
+
+    url(r'^password_change$',views.password_change,name='password_change'),
 ]

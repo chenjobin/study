@@ -4,7 +4,7 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth import login,logout,authenticate
 # from django.contrib.auth.forms import UserCreationForm
 
-from .forms import RegisterForm,ChangeNickForm
+from .forms import RegisterForm,ChangeNickForm,ChangePwdForm
 from django.contrib.auth.models import User
 from django.core.mail import EmailMultiAlternatives   #发送邮件
 import time, re,json
@@ -234,4 +234,40 @@ def nickname_change(request):
             'nickname': nickname,
             })
     data['form'] = form
-    return render(request, 'users/nickname_change.html', data)
+    return render(request, 'users/nickname_or_password_change.html', data)
+
+@check_login
+def password_change(request):
+    data = {}
+    data['form_title'] = u'修改密码'
+    data['submit_name'] = u'　确定　'
+
+    if request.method == 'POST':
+        #表单提交
+        form = ChangePwdForm(request.POST)
+
+        #验证是否合法
+        if form.is_valid():
+            #修改数据库
+            username = request.user.username
+            pwd = form.cleaned_data['pwd_2']
+            request.user.set_password(pwd)
+            request.user.save()
+
+            #重新登录
+            user = authenticate(username=username, password=pwd)
+            if user is not None:
+                login(request, user)
+
+            #页面提示
+            data['goto_url'] = reverse('users:user_info')
+            data['goto_time'] = 3000
+            data['goto_page'] = True
+            data['message'] = u'修改密码成功，请牢记新密码'
+            return render_to_response('message.html',data)
+    else:
+        #正常加载
+        username = request.user.username
+        form = ChangePwdForm(initial={'username':username})
+    data['form'] = form
+    return render(request, 'users/nickname_or_password_change.html', data)

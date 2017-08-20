@@ -4,6 +4,7 @@ from django.contrib.auth.forms import UserCreationForm
 
 from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
+from django.contrib.auth import authenticate #验证密码是否正确
 
 #注册表单
 class RegisterForm(forms.Form,UserCreationForm):
@@ -43,3 +44,37 @@ class ChangeNickForm(forms.Form):
                 raise ValidationError(u'“%s”已被使用，请重新输入' % nickname)
         else:
             return nickname
+
+class ChangePwdForm(forms.Form):
+    """change the password form"""
+    username = forms.CharField(widget=forms.HiddenInput())
+    pwd_old = forms.CharField(label=u'旧的密码', max_length=36,
+        widget=forms.PasswordInput(
+            attrs={'class':'form-control', 'id':'pwd_old','placeholder':u'请输入旧密码，验真身'}))
+    pwd_1 = forms.CharField(label=u'新的密码', max_length=36,
+        widget=forms.PasswordInput(
+            attrs={'class':'form-control', 'id':'pwd_1','placeholder':u'请输入至少8位的密码'}))
+    pwd_2 = forms.CharField(label=u'再输一遍', max_length=36,
+        widget=forms.PasswordInput(
+            attrs={'class':'form-control', 'id':'pwd_2','placeholder':u'重复新的密码确保正确'}))
+
+    #验证两个新密码是否一致
+    def clean_pwd_2(self):
+        pwd_1 = self.cleaned_data.get('pwd_1')
+        pwd_2 = self.cleaned_data.get('pwd_2')
+
+        if pwd_1 != pwd_2:
+            raise ValidationError(u'两次输入的密码不一致，再输入一次吧')
+        if len(pwd_2) < 6 or len(pwd_2) > 36:
+            raise ValidationError(u'密码长度需要在6-36之间')
+        return pwd_2
+
+    #验证旧密码是否正确
+    def clean_pwd_old(self):
+        username = self.cleaned_data.get('username')
+        pwd_old = self.cleaned_data.get('pwd_old')
+        user = authenticate(username=username, password=pwd_old)
+
+        if user is None:
+            raise ValidationError(u'旧密码不正确，验真身失败')
+        return pwd_old

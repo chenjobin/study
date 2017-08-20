@@ -1,0 +1,247 @@
+
+
+---------------------------------------------------------------------------------------------
+commit 2876f57d687e699725de217f655f314cd8ac0956 (HEAD -> master)
+Author: chenjobin <923869988@qq.com>
+Date:   Sun Aug 20 11:26:12 2017 +0800
+
+    V0.2.5 注册用户邮箱检测，每个邮箱只能注册一个账号
+    待改进
+    1.修复未激活的用户也能评论
+    2.用户中心可以重新发送激活邮件
+---------------------------------------------------------------------------------------------
+commit 03e0364e9cd3061d2c6991feb02f092de371bbe0
+Author: chenjobin <923869988@qq.com>
+Date:   Sun Aug 20 10:51:26 2017 +0800
+
+    V0.2.4 添加修改昵称，利用了first_name字段
+---------------------------------------------------------------------------------------------
+commit 3a6008ac349dc2d87fc71e71c63622dc5a4ee244
+Author: chenjobin <923869988@qq.com>
+Date:   Sat Aug 19 21:47:33 2017 +0800
+
+    V0.2.3 用户中心，使用了SQL查询。可以看到昵称，评论等信息及统计
+---------------------------------------------------------------------------------------------
+commit 11e81c0fa5b9e03c567042a581a573234fb5265f
+Author: chenjobin <923869988@qq.com>
+:...skipping...
+commit 2876f57d687e699725de217f655f314cd8ac0956 (HEAD -> master)
+Author: chenjobin <923869988@qq.com>
+Date:   Sun Aug 20 11:26:12 2017 +0800
+
+    V0.2.5 注册用户邮箱检测，每个邮箱只能注册一个账号
+    待改进
+    1.修复未激活的用户也能评论
+    2.用户中心可以重新发送激活邮件
+---------------------------------------------------------------------------------------------
+commit 03e0364e9cd3061d2c6991feb02f092de371bbe0
+Author: chenjobin <923869988@qq.com>
+Date:   Sun Aug 20 10:51:26 2017 +0800
+
+    V0.2.4 添加修改昵称，利用了first_name字段
+---------------------------------------------------------------------------------------------
+commit 3a6008ac349dc2d87fc71e71c63622dc5a4ee244
+Author: chenjobin <923869988@qq.com>
+Date:   Sat Aug 19 21:47:33 2017 +0800
+
+    V0.2.3 用户中心，使用了SQL查询。可以看到昵称，评论等信息及统计
+---------------------------------------------------------------------------------------------
+commit 11e81c0fa5b9e03c567042a581a573234fb5265f
+Author: chenjobin <923869988@qq.com>
+Date:   Sat Aug 19 15:22:25 2017 +0800
+
+    Merge branch 'dev'
+
+    # Please enter a commit message to explain why this merge is necessary,
+    # especially if it merges an updated upstream into a topic branch.
+    #
+    # Lines starting with '#' will be ignored, and an empty message aborts
+    # the commit.
+---------------------------------------------------------------------------------------------
+commit 558aeaf6d9e7de0eb9b650004344039e95a76f0a
+Author: chenjobin <923869988@qq.com>
+Date:   Sat Aug 19 15:02:29 2017 +0800
+
+    V0.2.2 评论及回复均使用异步发送邮件
+---------------------------------------------------------------------------------------------
+commit 05c330eaec2bbde9f2278ec2a5b6a740245a18b8
+Author: chenjobin <923869988@qq.com>
+Date:   Sat Aug 19 14:59:06 2017 +0800
+
+    这段没做什么
+    master1，一个db.sqlite3内容评论添加了。必须commit。
+---------------------------------------------------------------------------------------------
+commit 9c13ab83f7cf84a02d7f85aa16d766b6226d3040 (study/master)
+Author: chenjobin <923869988@qq.com>
+Date:   Fri Aug 18 21:55:03 2017 +0800
+
+    V0.2.0 回复评论实现，复用原本的回复框
+            django_comments模块可以不用安装，直接放在根目录下目前看都没问题
+
+    (web1) C:\Users\92386>conda list
+    # packages in environment at C:\Anaconda3\envs\web1:
+    #
+    django                    1.11.3                   py36_0
+    django-bootstrap3         9.0.0                     <pip>
+    pip                       9.0.1                    py36_1
+    python                    3.6.2                         0
+    pytz                      2017.2                   py36_0
+    setuptools                27.2.0                   py36_1
+    vs2015_runtime            14.0.25420                    0
+    wheel                     0.29.0                   py36_0
+---------------------------------------------------------------------------------------------
+commit e92551eb1c808a27526ffceb1e177e44c9f54d7e
+Author: chenjobin <923869988@qq.com>
+Date:   Fri Aug 18 17:04:30 2017 +0800
+
+    V0.1.9 django-comments包修改评论功能改进，评论AJAX提交修订成功。
+            回复评论尚未成功。总是提示错误。MARK下
+---------------------------------------------------------------------------------------------
+commit 1a1485cb3dc43d78384f941d6b299ecb7d6814bd
+Author: chenjobin <923869988@qq.com>
+Date:   Fri Aug 18 09:47:22 2017 +0800
+
+    V0.1.8 django-comments从环境配置下直接拷贝到根目录下，测试，可用
+
+    (web1) F:\Django\study>conda list
+    # packages in environment at C:\Anaconda3\envs\web1:
+    #
+    django                    1.11.3                   py36_0
+    django-bootstrap3         9.0.0                     <pip>
+    pip                       9.0.1                    py36_1
+    python                    3.6.2                         0
+    pytz                      2017.2                   py36_0
+    setuptools                27.2.0                   py36_1
+    vs2015_runtime            14.0.25420                    0
+    wheel                     0.29.0                   py36_0
+---------------------------------------------------------------------------------------------
+commit aff8e7f62b27839f32cabd65fba78f82954c56e3
+Author: chenjobin <923869988@qq.com>
+Date:   Thu Aug 17 16:41:29 2017 +0800
+
+    V0.1.7 注册后提示邮件激活微调，至少有提示。如何使其UI更加友好，可以考虑AJAX,在以后的版本中添加
+---------------------------------------------------------------------------------------------
+commit 11a07a7562a4d05ad92b2fb1d8cd32bac4efc26b
+Author: chenjobin <923869988@qq.com>
+Date:   Thu Aug 17 16:16:48 2017 +0800
+
+    V0.1.6 邮件激活账户功能，实现
+---------------------------------------------------------------------------------------------
+commit 38b8fa574a651d95f76a01af847b0a5a85d798bd
+Author: chenjobin <923869988@qq.com>
+Date:   Thu Aug 17 15:25:47 2017 +0800
+
+    V0.1.5 用户注册时必须填写邮箱，邮箱正常存入数据库
+---------------------------------------------------------------------------------------------
+commit 1a22b3f3b677deabbdd168d955218913332358fb
+Author: chenjobin <923869988@qq.com>
+Date:   Wed Aug 16 15:28:27 2017 +0800
+
+    V0.1.4 简单搜索功能、关闭调试、邮件发送错误日志、博文前后篇
+    下一步 用户
+    (web) F:\Django\study>conda list
+    # packages in environment at C:\Anaconda3\envs\web:
+    #
+    django                    1.11.3                   py36_0
+    django-bootstrap3         9.0.0                     <pip>
+    django-contrib-comments   1.8.0                     <pip>
+    pip                       9.0.1                    py36_1
+    python                    3.6.2                         0
+    pytz                      2017.2                   py36_0
+    setuptools                27.2.0                   py36_1
+    vs2015_runtime            14.0.25420                    0
+    wheel                     0.29.0                   py36_0
+---------------------------------------------------------------------------------------------
+commit 2efb815bbf3e4d088ead191a26bdf464cee731aa
+Author: chenjobin <923869988@qq.com>
+Date:   Wed Aug 16 09:30:46 2017 +0800
+
+    V0.1.3 添加评论comments功能。普通用户可以通过后台设置对comments权限，还未做审核功能，自动获得comments权限
+    前提 安装django-contrib-comments
+
+    (web1) F:\Django\study>conda list
+    # packages in environment at C:\Anaconda3\envs\web1:
+    #
+    django                    1.11.3                   py36_0
+    django-bootstrap3         9.0.0                     <pip>
+    django-contrib-comments   1.8.0                     <pip>
+    pip                       9.0.1                    py36_1
+    python                    3.6.2                         0
+    pytz                      2017.2                   py36_0
+    setuptools                27.2.0                   py36_1
+    vs2015_runtime            14.0.25420                    0
+    wheel                     0.29.0                   py36_0
+---------------------------------------------------------------------------------------------
+commit 199296ba51df201b536716bcf06d2b0c08ac28e5
+Author: chenjobin <923869988@qq.com>
+Date:   Tue Aug 15 16:19:48 2017 +0800
+
+    V0.1.2 添加Tag标签、阅读次数、列表 分页，文章详细页面暂时没有添加分页，对UI也适当进行了修改
+    下一步，评论库
+
+    (web) F:\Django\study>conda list
+    # packages in environment at C:\Anaconda3\envs\web:
+    #
+    django                    1.11.3                   py36_0
+    django-bootstrap3         9.0.0                     <pip>
+    pip                       9.0.1                    py36_1
+    python                    3.6.2                         0
+    pytz                      2017.2                   py36_0
+    setuptools                27.2.0                   py36_1
+    vs2015_runtime            14.0.25420                    0
+    wheel                     0.29.0                   py36_0
+---------------------------------------------------------------------------------------------
+commit eb905a2f026880787f1f06179a97d3b81823398a
+Author: chenjobin <923869988@qq.com>
+Date:   Mon Aug 14 18:09:42 2017 +0800
+
+    修改settings为中文，解决模板ueditor问题
+
+    (web) F:\Django\study>conda list
+    # packages in environment at C:\Anaconda3\envs\web:
+    #
+    django                    1.11.3                   py36_0
+    django-bootstrap3         9.0.0                     <pip>
+    pip                       9.0.1                    py36_1
+    python                    3.6.2                         0
+    pytz                      2017.2                   py36_0
+    setuptools                27.2.0                   py36_1
+    vs2015_runtime            14.0.25420                    0
+    wheel                     0.29.0                   py36_0
+---------------------------------------------------------------------------------------------
+commit bc1eefa48f7a4128b61b233d0a9e0775085ff333
+Author: chenjobin <923869988@qq.com>
+Date:   Sun Aug 13 16:28:13 2017 +0800
+
+    教程实例完成，bootstrap3又用到部分，所以还是安装了
+    后台管理添加DjangoUeditor成功，但是显示有点小问题，会显示源码
+
+    (web) F:\Django\study>conda list
+    # packages in environment at C:\Anaconda3\envs\web:
+    #
+    django                    1.11.3                   py36_0
+    django-bootstrap3         9.0.0                     <pip>
+    pip                       9.0.1                    py36_1
+    python                    3.6.2                         0
+    pytz                      2017.2                   py36_0
+    setuptools                27.2.0                   py36_1
+    vs2015_runtime            14.0.25420                    0
+    wheel                     0.29.0                   py36_0
+---------------------------------------------------------------------------------------------
+commit f90cbd82d2b2905d32d874583bf343eecf85f509
+Author: chenjobin <923869988@qq.com>
+Date:   Sun Aug 13 13:21:24 2017 +0800
+
+    blog,users初步建立
+
+    (web) F:\Django\study>conda list
+    # packages in environment at C:\Anaconda3\envs\web:
+    #
+    django                    1.11.3                   py36_0
+    pip                       9.0.1                    py36_1
+    python                    3.6.2                         0
+    pytz                      2017.2                   py36_0
+    setuptools                27.2.0                   py36_1
+    vs2015_runtime            14.0.25420                    0
+    wheel                     0.29.0                   py36_0
+(END)
