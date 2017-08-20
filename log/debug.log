@@ -472,3 +472,18 @@ Traceback (most recent call last):
   File "C:\Anaconda3\envs\web1\lib\site-packages\django\urls\resolvers.py", line 497, in _reverse_with_prefix
     raise NoReverseMatch(msg)
 django.urls.exceptions.NoReverseMatch: Reverse for 'user_info' not found. 'user_info' is not a valid view function or pattern name.
+2017-08-20 11:14:17,231 [Thread-2:4508] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /users/register/
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Django\study\users\views.py", line 54, in register
+    return JsonResponse(response_data,ensure_ascii = False)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\http\response.py", line 531, in __init__
+    super(JsonResponse, self).__init__(content=data, **kwargs)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\http\response.py", line 301, in __init__
+    super(HttpResponse, self).__init__(*args, **kwargs)
+TypeError: __init__() got an unexpected keyword argument 'ensure_ascii'

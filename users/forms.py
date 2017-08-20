@@ -32,6 +32,7 @@ class ChangeNickForm(forms.Form):
     def clean_nickname(self):
         old_nickname = self.cleaned_data.get('old_nickname')
         nickname = self.cleaned_data.get('nickname')
+        #此处可以被参考，用在邮箱验证，确保一个邮箱只能注册一个账号
         is_exist = User.objects.filter(first_name=nickname).count()>0
 
         if is_exist:

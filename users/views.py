@@ -1,8 +1,8 @@
 from django.shortcuts import render,render_to_response
-from django.http import HttpResponseRedirect,HttpResponse
+from django.http import HttpResponseRedirect,HttpResponse,JsonResponse
 from django.core.urlresolvers import reverse
 from django.contrib.auth import login,logout,authenticate
-from django.contrib.auth.forms import UserCreationForm
+# from django.contrib.auth.forms import UserCreationForm
 
 from .forms import RegisterForm,ChangeNickForm
 from django.contrib.auth.models import User
@@ -28,24 +28,30 @@ def register(request):
             username = form.cleaned_data['username']
             password = form.cleaned_data['password1']
             email = form.cleaned_data['email']
+            # 判断注册邮箱是否已经存在
+            is_exist = User.objects.filter(email=email).count()>0
 
-            new_user = User.objects.create_user(username, email, password)
-            new_user.is_active = False
-            new_user.save()
+            if is_exist:
+                response_data={'success': u'sorry,注册失败,此邮箱已被使用，This Email has been used'}
+                return JsonResponse(response_data)
+            else:
+                new_user = User.objects.create_user(username, email, password)
+                new_user.is_active = False
+                new_user.save()
 
-                #发送激活邮件
-                #不想用uuid模块生成唯一ID保存到数据库中，也不想用django-registration
-                #安全级别要求不高，所以简单写个加密解密的方法来处理
-            active_code=get_active_code(email)
-            send_active_email(email,active_code)
+                    #发送激活邮件
+                    #不想用uuid模块生成唯一ID保存到数据库中，也不想用django-registration
+                    #安全级别要求不高，所以简单写个加密解密的方法来处理
+                active_code=get_active_code(email)
+                send_active_email(email,active_code)
 
-            # new_user=form.save()
-            #让用户自动登录，再重定向到主页
-            # authenticated_user=authenticate(username=new_user.username,password=request.POST['password1'])
-            # login(request,authenticated_user)
-            # return HttpResponseRedirect(reverse('blog:index'))
-            response_data={'success': u'注册成功,请前往邮箱激活后登录,Check Email to Active your account'}
-            return HttpResponse(json.dumps(response_data,ensure_ascii = False), content_type="application/json")
+                # new_user=form.save()
+                #让用户自动登录，再重定向到主页
+                # authenticated_user=authenticate(username=new_user.username,password=request.POST['password1'])
+                # login(request,authenticated_user)
+                # return HttpResponseRedirect(reverse('blog:index'))
+                response_data={'success': u'注册成功,请前往邮箱激活后登录,Check Email to Active your account'}
+                return JsonResponse(response_data)
 
     context={'form':form}
     return render(request,'users/register.html',context)
@@ -59,11 +65,12 @@ def get_active_code(email):
 
 def send_active_email(email,active_code):
     """send the active email"""
-    url='http://127.0.0.1:8000%s' % (reverse('users:user_active',args=(active_code,)))
+    # url='http://127.0.0.1:8000%s' % (reverse('users:user_active',args=(active_code,)))
+    url='http://chenzhibin.vip%s' % (reverse('users:user_active',args=(active_code,)))
 
     subject=u'[chenzhibin.vip]激活您的帐号'
     message=u'''
-        <h2>陈志斌的博客(<a href="http://127.0.0.1:8000/" target=_blank>chenzhibin.vip</a>)<h2><br />
+        <h2>陈志斌的博客(<a href="http://chenzhibin.vip/" target=_blank>chenzhibin.vip</a>)<h2><br />
         <p>欢迎注册，请点击下面链接进行激活操作(7天后过期)：<a href="%s" target=_blank>%s</a></p>
         ''' % (url,url)
 
