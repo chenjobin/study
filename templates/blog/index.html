@@ -11,6 +11,36 @@
         window.location.href = '?page=' + page;  //重定向
         return false;
     }
+
+$(document).ready(function() {    
+    /*绑定复选框事件*/
+		$("#filter_form input[name=topic]").each(function(){
+		    $(this).change(function(){
+		        //移除“全部类别”的勾选
+		        $('#check_all').removeAttr("checked");
+		        //提交表单
+		        $('#filter_form').submit();
+		    });
+		});
+		 
+		//“全部类别”的复选框
+		$("#check_all").change(function(){
+		    //判断是否选中“全部类别”，才去掉其他类别的勾选，并提交表单
+		    if($("#check_all").is(':checked')){
+		        $("#filter_form input[name=topic]").each(function(){
+		            $(this).removeAttr("checked");
+		        });
+		        //提交表单
+		        $('#filter_form').submit();
+		    }
+		});
+		 
+		//“推荐”的复选框
+		$("#recommend").change(function(){
+		    //提交表单
+		    $('#filter_form').submit();
+		});
+});
 </script>
 <style type="text/css">
     {#页码跳转的显示样式#}
@@ -89,32 +119,34 @@
         </div>
         <div class="clearfix"></div>
         <hr style="margin:5px;margin-top:6px;height:1px;"/>
-        <div class="tag-list">
-            <form id="filter_form" method="GET" action="/blog/">
-                <!--排序类型-->
+                
+                <!--排序方式 待使用-->
                 <input type="hidden" name='sf' id='sort_sf' value='date' />
-                <!--排序方式-->
                 <input type="hidden" name='st' id='sort_st' value='-1' />
                 <input type="hidden" name='wd' id='keywords' value='' />
+        <div class="tag-list">
+            <form id="filter_form" method="GET" action="{% url 'blog:index1' %}">
+                <!--排序类型-->
+
                 <ul class="list-inline"> 
                     <li class="tag-recommend">
                         <input id="recommend" type="checkbox" name="recommend" value="true" 
-                            />
+                            {%if filter.recommend%}checked{%endif%}/>
                         <label for="recommend">推荐&nbsp;({{entries_recommend}})</label>
                     </li>
 
                     <li class="tag-recommend">
                         <input id="check_all" type="checkbox" name="check_all" value="true" 
-                            checked/>
+                            {%if filter.check_all%}checked{%endif%}/>
                         <label for="check_all">全部类别&nbsp;({{entries_num}})</label>
                     </li>
                     {% for topic in topics%}
 								        <li>
-                            <input id="{{topic}}" type="checkbox" name="tag" value="1"/>
-                            <a href="{% url 'blog:topic' topic.id %}">
-                            	<label for="tag_1">{{topic}}&nbsp;({{topic.num_entry}})
+                            <input id="topic_{{topic.id}}" type="checkbox" name="topic" value="{{topic.id}}"
+                            	 {%if topic.checked%}checked{%endif%}/>
+                            	<label for="topic_{{topic.id}}">{{topic}}&nbsp;({{topic.entry_set.count}})
                             	</label>
-                            </a>
+
                         </li>
 								    {%empty%}
 								        <li>No topics have been added yet</li>

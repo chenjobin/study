@@ -25,17 +25,71 @@ def index1(request):
     # 使用annotate 仅调用一次数据库
     # 这里 annotate 不仅从数据库获取了全部分类，相当于使用了 all 方法，
     # 它还帮我们为每一个分类添加了一个 num_entry 属性，其值为该分类下的文章数，这样我们在模板中就可以调用这个属性
-    topics = Topic.objects.annotate(num_entry=Count('entry'))
+    # topics = Topic.objects.annotate(num_entry=Count('entry'))
+    # ----------可惜因为要筛选框作用，取消了annotate这个方式
+
     # 计算Entry的数量
     entries_num=Entry.objects.count()
     entries_recommend=Entry.objects.filter(recommend=1).count() #获取推荐文章数量
-    entries=Entry.objects.order_by('-date_added')
+    # 因参考他文，所以下方tag代替了topic，未改回
+    try:
+        #处理主题分类标签
+        tags_checked = request.GET.getlist('topic') #获取同名参数
 
-    pages,entries=getPages(request,entries)  #将Paginator封装成函数了
+        #判断是否需要勾选(若勾选个数为0或全部，则无需筛选tag)
+        tag_need_length = len(tags_checked)
+        tag_need_check = tag_need_length>0 and tag_need_length<Topic.objects.count()
 
-    context={'topics':topics,'entries':entries,'pages':pages,
-             'entries_num':entries_num,'entries_recommend':entries_recommend}
-    return render(request,'blog/index.html',context)
+        tags = []
+        tag_ids = []
+
+        for tag in Topic.objects.all():
+            #ManyToMany多对多字段，统计对应博文数量
+            tag.count = len(tag.entry_set.all())
+
+            #判断是否需要勾选（若tag_need_check=False，说明全选。and逻辑关系就变成False）
+            tag.checked = str(tag.id) in tags_checked and tag_need_check
+
+            #加了两个属性的tag，添加到tags中
+            tags.append(tag)
+            #重新建一个list避免客户端乱输参数
+            if tag.checked: tag_ids.append(tag.id)
+
+        #博文类别筛选
+        if tag_need_check:
+            entries = Entry.objects.filter(topic__in = tag_ids) #in查询
+            entries = entries.distinct()    #去重
+        else:
+            entries = Entry.objects.all() #返回全部博文
+
+        #是否筛选推荐的博文
+        is_recommend = request.GET.get('recommend','') == 'true'
+        if is_recommend: entries = entries.filter(recommend = True)
+
+        #页码（这个页面处理函数 getPages是我自己定义的）
+        paginator, entries = getPages(request, entries)
+
+        #返回的参数，可以利用data字典来传送字典，嵌套使用
+        params = {}
+        params['recommend'] = is_recommend #是否勾选推荐
+        params['check_all'] = not(tag_need_check) #是否勾选全部类别
+
+        #return data
+        data = {}
+        data['filter'] = params
+        # data["topics"] = topics
+        # data["tags"] = tags
+        data["topics"] = tags
+        data["entries"] = entries
+        data["pages"] = paginator
+
+        data['entries_num']=entries_num
+        data['entries_recommend']=entries_recommend
+    except Exception:
+        raise Http404
+    return render_to_response('blog/index.html', data)
+    # return render(request,'blog/index.html',data)
+
 
 def tag(request,tag_id):
     '''显示特定tag及其所有的条目'''

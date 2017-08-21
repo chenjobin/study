@@ -2551,3 +2551,21 @@ Traceback (most recent call last):
   File "C:\Anaconda3\envs\web1\lib\site-packages\django\urls\resolvers.py", line 497, in _reverse_with_prefix
     raise NoReverseMatch(msg)
 django.urls.exceptions.NoReverseMatch: Reverse for 'recommend' not found. 'recommend' is not a valid view function or pattern name.
+2017-08-21 20:17:13,834 [Thread-2:10968] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /blog/
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+TypeError: index1() missing 1 required positional argument: 'topic_id'
+2017-08-21 20:18:33,659 [Thread-2:1544] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /blog/
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+TypeError: index1() missing 1 required positional argument: 'topic_id'
