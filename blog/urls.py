@@ -12,6 +12,8 @@ urlpatterns=[
 
     #显示所有的主题
     url(r'^topics/$',views.topics,name='topics'),
+    #推荐博文
+    url(r'^recommends/$',views.entry_recommend,name='recommends'),
 
     #特定主题的详细页面
     url(r'^topics/(?P<topic_id>\d+)/$',views.topic,name='topic'),

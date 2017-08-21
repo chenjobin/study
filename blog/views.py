@@ -39,7 +39,6 @@ def index1(request):
 
 def tag(request,tag_id):
     '''显示特定tag及其所有的条目'''
-    limit = 7  # 每页显示的记录数
     tag=Tag.objects.get(id=tag_id)
 
     entries=tag.entry_set.order_by('-date_added')
@@ -48,6 +47,15 @@ def tag(request,tag_id):
 
     context={'tag':tag,'entries':entries,'pages':pages}
     return render(request,'blog/tag.html',context)
+
+def entry_recommend(request):
+    '''显示推荐博文'''
+    entries=Entry.objects.filter(recommend=1).order_by('-date_added')
+
+    pages,entries=getPages(request,entries)  #将Paginator封装成函数了
+
+    context={'tag':tag,'entries':entries,'pages':pages}
+    return render(request,'blog/recommend.html',context)
 
 # @login_required
 def topics(request):

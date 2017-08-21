@@ -154,10 +154,12 @@
                             <span class="glyphicon glyphicon-tag"></span>
                             <a href="{% url 'blog:topic' entry.topic_id %}">{{entry.topic}} </a>
                         </li>
+                        {% if entry.recommend %}
                         <li class="tag-recommend">
                             <span class="glyphicon glyphicon-thumbs-up"></span>
-                            <a href="/blog/?recommend=true">推荐</a>                            
-                        </li>  
+                            <a href="{% url 'blog:recommends' %}">推荐</a>                            
+                        </li> 
+                        {% endif %}
             </ul>
         </div>
     	</div>
