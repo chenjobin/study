@@ -8,13 +8,28 @@ from .forms import TopicForm,EntryForm
 from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
 
 from django.core.mail import send_mail #导入django发送邮件模块
+from django.db.models.aggregates import Count
 
 # Create your views here.
 def index(request):
-    '''Blog的主页'''
+    '''网站主页'''
     # return render(request,'blog/index.html') # 制作多个项目时，index,base等放templates根目录
     tags=Tag.objects.order_by('date_added')
     context={'tags':tags}
+    return render(request,'index.html',context)
+
+def index1(request):
+    '''Blog的主页'''
+    # topics=Topic.objects.order_by('date_added')
+    # topic.entry_set.count模板中使用该方法也可以获得该topic的文章数量，但是每次执行都会调用一次数据库
+    # 使用annotate 仅调用一次数据库
+    # 这里 annotate 不仅从数据库获取了全部分类，相当于使用了 all 方法，
+    # 它还帮我们为每一个分类添加了一个 num_entry 属性，其值为该分类下的文章数，这样我们在模板中就可以调用这个属性
+    topics = Topic.objects.annotate(num_entry=Count('entry'))
+    # 计算Entry的数量
+    entries_num=Entry.objects.count()
+    entries_recommend=Entry.objects.filter(recommend=1).count() #获取推荐文章数量
+    context={'topics':topics,'entries_num':entries_num,'entries_recommend':entries_recommend}
     return render(request,'blog/index.html',context)
 
 def tag(request,tag_id):
@@ -23,15 +38,8 @@ def tag(request,tag_id):
     tag=Tag.objects.get(id=tag_id)
 
     entries=tag.entry_set.order_by('-date_added')
-    pages = Paginator(entries, limit)  # 实例化一个分页对象
 
-    page = request.GET.get('page',1)  # 获取GET请求的参数，得到当前页码。若没有该参数，默认为1
-    try:
-        entries = pages.page(page)  # 获取某页对应的记录
-    except PageNotAnInteger:  # 如果页码不是个整数
-        entries = pages.page(1)  # 取第一页的记录
-    except EmptyPage:  # 如果页码太大，没有相应的记录
-        entries = pages.page(pages.num_pages)  # 取最后一页的记录
+    pages,entries=getPages(request,entries)  #将Paginator封装成函数了
 
     context={'tag':tag,'entries':entries,'pages':pages}
     return render(request,'blog/tag.html',context)

@@ -7,6 +7,8 @@ from . import  views
 urlpatterns=[
     #主页
     url(r'^$',views.index,name='index'),
+    #博客主页
+    url(r'^blog/$',views.index1,name='index1'),
 
     #显示所有的主题
     url(r'^topics/$',views.topics,name='topics'),

@@ -1,14 +1,7 @@
 {% extends 'base.html' %}
 
 {% block header %}	
-      <div class="jumbotron">
-        <h1>Navbar example</h1>
-        <p>This example is a quick exercise to illustrate how the default, static and fixed to top navbar work. It includes the responsive CSS and HTML, so it also adapts to your viewport and device.</p>
-        <p>To see the difference between static and fixed top navbars, just scroll.</p>
-        <p>
-          <a class="btn btn-lg btn-primary" href="#" role="button">View navbar docs &raquo;</a>
-        </p>
-      </div>
+
 {% endblock header %}
 
 {% block content %}
@@ -23,6 +16,98 @@
     {%empty%}
   			
     {%endfor%}
-</div>    
-    
+</div>  
+{# 筛选框  #}
+<div class="panel panel-default">
+    <div class="panel-body" style="word-wrap:break-word">
+			<div class="filter blog-border">
+        <div class="filter-item">
+            <div class="btn-group">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                    发布日期 <span class="caret"></span>
+                </button>
+
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="javascript:void(0);" onclick="blog_sort('date','-1');" name="date">
+                        发布日期从近到远
+                    </a></li>
+                    <li><a href="javascript:void(0);" onclick="blog_sort('date','1');"  name="date">
+                        发布日期从远到近
+                    </a></li>
+                 </ul>
+            </div>
+
+            <div class="btn-group">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                    阅读数 <span class="caret"></span>
+                </button>
+
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="javascript:void(0);" onclick="blog_sort('view','-1');" name="view">
+                        阅读数由多到少
+                    </a></li>
+                    <li><a href="javascript:void(0);" onclick="blog_sort('view','1');"  name="view">
+                        阅读数由少到多
+                    </a></li>
+                 </ul>
+            </div>
+
+            <div class="btn-group">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                    评论数 <span class="caret"></span>
+                </button>
+
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="javascript:void(0);" onclick="blog_sort('comment','-1');" name="comment">
+                        评论数由多到少
+                    </a></li>
+                    <li><a href="javascript:void(0);" onclick="blog_sort('comment','1');"  name="comment">
+                        评论数由少到多
+                    </a></li>
+                 </ul>
+            </div>
+
+            <span style="padding-left:1em; white-space:nowrap;">
+                排序：<span id="sort_content">发布日期从近到远</span>
+            </span>
+        </div>
+        <div class="clearfix"></div>
+        <hr style="margin:5px;margin-top:6px;height:1px;"/>
+        <div class="tag-list">
+            <form id="filter_form" method="GET" action="/blog/">
+                <!--排序类型-->
+                <input type="hidden" name='sf' id='sort_sf' value='date' />
+                <!--排序方式-->
+                <input type="hidden" name='st' id='sort_st' value='-1' />
+                <input type="hidden" name='wd' id='keywords' value='' />
+                <ul class="list-inline"> 
+                    <li class="tag-recommend">
+                        <input id="recommend" type="checkbox" name="recommend" value="true" 
+                            />
+                        <label for="recommend">推荐&nbsp;({{entries_recommend}})</label>
+                    </li>
+
+                    <li class="tag-recommend">
+                        <input id="check_all" type="checkbox" name="check_all" value="true" 
+                            checked/>
+                        <label for="check_all">全部类别&nbsp;({{entries_num}})</label>
+                    </li>
+                    {% for topic in topics%}
+								        <li>
+                            <input id="{{topic}}" type="checkbox" name="tag" value="1"/>
+                            <a href="{% url 'blog:topic' topic.id %}">
+                            	<label for="tag_1">{{topic}}&nbsp;({{topic.num_entry}})
+                            	</label>
+                            </a>
+                        </li>
+								    {%empty%}
+								        <li>No topics have been added yet</li>
+								    {%endfor%}
+                    <li><a class="btn btn-success btn-xs" href="/blog/">清除条件</a></li>
+                    
+                </ul>
+            </form>
+        </div></div>
+    </div>
+</div>
 {% endblock content %}

@@ -2,6 +2,26 @@
 
 {%block header%}
 	<h1>{{tag}}</h1>
+<script type="text/javascript">
+    function page_goto(){
+        var page = $("#page_goto input")[0].value;
+        window.location.href = '?page=' + page;  //重定向
+        return false;
+    }
+</script>
+ 
+<style type="text/css">
+    {#页码跳转的显示样式#}
+    #page_goto span{
+        padding: 6px 4px;
+    }
+    #page_goto input{
+        border: none;
+        padding: 0;
+        width: 2em;
+        text-align: center;
+    }
+</style>
 {%endblock header%}
 
 
@@ -51,9 +71,13 @@
 	        </li>
 	 
 	        {# 遍历所有页码 #}
-	        {% for page in pages.page_range %}
-	            <li><a href="?page={{page}}">{{page}}</a></li>
-	        {% endfor %}
+	        {% for page in pages.page_range_ex %}
+                    {% if page == '...' %}
+                        <li><span>...</span></li>
+                    {% else %}
+                        <li><a href="?page={{page}}">{{page}}</a></li>
+                    {% endif %}
+            {% endfor %}
 	 
 	        {# 下一页，这里需要用到has_next方法判断是否有下一页 #}
 	        <li>
@@ -68,12 +92,25 @@
 	            </a>
 	        </li>
 	    </ul>
+	    	    {# 页码跳转的html代码 #}
+        <ul class="pagination">
+            <li id="page_goto">
+                <span >
+                    <input type="text" value="{{paginator.page_goto}}" />
+                </span>
+            </li>
+            <li><a href="javascript:void(0);" onClick="page_goto();">Go</a></li>
+        </ul> 
 	    </div>
 	</div>
 	{% block extra_footer %}
-	    {#设置凸显当前的页码#}
+	    {#设置凸显当前的页码 此处代码放在header则无效，奇怪#}
 	    <script type="text/javascript">
-	        $(".pagination li:eq({{entries.number}})").addClass("active");
+			$(".pagination li a").each(function(){
+		        if($(this).text()=="{{entries.number}}"){
+		            $(this).parent().addClass("active");
+		        }
+		   });
 	    </script>
 	{% endblock extra_footer%}
 
