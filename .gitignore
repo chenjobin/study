@@ -3,6 +3,7 @@ Thumbs.db
 ehthumbs.db
 Desktop.ini
 
+./media/.
 # Python:
 *.py[cod]
 *.so

@@ -133,6 +133,7 @@
 
 
 {%block content%}
+{% get_comment_count for entry as comment_count %}
 <div class="panel panel-default">
     <div class="panel-heading">
     	<div class="">
@@ -141,18 +142,19 @@
                     <li>发布时间：{{entry.date_added|date:'Y-m-d, H:i'}}</li>
                     <li>作者：{{entry.author}}</li> 
                     <li>阅读({{entry.read_num}})</li>
-                    <li>评论(0)</li>
+                    <li>评论({{comment_count}})</li>
                 </ul>
                 <span class="clearfix"></span>
                 <ul class="list-inline">
                     <li>分类标签：
                     	{%for tag in entry.tags.all%}
 						<kbd>
+                    		<span class="glyphicon glyphicon-tag"></span>
                     		<a href="{% url 'blog:tag' tag.id %}" target=_blank style="color: white;">{{tag}}</a>
 						</kbd>
 						&nbsp;
                     	{% empty %}
-                    	
+                    		<span class="glyphicon glyphicon-tag"></span>本文暂无相关标签
                     	{%endfor%}
                     </li>
                 </ul>
@@ -189,7 +191,6 @@
  
     <div class="panel-body">
         {% get_comment_list for entry as comments %}
-        {% get_comment_count for entry as comment_count %}
         {% for comment in comments %}
             <div class="blog_comment" name="F{{comment.id}}">
 		        <p class="comment_title">

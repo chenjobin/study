@@ -23,89 +23,78 @@
 		<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
 		<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
   </head>
-<div class="filter blog-border">
-        <div class="filter-item">
-            <div class="btn-group">
-                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                    发布日期 <span class="caret"></span>
-                </button>
+ <div class="blog-border">
+        
+            <div class="blog-item">
+                <div class="blog-title">
+                    <a href="/blog/187" target="_blank">充分利用Excel的布尔值</a>
+                </div>
+                
+                <div class="blog_descipt">
+                    Excel的布尔值是True和False。在Excel使用布尔值最多的地方是If函数。我们可以通过If函数分析如何充分挖掘布尔值的作用。If函数格式如下：=IF(条件表达式,&nbsp;为True执行,&nbsp;为Fals...
+                </div>
 
-                <ul class="dropdown-menu" role="menu">
-                    <li><a href="javascript:void(0);" onclick="blog_sort('date','-1');" name="date">
-                        发布日期从近到远
-                    </a></li>
-                    <li><a href="javascript:void(0);" onclick="blog_sort('date','1');"  name="date">
-                        发布日期从远到近
-                    </a></li>
-                 </ul>
-            </div>
-
-            <div class="btn-group">
-                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                    阅读数 <span class="caret"></span>
-                </button>
-
-                <ul class="dropdown-menu" role="menu">
-                    <li><a href="javascript:void(0);" onclick="blog_sort('view','-1');" name="view">
-                        阅读数由多到少
-                    </a></li>
-                    <li><a href="javascript:void(0);" onclick="blog_sort('view','1');"  name="view">
-                        阅读数由少到多
-                    </a></li>
-                 </ul>
-            </div>
-
-            <div class="btn-group">
-                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                    评论数 <span class="caret"></span>
-                </button>
-
-                <ul class="dropdown-menu" role="menu">
-                    <li><a href="javascript:void(0);" onclick="blog_sort('comment','-1');" name="comment">
-                        评论数由多到少
-                    </a></li>
-                    <li><a href="javascript:void(0);" onclick="blog_sort('comment','1');"  name="comment">
-                        评论数由少到多
-                    </a></li>
-                 </ul>
-            </div>
-
-            <span style="padding-left:1em; white-space:nowrap;">
-                排序：<span id="sort_content">发布日期从近到远</span>
-            </span>
-        </div>
-        <div class="clearfix"></div>
-        <div class="tag-list">
-            <form id="filter_form" method="GET" action="/blog/">
-                <!--排序类型-->
-                <input type="hidden" name='sf' id='sort_sf' value='date' />
-                <!--排序方式-->
-                <input type="hidden" name='st' id='sort_st' value='-1' />
-                <input type="hidden" name='wd' id='keywords' value='' />
-                <ul>
-                    <li class="tag-recommend">
-                        <input id="recommend" type="checkbox" name="recommend" value="true" 
-                            />
-                        <label for="recommend">推荐</label>
-                    </li>
-
-                    <li class="tag-recommend">
-                        <input id="check_all" type="checkbox" name="check_all" value="true" 
-                            checked/>
-                        <label for="check_all">全部类别&nbsp;(186)</label>
-                    </li>
-
-                    
+                <div class="blog-tags">
+                    <ul>
                         <li>
-                            <input id="tag_1" type="checkbox" name="tag" value="1" 
-                                />
-                            <label for="tag_1">我的网站搭建&nbsp;(56)</label>
+                            <span class="glyphicon glyphicon-time"></span>
+                            <span>2017-08-13</span>
                         </li>
-                    
- 
-                    
-                        <li><a class="btn btn-success btn-xs" href="/blog/">清除条件</a></li>
-                    
-                </ul>
-            </form>
-        </div>
+
+                        <li>
+                            
+                            阅读：65
+                        </li>
+                        <li>
+                            
+                            评论：0 
+                        </li>  
+
+                        
+                        <li>
+                            <span class="glyphicon glyphicon-tag"></span>
+                            <a href="/blog/?tag=2">Excel</a>
+                        </li>
+                        
+
+                        
+                    </ul>
+                </div>
+            </div>
+        
+            <div class="blog-item">
+                <div class="blog-title">
+                    <a href="/blog/185" target="_blank">初步使用tastypie的体悟（二）</a>
+                </div>
+                
+                <div class="blog_descipt">
+                    接着上一篇初步使用tastypie的体悟（一），继续写体悟。这次主要聊聊tastypie对应model与model之间的关系。tastypie既然可以通过ModelResource快速创建和Model对应的Resource。...
+                </div>
+
+                <div class="blog-tags">
+                    <ul>
+                        <li>
+                            <span class="glyphicon glyphicon-time"></span>
+                            <span>2017-08-04</span>
+                        </li>
+
+                        <li>
+                            
+                            阅读：101
+                        </li>
+                        <li>
+                            
+                            评论：0 
+                        </li>  
+
+                        
+                        <li>
+                            <span class="glyphicon glyphicon-tag"></span>
+                            <a href="/blog/?tag=8">Django</a>
+                        </li>
+                        
+
+                        
+                    </ul>
+                </div>
+            </div>

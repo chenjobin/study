@@ -29,7 +29,12 @@ def index1(request):
     # 计算Entry的数量
     entries_num=Entry.objects.count()
     entries_recommend=Entry.objects.filter(recommend=1).count() #获取推荐文章数量
-    context={'topics':topics,'entries_num':entries_num,'entries_recommend':entries_recommend}
+    entries=Entry.objects.order_by('-date_added')
+
+    pages,entries=getPages(request,entries)  #将Paginator封装成函数了
+
+    context={'topics':topics,'entries':entries,'pages':pages,
+             'entries_num':entries_num,'entries_recommend':entries_recommend}
     return render(request,'blog/index.html',context)
 
 def tag(request,tag_id):

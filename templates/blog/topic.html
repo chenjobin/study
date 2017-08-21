@@ -3,6 +3,7 @@
 {%block header%}
 	<h1>{{topic}}</h1>
 <script type="text/javascript">
+	{# 页面跳转按钮 #}
     function page_goto(){
         var page = $("#page_goto input")[0].value;
         window.location.href = '?page=' + page;  //重定向
