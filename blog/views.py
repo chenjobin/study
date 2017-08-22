@@ -31,6 +31,24 @@ def index1(request):
     # 计算Entry的数量
     entries_num=Entry.objects.count()
     entries_recommend=Entry.objects.filter(recommend=1).count() #获取推荐文章数量
+    # return render(request,'blog/index.html',context)
+    topics=Topic.objects.order_by('date_added')
+    context={'topics':topics}
+    return render(request,'blog/index.html',context)
+
+def blog_list(request):
+    '''Blog的主页'''
+    # topics=Topic.objects.order_by('date_added')
+    # topic.entry_set.count模板中使用该方法也可以获得该topic的文章数量，但是每次执行都会调用一次数据库
+    # 使用annotate 仅调用一次数据库
+    # 这里 annotate 不仅从数据库获取了全部分类，相当于使用了 all 方法，
+    # 它还帮我们为每一个分类添加了一个 num_entry 属性，其值为该分类下的文章数，这样我们在模板中就可以调用这个属性
+    # topics = Topic.objects.annotate(num_entry=Count('entry'))
+    # ----------可惜因为要筛选框作用，取消了annotate这个方式
+
+    # 计算Entry的数量
+    entries_num=Entry.objects.count()
+    entries_recommend=Entry.objects.filter(recommend=1).count() #获取推荐文章数量
     # 因参考他文，所以下方tag代替了topic，未改回
     try:
         #处理主题分类标签
@@ -102,7 +120,7 @@ def index1(request):
         data['entries_recommend']=entries_recommend
     except Exception:
         raise Http404
-    return render_to_response('blog/index.html', data)
+    return render_to_response('blog/blog_list.html', data)
     # return render(request,'blog/index.html',data)
 
 
