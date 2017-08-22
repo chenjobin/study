@@ -13,8 +13,8 @@ class SubjectType(models.Model):
         return '%s' % (self.type_name)
 
     class Meta:
-        verbose_name = '连载中'
-        verbose_name_plural = '连载中'
+        verbose_name = '专题类别'
+        verbose_name_plural = '专题类别'
 
 
 class SubjectStaticType(models.Model):
@@ -26,8 +26,8 @@ class SubjectStaticType(models.Model):
         return self.type_name
 
     class Meta:
-        verbose_name = '连载完成'
-        verbose_name_plural = '连载完成'
+        verbose_name = '专题类别状态'
+        verbose_name_plural = '专题类别状态'
 
 
 class Subject(models.Model):
@@ -36,7 +36,7 @@ class Subject(models.Model):
     description = models.TextField()
 
     author = models.ForeignKey(User, default=1)
-    img = models.FileField(upload_to='media/subject')
+    img = models.FileField(upload_to='subject')
     static = models.ForeignKey(SubjectStaticType, default=1)
     subject_type = models.ForeignKey(SubjectType, default=1)
 

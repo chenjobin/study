@@ -6,12 +6,12 @@ from django.core.urlresolvers import reverse #url逆向解析
 from django.template import RequestContext
 # from apps_project.view_record.decorator import record_view #阅读计数
 
-def subject_list(request):
+def index(request):
     # subjects = Subject.objects.all()
     subjects = Subject.objects.order_by('-create_time')
     data = {}
     data['subjects'] = subjects
-    return render_to_response('subject/subject_list.html', data)
+    return render_to_response('subject/index.html', data)
 
 # @record_view(Subject)
 def subject_show(request, subject_id):

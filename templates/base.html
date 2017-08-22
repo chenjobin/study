@@ -22,6 +22,8 @@
 		<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
 		<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
 		<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    {% block head %}
+    {% endblock head %}
   </head>
 
   <body>
@@ -43,7 +45,7 @@
           <ul class="nav navbar-nav">
             <li class="active"><a href="{% url 'blog:index1' %}">Blog</a></li>
             <li><a href="{% url 'blog:topics' %}">Topics</a></li>
-            <li><a href="{% url 'subject:subject_list' %}">专题</a></li>
+            <li><a href="{% url 'subject:index' %}">专题</a></li>
             <li><a href="{% url 'blog:topics' %}">Topics</a></li>
             <li><a href="{% url 'blog:topics' %}">Topics</a></li>
 
