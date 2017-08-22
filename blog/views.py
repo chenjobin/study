@@ -35,6 +35,8 @@ def index1(request):
     try:
         #处理主题分类标签
         tags_checked = request.GET.getlist('topic') #获取同名参数
+        sort_sf=str(request.GET.get('sf'))  #获取排序类型
+        sort_st=str(request.GET.get('st'))  #获取排序方式
 
         #判断是否需要勾选(若勾选个数为0或全部，则无需筛选tag)
         tag_need_length = len(tags_checked)
@@ -55,12 +57,23 @@ def index1(request):
             #重新建一个list避免客户端乱输参数
             if tag.checked: tag_ids.append(tag.id)
 
+        #排序方式(个人）
+        if sort_sf=='read_num' and sort_st=='1':
+            sort_s='read_num'
+        elif sort_sf =='date' and sort_st=='1':
+            sort_s='date_added'
+        elif sort_sf=='read_num' and sort_st=='-1':
+            sort_s='-read_num'
+        else:
+            sort_s='-date_added'
+
+
         #博文类别筛选
         if tag_need_check:
             entries = Entry.objects.filter(topic__in = tag_ids) #in查询
-            entries = entries.distinct()    #去重
+            entries = entries.distinct().order_by(sort_s)    #去重
         else:
-            entries = Entry.objects.all() #返回全部博文
+            entries = Entry.objects.all().order_by(sort_s) #返回全部博文
 
         #是否筛选推荐的博文
         is_recommend = request.GET.get('recommend','') == 'true'
@@ -73,6 +86,8 @@ def index1(request):
         params = {}
         params['recommend'] = is_recommend #是否勾选推荐
         params['check_all'] = not(tag_need_check) #是否勾选全部类别
+        params['sorted_field']=sort_sf
+        params['sorted_type']=sort_st
 
         #return data
         data = {}

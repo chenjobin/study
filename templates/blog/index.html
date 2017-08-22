@@ -5,12 +5,18 @@
 {% block header %}	
 
 <script type="text/javascript">
-		{# 页面跳转按钮 #}
+	{# 页面跳转按钮 #}
     function page_goto(){
         var page = $("#page_goto input")[0].value;
         window.location.href = '?page=' + page;  //重定向
         return false;
     }
+    //排序可调用的通用函数
+	function blog_sort(sf, st){
+	    $('#sort_sf').attr('value', sf);   //排序类型
+	    $('#sort_st').attr('value', st);   //排序方式(升序/降序)
+	    $('#filter_form').submit();        //提交表单
+	}
 
 $(document).ready(function() {    
     /*绑定复选框事件*/
@@ -40,6 +46,20 @@ $(document).ready(function() {
 		    //提交表单
 		    $('#filter_form').submit();
 		});
+		
+		/*设置排序文本*/
+		function set_sort_content(field, sort_type){
+		    var texts = $('.filter-item a[name=' + field + ']');
+		    var text = '';
+		    if(texts.length>1){
+		        text = '排序:'+texts[sort_type=='-1' ? 0:1].text.trim();
+		    }
+		 
+		    $('#sort_content').text(text);
+		}
+		 
+		//执行设置排序文本
+		set_sort_content('{{filter.sorted_field}}', '{{filter.sorted_type}}');
 });
 </script>
 <style type="text/css">
@@ -89,45 +109,30 @@ $(document).ready(function() {
                 </button>
 
                 <ul class="dropdown-menu" role="menu">
-                    <li><a href="javascript:void(0);" onclick="blog_sort('view','-1');" name="view">
+                    <li><a href="javascript:void(0);" onclick="blog_sort('read_num','-1');" name="read_num">
                         阅读数由多到少
                     </a></li>
-                    <li><a href="javascript:void(0);" onclick="blog_sort('view','1');"  name="view">
+                    <li><a href="javascript:void(0);" onclick="blog_sort('read_num','1');"  name="read_num">
                         阅读数由少到多
                     </a></li>
                  </ul>
             </div>
 
-            <div class="btn-group">
-                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                    评论数 <span class="caret"></span>
-                </button>
-
-                <ul class="dropdown-menu" role="menu">
-                    <li><a href="javascript:void(0);" onclick="blog_sort('comment','-1');" name="comment">
-                        评论数由多到少
-                    </a></li>
-                    <li><a href="javascript:void(0);" onclick="blog_sort('comment','1');"  name="comment">
-                        评论数由少到多
-                    </a></li>
-                 </ul>
-            </div>
-
             <span style="padding-left:1em; white-space:nowrap;">
-                排序：<span id="sort_content">发布日期从近到远</span>
+                <span id="sort_content">发布日期从近到远</span>
             </span>
         </div>
         <div class="clearfix"></div>
         <hr style="margin:5px;margin-top:6px;height:1px;"/>
                 
-                <!--排序方式 待使用-->
-                <input type="hidden" name='sf' id='sort_sf' value='date' />
-                <input type="hidden" name='st' id='sort_st' value='-1' />
+
                 <input type="hidden" name='wd' id='keywords' value='' />
         <div class="tag-list">
             <form id="filter_form" method="GET" action="{% url 'blog:index1' %}">
                 <!--排序类型-->
-
+                <input type="hidden" name='sf' id='sort_sf' value='{{filter.sorted_field}}' />
+                <!--排序方式 -->
+                <input type="hidden" name='st' id='sort_st' value='{{filter.sorted_type}}' />
                 <ul class="list-inline"> 
                     <li class="tag-recommend">
                         <input id="recommend" type="checkbox" name="recommend" value="true" 
@@ -185,6 +190,10 @@ $(document).ready(function() {
                         <li>
                             <span class="glyphicon glyphicon-tag"></span>
                             <a href="{% url 'blog:topic' entry.topic_id %}">{{entry.topic}} </a>
+                        </li>
+                        <li>
+                            <span class="glyphicon glyphicon-tag"></span>
+                            <a href="{% url 'blog:topic' entry.topic_id %}">{{sort_sf}} </a>
                         </li>
                         {% if entry.recommend %}
                         <li class="tag-recommend">
