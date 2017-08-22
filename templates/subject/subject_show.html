@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block header %}	
+      <div class="jumbotron">
+        <h1>Navbar example</h1>
+        <p>This example is a quick exercise to illustrate how the default, static and fixed to top navbar work. It includes the responsive CSS and HTML, so it also adapts to your viewport and device.</p>
+        <p>To see the difference between static and fixed top navbars, just scroll.</p>
+        <p>
+          <a class="btn btn-lg btn-primary" href="{% url 'blog:blog_list' %}" role="button">进入博客列表页 &raquo;</a>
+        </p>
+      </div>
+{% endblock header %}
+
+{% block content %}
+<h2>
+	<a href="{% url 'users:register' %}">Register an account</a>
+	你自己打的Blog,并列出所有的主题11111111111111111111111111111111
+</h2>
+<h2>Learning Log helps you keep track of your learning,for any topic you're learning about.这是一段Learning Log简介</h2>
+<div id="tags">
+    {% for subject in subjects%}
+            <a href="{% url 'subject:subject_show' subject.id %}">{{subject}}</a>
+    {%empty%}
+  			
+    {%endfor%}
+</div>    
+    
+{% endblock content %}
