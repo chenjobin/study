@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+
+{% block title %}用户中心 - 陈志斌的博客{% endblock title%}
+ 
+{% block head %}
+<link rel="stylesheet" type="text/css" href="https://cdn.bootcss.com/cropper/3.0.0-rc.3/cropper.min.css">
+<script src="https://cdn.bootcss.com/cropper/3.0.0-rc.3/cropper.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+        $('#avatar_upload').submit(function() {
+      
+            $.ajax({
+                type: "POST",
+                data: $('#avatar_form').serialize(),
+                url: "{% url 'users:upload_pic' %}",
+                cache: false,
+                dataType: "json",
+                success: function(json, textStatus) {
+			            if(json['success']){
+			                window.location.reload();
+			                alert('上传成功');
+			            }else{
+							alert('上传失败');
+			            }
+			        },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert("上传出错，失败了" + errorThrown);
+                }
+            });            
+            return false;
+        });
+});
+</script>
+<style>
+/*在线图片*/
+.avatar_online_img img{ 
+    width: 96px; 
+    margin: 0 0 5px 5px; 
+    border: 1px #ccc solid; 
+    border-radius: 4px; 
+    cursor: pointer;
+}
+.avatar_online_img img:hover{ 
+    border-color: #bbb; 
+    box-shadow: 0 0 5px rgba(0,0,0,.25);
+}
+ 
+/*不同屏幕改变头像大小*/
+@media (max-width:485px){
+  .avatar_online_img img{ width: 72px;}
+}
+@media (max-width:388px){
+  .avatar_online_img img{ width: 48px;}
+}
+/*头像预览*/
+.avatar-preview {
+  margin-top: 15px;
+  margin-right: 15px;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  background-color: #fff;
+  overflow: hidden;
+  height: 96px;
+  width: 96px;
+}
+.avatar-preview:hover { border-color: #ccf; box-shadow: 0 0 5px rgba(0,0,0,.15);}
+</style>
+{% endblock head %}
+ 
+{% block content %}
+
+
+    <div class="">
+        <div class="modal-header">
+            <div class="text-left col-md-5 col-xs-5 col-sm-5"><h4 >请选择或者上传一个头像</h4></div>
+			<form id="avatar_form" action="" method="post" enctype="multipart/form-data">
+				{% csrf_token %}
+                <p>
+                      <input id="id_image" type="file" class="" name="image"> <!-- 这一行应该是form.image，省事写的 -->
+                </p>
+                <input id="avatar_upload" type="submit" value="Submit" />
+            </form>
+            <div class="text-right">
+            	<input type="submit" value="确定头像" name="submit" class="btn btn-primary text-right"/> 	
+            </div>
+
+        </div>
+ 		
+        <div class="" style="text-align: center; position: relative;top:10px;">
+            <div class="avatar_online_img">
+            <div>
+                <img src="/media/avatar/online/h1.jpg" />
+                <img src="/media/avatar/online/h2.jpg" />
+                <img src="/media/avatar/online/h3.jpg" />
+                <img src="/media/avatar/online/h4.jpg" />
+            </div>
+            <div>
+                <img src="/media/avatar/online/h5.jpg" />
+                <img src="/media/avatar/online/h6.jpg" />
+                <img src="/media/avatar/online/h7.jpg" />
+                <img src="/media/avatar/online/h8.jpg" />
+            </div>
+            <div>
+                <img src="/media/avatar/online/h9.jpg" />
+                <img src="/media/avatar/online/h10.jpg" />
+                <img src="/media/avatar/online/h11.jpg" />
+                <img src="/media/avatar/online/h12.jpg" />
+            </div>
+            <div>
+                <img src="/media/avatar/online/h13.jpg" />
+                <img src="/media/avatar/online/h14.jpg" />
+                <img src="/media/avatar/online/h15.jpg" />
+                <img src="/media/avatar/online/h16.jpg" />
+            </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content%}

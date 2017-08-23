@@ -3207,3 +3207,238 @@ Traceback (most recent call last):
   File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 700, in __init__
     "from '%s'" % (token[upto:], token))
 django.template.exceptions.TemplateSyntaxError: Could not parse the remainder: '()' from 'user.get_avatar_url()'
+2017-08-23 10:13:04,278 [Thread-4:13736] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /users/avatar
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Django\study\users\views.py", line 211, in wrapper
+    return func(request)
+  File "F:\Django\study\users\views.py", line 420, in user_avatar
+    context_instance=RequestContext(request))
+TypeError: render_to_response() got an unexpected keyword argument 'context_instance'
+2017-08-23 10:15:18,993 [Thread-8:8052] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /users/avatar
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Django\study\users\views.py", line 211, in wrapper
+    return func(request)
+  File "F:\Django\study\users\views.py", line 420, in user_avatar
+    context_instance=RequestContext(request))
+TypeError: render_to_response() got an unexpected keyword argument 'context_instance'
+2017-08-23 10:34:47,162 [Thread-2:6676] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /users/avatar
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Django\study\users\views.py", line 211, in wrapper
+    return func(request)
+  File "F:\Django\study\users\views.py", line 417, in user_avatar
+    return render(RequestContext(request), 'users/avatar.html', data)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\shortcuts.py", line 30, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\loader.py", line 68, in render_to_string
+    return template.render(context, request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\backends\django.py", line 66, in render
+    return self.template.render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 205, in render
+    with context.bind_template(self):
+  File "C:\Anaconda3\envs\web1\lib\contextlib.py", line 81, in __enter__
+    return next(self.gen)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\context.py", line 263, in bind_template
+    updates.update(processor(self.request))
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\context_processors.py", line 43, in debug
+    if settings.DEBUG and request.META.get('REMOTE_ADDR') in settings.INTERNAL_IPS:
+AttributeError: 'RequestContext' object has no attribute 'META'
+2017-08-23 14:08:53,329 [Thread-2:12008] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /users/avatar
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Django\study\users\views.py", line 211, in wrapper
+    return func(request)
+  File "F:\Django\study\users\views.py", line 421, in user_avatar
+    context_instance=RequestContext(request))
+TypeError: render_to_response() got an unexpected keyword argument 'context_instance'
+2017-08-23 14:14:20,795 [Thread-2:5904] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /users/avatar
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Django\study\users\views.py", line 211, in wrapper
+    return func(request)
+  File "F:\Django\study\users\views.py", line 418, in user_avatar
+    return render(request1, 'users/avatar.html', data)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\shortcuts.py", line 30, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\loader.py", line 68, in render_to_string
+    return template.render(context, request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\backends\django.py", line 66, in render
+    return self.template.render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 205, in render
+    with context.bind_template(self):
+  File "C:\Anaconda3\envs\web1\lib\contextlib.py", line 81, in __enter__
+    return next(self.gen)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\context.py", line 263, in bind_template
+    updates.update(processor(self.request))
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\context_processors.py", line 43, in debug
+    if settings.DEBUG and request.META.get('REMOTE_ADDR') in settings.INTERNAL_IPS:
+AttributeError: 'RequestContext' object has no attribute 'META'
+2017-08-23 15:13:46,762 [Thread-2:644] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /users/avatar
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Django\study\users\views.py", line 211, in wrapper
+    return func(request)
+  File "F:\Django\study\users\views.py", line 417, in user_avatar
+    return render(request, 'users/avatar.html', data)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\shortcuts.py", line 30, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\loader.py", line 68, in render_to_string
+    return template.render(context, request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\backends\django.py", line 66, in render
+    return self.template.render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 207, in render
+    return self._render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 990, in render
+    bit = node.render_annotated(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 957, in render_annotated
+    return self.render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\loader_tags.py", line 177, in render
+    return compiled_parent._render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 990, in render
+    bit = node.render_annotated(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 957, in render_annotated
+    return self.render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\loader_tags.py", line 72, in render
+    result = block.nodelist.render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 990, in render
+    bit = node.render_annotated(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 957, in render_annotated
+    return self.render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\defaulttags.py", line 458, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\urls\base.py", line 91, in reverse
+    return force_text(iri_to_uri(resolver._reverse_with_prefix(view, prefix, *args, **kwargs)))
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\urls\resolvers.py", line 497, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for '' not found. '' is not a valid view function or pattern name.
+2017-08-23 15:22:37,582 [Thread-2:11120] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /users/avatar
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Django\study\users\views.py", line 211, in wrapper
+    return func(request)
+  File "F:\Django\study\users\views.py", line 417, in user_avatar
+    return render(request, 'users/avatar.html', data)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\shortcuts.py", line 30, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\loader.py", line 68, in render_to_string
+    return template.render(context, request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\backends\django.py", line 66, in render
+    return self.template.render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 207, in render
+    return self._render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 990, in render
+    bit = node.render_annotated(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 957, in render_annotated
+    return self.render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\loader_tags.py", line 177, in render
+    return compiled_parent._render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 990, in render
+    bit = node.render_annotated(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 957, in render_annotated
+    return self.render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\loader_tags.py", line 72, in render
+    result = block.nodelist.render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 990, in render
+    bit = node.render_annotated(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 957, in render_annotated
+    return self.render(context)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\defaulttags.py", line 458, in render
+    url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\urls\base.py", line 91, in reverse
+    return force_text(iri_to_uri(resolver._reverse_with_prefix(view, prefix, *args, **kwargs)))
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\urls\resolvers.py", line 497, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'upload_pic' not found. 'upload_pic' is not a valid view function or pattern name.
+2017-08-23 15:42:38,108 [Thread-20:9252] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /users/upload_pic
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Django\study\users\views.py", line 428, in upload_pic
+    m = User_Avatar.objects.get(pk=course_id)
+NameError: name 'course_id' is not defined
+2017-08-23 15:53:50,922 [Thread-35:13604] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /users/upload_pic
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Django\study\users\views.py", line 428, in upload_pic
+    m = User_Avatar.objects.get(user_id=request.user.id)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\db\models\query.py", line 380, in get
+    self.model._meta.object_name
+users.models.DoesNotExist: User_Avatar matching query does not exist.
+2017-08-23 15:59:42,604 [Thread-2:14228] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /users/upload_pic
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Django\study\users\views.py", line 429, in upload_pic
+    m=form.save(commit=False)
+AttributeError: 'ImageUploadForm' object has no attribute 'save'
+2017-08-23 16:03:24,605 [Thread-20:7920] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /users/upload_pic
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web1\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Django\study\users\views.py", line 434, in upload_pic
+    return HttpResponseForbidden('allowed only via POST')
+NameError: name 'HttpResponseForbidden' is not defined

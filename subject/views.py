@@ -1,4 +1,4 @@
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response,render
 from .models import SubjectType, SubjectStaticType, Subject, SubjectChapter, SubjectItem
 
 from django.http import Http404
@@ -11,7 +11,7 @@ def index(request):
     subjects = Subject.objects.order_by('-create_time')
     data = {}
     data['subjects'] = subjects
-    return render_to_response('subject/index.html', data)
+    return render(request,'subject/index.html', data)
 
 # @record_view(Subject)
 def subject_show(request, subject_id):
@@ -60,4 +60,4 @@ def subject_show(request, subject_id):
     data['chapters'] = chapters
     data['count'] = u'该专题分%s章节，共%s篇博客、%s个教程' % (len(chapters), blog_num, tutorial_num)
     # return render_to_response('subject/subject_show.html', data, context_instance=RequestContext(request))
-    return render_to_response('subject/subject_show.html', data)
+    return render(request,'subject/subject_show.html', data)

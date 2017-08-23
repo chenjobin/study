@@ -5,7 +5,7 @@ from types import MethodType #类动态绑定方法
 import os
 
 AVATAR_ROOT = 'avatar'
-AVATAR_DEFAULT = os.path.join(AVATAR_ROOT, 'default.png')
+AVATAR_DEFAULT = os.path.join(AVATAR_ROOT, 'default.jpg')
 
 # 找回密码创建
 class User_ex(models.Model):
