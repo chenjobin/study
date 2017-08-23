@@ -52,8 +52,11 @@
           </ul>
           <ul class="nav navbar-nav navbar-right">
             {% if user.is_authenticated %}
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">您好！{{user.username}} <span class="caret"></span></a>
+            <li class="dropdown" style="padding:0px;margin:0px;">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+              	<img src="/media/{{user.get_avatar_url}}" class="navbar-header" width="35px" heigth="35px" style="position:relative;top:-6px;"/>
+              	&nbsp;&nbsp;您好！{{user.username}} <span class="caret"></span>
+              </a>
               <ul class="dropdown-menu">
                 <li><a href="{%url 'users:user_info'%}">用户中心</a></li>
                 <li role="separator" class="divider"></li>
