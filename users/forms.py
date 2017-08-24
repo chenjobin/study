@@ -49,6 +49,22 @@ class ChangeNickForm(forms.Form):
         else:
             return nickname
 
+# 引用自ChangeNickForm 基本没改
+class ChangAvatarForm(forms.Form):
+    """change the nick name form"""
+    #旧昵称，hidden类型，用于判断是否有修改
+    old_nickname = forms.CharField(widget=forms.HiddenInput(attrs={'id':'old_nickname'}))
+    #新昵称
+    nickname = forms.CharField(label=u'新的头像', max_length=20,
+        widget=forms.TextInput(attrs={'class':'form-control', 'id':'nickname', 'placeholder':u"请输入您的头像名"}),
+        error_messages={'required':u'头像名不能为空'})
+
+    #nickname验证方法
+    def clean_nickname(self):
+        old_nickname = self.cleaned_data.get('old_nickname')
+        nickname = self.cleaned_data.get('nickname')
+        return nickname
+
 class ChangePwdForm(forms.Form):
     """change the password form"""
     username = forms.CharField(widget=forms.HiddenInput())

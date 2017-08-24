@@ -22,4 +22,6 @@ urlpatterns = [
     # 密码找回
     url(r'password_lost', views.password_lost, name='password_lost'),
     url(r'get_email_code', views.get_email_code, name='get_email_code'),
+    # 修改头像
+    url(r'avatar_change', views.avatar_change, name='avatar_change'),
 ]

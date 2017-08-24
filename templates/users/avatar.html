@@ -12,7 +12,7 @@ $(document).ready(function() {
             $.ajax({
                 type: "POST",
                 data: $('#avatar_form').serialize(),
-                url: "{% url 'users:upload_pic' %}",
+                url: "{% url 'users:avatar_change' %}",
                 cache: false,
                 dataType: "json",
                 success: function(json, textStatus) {
@@ -30,6 +30,18 @@ $(document).ready(function() {
             return false;
         });
 });
+function avatar_change(obj){
+	//var comment=obj.parentElement.parentElement;
+	var comment=obj;
+	var $c=$(comment);
+	//获取相关信息
+	var img_id=$c.attr("id");
+
+	//设置回复表单相关值
+	$("#nickname").val(img_id);
+
+	alert('已选择'+img_id+'，请再点击确定更换,如果想换一个选择，请继续点击其他头像')
+}
 </script>
 <style>
 /*在线图片*/
@@ -72,45 +84,59 @@ $(document).ready(function() {
 
     <div class="">
         <div class="modal-header">
-            <div class="text-left col-md-5 col-xs-5 col-sm-5"><h4 >请选择或者上传一个头像</h4></div>
-			<form id="avatar_form" action="" method="post" enctype="multipart/form-data">
-				{% csrf_token %}
-                <p>
-                      <input id="id_image" type="file" class="" name="image"> <!-- 这一行应该是form.image，省事写的 -->
-                </p>
-                <input id="avatar_upload" type="submit" value="Submit" />
+            <div class="text-left col-md-5 col-xs-5 col-sm-5"><h4 >请选择一个头像</h4></div>
+            <form method='post'>
+                {%csrf_token%}
+                {% for field in form %}
+                    {# 区分是否是hidden字段 #}
+                    {% if field.is_hidden %}
+                        {{ field }}
+                    {% else %}
+                        <div class="input-group" style="display: none;">
+                            <label class="input-group-addon" for="{{ field.id_for_label }}">
+                                {{ field.label }}
+                            </label>
+                            {{ field }}
+                        </div>
+                        {# 错误提示信息 #}
+                        <p class="text-danger text-right">
+                            {{ field.errors.as_text }}
+                        </p>
+                    {%endif%}
+                {%endfor%}
+ 
+                <div class="text-right">
+                    <input class="btn btn-primary" id="btn_submit" 
+                                    type="submit" value="{{submit_name}}"/>
+                </div>
             </form>
-            <div class="text-right">
-            	<input type="submit" value="确定头像" name="submit" class="btn btn-primary text-right"/> 	
-            </div>
-
         </div>
  		
         <div class="" style="text-align: center; position: relative;top:10px;">
-            <div class="avatar_online_img">
+            <div class="avatar_online_img" id='avatar_online_img'>
             <div>
-                <img src="/media/avatar/online/h1.jpg" />
-                <img src="/media/avatar/online/h2.jpg" />
-                <img src="/media/avatar/online/h3.jpg" />
-                <img src="/media/avatar/online/h4.jpg" />
+                <img id="h1.jpg" name="avatar_jpg" src="/media/avatar/online/h1.jpg" onclick="avatar_change(this)"/>
+                <img id="h2.jpg" name="avatar_jpg" src="/media/avatar/online/h2.jpg" onclick="avatar_change(this)"/>
+                <img id="h3.jpg" name="avatar_jpg" src="/media/avatar/online/h3.jpg" onclick="avatar_change(this)"/>
+                <img id="h4.jpg" name="avatar_jpg" src="/media/avatar/online/h4.jpg" onclick="avatar_change(this)"/>
             </div>
             <div>
-                <img src="/media/avatar/online/h5.jpg" />
-                <img src="/media/avatar/online/h6.jpg" />
-                <img src="/media/avatar/online/h7.jpg" />
-                <img src="/media/avatar/online/h8.jpg" />
+                <img id="h5.jpg" name="avatar_jpg" src="/media/avatar/online/h5.jpg" onclick="avatar_change(this)"/>
+                <img id="h6.jpg" name="avatar_jpg" src="/media/avatar/online/h6.jpg" onclick="avatar_change(this)"/>
+                <img id="h7.jpg" name="avatar_jpg" src="/media/avatar/online/h7.jpg" onclick="avatar_change(this)"/>
+                <img id="h8.jpg" name="avatar_jpg"  src="/media/avatar/online/h8.jpg" onclick="avatar_change(this)"/>
             </div>
             <div>
-                <img src="/media/avatar/online/h9.jpg" />
-                <img src="/media/avatar/online/h10.jpg" />
-                <img src="/media/avatar/online/h11.jpg" />
-                <img src="/media/avatar/online/h12.jpg" />
+                <img id="h9.jpg" name="avatar_jpg" src="/media/avatar/online/h9.jpg" onclick="avatar_change(this)"/>
+                <img id="h10.jpg" name="avatar_jpg" src="/media/avatar/online/h10.jpg" onclick="avatar_change(this)"/>
+                <img id="h11.jpg" name="avatar_jpg" src="/media/avatar/online/h11.jpg" onclick="avatar_change(this)"/>
+                <img id="h12.jpg" name="avatar_jpg" src="/media/avatar/online/h12.jpg" onclick="avatar_change(this)"/>
             </div>
             <div>
-                <img src="/media/avatar/online/h13.jpg" />
-                <img src="/media/avatar/online/h14.jpg" />
-                <img src="/media/avatar/online/h15.jpg" />
-                <img src="/media/avatar/online/h16.jpg" />
+                <img id="h13.jpg" name="avatar_jpg" src="/media/avatar/online/h13.jpg" onclick="avatar_change(this)"/>
+                <img id="h14.jpg" name="avatar_jpg" src="/media/avatar/online/h14.jpg" onclick="avatar_change(this)"/>
+                <img id="h15.jpg" name="avatar_jpg" src="/media/avatar/online/h15.jpg" onclick="avatar_change(this)"/>
+                <img id="h16.jpg" name="avatar_jpg" src="/media/avatar/online/h16.jpg" onclick="avatar_change(this)"/>
             </div>
             </div>
         </div>

@@ -25,10 +25,12 @@ class User_Avatar(models.Model):
 #动态绑定头像相关的方法
 def get_avatar_url(self):
     try:
-        avatar = User_Avatar.objects.get(user=self.id)
-        return avatar.avatar
+        # avatar1 = User_Avatar.objects.get(user=self.id)
+        # return avatar1.avatar
+        i=self.id
+        return i
     except Exception as e:
         return AVATAR_DEFAULT
 
-#动态绑定方法
+#动态绑定方法模板中使用{{user.get_avatar_url}}
 User.get_avatar_url = MethodType(get_avatar_url, User)

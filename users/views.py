@@ -4,7 +4,7 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth import login,logout,authenticate
 # from django.contrib.auth.forms import UserCreationForm
 
-from .forms import RegisterForm,ChangeNickForm,ChangePwdForm,ForgetPwdForm
+from .forms import RegisterForm,ChangeNickForm,ChangePwdForm,ForgetPwdForm,ChangAvatarForm
 from django.contrib.auth.models import User
 from django.core.mail import EmailMultiAlternatives   #发送邮件
 from my_plug import comments_count
@@ -406,3 +406,37 @@ def generate_verification_code():
     # print code_list
     # print type(myslice)
     return verification_code
+
+#几乎原封不动引用了昵称修改的方法，考虑到以后更换用户系统，所以就这样先把
+def avatar_change(request):
+    data = {}
+    data['form_title'] = u'修改头像'
+    data['submit_name'] = u'　确定　'
+
+    if request.method == 'POST':
+        #表单提交
+        form = ChangAvatarForm(request.POST)
+
+        #验证是否合法
+        if form.is_valid():
+            #修改数据库
+            nickname = form.cleaned_data['nickname']
+            request.user.last_name = nickname
+            request.user.save()
+
+            #页面提示
+            data['goto_url'] = reverse('users:user_info')
+            data['goto_time'] = 3000
+            data['goto_page'] = True
+            data['message'] = u'修改头像成功，修改为“%s”' % nickname
+            return render_to_response('message.html',data)
+    else:
+        #正常加载
+        nickname = request.user.last_name
+        #用initial给表单填写初始值
+        form = ChangAvatarForm(initial={
+            'old_nickname': nickname,
+            'nickname': nickname,
+            })
+    data['form'] = form
+    return render(request, 'users/avatar.html', data)
