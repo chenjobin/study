@@ -1,5 +1,8 @@
 {% extends 'base.html' %}
 
+{# 导入评论库模块的模版标签 #}
+{% load comments %}
+
 {% block head %}
 <style>
 .subject_list{ overflow: hidden; min-height: 400px}
@@ -61,13 +64,15 @@
 {% endblock header %}
 
 {% block content %}
+
  	{% for subject in subjects%}
+ 		{% get_comment_count for subject as comment_count %}
 	<div class="subject">
 	  <a href="{% url 'subject:subject_show' subject.id %}">
 	    <img class="subject_img" src="/media/{{subject.img}}" alt="{{subject}}" />
 	    <p class="subject_number">
 				<span>阅读(197)</span>&nbsp;
-	      <span class="hidden-xs">评论(0)</span>
+	      <span class="hidden-xs">评论({{comment_count}})</span>
 	    </p>
 	
 	    <div class="subject_text">

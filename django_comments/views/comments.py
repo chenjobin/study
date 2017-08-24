@@ -54,7 +54,9 @@ def post_comment(request, next=None, using=None):
         user_is_authenticated = request.user.is_authenticated
     if user_is_authenticated:
         if not data.get('name', ''):
-            data["name"] = request.user.get_full_name() or request.user.get_username()
+            data["name"] = request.user.get_short_name() or request.user.get_username()
+            # 考虑到last_name被我用来放头像JPG了，所以不要get_full_name
+            # data["name"] = request.user.get_full_name() or request.user.get_username()
         if not data.get('email', ''):
             data["email"] = request.user.email
     #add 2017-08-18 Jobin refer ysh

@@ -1,26 +1,151 @@
 {% extends 'base.html' %}
 
+{# 导入评论库模块的模版标签 #}
+{% load comments %}
+
 {% block head %}
-<style>
-	/*专题明细*/
-.subject_header{ overflow: hidden; padding: 1em 0em 0em 1em;}
-.subject_header h3 { color: #0d56a6; margin-top: 10px;}
-.subject_header li{ float: left; padding-right: 0.7em; font-size: small;}
+	{#设置提交评论#}
+    <script type="text/javascript">
 
-.subject_content{ padding: 1em 1em 0;}
-.subject_content .alert{ overflow: hidden;}
-.subject_content img{ float: left; width: 100px;}
-.subject_description{ margin-left: 110px;text-indent: 1em;}
-.subject_description h4{ font-weight: bold; margin-top: 10px;}
+    	$(document).ready(function() {
+        $('#comment_form').submit(function() {
+        	if ($("#id_honeypot").val().length!=0) {
+                        alert("Stop!垃圾评论");
+                        return false;
+            };
+            if ($("#id_comment").val().trim().length==0){
+                alert("Error:请输入您的评论");
+                $("#id_comment").focus();
+                return false;
+            };
+ 
+            $("#id_timestamp").value=event.timeStamp;
+            $.ajax({
+                type: "POST",
+                data: $('#comment_form').serialize(),
+                url: "{% comment_form_target %}",
+                cache: false,
+                dataType: "json",
+                success: function(json, textStatus) {
+			            if(json['success']){
+			                window.location.reload();
+			            }else{
+			                if(json['code']==501){
+			                    alert('您尚未登录，请先登录才能评论。');
+			                }else if(json['code']==502){
+			                    alert('您尚未激活，请先激活您的账户才能评论。');
+			                }else{
+			                    alert('评论出错，请刷新重试\n'+json['message']);
+			                }
+			            }
+			        },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert("评论出错，" + errorThrown);
+                }
+            });            
+            return false;
+        	});
+        		        
+			//绑定回复按钮的鼠标经过事件
+			$(".comment_content,.comment_reply li").each(function(){
+			    $(this).hover(function(){
+			        $(this).append("<span class='reply_button'> <a href='javascript:void(0);' onclick='reply_click(this);'>回复</a></span>");
+			    },function(){
+			        $(this).children(".reply_button").remove();
+			    });
+			});
+			
+			//取消回复-按钮
+	        $("#reply_cancel").click(function(){
+	            //设置相关数据
+	            $("#reply_to").val('0');
+	            $("#root_id").val('0');
+	            $("#reply_name").val("");
+	
+	            //调整页面显示
+	            $("#comment_title").text("新的评论");
+	            $("#reply_text_pre").hide();
+	            $("#reply_cancel").hide();
+	        });
+	        
+	        //定位到评论位置
+			if(window.location.hash!=""){
+			    //根据名称获取元素
+			    obj = document.getElementsByName(window.location.hash.split("#")[1])[0];
+			    //DOM对象转为jQuery对象
+			    var $obj = $(obj);
+			    //定位到评论或回复的位置
+			    $("body,html").animate({
+			      scrollTop: $obj.offset().top - 70
+			    }, 0);
+			}
+        });
+		 
+		//回复按钮点击触发的方法
+		function reply_click(obj){
+		    //获取回复按钮对应的评论或回复（DOM转成jQuery对象）
+		    var comment=obj.parentElement.parentElement;
+		    var $c=$(comment);
+		    //获取相关信息
+		    var root=$c.attr("root");
+		    var role=$c.attr("role");
+		    var base=$c.attr("base");
+		 
+		    //设置回复表单相关值
+		    $("#reply_to").val(role);
+		    $("#root_id").val(root);
+		    $("#reply_name").val(base);
+		  	
+		  	//显示回复的相关内容
+            $("#comment_title").text("回复：" + base);
+            $("#reply_text_pre").html($("#comment_"+role).html()); //显示要回复的评论内容
+            $("#reply_text_pre").show();
+            $("#reply_cancel").show();
 
-.subject_chapter{ margin-top: 2em; margin-left: 1em;}
-.subject_chapter h4{ font-weight: bold; padding-bottom: 0.5em; display: inline-block;}
-.subject_chapter ul{ list-style-type:none; counter-reset:sectioncounter; margin-left: 2em;}
-.subject_items li{ margin-bottom: 8px;}
+            //评论库获得焦点
+            $("#id_comment").focus();
 
-.subject_items li:before{ content:counter(sectioncounter) "）"; counter-increment:sectioncounter;}  
-.share_btns{ border-top: 1px #ddd solid; padding: 1em 0 0.5em; margin-top: 4em;}
-</style>
+		    return false;
+		}
+
+    </script>
+    <style>
+		 /*评论*/
+		.blog_comment{
+		    border-bottom: 1px solid #ddd;
+		}
+		.blog_comment .comment_title{
+		    margin-top: 0.5em;
+		}
+		.blog_comment .comment_content{
+		    padding: 0.5em;
+		    border-radius: 6px;
+		    background-color: #efefef;
+		}
+		/*回复*/
+		.blog_comment .comment_reply{
+		    text-indent: 0.5em;
+		}
+			/*专题明细*/
+	.subject_header{ overflow: hidden; padding: 1em 0em 0em 1em;}
+	.subject_header h3 { color: #0d56a6; margin-top: 10px;}
+	.subject_header li{ float: left; padding-right: 0.7em; font-size: small;}
+	
+	.subject_content{ padding: 1em 1em 0;}
+	.subject_content .alert{ overflow: hidden;}
+	.subject_content img{ float: left; width: 100px;}
+	.subject_description{ margin-left: 110px;text-indent: 1em;}
+	.subject_description h4{ font-weight: bold; margin-top: 10px;}
+	
+	.subject_chapter{ margin-top: 2em; margin-left: 1em;}
+	.subject_chapter h4{ font-weight: bold; padding-bottom: 0.5em; display: inline-block;}
+	.subject_chapter ul{ list-style-type:none; counter-reset:sectioncounter; margin-left: 2em;}
+	.subject_items li{ margin-bottom: 8px;}
+	
+	.subject_items li:before{ content:counter(sectioncounter) "）"; counter-increment:sectioncounter;}  
+	.share_btns{ border-top: 1px #ddd solid; padding: 1em 0 0.5em; margin-top: 4em;}
+    	
+    </style>
 
 {% endblock head %}
 
@@ -29,8 +154,7 @@
 {% endblock header %}
 
 {% block content %}
-<div class="row">
- 	<div class="col-md-9 col-md-offset-1 col-xs-12">
+{% get_comment_count for subject as comment_count %}
         <div class="panel panel-default">
             <div class="panel-heading">
                 <div class="subject_header">
@@ -51,7 +175,7 @@
                             阅读(224)
                         </li>
                         <li>
-                            评论(0)
+                            评论({{comment_count}})
                         </li>
                     </ul>
                 </div>
@@ -95,12 +219,111 @@
                         </div>
                     </div>
                 </div>
+
             </div>
-        </div>
+		</div>
 
+{# 评论功能 #}
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4>评论列表</h4>
+    </div>
+ 
+    <div class="panel-body">
+        {% get_comment_list for subject as comments %}
+        {% for comment in comments %}
+            <div class="blog_comment" name="F{{comment.id}}">
+		        <p class="comment_title">
+		            {{comment.submit_date|date:"Y-m-d H:i"}} @ {{comment.user_name}} 评论
+		        </p>
+		        <p class="comment_content"
+		           root='{{comment.id}}'
+		           role='{{comment.id}}'
+		           base='{{comment.user_name}}'
+		           id='comment_{{comment.id}}'>
+		           {{ comment.comment }}
+		        </p>
+		 
+		        <ul class="comment_reply">
+		            {% for reply in comment.replies %}
+		                <li root='{{reply.root_id}}'
+		                    role='{{reply.id}}'
+		                    base='{{reply.user_name}}'
+		                    id='comment_{{reply.id}}'
+		                    name="F{{reply.id}}">
+		                    {{reply.user_name}} 回复 {{reply.reply_name}} ({{ reply.submit_date|date:"Y-m-d H:i"}})：{{ reply.comment }}
+		                </li>
+		            {% endfor %}
+		        </ul>
+		    </div>
+        {% empty %}
+            <span>飘过的大虾，留个名呗</span>
+        {% endfor %}
+    </div>
 </div>
+<div class="panel panel-default">
 
+	<div class="panel-heading">
+		<div class="row">
+		<div class="col-md-5 col-lg-5 col-sm-5 col-xs-5">
+			<h4 id="comment_title">新的评论</h4>
+		</div> 
+        <div class="text-right ">
+            <button id="reply_cancel" class="btn btn-warning comment_title_btn " 
+            	style="display:none;position:relative;left:-10px;">取消回复</button>
+        </div>
+       </div>
+            <p id="reply_text_pre" style="display:none"></p>
+    </div>
+		{% get_comment_form for subject as blog_form %}
+	<div class="panel-body">	 
+		<form id="comment_form" 
+		      class="form-horizontal" 
+		      method="post"
+		>
+		    {% csrf_token %}
+		 
+		    {# 必须的字段 #}
+		    {{ blog_form.object_pk }}
+		    {{ blog_form.content_type }}
+		    {{ blog_form.timestamp }}
+		    {{ blog_form.site }}
+		    {{ blog_form.submit_date }}
+		    {{ blog_form.security_hash }}
+		 	
+			    {# 评论内容 #}
+			    <a name="newcomment" id="newcomment"></a>
+			    <div class="control-group">
+			        <div class="controls">
+			            <textarea rows="5" style="width:100%" id="id_comment" name="comment" >
+			            </textarea>
+			        </div>
+			    </div>
+			    {# 表单按钮 #}
+			    <div class="controls">
+			        <div class="form-actions text-right">
+			            <input class="btn btn-info" id="submit_btn" type="submit" name="submit" value="提  交"/>
+			            <input type="hidden" name="next" value="{%url 'subject:subject_show' subject.id%}"/>
+			            <input id="reply_to" type="hidden" name="reply_to" value="0" />
+				        <input id="root_id" type="hidden" name="root_id" value="0" />
+				        <input id="reply_name" type="hidden" name="reply_name" value="">
+			            <input class="btn" id="reset_btn" type="reset" name="submit" value="清空"/>
+			        </div>
+			    </div>
 
+			    {# 防垃圾评论 #}
+				<p style="display:none;">
+        			<label for="id_honeypot">如果你在该字段中输入任何内容，你的评论就会被视为垃圾评论。</label>
+        			<input type="text" name="honeypot" id="id_honeypot">
+    			</p>
+
+		 </form>
+	</div>
+	
+	<div class="panel-footer">
+		
+	</div>
+</div>  
 
      
 
