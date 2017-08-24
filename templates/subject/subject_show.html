@@ -160,23 +160,18 @@
                 <div class="subject_header">
                     <h3>{{subject}}</h3>
 
-                    <ul>
+                    <ul class="list-inline">
                         <li>创建时间：{{subject.create_time|date:'Y-m-d, H:i'}}</li>
                         <li>作者：{{subject.author}}</li>
                     </ul>
                     <span class="clearfix"></span>
-                    <ul>
+                    <ul class="list-inline">
                         <li>更新状态：
                             <span class="subject_static ">{{subject.static}}</span>
                         </li> 
                         <li>类别：{{subject.subject_type}}</li>
-                        <li>
-                            
-                            阅读(224)
-                        </li>
-                        <li>
-                            评论({{comment_count}})
-                        </li>
+                        <li>阅读({{subject.read_num}})</li>
+                        <li>评论({{comment_count}})</li>
                     </ul>
                 </div>
             </div>

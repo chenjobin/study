@@ -46,7 +46,7 @@ class Entry(models.Model):
     date_added = models.DateTimeField('发布时间',auto_now_add=True)
     date_update = models.DateTimeField('更新时间',auto_now=True)
     recommend = models.BooleanField('推荐',default=False) #布尔字段，我用于标记是否是推荐博文
-    read_num = models.PositiveIntegerField(default=0) # 新增 views 字段记录阅读量
+    read_num = models.PositiveIntegerField(default=0) # 新增  字段记录阅读量
     top_in=models.BooleanField('置顶',default=False) #标记是否为置顶的博文
 
     class Meta:

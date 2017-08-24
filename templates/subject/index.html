@@ -71,7 +71,7 @@
 	  <a href="{% url 'subject:subject_show' subject.id %}">
 	    <img class="subject_img" src="/media/{{subject.img}}" alt="{{subject}}" />
 	    <p class="subject_number">
-				<span>阅读(197)</span>&nbsp;
+				<span>阅读({{subject.read_num}})</span>&nbsp;
 	      <span class="hidden-xs">评论({{comment_count}})</span>
 	    </p>
 	

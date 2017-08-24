@@ -18,7 +18,7 @@ def subject_show(request, subject_id):
     try:
         subject = Subject.objects.get(id=subject_id)
         chapters = []
-
+        subject.increase_read_num()
         #数据统计
         blog_num = 0
         tutorial_num = 0

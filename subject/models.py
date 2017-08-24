@@ -43,6 +43,8 @@ class Subject(models.Model):
     create_time = models.DateTimeField(auto_now_add=True)
     update_time = models.DateTimeField(auto_now=True)
 
+    read_num = models.PositiveIntegerField(default=0) # 新增 字段记录阅读量
+
     def __str__(self):
         return '%s' % self.caption
 
@@ -56,6 +58,10 @@ class Subject(models.Model):
         comment_model = django_comments.get_model()
         comments = comment_model.objects.filter(content_type=obj_type, object_pk=self.id)
         return comments.count()
+
+    def increase_read_num(self):
+        self.read_num += 1
+        self.save(update_fields=['read_num'])
 
 class SubjectChapter(models.Model):
     '''subject chapter'''
