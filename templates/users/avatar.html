@@ -6,30 +6,7 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.bootcss.com/cropper/3.0.0-rc.3/cropper.min.css">
 <script src="https://cdn.bootcss.com/cropper/3.0.0-rc.3/cropper.min.js"></script>
 <script type="text/javascript">
-$(document).ready(function() {
-        $('#avatar_upload').submit(function() {
-      
-            $.ajax({
-                type: "POST",
-                data: $('#avatar_form').serialize(),
-                url: "{% url 'users:avatar_change' %}",
-                cache: false,
-                dataType: "json",
-                success: function(json, textStatus) {
-			            if(json['success']){
-			                window.location.reload();
-			                alert('上传成功');
-			            }else{
-							alert('上传失败');
-			            }
-			        },
-                error: function (XMLHttpRequest, textStatus, errorThrown) {
-                    alert("上传出错，失败了" + errorThrown);
-                }
-            });            
-            return false;
-        });
-});
+
 function avatar_change(obj){
 	//var comment=obj.parentElement.parentElement;
 	var comment=obj;

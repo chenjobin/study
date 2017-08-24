@@ -1,5 +1,76 @@
 
 ---------------------------------------------------------------------------------------------
+commit 9c2ae2edab25472998c1d8e893f1be823fc58290 (HEAD -> master)
+Author: chenjobin <923869988@qq.com>
+Date:   Thu Aug 24 15:19:50 2017 +0800
+
+    V0.4.2 删除了头像字段，放弃了可能有用的动态绑定方法
+    -#动态绑定方法模板中使用{{user.get_avatar_url}}
+    User.get_avatar_url = MethodType(get_avatar_url, User)
+    因为测试发现avatar1 = User_Avatar.objects.get(user=self.id)这一句一直无法正常执行
+
+    好处是，不用装Pillow了，也许以后还是需要
+    (web) F:\Django\study>conda list
+    # packages in environment at C:\Anaconda3\envs\web:
+    #
+    django                    1.11.3                   py36_0
+    django-bootstrap3         9.0.0                     <pip>
+    pip                       9.0.1                    py36_1
+    python                    3.6.2                         0
+    pytz                      2017.2                   py36_0
+    setuptools                27.2.0                   py36_1
+    vs2015_runtime            14.0.25420                    0
+    wheel                     0.29.0                   py36_0
+---------------------------------------------------------------------------------------------
+commit f3f873f997f91bb93333675bb7fdb3687b6de3cf
+Author: chenjobin <923869988@qq.com>
+Date:   Thu Aug 24 15:11:09 2017 +0800
+
+    V0.4.1 修复如果last_name为空的时候，头像不能正常修改的情况
+    优化了头像修改体验，使用jQ CSS产生红框效果表示选中
+
+    下一步考虑将之前的头像字段去掉
+---------------------------------------------------------------------------------------------
+commit 90329ade5b3eeb00feb39715b241784e05a3f44d
+Author: chenjobin <923869988@qq.com>
+Date:   Thu Aug 24 11:16:05 2017 +0800
+
+    V0.4.0 利用了User.last_name字段，更换头像成功。默认头像也OK
+    考虑将原先的头像字段去除
+---------------------------------------------------------------------------------------------
+commit fd1a4c7a29e9a4cb7fbe1ba897a92268d9865c1a (study/master)
+Author: chenjobin <923869988@qq.com>
+Date:   Wed Aug 23 17:04:02 2017 +0800
+
+    V0.3.9 修复专题页面，显示未登陆的问题。修改用户头像默认样式
+    问题：
+    1、使用Cropper上传图片，试了好久，没有成功
+    2、单独考虑imageField上传图片，亦没有收获
+    所以，头像更换的问题，暂时先放一放吧。
+    因为头像使用了imageField，所以，环境也安装了Pillow，附带着也装了其他模块
+
+    (web1) F:\Django\study>conda list
+    # packages in environment at C:\Anaconda3\envs\web1:
+    #
+    django                    1.11.3                   py36_0
+    django-bootstrap3         9.0.0                     <pip>
+    olefile                   0.44                      <pip>
+    Pillow                    4.2.1                     <pip>
+    pip                       9.0.1                    py36_1
+    python                    3.6.2                         0
+    pytz                      2017.2                   py36_0
+    setuptools                27.2.0                   py36_1
+    vs2015_runtime            14.0.25420                    0
+    wheel                     0.29.0                   py36_0
+---------------------------------------------------------------------------------------------
+commit 98e0e2a7759e8c9cb60b96530df995845c99c8c5
+Author: chenjobin <923869988@qq.com>
+Date:   Wed Aug 23 09:50:52 2017 +0800
+
+    V0.3.8 添加头像字段，利用上版本所说的静态资源访问问题，
+    虽然还未解决，但media倒是解决了
+
+---------------------------------------------------------------------------------------------
 commit af77450f036e18a300e0977370fa43f0b7939bed (HEAD -> master)
 Author: chenjobin <923869988@qq.com>
 Date:   Tue Aug 22 22:18:19 2017 +0800

@@ -1,28 +1,108 @@
 {% extends 'base.html' %}
 
+{% block head %}
+<style>
+	/*专题明细*/
+.subject_header{ overflow: hidden; padding: 1em 0em 0em 1em;}
+.subject_header h3 { color: #0d56a6; margin-top: 10px;}
+.subject_header li{ float: left; padding-right: 0.7em; font-size: small;}
+
+.subject_content{ padding: 1em 1em 0;}
+.subject_content .alert{ overflow: hidden;}
+.subject_content img{ float: left; width: 100px;}
+.subject_description{ margin-left: 110px;text-indent: 1em;}
+.subject_description h4{ font-weight: bold; margin-top: 10px;}
+
+.subject_chapter{ margin-top: 2em; margin-left: 1em;}
+.subject_chapter h4{ font-weight: bold; padding-bottom: 0.5em; display: inline-block;}
+.subject_chapter ul{ list-style-type:none; counter-reset:sectioncounter; margin-left: 2em;}
+.subject_items li{ margin-bottom: 8px;}
+
+.subject_items li:before{ content:counter(sectioncounter) "）"; counter-increment:sectioncounter;}  
+.share_btns{ border-top: 1px #ddd solid; padding: 1em 0 0.5em; margin-top: 4em;}
+</style>
+
+{% endblock head %}
+
 {% block header %}	
-      <div class="jumbotron">
-        <h1>Navbar example</h1>
-        <p>This example is a quick exercise to illustrate how the default, static and fixed to top navbar work. It includes the responsive CSS and HTML, so it also adapts to your viewport and device.</p>
-        <p>To see the difference between static and fixed top navbars, just scroll.</p>
-        <p>
-          <a class="btn btn-lg btn-primary" href="{% url 'blog:blog_list' %}" role="button">进入博客列表页 &raquo;</a>
-        </p>
-      </div>
+
 {% endblock header %}
 
 {% block content %}
-<h2>
-	<a href="{% url 'users:register' %}">Register an account</a>
-	你自己打的Blog,并列出所有的主题11111111111111111111111111111111
-</h2>
-<h2>Learning Log helps you keep track of your learning,for any topic you're learning about.这是一段Learning Log简介</h2>
-<div id="tags">
-    {% for subject in subjects%}
-            <a href="{% url 'subject:subject_show' subject.id %}">{{subject}}</a>
-    {%empty%}
-  			
-    {%endfor%}
-</div>    
+<div class="row">
+ 	<div class="col-md-9 col-md-offset-1 col-xs-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="subject_header">
+                    <h3>{{subject}}</h3>
+
+                    <ul>
+                        <li>创建时间：{{subject.create_time|date:'Y-m-d, H:i'}}</li>
+                        <li>作者：{{subject.author}}</li>
+                    </ul>
+                    <span class="clearfix"></span>
+                    <ul>
+                        <li>更新状态：
+                            <span class="subject_static ">{{subject.static}}</span>
+                        </li> 
+                        <li>类别：{{subject.subject_type}}</li>
+                        <li>
+                            
+                            阅读(224)
+                        </li>
+                        <li>
+                            评论(0)
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="panel-body">
+                <div class="subject_content">
+                    <div class="alert alert-info">
+                        <img src="/media/{{subject.img}}" />
+
+                        <div class="subject_description">
+                            <h4 style=" font-weight: bold; margin-top: 10px;">专题简介</h4>
+                            <p>{{subject.description|safe}}</p>
+                        </div>
+                    </div>
+                    
+                    {% for chapter in chapters %}
+                        <div class="subject_chapter">
+                            <h4>{{chapter.title}}</h4>  
+                            <ul class="subject_items"> 
+                            	{% for item in chapter.items %}
+                                    <li>
+                                        <span> {{item.type_name}}：</span> 
+                                        <a href="{{item.url}}" target=_blank>{{item.title}}</a>
+                                    </li>
+                                
+                                {%endfor%}
+                            </ul>
+
+                        </div>
+                    {%endfor%}
+                  
+
+                    <!-- JiaThis Button -->
+                    <div class="share_btns">
+                        <div style="padding-left: 2em;">
+                            <p>{{count}}</p>
+                            <p>
+                            	
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+</div>
+
+
+
+     
+
     
 {% endblock content %}

@@ -63,7 +63,7 @@
 {% block content %}
  	{% for subject in subjects%}
 	<div class="subject">
-	  <a href="{% url 'subject:subject_show' subject.id %}" target=_blank>
+	  <a href="{% url 'subject:subject_show' subject.id %}">
 	    <img class="subject_img" src="/media/{{subject.img}}" alt="{{subject}}" />
 	    <p class="subject_number">
 				<span>阅读(197)</span>&nbsp;

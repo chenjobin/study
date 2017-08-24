@@ -32,15 +32,15 @@ def subject_show(request, subject_id):
                 obj_type = item.content_type.model
 
                 #根据类型不同，设置名称和链接（动态绑定属性）
-                if obj_type == 'blog':
+                if obj_type == 'entry':
                     item.type_name = '博客'
-                    item.url = reverse('detailblog', args = [item.object_id,])
-                    item.title = obj.caption
+                    item.url = reverse('blog:detail_entry', args = [item.object_id,])
+                    item.title = obj.title
                     blog_num += 1
                 elif obj_type == 'tutorial':
                     item.type_name = '教程'
                     item.url = reverse('tutorial_detail', args = [item.object_id,])
-                    item.title = obj.caption
+                    item.title = obj.title
                     tutorial_num += 1
                 else:
                     item.type_name = '未知'
