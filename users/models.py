@@ -1,11 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-from types import MethodType #类动态绑定方法
-import os
 
-AVATAR_ROOT = 'avatar'
-AVATAR_DEFAULT = os.path.join(AVATAR_ROOT, 'default.jpg')
 
 # 找回密码创建
 class User_ex(models.Model):
@@ -16,21 +12,3 @@ class User_ex(models.Model):
  
     def __str__(self):
         return u'%s' % (self.valid_code)
-
-class User_Avatar(models.Model):
-    """user avatar"""
-    user = models.ForeignKey(User)
-    avatar = models.ImageField(upload_to='avatar/')
-
-#动态绑定头像相关的方法
-def get_avatar_url(self):
-    try:
-        # avatar1 = User_Avatar.objects.get(user=self.id)
-        # return avatar1.avatar
-        i=self.id
-        return i
-    except Exception as e:
-        return AVATAR_DEFAULT
-
-#动态绑定方法模板中使用{{user.get_avatar_url}}
-User.get_avatar_url = MethodType(get_avatar_url, User)
