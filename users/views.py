@@ -230,7 +230,7 @@ def nickname_change(request):
             data['goto_url'] = reverse('users:user_info')
             data['goto_time'] = 3000
             data['goto_page'] = True
-            data['message'] = u'修改昵称成功，修改为“%s”' % nickname
+            data['message'] = u'修改昵称成功，修改为“%s”，请稍后...' % nickname
             return render_to_response('message.html',data)
     else:
         #正常加载
@@ -270,7 +270,7 @@ def password_change(request):
             data['goto_url'] = reverse('users:user_info')
             data['goto_time'] = 3000
             data['goto_page'] = True
-            data['message'] = u'修改密码成功，请牢记新密码'
+            data['message'] = u'修改密码成功，请牢记新密码，稍后跳转...'
             return render_to_response('message.html',data)
     else:
         #正常加载
@@ -408,6 +408,7 @@ def generate_verification_code():
     return verification_code
 
 #几乎原封不动引用了昵称修改的方法，考虑到以后更换用户系统，所以就这样先把
+@check_login
 def avatar_change(request):
     data = {}
     data['form_title'] = u'修改头像'
@@ -428,11 +429,14 @@ def avatar_change(request):
             data['goto_url'] = reverse('users:user_info')
             data['goto_time'] = 3000
             data['goto_page'] = True
-            data['message'] = u'修改头像成功，修改为“%s”' % nickname
+            data['message'] = u'修改头像成功，修改为“%s”，请稍后...' % nickname
             return render_to_response('message.html',data)
     else:
         #正常加载
         nickname = request.user.last_name
+        # 如果原本没有last_name，会导致前端不能修改，所以，加入判断，设定初值
+        if nickname==None:
+            nickname='h1.jpg'
         #用initial给表单填写初始值
         form = ChangAvatarForm(initial={
             'old_nickname': nickname,

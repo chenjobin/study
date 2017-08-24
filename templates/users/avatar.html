@@ -36,14 +36,22 @@ function avatar_change(obj){
 	var $c=$(comment);
 	//获取相关信息
 	var img_id=$c.attr("id");
-
+	
+	$("#avatar_online_img img").removeClass("hong");
+	$(obj).addClass("hong");
+	//obj.style.borderColor=red;
 	//设置回复表单相关值
 	$("#nickname").val(img_id);
 
-	alert('已选择'+img_id+'，请再点击确定更换,如果想换一个选择，请继续点击其他头像')
+	//alert('已选择'+img_id+'，请再点击确定更换,如果想换一个选择，请继续点击其他头像')
 }
 </script>
 <style>
+/*图片点击后红框*/
+.hong
+{
+	border: 3Px #FF0000 solid !important; 
+}
 /*在线图片*/
 .avatar_online_img img{ 
     width: 96px; 
@@ -53,8 +61,8 @@ function avatar_change(obj){
     cursor: pointer;
 }
 .avatar_online_img img:hover{ 
-    border-color: #bbb; 
-    box-shadow: 0 0 5px rgba(0,0,0,.25);
+    border-color: red; 
+    box-shadow: 0 0 10px rgba(0,0,0,.25);
 }
  
 /*不同屏幕改变头像大小*/
@@ -84,7 +92,12 @@ function avatar_change(obj){
 
     <div class="">
         <div class="modal-header">
-            <div class="text-left col-md-5 col-xs-5 col-sm-5"><h4 >请选择一个头像</h4></div>
+            <div class="text-left col-md-5 col-xs-5 col-sm-5">
+            	<img src="{% if user.last_name %}/media/avatar/online/{{user.last_name}}{%else%}/media/avatar/online/h1.jpg{%endif%}" 
+            		class="navbar-header img-thumbnail" width="60px" heigth="60px" style="position:relative;top:-6px;"/>
+            	
+            	<h4 >&nbsp;&nbsp;&nbsp;请在下方选择一个头像</h4>
+            </div>
             <form method='post'>
                 {%csrf_token%}
                 {% for field in form %}

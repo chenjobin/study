@@ -55,7 +55,7 @@
             <li class="dropdown" style="padding:0px;margin:0px;">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
               	<img src="{% if user.last_name %}/media/avatar/online/{{user.last_name}}{%else%}/media/avatar/online/h1.jpg{%endif%}" class="navbar-header" width="35px" heigth="35px" style="position:relative;top:-6px;"/>
-              	&nbsp;&nbsp;您好！{{user.username}} <span class="caret"></span>
+              	&nbsp;&nbsp;您好！{% if user.first_name %}{{user.first_name}}{%else%}{{user.username}}{%endif%} <span class="caret"></span>
               </a>
               <ul class="dropdown-menu">
                 <li><a href="{%url 'users:user_info'%}">用户中心</a></li>
