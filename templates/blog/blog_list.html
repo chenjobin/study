@@ -192,10 +192,7 @@ $(document).ready(function() {
                             <span class="glyphicon glyphicon-tag"></span>
                             <a href="{% url 'blog:topic' entry.topic_id %}">{{entry.topic}} </a>
                         </li>
-                        <li>
-                            <span class="glyphicon glyphicon-tag"></span>
-                            <a href="{% url 'blog:topic' entry.topic_id %}">{{sort_sf}} </a>
-                        </li>
+
                         {% if entry.recommend %}
                         <li class="tag-recommend">
                             <span class="glyphicon glyphicon-thumbs-up"></span>
