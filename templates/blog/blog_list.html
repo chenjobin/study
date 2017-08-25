@@ -2,7 +2,7 @@
 {# 导入评论库模块的模版标签 #}
 {% load comments %}
 
-{% block header %}	
+{% block head %}	
 
 <script type="text/javascript">
 	{# 页面跳转按钮 #}
@@ -74,14 +74,14 @@ $(document).ready(function() {
         text-align: center;
     }
 </style>
+{% endblock head %}
+{% block header %}	
+      <div class="jumbotron">
+        <h1>Navbar example</h1>
+        <p>It includes the responsive CSS and HTML, so it also adapts to your viewport and device.</p>
+      </div>
 {% endblock header %}
-
 {% block content %}
-<h2>
-	<a href="{% url 'users:register' %}">Register an account</a>
-	你自己打的Blog,并列出所有的主题
-</h2>
-<h2>Learning Log helps you keep track of your learning,for any topic you're learning about.这是一段Learning Log简介</h2>
  
 {# 筛选框  #}
 <div class="panel panel-default">
@@ -128,7 +128,7 @@ $(document).ready(function() {
 
                 <input type="hidden" name='wd' id='keywords' value='' />
         <div class="tag-list">
-            <form id="filter_form" method="GET" action="{% url 'blog:blog_list' %}">
+            <form id="filter_form" method="GET" action="{% url 'blog:index1' %}">
                 <!--排序类型-->
                 <input type="hidden" name='sf' id='sort_sf' value='{{filter.sorted_field}}' />
                 <!--排序方式 -->

@@ -1,0 +1,1 @@
+"c:\anaconda3\envs\web1\python.exe|c:\anaconda3\envs\web1\lib\site-packages\wfastcgi.py" can now be used as a FastCGI script processor
