@@ -2,27 +2,35 @@
 
 {% block header %}	
       <div class="jumbotron">
-        <h1>Navbar example</h1>
-        <p>This example is a quick exercise to illustrate how the default, static and fixed to top navbar work. It includes the responsive CSS and HTML, so it also adapts to your viewport and device.</p>
-        <p>To see the difference between static and fixed top navbars, just scroll.</p>
+        <h1>陈志斌的网站</h1>
+        <p>这里会发布一些博文，然后，在以后的时间，会做一个在线测试系统出来，可以在线测试高中信息技术的知识
+        </p>
+        <p>chenzhibin.vip</p>
         <p>
-          <a class="btn btn-lg btn-primary" href="#" role="button">View navbar docs &raquo;</a>
+          <a class="btn btn-lg btn-primary" href="{% url 'blog:index1' %}" role="button">看看更多博文？ &raquo;</a>
         </p>
       </div>
 {% endblock header %}
 
 {% block content %}
-<h2>
-	<a href="{% url 'users:register' %}">Register an account</a>
-	你自己打的Blog,并列出所有的主题11111111111111111111111111111111
-</h2>
-<h2>Learning Log helps you keep track of your learning,for any topic you're learning about.这是一段Learning Log简介</h2>
-<div id="tags">
-    {% for tag in tags%}
-            <a href="{% url 'blog:tag' tag.id %}">{{tag}}</a>
-    {%empty%}
-  			
-    {%endfor%}
-</div>    
+  <!-- START THE FEATURETTES -->
+  {% for entry in entries_recommend %}
+      <div class="row featurette">
+        <div class="col-md-7">
+          <h2 class="featurette-heading"><a href="{% url 'blog:detail_entry' entry.id %}">{{entry.title}}
+          	<span class="text-muted">&nbsp;<small>{{entry.date_update}}</small><!-- 留空副标题 --></span></a></h2>
+          <p class="lead">{{entry.text|safe|striptags|truncatechars:200}}
+          </p>
+        </div>
+        <div class="col-md-5">
+          <img class="featurette-image img-responsive center-block" id="{{entry.id}}"
+          	src="{{entry.img_url}}" onerror="this.src='/media/2.jpg';"
+          	alt="Generic placeholder image" >
+        </div>
+      </div>
+	
+      <hr class="featurette-divider">
+	{%endfor%}
+  <!-- /END THE FEATURETTES --> 
     
 {% endblock content %}

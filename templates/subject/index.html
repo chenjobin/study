@@ -55,16 +55,13 @@
 
 {% block header %}	
       <div class="jumbotron">
-        <h1>Navbar example</h1>
-        <p>It includes the responsive CSS and HTML, so it also adapts to your viewport and device.</p>
-        <p>
-          <a class="btn btn-lg btn-primary" href="{% url 'blog:index1' %}" role="button">进入博客列表页 &raquo;</a>
-        </p>
+        <h1>专题突破</h1>
+        <p>将某一类问题，整合起来，集中突破，也是一种好的方法</p>
       </div>
 {% endblock header %}
 
 {% block content %}
-
+<div class="container" style="position: relative;left: -1em;">
  	{% for subject in subjects%}
  		{% get_comment_count for subject as comment_count %}
 	<div class="subject">
@@ -88,6 +85,6 @@
   {%empty%}
 
   {%endfor%}
-  
+</div>
     
 {% endblock content %}

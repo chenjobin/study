@@ -9,13 +9,27 @@ from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
 
 from django.core.mail import send_mail #导入django发送邮件模块
 from django.db.models.aggregates import Count
+import re
 
 # Create your views here.
 def index(request):
     '''网站主页'''
     # return render(request,'blog/index.html') # 制作多个项目时，index,base等放templates根目录
-    tags=Tag.objects.order_by('date_added')
-    context={'tags':tags}
+    entries_recommend=Entry.objects.filter(recommend=1).order_by('-date_update')[:3]
+    for entry in entries_recommend:
+        html = entry.text
+        # pat = '[p|/]>\n*<img src="(.*?)"' #这个方法可能获取的图片不对
+        pat = r'src="(.*?\.*)"'
+        try:
+            img_urls = re.findall(pat, html, re.M)
+            i=1           #获取第一张图片
+            for img_url in img_urls:
+                if i==1:
+                    entry.img_url=img_url
+                    i=2
+        except:
+            pass
+    context={'entries_recommend':entries_recommend}
     return render(request,'index.html',context)
 
 def index1(request):
