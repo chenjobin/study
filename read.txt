@@ -3,8 +3,91 @@
 
 
 
+commit 57081cde1b2de81efad6b7fd85af2588a44d9a41 (HEAD -> master)
+Author: chenjobin <923869988@qq.com>
+Date:   Sat Aug 26 16:51:50 2017 +0800
 
+    V0.5.3添加评论框emoji表情
+---------------------------------------------------------------------------------------------
+commit 6f0e2193adc3c4620bd70779b2ad997dbda5a9c3
+Author: chenjobin <923869988@qq.com>
+Date:   Sat Aug 26 16:22:37 2017 +0800
 
+    V0.5.2 评论框UI优化
+---------------------------------------------------------------------------------------------
+commit e9583f9c5114c296ec08d17fed07ea3af71ef4cd
+Author: chenjobin <923869988@qq.com>
+Date:   Sat Aug 26 15:17:51 2017 +0800
+
+    V0.5.1 修改评论后发送邮件限制，专题被评也会有邮件
+---------------------------------------------------------------------------------------------
+commit 4ded876a89483d011a06f2967f6bd90670ef290a
+Author: chenjobin <923869988@qq.com>
+Date:   Sat Aug 26 13:10:23 2017 +0800
+
+    V0.5.0 静态资源CSS,JS等放入media
+---------------------------------------------------------------------------------------------
+commit a025b1a16cd89a93aa9b00a342cafdfab134f772 (study/master)
+Author: chenjobin <923869988@qq.com>
+Date:   Fri Aug 25 21:56:25 2017 +0800
+
+    V0.4.9网站底部信息UI修改
+---------------------------------------------------------------------------------------------
+commit dd8f059943a64563b2c12932986d1a4bb62654bf
+Author: chenjobin <923869988@qq.com>
+Date:   Fri Aug 25 21:06:12 2017 +0800
+
+    V0.4.8 界面UI修改，删除了所有的edit_entry，add_entry,add_topic，避免前端对数                                                                                                                                                 据库进行操作
+---------------------------------------------------------------------------------------------
+commit c5ef6f47c552fe9b602fa8e3028b0c507720f47f
+Author: chenjobin <923869988@qq.com>
+Date:   Fri Aug 25 18:07:00 2017 +0800
+
+    V0.4.7 网站底部制作，网站首页制作，使用了正则表达式获取文章的第一张图片使用                                                                                                                                                 ，专题页面UI
+---------------------------------------------------------------------------------------------
+commit c3223c7fc42c216f3041ee776b1e170b1f4605b1
+Author: chenjobin <923869988@qq.com>
+Date:   Fri Aug 25 10:08:00 2017 +0800
+
+    V0.4.6 win10本地部署尝试，发现再测试的时候略卡的再部署后不卡。
+    考虑到内容初建立，修改了blog首页为列表页。备注下
+    python环境中多了一个wfastcgi
+    (web1) C:\Users\92386>conda list
+    # packages in environment at C:\Anaconda3\envs\web1:
+    #
+    django                    1.11.3                   py36_0
+    django-bootstrap3         9.0.0                     <pip>
+    pip                       9.0.1                    py36_1
+    python                    3.6.2                         0
+    pytz                      2017.2                   py36_0
+    setuptools                27.2.0                   py36_1
+    vs2015_runtime            14.0.25420                    0
+---------------------------------------------------------------------------------------------
+commit c5ef6f47c552fe9b602fa8e3028b0c507720f47f
+Author: chenjobin <923869988@qq.com>
+Date:   Fri Aug 25 18:07:00 2017 +0800
+
+    V0.4.7 网站底部制作，网站首页制作，使用了正则表达式获取文章的第一张图片使用，专题页面UI
+---------------------------------------------------------------------------------------------
+commit c3223c7fc42c216f3041ee776b1e170b1f4605b1
+Author: chenjobin <923869988@qq.com>
+Date:   Fri Aug 25 10:08:00 2017 +0800
+
+    V0.4.6 win10本地部署尝试，发现再测试的时候略卡的再部署后不卡。
+    考虑到内容初建立，修改了blog首页为列表页。备注下
+    python环境中多了一个wfastcgi
+    (web1) C:\Users\92386>conda list
+    # packages in environment at C:\Anaconda3\envs\web1:
+    #
+    django                    1.11.3                   py36_0
+    django-bootstrap3         9.0.0                     <pip>
+    pip                       9.0.1                    py36_1
+    python                    3.6.2                         0
+    pytz                      2017.2                   py36_0
+    setuptools                27.2.0                   py36_1
+    vs2015_runtime            14.0.25420                    0
+    wfastcgi                  3.0.0                     <pip>
+    wheel                     0.29.0                   py36_0
 ---------------------------------------------------------------------------------------------
 commit bcf245ebd1c8dfba7769a900f689776d7d6a3c22 (HEAD -> master, study/master)
 Author: chenjobin <923869988@qq.com>
