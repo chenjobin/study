@@ -47,13 +47,13 @@
         	});
         		        
 			//绑定回复按钮的鼠标经过事件
-			$(".comment_content,.comment_reply li").each(function(){
-			    $(this).hover(function(){
-			        $(this).append("<span class='reply_button'> <a href='javascript:void(0);' onclick='reply_click(this);'>回复</a></span>");
-			    },function(){
-			        $(this).children(".reply_button").remove();
-			    });
-			});
+		//	$(".comment_content,.comment_reply li").each(function(){
+		//	    $(this).hover(function(){
+		//	        $(this).append("<span class='reply_button'> <a href='javascript:void(0);' onclick='reply_click(this);'>回复</a></span>");
+		//	    },function(){
+		//	        $(this).children(".reply_button").remove();
+		//	    });
+		//	});
 			
 			//取消回复-按钮
 	        $("#reply_cancel").click(function(){
@@ -84,7 +84,7 @@
 		//回复按钮点击触发的方法
 		function reply_click(obj){
 		    //获取回复按钮对应的评论或回复（DOM转成jQuery对象）
-		    var comment=obj.parentElement.parentElement;
+		    var comment=obj;
 		    var $c=$(comment);
 		    //获取相关信息
 		    var root=$c.attr("root");
@@ -108,25 +108,37 @@
 		    return false;
 		}
 
+
     </script>
     <style>
-		    	/*评论*/
-		.blog_comment{
-		    border-bottom: 1px solid #ddd;
-		}
-		.blog_comment .comment_title{
-		    margin-top: 0.5em;
-		}
-		.blog_comment .comment_content{
-		    padding: 0.5em;
-		    border-radius: 6px;
-		    background-color: #efefef;
-		}
-		/*回复*/
-		.blog_comment .comment_reply{
-		    text-indent: 0.5em;
-		}
-    	
+    	/*评论框*/
+.comment_text{ width: 100%; height: 9em; overflow-y: visible;}
+.comment_button{ margin-top:0.5em; float: right;}
+.comment_button #reset_btn{ margin-right:1em;}
+ 
+/*评论列表*/            
+.blog_comment{  overflow: hidden; padding-bottom: 0.5em; border-bottom: 1px #ddd solid; margin-top: 1.5em;}
+#blog_comments :last-child{ border-bottom: none;}
+ 
+/*头像*/
+.blog_comment .comment_user{ width: 70px; text-align: center; float: left;}
+.blog_comment .user_avatar{ border-radius: 6px; width: 64px; height: 64px;}
+.blog_comment .uesr_name{ font-size: 70%; margin-top: 0.5em; word-break:break-all; font-weight: bolder;}
+ 
+/*评论*/
+.blog_comment .comment_body{ margin-left: 80px;}
+.blog_comment .comment_content{ min-height: 64px; padding: 0.2em; border-radius: 6px;}
+.blog_comment .comment_bottom{ text-align: right; padding-right: 0.3em; }
+.blog_comment .comment_bottom span{ color: #aaa;}
+ 
+/*回复*/
+.blog_comment .comment_reply{ border-top: 1px #ddd dashed; padding-top: 0.2em;}
+.blog_comment .reply_avatar{ width: 32px; height: 32px; border-radius: 4px; float: left; margin-top:4px;}
+.blog_comment .reply_body{ margin-left: 40px;}
+.blog_comment .reply_body p{ margin: 0;}
+.blog_comment .reply_body .comment_bottom{ padding-top: 0.5em;}
+.blog_comment .reply_name{ font-weight: bolder;}
+.blog_comment .comment_reply li{  padding-top: 0.7em; padding-bottom: 0.5em; border-bottom: 1px #ddd dashed;}
     </style>
 
 {%endblock head%}
@@ -184,36 +196,67 @@
 {# 评论功能 #}
 <div class="panel panel-default">
     <div class="panel-heading">
-        <h4>评论列表</h4>
+        <h4>评论列表</h4> 
     </div>
  
     <div class="panel-body">
         {% get_comment_list for entry as comments %}
         {% for comment in comments %}
             <div class="blog_comment" name="F{{comment.id}}">
-		        <p class="comment_title">
-		            {{comment.submit_date|date:"Y-m-d H:i"}} @ {{comment.user_name}} 评论
-		        </p>
-		        <p class="comment_content"
-		           root='{{comment.id}}'
-		           role='{{comment.id}}'
-		           base='{{comment.user_name}}'
-		           id='comment_{{comment.id}}'>
-		           {{ comment.comment }}
-		        </p>
-		 
-		        <ul class="comment_reply">
-		            {% for reply in comment.replies %}
-		                <li root='{{reply.root_id}}'
-		                    role='{{reply.id}}'
-		                    base='{{reply.user_name}}'
-		                    id='comment_{{reply.id}}'
-		                    name="F{{reply.id}}">
-		                    {{reply.user_name}} 回复 {{reply.reply_name}} ({{ reply.submit_date|date:"Y-m-d H:i"}})：{{ reply.comment }}
-		                </li>
-		            {% endfor %}
-		        </ul>
-		    </div>
+            <div class="comment_user">
+                <img class="user_avatar" src="/media/avatar/online/{{user.last_name}}" alt="{{comment.user_name}}">
+                <p class="uesr_name">{{comment.user_name}}</p>
+            </div>
+ 
+            <div class="comment_body">
+                <div class="comment_content">
+                    <p id='comment_{{comment.id}}'>{{ comment.comment }}</p>
+                </div>
+                
+                <p class="comment_bottom">                        
+                    <span>{{comment.submit_date|date:"Y-m-d H:i"}}</span>
+                    <span class='reply_button'>
+                        <a href='javascript:void(0);' onclick='reply_click(this);' root='{{comment.id}}' role='{{comment.id}}' base='{{comment.user_name}}'>回复</a>
+                    </span>
+                </p>
+            
+                {% if comment.replies%}
+                <ul class="comment_reply">
+                    {% for reply in comment.replies %}
+                    <li name='F{{reply.id}}'>
+                        <img class="reply_avatar" src="/media/avatar/online/{{user.last_name}}">
+ 
+                        <div class="reply_body">
+                            <p id='comment_{{reply.id}}'>
+                                {#判断是否回复评论#}
+                                {% ifequal comment.id reply.reply_to %}
+                                    <span class="reply_name">{{reply.user_name}}</span>
+                                {% else %}
+                                    <span class="reply_name">{{reply.user_name}}</span>
+                                    <span> 回复 </span>
+                                    <span class="reply_name">{{reply.reply_name}}</span>
+                                {% endifequal %}
+                            </p>
+                            
+                            <div class="reply_content">
+                                <p>{{reply.comment}}</p>
+                            </div>                                    
+ 
+                            <p class="comment_bottom">                        
+                                <span>{{reply.submit_date|date:"Y-m-d H:i"}}</span>
+                                <span class='reply_button'>
+                                    <a href='javascript:void(0);' onclick='reply_click(this);' root='{{reply.root_id}}' role='{{reply.id}}' base='{{reply.user_name}}'>回复</a>
+                                </span>
+                            </p>
+                        </div>                                
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+ 
+            <span class="clearfix"></span>
+        </div>
         {% empty %}
             <span>飘过的大虾，留个名呗</span>
         {% endfor %}
