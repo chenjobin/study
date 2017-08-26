@@ -5883,3 +5883,433 @@ Traceback (most recent call last):
   File "C:\Anaconda3\envs\web1\lib\site-packages\django\template\base.py", line 770, in args_check
     (name, alen - dlen, plen))
 django.template.exceptions.TemplateSyntaxError: ljust requires 2 arguments, 1 provided
+2017-08-26 14:30:05,178 [Thread-2:13356] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /comments/post/
+Traceback (most recent call last):
+  File "F:\Django\study\django_comments\views\comments.py", line 221, in post_comment
+    send_comment_email(comment, src_url)
+  File "F:\Django\study\django_comments\views\comments.py", line 240, in send_comment_email
+    email_address = model_object.author.email #获取被评论对象的作者邮箱
+AttributeError: 'NoneType' object has no attribute 'email'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\utils\decorators.py", line 149, in _wrapped_view
+    response = view_func(request, *args, **kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\views\decorators\http.py", line 40, in inner
+    return func(request, *args, **kwargs)
+  File "F:\Django\study\django_comments\views\comments.py", line 224, in post_comment
+    return ResponseJson(200, True, e.message)
+AttributeError: 'AttributeError' object has no attribute 'message'
+2017-08-26 14:36:26,963 [Thread-2:14104] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /comments/post/
+Traceback (most recent call last):
+  File "F:\Django\study\django_comments\views\comments.py", line 218, in post_comment
+    send_comment_email(comment, src_url)
+  File "F:\Django\study\django_comments\views\comments.py", line 238, in send_comment_email
+    email_address = model_object.author.email #获取被评论对象的作者邮箱
+AttributeError: 'NoneType' object has no attribute 'email'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\utils\decorators.py", line 149, in _wrapped_view
+    response = view_func(request, *args, **kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\views\decorators\http.py", line 40, in inner
+    return func(request, *args, **kwargs)
+  File "F:\Django\study\django_comments\views\comments.py", line 222, in post_comment
+    return ResponseJson(200, True, e.message)
+AttributeError: 'AttributeError' object has no attribute 'message'
+2017-08-26 14:37:06,991 [Thread-3:3572] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /comments/post/
+Traceback (most recent call last):
+  File "F:\Django\study\django_comments\views\comments.py", line 218, in post_comment
+    send_comment_email(comment, src_url)
+  File "F:\Django\study\django_comments\views\comments.py", line 238, in send_comment_email
+    email_address = model_object.author.email #获取被评论对象的作者邮箱
+AttributeError: 'NoneType' object has no attribute 'email'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\utils\decorators.py", line 149, in _wrapped_view
+    response = view_func(request, *args, **kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\views\decorators\http.py", line 40, in inner
+    return func(request, *args, **kwargs)
+  File "F:\Django\study\django_comments\views\comments.py", line 222, in post_comment
+    return ResponseJson(200, True, e.message)
+AttributeError: 'AttributeError' object has no attribute 'message'
+2017-08-26 14:40:12,689 [Thread-2:12216] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /comments/post/
+Traceback (most recent call last):
+  File "F:\Django\study\django_comments\views\comments.py", line 218, in post_comment
+    send_comment_email(comment)
+  File "F:\Django\study\django_comments\views\comments.py", line 238, in send_comment_email
+    email_address = model_object.author.email #获取被评论对象的作者邮箱
+AttributeError: 'NoneType' object has no attribute 'email'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\utils\decorators.py", line 149, in _wrapped_view
+    response = view_func(request, *args, **kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\views\decorators\http.py", line 40, in inner
+    return func(request, *args, **kwargs)
+  File "F:\Django\study\django_comments\views\comments.py", line 222, in post_comment
+    return ResponseJson(200, True, e.message)
+AttributeError: 'AttributeError' object has no attribute 'message'
+2017-08-26 14:41:32,087 [Thread-3:7372] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /comments/post/
+Traceback (most recent call last):
+  File "F:\Django\study\django_comments\views\comments.py", line 218, in post_comment
+    send_comment_email(comment)
+  File "F:\Django\study\django_comments\views\comments.py", line 238, in send_comment_email
+    email_address = model_object.author.email #获取被评论对象的作者邮箱
+AttributeError: 'NoneType' object has no attribute 'email'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\utils\decorators.py", line 149, in _wrapped_view
+    response = view_func(request, *args, **kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\views\decorators\http.py", line 40, in inner
+    return func(request, *args, **kwargs)
+  File "F:\Django\study\django_comments\views\comments.py", line 222, in post_comment
+    return ResponseJson(200, True, e.message)
+AttributeError: 'AttributeError' object has no attribute 'message'
+2017-08-26 14:44:46,531 [Thread-2:3988] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /comments/post/
+Traceback (most recent call last):
+  File "F:\Django\study\django_comments\views\comments.py", line 218, in post_comment
+    send_comment_email(comment)
+  File "F:\Django\study\django_comments\views\comments.py", line 238, in send_comment_email
+    email_address = model_object.author.email #获取被评论对象的作者邮箱
+AttributeError: 'NoneType' object has no attribute 'email'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\utils\decorators.py", line 149, in _wrapped_view
+    response = view_func(request, *args, **kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\views\decorators\http.py", line 40, in inner
+    return func(request, *args, **kwargs)
+  File "F:\Django\study\django_comments\views\comments.py", line 222, in post_comment
+    return ResponseJson(200, True, e.message)
+AttributeError: 'AttributeError' object has no attribute 'message'
+2017-08-26 14:50:42,501 [Thread-3:6132] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /comments/post/
+Traceback (most recent call last):
+  File "F:\Django\study\django_comments\views\comments.py", line 188, in post_comment
+    send_comment_email(comment,src_url)
+  File "F:\Django\study\django_comments\views\comments.py", line 208, in send_comment_email
+    email_address = model_object.author.email #获取被评论对象的作者邮箱
+AttributeError: 'NoneType' object has no attribute 'email'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\utils\decorators.py", line 149, in _wrapped_view
+    response = view_func(request, *args, **kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\views\decorators\http.py", line 40, in inner
+    return func(request, *args, **kwargs)
+  File "F:\Django\study\django_comments\views\comments.py", line 192, in post_comment
+    return ResponseJson(200, True, e.message)
+AttributeError: 'AttributeError' object has no attribute 'message'
+2017-08-26 14:51:46,347 [Thread-2:10432] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /comments/post/
+Traceback (most recent call last):
+  File "F:\Django\study\django_comments\views\comments.py", line 188, in post_comment
+    send_comment_email(comment)
+  File "F:\Django\study\django_comments\views\comments.py", line 208, in send_comment_email
+    email_address = model_object.author.email #获取被评论对象的作者邮箱
+AttributeError: 'NoneType' object has no attribute 'email'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\utils\decorators.py", line 149, in _wrapped_view
+    response = view_func(request, *args, **kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\views\decorators\http.py", line 40, in inner
+    return func(request, *args, **kwargs)
+  File "F:\Django\study\django_comments\views\comments.py", line 192, in post_comment
+    return ResponseJson(200, True, e.message)
+AttributeError: 'AttributeError' object has no attribute 'message'
+2017-08-26 14:53:01,819 [Thread-3:13524] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /comments/post/
+Traceback (most recent call last):
+  File "F:\Django\study\django_comments\views\comments.py", line 188, in post_comment
+    send_comment_email1(comment)
+NameError: name 'send_comment_email1' is not defined
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\utils\decorators.py", line 149, in _wrapped_view
+    response = view_func(request, *args, **kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\views\decorators\http.py", line 40, in inner
+    return func(request, *args, **kwargs)
+  File "F:\Django\study\django_comments\views\comments.py", line 192, in post_comment
+    return ResponseJson(200, True, e.message)
+AttributeError: 'NameError' object has no attribute 'message'
+2017-08-26 14:53:53,135 [Thread-8:7496] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /comments/post/
+Traceback (most recent call last):
+  File "F:\Django\study\django_comments\views\comments.py", line 188, in post_comment
+    send_comment_email(comment)
+  File "F:\Django\study\django_comments\views\comments.py", line 208, in send_comment_email
+    email_address = model_object.author.email #获取被评论对象的作者邮箱
+AttributeError: 'NoneType' object has no attribute 'email'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\utils\decorators.py", line 149, in _wrapped_view
+    response = view_func(request, *args, **kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\views\decorators\http.py", line 40, in inner
+    return func(request, *args, **kwargs)
+  File "F:\Django\study\django_comments\views\comments.py", line 192, in post_comment
+    return ResponseJson(200, True, e.message)
+AttributeError: 'AttributeError' object has no attribute 'message'
+2017-08-26 14:54:41,493 [Thread-3:13768] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /comments/post/
+Traceback (most recent call last):
+  File "F:\Django\study\django_comments\views\comments.py", line 188, in post_comment
+    send_comment_email(comment,root_url)
+  File "F:\Django\study\django_comments\views\comments.py", line 208, in send_comment_email
+    email_address = model_object.author.email #获取被评论对象的作者邮箱
+AttributeError: 'NoneType' object has no attribute 'email'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\utils\decorators.py", line 149, in _wrapped_view
+    response = view_func(request, *args, **kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\views\decorators\http.py", line 40, in inner
+    return func(request, *args, **kwargs)
+  File "F:\Django\study\django_comments\views\comments.py", line 192, in post_comment
+    return ResponseJson(200, True, e.message)
+AttributeError: 'AttributeError' object has no attribute 'message'
+2017-08-26 14:56:39,135 [Thread-3:6692] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /comments/post/
+Traceback (most recent call last):
+  File "F:\Django\study\django_comments\views\comments.py", line 188, in post_comment
+    send_comment_email(comment,src_url)
+  File "F:\Django\study\django_comments\views\comments.py", line 208, in send_comment_email
+    email_address = model_object.author.email #获取被评论对象的作者邮箱
+AttributeError: 'NoneType' object has no attribute 'email'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\utils\decorators.py", line 149, in _wrapped_view
+    response = view_func(request, *args, **kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\views\decorators\http.py", line 40, in inner
+    return func(request, *args, **kwargs)
+  File "F:\Django\study\django_comments\views\comments.py", line 192, in post_comment
+    return ResponseJson(200, True, e.message)
+AttributeError: 'AttributeError' object has no attribute 'message'
+2017-08-26 14:56:57,817 [Thread-3:11552] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /comments/post/
+Traceback (most recent call last):
+  File "F:\Django\study\django_comments\views\comments.py", line 188, in post_comment
+    send_comment_email(comment,src_url)
+  File "F:\Django\study\django_comments\views\comments.py", line 208, in send_comment_email
+    email_address = model_object.author.email #获取被评论对象的作者邮箱
+AttributeError: 'NoneType' object has no attribute 'email'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\utils\decorators.py", line 149, in _wrapped_view
+    response = view_func(request, *args, **kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\views\decorators\http.py", line 40, in inner
+    return func(request, *args, **kwargs)
+  File "F:\Django\study\django_comments\views\comments.py", line 192, in post_comment
+    return ResponseJson(200, True, e.message)
+AttributeError: 'AttributeError' object has no attribute 'message'
+2017-08-26 14:57:28,681 [Thread-3:12436] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /comments/post/
+Traceback (most recent call last):
+  File "F:\Django\study\django_comments\views\comments.py", line 188, in post_comment
+    send_comment_email(comment,src_url)
+  File "F:\Django\study\django_comments\views\comments.py", line 208, in send_comment_email
+    email_address = model_object.author.email #获取被评论对象的作者邮箱
+AttributeError: 'NoneType' object has no attribute 'email'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\utils\decorators.py", line 149, in _wrapped_view
+    response = view_func(request, *args, **kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\views\decorators\http.py", line 40, in inner
+    return func(request, *args, **kwargs)
+  File "F:\Django\study\django_comments\views\comments.py", line 192, in post_comment
+    return ResponseJson(200, True, e.message)
+AttributeError: 'AttributeError' object has no attribute 'message'
+2017-08-26 14:57:52,950 [Thread-3:11472] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /comments/post/
+Traceback (most recent call last):
+  File "F:\Django\study\django_comments\views\comments.py", line 188, in post_comment
+    send_comment_email(comment,src_url)
+  File "F:\Django\study\django_comments\views\comments.py", line 208, in send_comment_email
+    email_address = model_object.author.email #获取被评论对象的作者邮箱
+AttributeError: 'NoneType' object has no attribute 'email'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\utils\decorators.py", line 149, in _wrapped_view
+    response = view_func(request, *args, **kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\views\decorators\http.py", line 40, in inner
+    return func(request, *args, **kwargs)
+  File "F:\Django\study\django_comments\views\comments.py", line 192, in post_comment
+    return ResponseJson(200, True, e.message)
+AttributeError: 'AttributeError' object has no attribute 'message'
+2017-08-26 14:59:07,157 [Thread-2:224] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /comments/post/
+Traceback (most recent call last):
+  File "F:\Django\study\django_comments\views\comments.py", line 188, in post_comment
+    send_comment_email(comment,src_url)
+  File "F:\Django\study\django_comments\views\comments.py", line 208, in send_comment_email
+    email_address = model_object.author.email #获取被评论对象的作者邮箱
+AttributeError: 'NoneType' object has no attribute 'email'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\utils\decorators.py", line 149, in _wrapped_view
+    response = view_func(request, *args, **kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\views\decorators\http.py", line 40, in inner
+    return func(request, *args, **kwargs)
+  File "F:\Django\study\django_comments\views\comments.py", line 192, in post_comment
+    return ResponseJson(200, True, e.message)
+AttributeError: 'AttributeError' object has no attribute 'message'
+2017-08-26 15:01:07,112 [Thread-3:12488] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /comments/post/
+Traceback (most recent call last):
+  File "F:\Django\study\django_comments\views\comments.py", line 188, in post_comment
+    send_comment_email(comment,src_url)
+  File "F:\Django\study\django_comments\views\comments.py", line 221, in send_comment_email
+    to_list.append(email_address)
+NameError: name 'email_address' is not defined
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\utils\decorators.py", line 149, in _wrapped_view
+    response = view_func(request, *args, **kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\views\decorators\http.py", line 40, in inner
+    return func(request, *args, **kwargs)
+  File "F:\Django\study\django_comments\views\comments.py", line 192, in post_comment
+    return ResponseJson(200, True, e.message)
+AttributeError: 'NameError' object has no attribute 'message'
+2017-08-26 15:01:48,911 [Thread-3:7416] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /comments/post/
+Traceback (most recent call last):
+  File "F:\Django\study\django_comments\views\comments.py", line 188, in post_comment
+    send_comment_email(comment,src_url)
+  File "F:\Django\study\django_comments\views\comments.py", line 221, in send_comment_email
+    to_list.append(email_address)
+NameError: name 'email_address' is not defined
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\utils\decorators.py", line 149, in _wrapped_view
+    response = view_func(request, *args, **kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\views\decorators\http.py", line 40, in inner
+    return func(request, *args, **kwargs)
+  File "F:\Django\study\django_comments\views\comments.py", line 192, in post_comment
+    return ResponseJson(200, True, e.message)
+AttributeError: 'NameError' object has no attribute 'message'

@@ -176,40 +176,14 @@ def post_comment(request, next=None, using=None):
 
     #add 2017-08-18 Jobin refer ysh
     try:
-        #判断评论对象是否为博文
-        # 判断评论对象错误了，不知原因，所以取消了判断对象
-        if str(comment.content_type) == '文章':
-            #设置模版对应的参数
-            email_data = {
-                'comment_name' : data["name"],
-                'comment_content' : comment.comment,
-                'comment_url' : u'http://chenzhibin.vip/detail_entry/%s#F%s' % (comment.object_pk, comment.id)}
-            subject = ''    #邮件主题
-            template = ''   #使用的模版
-            to_list = []        #收件人
+        root_url = 'http://chenzhibin.vip'
+        src_url = data.get('src_url', root_url)
 
-            if int(comment.root_id) == 0:
-                subject = u'[陈志斌的博客]博文评论'
-                template = 'email/comment.html'
-                #发送给自己（可以写其他邮箱）
-                to_list.append(settings.DEFAULT_FROM_EMAIL)
-            else:
-                subject = u'[陈志斌的博客]评论回复'
-                template = 'email/reply.html'
-                #获取评论对象，找到回复对应的评论
-                comment_model = django_comments.get_model()
-                cams = comment_model.objects.filter(id = comment.reply_to)
-                if cams:
-                    to_list.append(cams[0].user_email)
-                else:
-                    #没有找到评论，就发给自己（可以修改其他邮箱）
-                    to_list.append(settings.DEFAULT_FROM_EMAIL)
+        src_url=root_url+src_url
 
-            #根据模版发送邮件
-            send_email_by_template(subject, template, email_data, to_list)
-        else:
-            # 其他类型的评论暂不处理
-            pass
+        # 调用发送邮件代码
+        send_comment_email(comment,src_url)
+
     except Exception as e:
         #ResponseJson方法是我前面自己加的，可以参考上一篇博文
         return ResponseJson(200, True, e.message)
@@ -223,3 +197,38 @@ comment_done = confirmation_view(
     template="comments/posted.html",
     doc="""Display a "comment was posted" success page."""
 )
+
+def send_comment_email(comment, src_url='http://chenzhibin.vip/'):
+    #获得被评论的对象
+    content_type = comment.content_type
+    model_object = content_type.get_object_for_this_type(id=comment.object_pk)
+    #不注释会出错，所以，如果不是本博主发的文，他收不到评论提醒
+    # email_address = model_object.author.email #获取被评论对象的作者邮箱
+
+    #构造评论模版所需的数据
+    email_data = {}
+    email_data['comment_name'] = comment.name
+    email_data['comment_content'] = comment.comment
+    email_data['comment_url'] = u'%s#F%s' % (src_url, comment.id)
+
+    #其他设置
+    to_list = []
+    if int(comment.root_id) == 0:
+        subject = u'[陈志斌的博客]有人评论'
+        template = 'email/comment.html'
+        # to_list.append(email_address)
+        to_list.append(settings.DEFAULT_FROM_EMAIL)
+    else:
+        subject = u'[陈志斌的博客]评论回复'
+        template = 'email/reply.html'
+        comment_model = django_comments.get_model()
+        cams = comment_model.objects.filter(id = comment.reply_to)
+        if cams:
+            to_list.append(cams[0].user_email)
+            to_list.append(settings.DEFAULT_FROM_EMAIL)
+        else:
+            #没有找到评论，就发给自己
+            to_list.append(settings.DEFAULT_FROM_EMAIL)
+
+    # 根据模版发送邮件
+    send_email_by_template(subject, template, email_data, to_list)
