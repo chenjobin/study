@@ -373,9 +373,9 @@ def get_email_code(request):
         subject=u'[chenzhibin.vip]重置您的帐号'
         message=u"""
             <h2>陈志斌的博客(<a href='http://chenzhibin.vip/' target=_blank>chenzbibin.vip</a>)<h2><br />
-            <p>重置密码的验证码(有效期10分钟)：%s</p>
+            <p>你的账户%s重置密码的验证码(有效期10分钟)：%s</p>
             <p><br/>(请保管好您的验证码)</p>
-            """ % code
+            """ % (user.username,code)
 
         send_to=[email]
         fail_silently=True  #发送异常不报错

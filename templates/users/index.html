@@ -4,7 +4,25 @@
  
 {% block blog_active %}active{% endblock blog_active%}
  
+{% block head %}
+    <style type="text/css">
+        .user-info{
+            margin-top: 1em;
+        }
+        .sp-item{
+            margin-bottom: 2em;
+            border-bottom: 1px #ccc dashed;
+        }
+        .sp-item li{
+            text-indent: 1em;
+            padding-bottom: 0.3em;
+        }
+    </style>
+
+{% endblock head %}
+
 {% block content %}
+
     <div class="row">
         <div class="col-md-5">
             <div class="panel panel-default">
@@ -74,24 +92,11 @@
                             </ul>
                         </div>
                     {% endfor %}
-                    <p class="text-right">查看更多博文发表您的宝贵意见吧~ <a href="/topics/" target="_blank">看博客&gt;&gt;</a></p>
-                </div>
+                    <p class="text-right">查看更多博文发表您的宝贵意见吧~ <a href="{% url 'blog:index1' %}">看博客&gt;&gt;</a></p>
                 </div>
             </div>
         </div>
     </div>
  
-    <style type="text/css">
-        .user-info{
-            margin-top: 1em;
-        }
-        .sp-item{
-            margin-bottom: 2em;
-            border-bottom: 1px #ccc dashed;
-        }
-        .sp-item li{
-            text-indent: 1em;
-            padding-bottom: 0.3em;
-        }
-    </style>
+
 {% endblock content%}

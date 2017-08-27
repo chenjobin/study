@@ -34,7 +34,7 @@ if socket.gethostbyname(socket.gethostname())[:3]=='192' or '127':
 else:
     DEBUG = TEMPLATE_DEBUG = False
 
-ALLOWED_HOSTS = ['chenzhibin.vip','*.chenzhibin.vip','127.0.0.1']
+ALLOWED_HOSTS = ['chenzhibin.vip','www.chenzhibin.vip','127.0.0.1']
 #DEBUG动态开启
 
 # Application definition
