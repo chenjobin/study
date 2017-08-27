@@ -6466,3 +6466,78 @@ Traceback (most recent call last):
   File "C:\Anaconda3\envs\web\lib\site-packages\django\contrib\contenttypes\models.py", line 30, in _get_opts
     model = model._meta.concrete_model
 AttributeError: 'str' object has no attribute '_meta'
+2017-08-27 15:23:37,749 [Thread-357:8460] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /subject/4/
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Django\study\subject\views.py", line 31, in subject_show
+    obj = item.content_type.get_object_for_this_type(id=item.object_id)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\contrib\contenttypes\models.py", line 174, in get_object_for_this_type
+    return self.model_class()._base_manager.using(self._state.db).get(**kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\db\models\query.py", line 380, in get
+    self.model._meta.object_name
+blog.models.DoesNotExist: Entry matching query does not exist.
+2017-08-27 15:24:27,403 [Thread-375:10788] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /subject/1/
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Django\study\subject\views.py", line 31, in subject_show
+    obj = item.content_type.get_object_for_this_type(id=item.object_id)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\contrib\contenttypes\models.py", line 174, in get_object_for_this_type
+    return self.model_class()._base_manager.using(self._state.db).get(**kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\db\models\query.py", line 380, in get
+    self.model._meta.object_name
+blog.models.DoesNotExist: Entry matching query does not exist.
+2017-08-27 15:24:29,026 [Thread-376:14548] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /subject/1/
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Django\study\subject\views.py", line 31, in subject_show
+    obj = item.content_type.get_object_for_this_type(id=item.object_id)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\contrib\contenttypes\models.py", line 174, in get_object_for_this_type
+    return self.model_class()._base_manager.using(self._state.db).get(**kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\db\models\query.py", line 380, in get
+    self.model._meta.object_name
+blog.models.DoesNotExist: Entry matching query does not exist.
+2017-08-27 15:26:49,838 [Thread-7:14120] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /subject/1/
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Django\study\subject\views.py", line 31, in subject_show
+    obj = item.content_type.get_object_for_this_type(id=item.object_id)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\contrib\contenttypes\models.py", line 174, in get_object_for_this_type
+    return self.model_class()._base_manager.using(self._state.db).get(**kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\db\models\query.py", line 380, in get
+    self.model._meta.object_name
+blog.models.DoesNotExist: Entry matching query does not exist.
+2017-08-27 15:26:58,566 [Thread-9:14296] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /subject/1/
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Django\study\subject\views.py", line 31, in subject_show
+    obj = item.content_type.get_object_for_this_type(id=item.object_id)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\contrib\contenttypes\models.py", line 174, in get_object_for_this_type
+    return self.model_class()._base_manager.using(self._state.db).get(**kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\db\models\query.py", line 380, in get
+    self.model._meta.object_name
+blog.models.DoesNotExist: Entry matching query does not exist.

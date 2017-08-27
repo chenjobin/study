@@ -7,7 +7,7 @@ from blog.models import Topic,Entry,Tag
 class TopicAdmin(admin.ModelAdmin):
     list_display = ('text', 'date_added', 'date_update','owner')
     #list_per_page设置每页显示多少条记录，默认是100条
-    list_per_page = 10
+    list_per_page = 15
     #ordering设置默认排序字段，负号表示降序排序
     # ordering = ('text')
     #list_editable 设置默认可编辑字段
@@ -17,9 +17,9 @@ class TopicAdmin(admin.ModelAdmin):
 
 
 class EntryAdmin(admin.ModelAdmin):
-    list_display = ('title','author','topic','date_added', 'date_update','recommend')
-    list_per_page = 10
-    # fields = (('topic', 'author'), 'title','text')
+    list_display = ('title','id','author','topic','date_added', 'date_update','recommend')
+    list_per_page = 15
+    fields = (('topic', 'author'), 'tags',('recommend','top_in'),'title','text')
     # 将prepopulated_fields设置为将字段名称映射到其应预先填充的字段的字典：
     # prepopulated_fields = {'author': ('title',)}
 
