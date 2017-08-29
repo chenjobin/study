@@ -2,11 +2,10 @@
 
 from django.conf.urls import url
 
-from . import  views
+from exam import  views
 
 urlpatterns=[
     #exam主页
-    # url(r'^exam/$',views.index,name='index'),
-
+    url(r'^exam/$',views.index,name='index'),
 
 ]

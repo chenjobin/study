@@ -24,7 +24,7 @@ class Exam_Topic(models.Model):
 
 # 单项选择题
 class Single_Q(models.Model):
-    '''学到的有关某个主题的具体知识'''
+    '''单选题模型'''
     topic = models.ForeignKey(Exam_Topic,verbose_name='归属主题')
     author = models.ForeignKey(User, blank=True, null=True, verbose_name='作者')
     tags = models.ManyToManyField(Tag,blank=True,verbose_name='标签') #多对多字段，绑定下面的Tag模型

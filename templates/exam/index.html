@@ -1,9 +1,30 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="UTF-8">
-		<title></title>
-	</head>
-	<body>
-	</body>
-</html>
+{% extends 'base.html' %}
+
+{%block header%}
+	<h1>单选题</h1>
+{%endblock header%}
+
+
+{%block content%}
+
+<ul>
+    {% for single in single_qs %}
+        <li>
+        	<h3>
+            <a href="#">{{single.title|safe}}</a>
+            </h3>
+            <ul>
+            	<li>{{single.select_correct|safe}}</li>
+            	<li>{{single.select_2}}</li>
+            	<li>{{single.select_3}}</li>
+            	<li>{{single.select_4}}</li>
+            	<li>{{single.answer_detail|safe}}</li>
+            	
+            </ul>
+        </li>
+    {%empty%}
+        <li>No 单选题  have been added yet</li>
+    {%endfor%}
+</ul>
+
+{%endblock content%}
