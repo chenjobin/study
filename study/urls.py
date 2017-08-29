@@ -25,6 +25,7 @@ urlpatterns = [
     url(r'',include('blog.urls',namespace='blog')),
     url(r'^comments/', include('django_comments.urls')),
     url(r'',include('subject.urls',namespace='subject')),
+    url(r'',include('exam.urls',namespace='exam')),
 ]
 
 
