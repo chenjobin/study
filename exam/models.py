@@ -34,10 +34,10 @@ class Single_Q(models.Model):
     title = UEditorField('题目', height=300, width=1000,
         default=u'', blank=True, imagePath="exam/uploads/images/",
         toolbars='besttome', filePath='exam/uploads/files/')
-    answer = models.TextField('正确选项',max_length=200,default=u'')
-    select_2 = models.TextField('选项2',max_length=200,default=u'')
-    select_3 = models.TextField('选项3',max_length=200,default=u'')
-    select_4 = models.TextField('选项4',max_length=200,default=u'')
+    answer = models.CharField('正确选项',max_length=200,default=u'')
+    select_2 = models.CharField('选项2',max_length=200,default=u'')
+    select_3 = models.CharField('选项3',max_length=200,default=u'')
+    select_4 = models.CharField('选项4',max_length=200,default=u'')
     answer_detail = UEditorField('答案解析', height=300, width=1000,
         default=u'', blank=True, imagePath="exam/uploads/images/",
         toolbars='besttome', filePath='exam/uploads/files/')
@@ -69,7 +69,6 @@ class Fill_Q(models.Model):
     title = UEditorField('题目', height=300, width=1000,
         default=u'', blank=True, imagePath="exam/uploads/images/",
         toolbars='besttome', filePath='exam/uploads/files/')
-    answer=models.TextField('正确答案',max_length=200,default=u'')
     answer_detail = UEditorField('答案解析', height=300, width=1000,
         default=u'', blank=True, imagePath="exam/uploads/images/",
         toolbars='besttome', filePath='exam/uploads/files/')
@@ -89,3 +88,19 @@ class Fill_Q(models.Model):
         else:
             return self.caption[:50]
 
+# 填空题答案
+class Fill_Answer(models.Model):
+    '''填空题模型答案'''
+    fill_q = models.ForeignKey(Fill_Q,verbose_name='归属填空题')
+    answer=models.CharField('正确答案',max_length=200,default=u'')
+
+    class Meta:
+        verbose_name = '填空题答案'
+        verbose_name_plural = '填空题答案'
+
+    def __str__(self):
+        '''返回模型的字符串表示'''
+        if len(self.answer)>50:
+            return self.answer[:50] + '...'
+        else:
+            return self.answer[:50]
