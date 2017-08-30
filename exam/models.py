@@ -3,7 +3,8 @@ from django.contrib.auth.models import User
 from DjangoUeditor.models import UEditorField
 from django.utils.encoding import  python_2_unicode_compatible
 from blog.models import Tag
-
+from django.contrib.contenttypes.models import ContentType
+from django.contrib.contenttypes.fields import GenericForeignKey
 
 @python_2_unicode_compatible
 class Exam_Topic(models.Model):
@@ -104,3 +105,23 @@ class Fill_Answer(models.Model):
             return self.answer[:50] + '...'
         else:
             return self.answer[:50]
+
+# 错题表
+class WrongAnswerInfo(models.Model):
+    '''答错的题目信息'''
+    user = models.ForeignKey(User,verbose_name='归属用户')
+    # question=models.ForeignKey(Single_Q,verbose_name='题目')
+    content_type = models.ForeignKey(ContentType)
+    object_id = models.PositiveIntegerField()
+    content_object = GenericForeignKey(
+        ct_field = "content_type",
+        fk_field = "object_id"
+    )
+    wrong_answer=models.CharField('用户答案',max_length=200,default=u'')
+
+    class Meta:
+        verbose_name = '错题本'
+        verbose_name_plural = '错题本'
+
+    def __str__(self):
+        return self.wrong_answer

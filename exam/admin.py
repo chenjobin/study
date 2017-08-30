@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Exam_Topic,Single_Q,Fill_Q,Fill_Answer
+from .models import Exam_Topic,Single_Q,Fill_Q,Fill_Answer,WrongAnswerInfo
 
 class Exam_TopicAdmin(admin.ModelAdmin):
     list_display = ('caption','id','date_added', 'date_update')
@@ -26,3 +26,4 @@ class Fill_QAdmin(admin.ModelAdmin):
 admin.site.register(Exam_Topic,Exam_TopicAdmin)
 admin.site.register(Single_Q,Single_QAdmin)
 admin.site.register(Fill_Q,Fill_QAdmin)
+admin.site.register(WrongAnswerInfo)
