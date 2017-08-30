@@ -276,7 +276,7 @@
         {% for comment in comments %}
             <div class="blog_comment" name="F{{comment.id}}">
             <div class="comment_user">
-                <img class="user_avatar" src="/media/avatar/online/{{user.last_name}}" alt="{{comment.user_name}}">
+                <img class="user_avatar" src="/media/avatar/online/{{comment.user.last_name}}" alt="{{comment.user_name}}">
                 <p class="uesr_name">{{comment.user_name}}</p>
             </div>
  
@@ -296,7 +296,7 @@
                 <ul class="comment_reply">
                     {% for reply in comment.replies %}
                     <li name='F{{reply.id}}'>
-                        <img class="reply_avatar" src="/media/avatar/online/{{user.last_name}}">
+                        <img class="reply_avatar" src="/media/avatar/online/{{reply.user.last_name}}">
  
                         <div class="reply_body">
                             <p id='comment_{{reply.id}}'>
