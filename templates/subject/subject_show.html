@@ -277,7 +277,7 @@
             <div class="blog_comment" name="F{{comment.id}}">
             <div class="comment_user">
                 <img class="user_avatar" src="/media/avatar/online/{{comment.user.last_name}}" alt="{{comment.user_name}}">
-                <p class="uesr_name">{{comment.user_name}}</p>
+                <p class="uesr_name">{{comment.user.first_name}}</p>
             </div>
  
             <div class="comment_body">
@@ -302,9 +302,9 @@
                             <p id='comment_{{reply.id}}'>
                                 {#判断是否回复评论#}
                                 {% ifequal comment.id reply.reply_to %}
-                                    <span class="reply_name">{{reply.user_name}}</span>
+                                    <span class="reply_name">{{reply.user.first_name}}</span>
                                 {% else %}
-                                    <span class="reply_name">{{reply.user_name}}</span>
+                                    <span class="reply_name">{{reply.user.first_name}}</span>
                                     <span> 回复 </span>
                                     <span class="reply_name">{{reply.reply_name}}</span>
                                 {% endifequal %}
