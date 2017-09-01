@@ -7,20 +7,13 @@
 
 {%block content%}
 
-<ul>
-    {% for single in single_qs %}
+<ul class="list-unstyled">
+    {% for single_q in single_qs %}
         <li>
         	<h3>
-            <a href="#">{{single.title|safe}}</a>
+            <a href="{% url 'exam:detail_selection' single_q.id %}">{{single_q.caption|safe}}</a>
             </h3>
-            <ul>
-            	<li>{{single.answer|safe}}</li>
-            	<li>{{single.select_2}}</li>
-            	<li>{{single.select_3}}</li>
-            	<li>{{single.select_4}}</li>
-            	<li>{{single.answer_detail|safe}}</li>
-            	
-            </ul>
+
         </li>
     {%empty%}
         <li>No 单选题  have been added yet</li>
