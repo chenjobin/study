@@ -41,3 +41,4 @@ def detail_selection(request,selection_id):
     except Single_Q.DoesNotExist:
         raise Http404
     return render(request,'exam/detail_selection.html',context)
+

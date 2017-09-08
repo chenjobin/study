@@ -30,7 +30,8 @@ $(document).ready(function() {
 		//移除disabled属性
 		//$('#areaSelect').removeAttr("disabled");
 		$("#answer_detail").show();
-
+		$("#answer_right").show();
+		$("#answer_wrong").show();
 	});
 });
 	
@@ -51,15 +52,21 @@ $(document).ready(function() {
 	        <ul class="list-unstyled" id="question">
 	           	<li><label><input name="selections" type="radio" value="{{single_q.answer|safe}}" />
 	           	&nbsp;{{single_q.answer|safe}} </label> </li>
-	           	<li><label><input name="selections" type="radio" value="{{single_q.select_2}}" />
-	           	&nbsp;{{single_q.select_2}} </label> </li>
-	           	<li><label><input name="selections" type="radio" value="{{single_q.select_3}}"/>
-	           	&nbsp;{{single_q.select_3}} </label> </li>
-	           	<li><label><input name="selections" type="radio" value="{{single_q.select_4}}" />
-	           	&nbsp;{{single_q.select_4}} </label> </li>
+	           	<li><label><input name="selections" type="radio" value="{{single_q.select_2|safe}}" />
+	           	&nbsp;{{single_q.select_2|safe}} </label> </li>
+	           	<li><label><input name="selections" type="radio" value="{{single_q.select_3|safe}}"/>
+	           	&nbsp;{{single_q.select_3|safe}} </label> </li>
+	           	<li><label><input name="selections" type="radio" value="{{single_q.select_4|safe}}" />
+	           	&nbsp;{{single_q.select_4|safe}} </label> </li>
 				
 	        </ul>
         </form>
+        <div id='answer_right' class="alert alert-success" style="display: none;">
+        	回答正确
+        </div>
+        <div id='answer_wrong' class="alert alert-danger" style="display:none ;">
+        	回答错误
+        </div>
         <div id="answer_detail" style="display: none;">
         	<blockquote>{{single_q.answer_detail|safe}}</blockquote>
         </div>
