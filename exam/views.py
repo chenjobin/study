@@ -1,6 +1,12 @@
 from django.shortcuts import render
 from .models import Single_Q
 from django.http import HttpResponseRedirect,Http404
+from django import http
+
+#添加返回json的方法，json结构有3个参数（code:返回码,is_success:是否处理成功,message:消息内容）
+def ResponseJson(code, is_success,is_right, message):
+    data = {'code':code, 'success':is_success,'right':is_right, 'message':message}
+    return http.JsonResponse(data)
 
 def index(request):
     # subjects = Single_Q.objects.all()
@@ -42,3 +48,28 @@ def detail_selection(request,selection_id):
         raise Http404
     return render(request,'exam/detail_selection.html',context)
 
+def selection_check_answer(request,selection_id):
+    data = request.POST.copy()
+    # try:
+    #     user_is_authenticated = request.user.is_authenticated()
+    # except TypeError:  # Django >= 1.11
+    #     user_is_authenticated = request.user.is_authenticated
+    # if user_is_authenticated:
+    #     if not data.get('name', ''):
+    #         data["name"] = request.user.get_short_name() or request.user.get_username()
+    #     if not data.get('email', ''):
+    #         data["email"] = request.user.email
+    # else:
+    #     return ResponseJson(501, False, 'No Login')
+    try:
+        answer=data.get('selected','not have a valid value')
+        single_q=Single_Q.objects.get(id=selection_id)
+        correct_answer=single_q.answer
+    except:
+        return ResponseJson(501, False, False,'can\'t find the answer')
+
+    if answer==correct_answer:
+        return ResponseJson(200, True, True,'you are right')
+    else:
+        return ResponseJson(200, True, False,answer)
+        # return ResponseJson(200, True, False,'you are wrong')

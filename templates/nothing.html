@@ -1,100 +1,14 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
+<script type="text/javascript">
 
-    <title>
-    	{% block title %}
-    	{% endblock title %}
-    </title>
-		<!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
-		<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+            $("input").click(function () {
+                if ($(this).attr("checked")) {
+                    alert("选中了");
+                }
+            });
 
-		<!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
-		<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-		
-		<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
-		<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-		<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-  </head>
- <div class="blog-border">
-        
-            <div class="blog-item">
-                <div class="blog-title">
-                    <a href="/blog/187" target="_blank">充分利用Excel的布尔值</a>
-                </div>
-                
-                <div class="blog_descipt">
-                    Excel的布尔值是True和False。在Excel使用布尔值最多的地方是If函数。我们可以通过If函数分析如何充分挖掘布尔值的作用。If函数格式如下：=IF(条件表达式,&nbsp;为True执行,&nbsp;为Fals...
-                </div>
-
-                <div class="blog-tags">
-                    <ul>
-                        <li>
-                            <span class="glyphicon glyphicon-time"></span>
-                            <span>2017-08-13</span>
-                        </li>
-
-                        <li>
-                            
-                            阅读：65
-                        </li>
-                        <li>
-                            
-                            评论：0 
-                        </li>  
-
-                        
-                        <li>
-                            <span class="glyphicon glyphicon-tag"></span>
-                            <a href="/blog/?tag=2">Excel</a>
-                        </li>
-                        
-
-                        
-                    </ul>
-                </div>
-            </div>
-        
-            <div class="blog-item">
-                <div class="blog-title">
-                    <a href="/blog/185" target="_blank">初步使用tastypie的体悟（二）</a>
-                </div>
-                
-                <div class="blog_descipt">
-                    接着上一篇初步使用tastypie的体悟（一），继续写体悟。这次主要聊聊tastypie对应model与model之间的关系。tastypie既然可以通过ModelResource快速创建和Model对应的Resource。...
-                </div>
-
-                <div class="blog-tags">
-                    <ul>
-                        <li>
-                            <span class="glyphicon glyphicon-time"></span>
-                            <span>2017-08-04</span>
-                        </li>
-
-                        <li>
-                            
-                            阅读：101
-                        </li>
-                        <li>
-                            
-                            评论：0 
-                        </li>  
-
-                        
-                        <li>
-                            <span class="glyphicon glyphicon-tag"></span>
-                            <a href="/blog/?tag=8">Django</a>
-                        </li>
-                        
-
-                        
-                    </ul>
-                </div>
-            </div>
+    </script>
+</head>
+<body>
+<input type="radio"/>
+</body>
+</html>
