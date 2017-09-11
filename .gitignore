@@ -4,7 +4,7 @@ ehthumbs.db
 Desktop.ini
 ±¸Íü.txt
 
-./media/.
+
 # Python:
 *.py[cod]
 *.so
@@ -16,3 +16,5 @@ build
 .idea
 __pycache__
 *.log
+
+./media/.
