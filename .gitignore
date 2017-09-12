@@ -2,19 +2,16 @@
 Thumbs.db
 ehthumbs.db
 Desktop.ini
-±¸Íü.txt
-
 
 # Python:
 *.py[cod]
 *.so
 *.egg
 *.egg-info
-*.sqlite3
 dist
 build
 .idea
 __pycache__
-*.log
 
-./media/.
+
+
