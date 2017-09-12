@@ -15,6 +15,8 @@ Including another URLconf
 """
 from django.conf.urls import url,include
 from django.contrib import admin
+from django.conf import settings
+from django.conf.urls.static import static
 
 from DjangoUeditor import urls as DjangoUeditor_urls
 
@@ -26,8 +28,7 @@ urlpatterns = [
     url(r'^comments/', include('django_comments.urls')),
     url(r'',include('subject.urls',namespace='subject')),
     url(r'',include('exam.urls',namespace='exam')),
-]
-
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 # DjangoUeditor额外引入 ------use Django server /media/ files---------------------
 from django.conf import settings
