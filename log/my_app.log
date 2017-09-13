@@ -1,0 +1,178 @@
+2017-08-25 09:44:13.471845: wfastcgi.py will restart when files in F:\Django\study\ are changed: .*((\.py)|(\.config))$
+2017-08-25 09:44:13.474345: wfastcgi.py 3.0.0 initialized
+2017-08-25 09:47:50.899859: wfastcgi.py will restart when files in F:\Django\study\ are changed: .*((\.py)|(\.config))$
+2017-08-25 09:47:50.899859: wfastcgi.py will restart when files in F:\Django\study\ are changed: .*((\.py)|(\.config))$
+2017-08-25 09:47:50.900859: wfastcgi.py will restart when files in F:\Django\study\ are changed: .*((\.py)|(\.config))$
+2017-08-25 09:47:50.900859: wfastcgi.py 3.0.0 initialized
+2017-08-25 09:47:50.901860: wfastcgi.py 3.0.0 initialized
+2017-08-25 09:47:50.902363: wfastcgi.py 3.0.0 initialized
+2017-08-25 09:47:51.580072: wfastcgi.py will restart when files in F:\Django\study\ are changed: .*((\.py)|(\.config))$
+2017-08-25 09:47:51.581072: wfastcgi.py 3.0.0 initialized
+2017-08-25 09:50:30.978118: wfastcgi.py will restart when files in F:\Django\study\ are changed: .*((\.py)|(\.config))$
+2017-08-25 09:50:30.979119: wfastcgi.py 3.0.0 initialized
+2017-08-25 09:50:30.982123: wfastcgi.py will restart when files in F:\Django\study\ are changed: .*((\.py)|(\.config))$
+2017-08-25 09:50:30.983122: wfastcgi.py 3.0.0 initialized
+2017-08-25 09:50:30.991127: wfastcgi.py will restart when files in F:\Django\study\ are changed: .*((\.py)|(\.config))$
+2017-08-25 09:50:30.992129: wfastcgi.py will restart when files in F:\Django\study\ are changed: .*((\.py)|(\.config))$
+2017-08-25 09:50:30.992129: wfastcgi.py 3.0.0 initialized
+2017-08-25 09:50:30.992129: wfastcgi.py will restart when files in F:\Django\study\ are changed: .*((\.py)|(\.config))$
+2017-08-25 09:50:30.994130: wfastcgi.py 3.0.0 initialized
+2017-08-25 09:50:30.994130: wfastcgi.py 3.0.0 initialized
+2017-08-25 09:55:44.921408: Unhandled exception in wfastcgi.py: Traceback (most recent call last):
+  File "c:\anaconda3\envs\web1\lib\site-packages\wfastcgi.py", line 774, in main
+    record = read_fastcgi_record(fcgi_stream)
+  File "c:\anaconda3\envs\web1\lib\site-packages\wfastcgi.py", line 158, in read_fastcgi_record
+    data = stream.read(8)     # read record
+OSError: [Errno 22] Invalid argument
+2017-08-25 09:55:44.921408: Running on_exit tasks
+2017-08-25 09:55:44.922407: wfastcgi.py 3.0.0 closed
+2017-08-25 09:55:44.935418: Unhandled exception in wfastcgi.py: Traceback (most recent call last):
+  File "c:\anaconda3\envs\web1\lib\site-packages\wfastcgi.py", line 774, in main
+    record = read_fastcgi_record(fcgi_stream)
+  File "c:\anaconda3\envs\web1\lib\site-packages\wfastcgi.py", line 158, in read_fastcgi_record
+    data = stream.read(8)     # read record
+OSError: [Errno 22] Invalid argument
+2017-08-25 09:55:44.935418: Running on_exit tasks
+2017-08-25 09:55:44.936417: wfastcgi.py 3.0.0 closed
+2017-08-25 09:55:44.939420: Unhandled exception in wfastcgi.py: Traceback (most recent call last):
+  File "c:\anaconda3\envs\web1\lib\site-packages\wfastcgi.py", line 774, in main
+    record = read_fastcgi_record(fcgi_stream)
+  File "c:\anaconda3\envs\web1\lib\site-packages\wfastcgi.py", line 158, in read_fastcgi_record
+    data = stream.read(8)     # read record
+OSError: [Errno 22] Invalid argument
+2017-08-25 09:55:44.940420: Running on_exit tasks
+2017-08-25 09:55:44.940420: wfastcgi.py 3.0.0 closed
+2017-08-25 09:55:51.818123: Unhandled exception in wfastcgi.py: Traceback (most recent call last):
+  File "c:\anaconda3\envs\web1\lib\site-packages\wfastcgi.py", line 774, in main
+    record = read_fastcgi_record(fcgi_stream)
+  File "c:\anaconda3\envs\web1\lib\site-packages\wfastcgi.py", line 158, in read_fastcgi_record
+    data = stream.read(8)     # read record
+OSError: [Errno 22] Invalid argument
+2017-08-25 09:55:51.819123: Running on_exit tasks
+2017-08-25 09:55:51.819123: wfastcgi.py 3.0.0 closed
+2017-08-25 09:55:59.991971: Unhandled exception in wfastcgi.py: Traceback (most recent call last):
+  File "c:\anaconda3\envs\web1\lib\site-packages\wfastcgi.py", line 774, in main
+    record = read_fastcgi_record(fcgi_stream)
+  File "c:\anaconda3\envs\web1\lib\site-packages\wfastcgi.py", line 158, in read_fastcgi_record
+    data = stream.read(8)     # read record
+OSError: [Errno 22] Invalid argument
+2017-08-25 09:55:59.991971: Unhandled exception in wfastcgi.py: Traceback (most recent call last):
+  File "c:\anaconda3\envs\web1\lib\site-packages\wfastcgi.py", line 774, in main
+    record = read_fastcgi_record(fcgi_stream)
+  File "c:\anaconda3\envs\web1\lib\site-packages\wfastcgi.py", line 158, in read_fastcgi_record
+    data = stream.read(8)     # read record
+OSError: [Errno 22] Invalid argument
+2017-08-25 09:55:59.993973: Running on_exit tasks
+2017-08-25 09:55:59.993973: Running on_exit tasks
+2017-08-25 09:55:59.996969: wfastcgi.py 3.0.0 closed
+2017-08-25 09:55:59.996969: wfastcgi.py 3.0.0 closed
+2017-08-25 09:56:00.009978: Unhandled exception in wfastcgi.py: Traceback (most recent call last):
+  File "c:\anaconda3\envs\web1\lib\site-packages\wfastcgi.py", line 774, in main
+    record = read_fastcgi_record(fcgi_stream)
+  File "c:\anaconda3\envs\web1\lib\site-packages\wfastcgi.py", line 158, in read_fastcgi_record
+    data = stream.read(8)     # read record
+OSError: [Errno 22] Invalid argument
+2017-08-25 09:56:00.010979: Running on_exit tasks
+2017-08-25 09:56:00.011979: wfastcgi.py 3.0.0 closed
+2017-08-25 09:56:00.630108: Unhandled exception in wfastcgi.py: Traceback (most recent call last):
+  File "c:\anaconda3\envs\web1\lib\site-packages\wfastcgi.py", line 774, in main
+    record = read_fastcgi_record(fcgi_stream)
+  File "c:\anaconda3\envs\web1\lib\site-packages\wfastcgi.py", line 158, in read_fastcgi_record
+    data = stream.read(8)     # read record
+OSError: [Errno 22] Invalid argument
+2017-08-25 09:56:00.631109: Running on_exit tasks
+2017-08-25 09:56:00.632109: wfastcgi.py 3.0.0 closed
+2017-08-25 09:56:54.924958: Unhandled exception in wfastcgi.py: Traceback (most recent call last):
+  File "c:\anaconda3\envs\web1\lib\site-packages\wfastcgi.py", line 774, in main
+    record = read_fastcgi_record(fcgi_stream)
+  File "c:\anaconda3\envs\web1\lib\site-packages\wfastcgi.py", line 158, in read_fastcgi_record
+    data = stream.read(8)     # read record
+OSError: [Errno 22] Invalid argument
+2017-08-25 09:56:54.924958: Running on_exit tasks
+2017-08-25 09:56:54.925959: wfastcgi.py 3.0.0 closed
+2017-08-25 10:05:25.890338: wfastcgi.py will restart when files in F:\Django\study\ are changed: .*((\.py)|(\.config))$
+2017-08-25 10:05:25.890338: wfastcgi.py 3.0.0 initialized
+2017-08-25 20:22:38.137573: wfastcgi.py will restart when files in F:\Django\study\ are changed: .*((\.py)|(\.config))$
+2017-08-25 20:22:38.181095: wfastcgi.py 3.0.0 initialized
+2017-08-25 20:22:39.590088: wfastcgi.py will restart when files in F:\Django\study\ are changed: .*((\.py)|(\.config))$
+2017-08-25 20:22:39.590590: wfastcgi.py will restart when files in F:\Django\study\ are changed: .*((\.py)|(\.config))$
+2017-08-25 20:22:39.591090: wfastcgi.py 3.0.0 initialized
+2017-08-25 20:22:39.591090: wfastcgi.py 3.0.0 initialized
+2017-08-25 20:22:39.613106: wfastcgi.py will restart when files in F:\Django\study\ are changed: .*((\.py)|(\.config))$
+2017-08-25 20:22:39.613605: wfastcgi.py 3.0.0 initialized
+2017-08-25 20:27:52.263670: Unhandled exception in wfastcgi.py: Traceback (most recent call last):
+  File "c:\anaconda3\envs\web1\lib\site-packages\wfastcgi.py", line 774, in main
+    record = read_fastcgi_record(fcgi_stream)
+  File "c:\anaconda3\envs\web1\lib\site-packages\wfastcgi.py", line 158, in read_fastcgi_record
+    data = stream.read(8)     # read record
+OSError: [Errno 22] Invalid argument
+2017-08-25 20:27:52.263670: Running on_exit tasks
+2017-08-25 20:27:52.264676: wfastcgi.py 3.0.0 closed
+2017-08-25 20:28:28.660156: Unhandled exception in wfastcgi.py: Traceback (most recent call last):
+  File "c:\anaconda3\envs\web1\lib\site-packages\wfastcgi.py", line 774, in main
+    record = read_fastcgi_record(fcgi_stream)
+  File "c:\anaconda3\envs\web1\lib\site-packages\wfastcgi.py", line 158, in read_fastcgi_record
+    data = stream.read(8)     # read record
+OSError: [Errno 22] Invalid argument
+2017-08-25 20:28:28.661160: Running on_exit tasks
+2017-08-25 20:28:28.661160: Running on_exit tasks
+2017-08-25 20:28:28.662161: wfastcgi.py 3.0.0 closed
+2017-08-25 20:28:28.663180: wfastcgi.py 3.0.0 closed
+2017-08-25 20:30:48.661434: Unhandled exception in wfastcgi.py: Traceback (most recent call last):
+  File "c:\anaconda3\envs\web1\lib\site-packages\wfastcgi.py", line 774, in main
+    record = read_fastcgi_record(fcgi_stream)
+  File "c:\anaconda3\envs\web1\lib\site-packages\wfastcgi.py", line 158, in read_fastcgi_record
+    data = stream.read(8)     # read record
+OSError: [Errno 22] Invalid argument
+2017-08-25 20:30:48.662931: Running on_exit tasks
+2017-08-25 20:30:48.663933: wfastcgi.py 3.0.0 closed
+2017-08-25 20:33:07.419589: wfastcgi.py will restart when files in F:\Django\study\ are changed: .*((\.py)|(\.config))$
+2017-08-25 20:33:07.420575: wfastcgi.py 3.0.0 initialized
+2017-08-25 20:33:08.655978: wfastcgi.py will restart when files in F:\Django\study\ are changed: .*((\.py)|(\.config))$
+2017-08-25 20:33:08.656478: wfastcgi.py 3.0.0 initialized
+2017-08-25 20:33:08.664484: wfastcgi.py will restart when files in F:\Django\study\ are changed: .*((\.py)|(\.config))$
+2017-08-25 20:33:08.665487: wfastcgi.py 3.0.0 initialized
+2017-08-25 20:38:21.729616: Unhandled exception in wfastcgi.py: Traceback (most recent call last):
+  File "c:\anaconda3\envs\web1\lib\site-packages\wfastcgi.py", line 774, in main
+    record = read_fastcgi_record(fcgi_stream)
+  File "c:\anaconda3\envs\web1\lib\site-packages\wfastcgi.py", line 158, in read_fastcgi_record
+    data = stream.read(8)     # read record
+OSError: [Errno 22] Invalid argument
+2017-08-25 20:38:21.729616: Running on_exit tasks
+2017-08-25 20:38:21.730616: wfastcgi.py 3.0.0 closed
+2017-08-25 20:38:22.820603: Unhandled exception in wfastcgi.py: Traceback (most recent call last):
+  File "c:\anaconda3\envs\web1\lib\site-packages\wfastcgi.py", line 774, in main
+    record = read_fastcgi_record(fcgi_stream)
+  File "c:\anaconda3\envs\web1\lib\site-packages\wfastcgi.py", line 158, in read_fastcgi_record
+    data = stream.read(8)     # read record
+OSError: [Errno 22] Invalid argument
+2017-08-25 20:38:22.820603: Running on_exit tasks
+2017-08-25 20:38:22.821601: wfastcgi.py 3.0.0 closed
+2017-08-25 20:38:57.819228: Unhandled exception in wfastcgi.py: Traceback (most recent call last):
+  File "c:\anaconda3\envs\web1\lib\site-packages\wfastcgi.py", line 774, in main
+    record = read_fastcgi_record(fcgi_stream)
+  File "c:\anaconda3\envs\web1\lib\site-packages\wfastcgi.py", line 158, in read_fastcgi_record
+    data = stream.read(8)     # read record
+OSError: [Errno 22] Invalid argument
+2017-08-25 20:38:57.820227: Running on_exit tasks
+2017-08-25 20:38:57.820227: wfastcgi.py 3.0.0 closed
+2017-09-02 13:53:26.507645: wfastcgi.py will restart when files in F:\Django\study\ are changed: .*((\.py)|(\.config))$
+2017-09-02 13:53:26.524159: wfastcgi.py 3.0.0 initialized
+2017-09-02 14:17:57.094038: wfastcgi.py will restart when files in F:\Django\study\ are changed: .*((\.py)|(\.config))$
+2017-09-02 14:17:57.094038: wfastcgi.py 3.0.0 initialized
+2017-09-02 14:23:09.853968: Unhandled exception in wfastcgi.py: Traceback (most recent call last):
+  File "c:\anaconda3\envs\web1\lib\site-packages\wfastcgi.py", line 774, in main
+    record = read_fastcgi_record(fcgi_stream)
+  File "c:\anaconda3\envs\web1\lib\site-packages\wfastcgi.py", line 158, in read_fastcgi_record
+    data = stream.read(8)     # read record
+OSError: [Errno 22] Invalid argument
+2017-09-02 14:23:09.854968: Running on_exit tasks
+2017-09-02 14:23:09.855966: wfastcgi.py 3.0.0 closed
+2017-09-02 14:23:11.329423: Unhandled exception in wfastcgi.py: Traceback (most recent call last):
+  File "c:\anaconda3\envs\web1\lib\site-packages\wfastcgi.py", line 774, in main
+    record = read_fastcgi_record(fcgi_stream)
+  File "c:\anaconda3\envs\web1\lib\site-packages\wfastcgi.py", line 158, in read_fastcgi_record
+    data = stream.read(8)     # read record
+OSError: [Errno 22] Invalid argument
+2017-09-02 14:23:11.330410: Running on_exit tasks
+2017-09-02 14:23:11.330410: wfastcgi.py 3.0.0 closed

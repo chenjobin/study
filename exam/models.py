@@ -107,21 +107,34 @@ class Fill_Answer(models.Model):
             return self.answer[:50]
 
 # 错题表
-class WrongAnswerInfo(models.Model):
+class SingleWrongAnswer(models.Model):
     '''答错的题目信息'''
     user = models.ForeignKey(User,verbose_name='归属用户')
-    # question=models.ForeignKey(Single_Q,verbose_name='题目')
-    content_type = models.ForeignKey(ContentType)
-    object_id = models.PositiveIntegerField()
-    content_object = GenericForeignKey(
-        ct_field = "content_type",
-        fk_field = "object_id"
-    )
+    question=models.ForeignKey(Single_Q,verbose_name='题目')
+    # content_type = models.ForeignKey(ContentType)
+    # object_id = models.PositiveIntegerField()
+    # content_object = GenericForeignKey(
+    #     ct_field = "content_type",
+    #     fk_field = "object_id"
+    # )
     wrong_answer=models.CharField('用户答案',max_length=200,default=u'')
+    date_update = models.DateTimeField('更新时间',auto_now=True)
+
+    # 进入错题集后，若是正确次数>5,且正确/错误 大于3，表明已基本掌握本题
+    correct_times=models.PositiveIntegerField(default=0) # 新增  字段记录正确次数
+    wrong_times=models.PositiveIntegerField(default=0) # 新增  字段记录错误次数
 
     class Meta:
-        verbose_name = '错题本'
-        verbose_name_plural = '错题本'
+        verbose_name = '错题本_单选题'
+        verbose_name_plural = '错题本_单选题'
 
     def __str__(self):
         return self.wrong_answer
+
+    def increase_correct_times(self):
+        self.correct_times += 1
+        self.save(update_fields=['correct_times'])
+
+    def increase_wrong_times(self):
+        self.wrong_times += 1
+        self.save(update_fields=['wrong_times'])
