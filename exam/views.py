@@ -62,21 +62,26 @@ def selection_check_answer(request,selection_id):
     single_q=Single_Q.objects.get(id=selection_id)
     correct_answer=single_q.answer
 
+    # 不管是否答题错误，都将其收入错题集，通过正确次数与错误次数的判断，来进行判定掌握
     try:
         single_wrong=SingleWrongAnswer.objects.filter(user=request.user,question=single_q)
         if not single_wrong.count():
-            # wrong_q = SingleWrongAnswer(user=request.user,question=single_q,wrong_answer=answer)
-            # wrong_q.save()
-            SingleWrongAnswer.objects.get_or_create(user=request.user,question=single_q,wrong_answer=answer)
+            wrong_q = SingleWrongAnswer(user=request.user,question=single_q)
+            wrong_q.save()
+            # SingleWrongAnswer.objects.get_or_create(user=request.user,question=single_q,wrong_answer=answer)
+
+        # get方法才可以使 类调用内部函数，filter做不到，所以多弄搞了个single_wrong1
+        single_wrong1=SingleWrongAnswer.objects.get(user=request.user,question=single_q)
+
         if answer==correct_answer:
-            # single_wrong.increase_correct_times()
-            # SingleWrongAnswer.objects.filter(user=request.user,question=single_q).increase_correct_times()
+            if single_wrong1.first_right_times==0:
+                single_wrong1.count_first_right_times()
+            single_wrong1.increase_correct_times()
             return ResponseJson(200, True, True,'you are right')
-        # 若答题错误，则将其收入错题集
-        # SingleWrongAnswer.objects.get_or_create(user=request.user,question=single_q,wrong_answer=answer)
+
         else:
             single_wrong.update(wrong_answer=answer)
-            # single_wrong.increase_correct_times()
+            single_wrong1.increase_wrong_times()
             return ResponseJson(200, True, False,answer)
         # else:
         #     return ResponseJson(200, True, False,answer)

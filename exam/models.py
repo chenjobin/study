@@ -123,6 +123,7 @@ class SingleWrongAnswer(models.Model):
     # 进入错题集后，若是正确次数>5,且正确/错误 大于3，表明已基本掌握本题
     correct_times=models.PositiveIntegerField(default=0) # 新增  字段记录正确次数
     wrong_times=models.PositiveIntegerField(default=0) # 新增  字段记录错误次数
+    first_right_times=models.PositiveIntegerField(default=0) # 第一次答对，是第几次作答
 
     class Meta:
         verbose_name = '错题本_单选题'
@@ -138,3 +139,7 @@ class SingleWrongAnswer(models.Model):
     def increase_wrong_times(self):
         self.wrong_times += 1
         self.save(update_fields=['wrong_times'])
+
+    def count_first_right_times(self):
+        self.first_right_times = self.correct_times + self.wrong_times + 1
+        self.save(update_fields=['first_right_times'])
