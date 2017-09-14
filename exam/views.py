@@ -11,10 +11,10 @@ def ResponseJson(code, is_success,is_right, message):
 
 def index(request):
     # subjects = Single_Q.objects.all()
-    single_qs = Single_Q.objects.order_by('-date_added')
-    data = {}
-    data['single_qs'] = single_qs
-    return render(request,'exam/index.html', data)
+    # single_qs = Single_Q.objects.order_by('-date_added')
+    # data = {}
+    # data['single_qs'] = single_qs
+    return render(request,'exam/index.html')
 
 def selection(request):
     # subjects = Single_Q.objects.all()

@@ -9228,3 +9228,25 @@ Traceback (most recent call last):
   File "C:\Anaconda3\envs\web\lib\site-packages\django\urls\resolvers.py", line 497, in _reverse_with_prefix
     raise NoReverseMatch(msg)
 django.urls.exceptions.NoReverseMatch: Reverse for 'selection_check_answer' with no arguments not found. 1 pattern(s) tried: ['post/(?P<selection_id>\\d+)$']
+2017-09-14 14:45:51,924 [Thread-12:1096] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /exam/
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\django\study\exam\views.py", line 17, in index
+    return render(request,'exam/index.html', data)
+NameError: name 'data' is not defined
+2017-09-14 14:46:35,985 [Thread-20:9740] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /exam/
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\django\study\exam\views.py", line 17, in index
+    return render(request,'exam/index.html', data)
+NameError: name 'data' is not defined
