@@ -22,7 +22,7 @@ class Fill_AnswerInline(admin.TabularInline):
     extra = 3
 
 class Fill_QAdmin(admin.ModelAdmin):
-    list_display = ('caption','id','author','topic','date_added', 'date_update','recommend')
+    list_display = ('caption','blank_num','author','id','topic','date_added', 'date_update','recommend')
     list_per_page = 15
     fields = (('topic', 'author','recommend'), ( 'topic_second','tags'),('caption','blank_num'),'title','answer_detail')
     inlines=[Fill_AnswerInline]

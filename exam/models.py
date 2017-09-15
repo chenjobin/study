@@ -114,7 +114,13 @@ class Fill_Q(models.Model):
 class Fill_Answer(models.Model):
     '''填空题模型答案'''
     fill_q = models.ForeignKey(Fill_Q,verbose_name='归属填空题')
+    # 增加属性，区分本题是否为仅有几种有限的答案
+    is_only=models.BooleanField('答案形式确定',default=False)
+    # 一般情况下，只有一个answer
     answer=models.CharField('正确答案',max_length=200,default=u'')
+    answer2=models.CharField('正确答案2',max_length=200,default=u'')
+    answer3=models.CharField('正确答案3',max_length=200,default=u'')
+    answer4=models.CharField('正确答案4',max_length=200,default=u'')
 
     class Meta:
         verbose_name = '填空题答案'

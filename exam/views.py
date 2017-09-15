@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Single_Q
+from .models import Single_Q,Fill_Q
 from django.http import HttpResponseRedirect,Http404
 from django import http
 from .models import SingleWrongAnswer
@@ -22,6 +22,13 @@ def selection(request):
     data = {}
     data['single_qs'] = single_qs
     return render(request,'exam/selection.html', data)
+
+def fill_question(request):
+    # subjects = Single_Q.objects.all()
+    fill_qs = Fill_Q.objects.order_by('-date_added')
+    data = {}
+    data['fill_qs'] = fill_qs
+    return render(request,'exam/fill_question.html', data)
 
 def detail_selection(request,selection_id):
     try:
@@ -88,3 +95,29 @@ def selection_check_answer(request,selection_id):
     except:
         return ResponseJson(502, False, False,'you are wrong')
 
+def detail_fill(request,fill_q_id):
+    try:
+        fill_q=Fill_Q.objects.get(id=fill_q_id)
+        topic=fill_q.topic
+
+        # 获取前后各一篇博文,QuerySet的写法，毕竟SQL查询可读性不强,所以没有使用。
+        #__gt和__lt分别是大于和小于的意思。可以修饰到判断条件的字段上
+        next_fill_q = Fill_Q.objects.filter(id__gt=fill_q_id).order_by('id')
+        pre_fill_q = Fill_Q.objects.filter(id__lt=fill_q_id).order_by('-id')
+
+        #取第1条记录
+        if pre_fill_q.count() > 0:
+            pre_fill_q = pre_fill_q[0]
+        else:
+            pre_fill_q = None
+
+        if next_fill_q.count() > 0:
+            next_fill_q = next_fill_q[0]
+        else:
+            next_fill_q = None
+        #将空格数变成一个list,方便前端遍历
+        fill_q.blank_nums=range(1,fill_q.blank_num+1)
+        context={'topic':topic,'fill_q':fill_q,'pre_fill_q':pre_fill_q,'next_fill_q':next_fill_q}
+    except Fill_Q.DoesNotExist:
+        raise Http404
+    return render(request,'exam/detail_fill.html',context)
