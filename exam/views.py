@@ -121,3 +121,54 @@ def detail_fill(request,fill_q_id):
     except Fill_Q.DoesNotExist:
         raise Http404
     return render(request,'exam/detail_fill.html',context)
+
+def fill_check_answer(request,fill_q_id):
+    data = request.POST.copy()
+    try:
+        user_is_authenticated = request.user.is_authenticated()
+    except TypeError:  # Django >= 1.11
+        user_is_authenticated = request.user.is_authenticated
+    if not user_is_authenticated:
+        return ResponseJson(501, False,False, 'No Login')
+
+    fill_answers=data.getlist('fill_qs')
+    # if fill_answers:
+    #     return ResponseJson(200, True, True,fill_answers)
+    try:
+        fill_q=Fill_Q.objects.get(id=fill_q_id)
+        blank_num=int(fill_q.blank_num)
+        correct_answer=[]
+        right_wrong=[]
+        # obj = answer_item.content_type.get_object_for_this_type(id=answer_item.object_id)
+        for i,answer_item in enumerate(fill_q.fill_answer_set.all()):
+            correct_answer.append(answer_item.answer1)
+            # 同一空下，答案的四种可能性
+            current_correct_answer=[]
+            current_correct_answer.append(answer_item.answer1)
+            current_correct_answer.append(answer_item.answer2)
+            current_correct_answer.append(answer_item.answer3)
+            current_correct_answer.append(answer_item.answer4)
+            # 去除字符串空格，避免因空格而弄错
+            # 考虑到编程题中，字符串中间可能需要空格，所以，不对中间的空格进行考虑去除
+            # 但又考虑编程题中间可能出现2个空格，决定还是对空格进行过滤
+            current_correct_answer[0]=''.join(current_correct_answer[0].split())
+            current_correct_answer[1]=''.join(current_correct_answer[1].split())
+            current_correct_answer[2]=''.join(current_correct_answer[2].split())
+            current_correct_answer[3]=''.join(current_correct_answer[3].split())
+            fill_answers[i]=''.join(fill_answers[i].split())
+
+            if fill_answers[i]==current_correct_answer[0] \
+                    or fill_answers[i]==current_correct_answer[1] \
+                    or fill_answers[i]==current_correct_answer[2] \
+                    or fill_answers[i]==current_correct_answer[3]:
+                right_wrong.append(True)
+            else:
+                right_wrong.append(False)
+            # pass
+        if right_wrong[0]==True:
+            return ResponseJson(200, True, True,correct_answer)
+        else:
+            return ResponseJson(200, True, False,correct_answer)
+        # return ResponseJson(200, True, right_wrong,right_wrong)
+    except:
+        return ResponseJson(502, False, False,'you are wrong')

@@ -117,7 +117,7 @@ class Fill_Answer(models.Model):
     # 增加属性，区分本题是否为仅有几种有限的答案
     is_only=models.BooleanField('答案形式确定',default=False)
     # 一般情况下，只有一个answer
-    answer=models.CharField('正确答案',max_length=200,default=u'')
+    answer1=models.CharField('正确答案1',max_length=200,default=u'')
     answer2=models.CharField('正确答案2',max_length=200,default=u'')
     answer3=models.CharField('正确答案3',max_length=200,default=u'')
     answer4=models.CharField('正确答案4',max_length=200,default=u'')
@@ -128,10 +128,10 @@ class Fill_Answer(models.Model):
 
     def __str__(self):
         '''返回模型的字符串表示'''
-        if len(self.answer)>50:
-            return self.answer[:50] + '...'
+        if len(self.answer1)>50:
+            return self.answer1[:50] + '...'
         else:
-            return self.answer[:50]
+            return self.answer1[:50]
 
 # 错题表
 class SingleWrongAnswer(models.Model):

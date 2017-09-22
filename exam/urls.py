@@ -18,4 +18,6 @@ urlpatterns=[
     url(r'^fill_question/$',views.fill_question,name='fill_question'),
     # 填空题详细页
     url(r'^detail_fill/(?P<fill_q_id>\d+)$',views.detail_fill,name='detail_fill'),
+
+    url(r'^post2/(?P<fill_q_id>\d+)$',views.fill_check_answer,name='fill_check_answer'),
 ]

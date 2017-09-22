@@ -12,6 +12,47 @@
 <link rel="stylesheet" type="text/css" href="/media/emoji_demo_min/css/emojionearea-2.1.3.min.css">
 <script type="text/javascript" src="/media/emoji_demo_min/js/emojionearea-2.1.3.min.js"></script>
 <script>
+	
+$(document).ready(function() {	
+
+    $('#fill_form').submit(function() {
+
+        $.ajax({
+                type: "POST",
+                data: $('#fill_form').serialize(),
+                url: "{% url 'exam:fill_check_answer' fill_q.id %}",
+                cache: false,
+                dataType: "json",
+                success: function(json, textStatus) {
+			            if(json['success']){
+						    //window.location.reload();
+						    if(json['right']){
+						        $("#answer_right").show();
+						        $("#answer_detail").show();
+						        alert(json['message']);
+						    }else{
+						    	$("#answer_wrong").show();
+						    	$("#answer_detail").show();
+						    	alert(json['message']);
+						    }
+			            }else{
+			                if(json['code']==501){
+			                    alert('您尚未登录，请先登录才能进行练习。');
+			                }else if(json['code']==502){
+			                    alert('未能将错题放入错题集！');
+			                }else{
+			                    alert('练习出错，请刷新重试\n'+json['message']);
+			                }
+			            }
+			        },
+                error: function (XMLHttpRequest, textStatus,errorThrown) {
+                    alert("练习出错2，" + errorThrown);
+                }
+        });            
+        return false;
+    });
+	
+});
 
 </script>
 
@@ -24,9 +65,10 @@
 
     <div class="panel-body" style="word-wrap:break-word" id='demo'>
     	<div id='' class="alert alert-info" >
-        	TIP:由于部分填空题答案存在着解答方式的不同情况，所以在练习模式下，提交答案后会对答题是否正确进行反馈，用户可以自行校对答案，并决定对错
+        	TIPS:1、答题时，注意不要随意输入不必要的多余字符<br />
+        	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2、由于部分填空题答案存在着解答方式的不同情况，所以在练习模式下，提交答案后会对答题是否正确进行反馈，用户可以自行校对答案，并决定对错
         </div>
-    	<form id='selection_form'>
+    	<form id='fill_form'>
     		{% csrf_token %}
 		 
 			<h3 style="color:dodgerblue;"> 
@@ -35,7 +77,7 @@
 	      	<h3>请在下方输入框内作答</h3>
 	      	<ul class="list-unstyled" id="fill_answer" style="font-size:large;">
 				{% for i in fill_q.blank_nums %}
-					<li><label>第{{i}}空：<input type="text" name="firstname" value="" 
+					<li><label>第{{i}}空：<input type="text" name="fill_qs" value="" 
 						style="width: 500px;" placeholder="第{{i}}空请点击此处作答"></label></li>
 				{% endfor %}
 			</ul>
