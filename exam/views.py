@@ -138,7 +138,7 @@ def fill_check_answer(request,fill_q_id):
         fill_q=Fill_Q.objects.get(id=fill_q_id)
         blank_num=int(fill_q.blank_num)
         correct_answer=[]
-        right_wrong=[]
+        right_wrong=[True] #第一个True在前端不被考虑进答案的对错，因为前端的i不能+1，所以
         # obj = answer_item.content_type.get_object_for_this_type(id=answer_item.object_id)
         for i,answer_item in enumerate(fill_q.fill_answer_set.all()):
             correct_answer.append(answer_item.answer1)
@@ -165,10 +165,12 @@ def fill_check_answer(request,fill_q_id):
             else:
                 right_wrong.append(False)
             # pass
-        if right_wrong[0]==True:
-            return ResponseJson(200, True, True,correct_answer)
-        else:
-            return ResponseJson(200, True, False,correct_answer)
-        # return ResponseJson(200, True, right_wrong,right_wrong)
+        # if right_wrong[0]==True:
+        #     return ResponseJson(200, True, True,correct_answer)
+        # else:
+        #     return ResponseJson(200, True, False,correct_answer)
+        # 收入错题集，如果没有全部答对
+
+        return ResponseJson(200, True, right_wrong,right_wrong)
     except:
         return ResponseJson(502, False, False,'you are wrong')

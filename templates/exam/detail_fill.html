@@ -26,15 +26,19 @@ $(document).ready(function() {
                 success: function(json, textStatus) {
 			            if(json['success']){
 						    //window.location.reload();
-						    if(json['right']){
-						        $("#answer_right").show();
-						        $("#answer_detail").show();
-						        alert(json['message']);
-						    }else{
-						    	$("#answer_wrong").show();
-						    	$("#answer_detail").show();
-						    	alert(json['message']);
-						    }
+//								alert(json['right']);
+							var data=json['right']
+							for(var i in data){  //序号从0开始的
+//								alert(data[i]);
+								if(data[i]){
+									$("#answer_right_"+String(i)).show();
+									$("#answer_wrong_"+String(i)).hide();
+								}else{
+									$("#answer_wrong_"+String(i)).show();
+									$("#answer_right_"+String(i)).hide();
+						     	}
+							}
+							$("#answer_detail").show();
 			            }else{
 			                if(json['code']==501){
 			                    alert('您尚未登录，请先登录才能进行练习。');
@@ -78,18 +82,16 @@ $(document).ready(function() {
 	      	<ul class="list-unstyled" id="fill_answer" style="font-size:large;">
 				{% for i in fill_q.blank_nums %}
 					<li><label>第{{i}}空：<input type="text" name="fill_qs" value="" 
-						style="width: 500px;" placeholder="第{{i}}空请点击此处作答"></label></li>
+						style="width: 500px;" placeholder="第{{i}}空请点击此处作答"></label>
+						<span id='answer_right_{{i}}' class="glyphicon glyphicon-ok" style="color: green;display: none;"></span>
+						<span id='answer_wrong_{{i}}' class="glyphicon glyphicon-remove" style="color: red;display: none;"></span>
+					</li>
 				{% endfor %}
 			</ul>
 			<input class="btn btn-info" id="submit_btn" type="submit" name="submit" value="提  交"/>
 			<input class="btn" id="reset_btn" type="reset" name="submit" value="清空"/>
         </form>
-        <div id='answer_right' class="alert alert-success" style="display: none;">
-        	回答正确
-        </div>
-        <div id='answer_wrong' class="alert alert-danger" style="display:none ;">
-        	回答错误，正确答案是&nbsp;&nbsp;&nbsp;
-        </div>
+		<p>&nbsp;</p>
         <div id="answer_detail" style="display: none;">
         	<blockquote>{{fill_q.answer_detail|safe}}</blockquote>
         </div>
