@@ -10762,3 +10762,14 @@ Traceback (most recent call last):
   File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 700, in __init__
     "from '%s'" % (token[upto:], token))
 django.template.exceptions.TemplateSyntaxError: Could not parse the remainder: '-1' from 'i-1'
+2017-09-26 19:10:02,034 [Thread-4:8296] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /detail_fill/2
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\django\study\exam\views.py", line 104, in detail_fill
+    fill_q.blank_num+=1
+AttributeError: 'Fill_Q' object has no attribute 'blank_num'

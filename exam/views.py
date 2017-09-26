@@ -99,6 +99,10 @@ def detail_fill(request,fill_q_id):
     try:
         fill_q=Fill_Q.objects.get(id=fill_q_id)
         topic=fill_q.topic
+        # 增加一个空格数
+        fill_q.blank_num=fill_q.fill_answer_set.count()
+        # for fill_question in fill_q.fill_answer_set.all():
+        #     fill_q.blank_num+=1
 
         # 获取前后各一篇博文,QuerySet的写法，毕竟SQL查询可读性不强,所以没有使用。
         #__gt和__lt分别是大于和小于的意思。可以修饰到判断条件的字段上
@@ -136,7 +140,6 @@ def fill_check_answer(request,fill_q_id):
     #     return ResponseJson(200, True, True,fill_answers)
     try:
         fill_q=Fill_Q.objects.get(id=fill_q_id)
-        blank_num=int(fill_q.blank_num)
         correct_answer=[]
         right_wrong=[True] #第一个True在前端不被考虑进答案的对错，因为前端的i不能+1，所以
         # obj = answer_item.content_type.get_object_for_this_type(id=answer_item.object_id)

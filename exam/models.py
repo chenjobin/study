@@ -87,7 +87,7 @@ class Fill_Q(models.Model):
     recommend = models.BooleanField('重点题目',default=False) #布尔字段，我用于标记是否是重点题
     # 考虑到HTML的影响，加入简化版，其实是和title一样
     caption = models.CharField('题目简化版',max_length=200)
-    blank_num=models.PositiveIntegerField(default=1,verbose_name='空白数') # 记录填空的数量
+    # blank_num=models.PositiveIntegerField(default=1,verbose_name='空白数') # 记录填空的数量
     title = UEditorField('题目', height=300, width=1000,
         default=u'', blank=True, imagePath="exam/uploads/images/",
         toolbars='besttome', filePath='exam/uploads/files/')
