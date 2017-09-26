@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Exam_Topic,Exam_Topic_Second,Single_Q,Fill_Q,Fill_Answer,SingleWrongAnswer
+from .models import Exam_Topic,Exam_Topic_Second,Single_Q,Fill_Q,Fill_Answer,SingleWrongAnswer,FillWrongAnswer
 
 class Exam_TopicAdmin(admin.ModelAdmin):
     list_display = ('caption','id','date_added', 'date_update')
@@ -27,8 +27,15 @@ class Fill_QAdmin(admin.ModelAdmin):
     fields = (('topic', 'author','recommend'), ( 'topic_second','tags'),'caption','title','answer_detail')
     inlines=[Fill_AnswerInline]
 
+class SingleWrongAnswerAdmin(admin.ModelAdmin):
+    list_display = ('question','user','first_right_times','correct_times','wrong_times')
+
+class FillWrongAnswerAdmin(admin.ModelAdmin):
+    list_display = ('question','user','wrong_fill_n','first_right_times','correct_times','wrong_times')
+
 admin.site.register(Exam_Topic,Exam_TopicAdmin)
 admin.site.register(Exam_Topic_Second,Exam_Topic_SecondAdmin)
 admin.site.register(Single_Q,Single_QAdmin)
 admin.site.register(Fill_Q,Fill_QAdmin)
-admin.site.register(SingleWrongAnswer)
+admin.site.register(SingleWrongAnswer,SingleWrongAnswerAdmin)
+admin.site.register(FillWrongAnswer,FillWrongAnswerAdmin)

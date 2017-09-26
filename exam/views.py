@@ -2,7 +2,7 @@ from django.shortcuts import render
 from .models import Single_Q,Fill_Q
 from django.http import HttpResponseRedirect,Http404
 from django import http
-from .models import SingleWrongAnswer
+from .models import SingleWrongAnswer,FillWrongAnswer
 
 #添加返回json的方法，json结构有3个参数（code:返回码,is_success:是否处理成功,message:消息内容）
 def ResponseJson(code, is_success,is_right, message):
@@ -142,8 +142,20 @@ def fill_check_answer(request,fill_q_id):
         fill_q=Fill_Q.objects.get(id=fill_q_id)
         correct_answer=[]
         right_wrong=[True] #第一个True在前端不被考虑进答案的对错，因为前端的i不能+1，所以
+
         # obj = answer_item.content_type.get_object_for_this_type(id=answer_item.object_id)
         for i,answer_item in enumerate(fill_q.fill_answer_set.all()):
+
+            # 不管是否答题错误，都将其收入错题集，通过正确次数与错误次数的判断，来进行判定掌握
+            # 若以后错题集模型合并，可以考虑一下函数抽象出来
+            fill_wrong=FillWrongAnswer.objects.filter(user=request.user,question=fill_q,wrong_fill_n=i+1)
+            if not fill_wrong.count():
+                wrong_q = FillWrongAnswer(user=request.user,question=fill_q,wrong_fill_n=i+1)
+                wrong_q.save()
+
+            # get方法才可以使 类调用内部函数，filter做不到，所以多弄搞了个fill_wrong1
+            fill_wrong1=FillWrongAnswer.objects.get(user=request.user,question=fill_q,wrong_fill_n=i+1)
+
             correct_answer.append(answer_item.answer1)
             # 同一空下，答案的四种可能性
             current_correct_answer=[]
@@ -165,8 +177,13 @@ def fill_check_answer(request,fill_q_id):
                     or fill_answers[i]==current_correct_answer[2] \
                     or fill_answers[i]==current_correct_answer[3]:
                 right_wrong.append(True)
+                if fill_wrong1.first_right_times==0:
+                    fill_wrong1.count_first_right_times()
+                fill_wrong1.increase_correct_times()
             else:
                 right_wrong.append(False)
+                fill_wrong1.increase_wrong_times()
+                fill_wrong.update(wrong_answer=fill_answers[i])
             # pass
         # if right_wrong[0]==True:
         #     return ResponseJson(200, True, True,correct_answer)

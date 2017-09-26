@@ -23,9 +23,11 @@
           </p>
         </div>
         <div class="col-md-5">
+        	<a href="{% url 'blog:detail_entry' entry.id %}">
           <img class="featurette-image img-responsive center-block" id="{{entry.id}}"
           	src="{{entry.img_url}}" onerror="this.src='/media/2.jpg';"
           	alt="Generic placeholder image" >
+          </a>
         </div>
       </div>
 	

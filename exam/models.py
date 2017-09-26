@@ -148,13 +148,50 @@ class SingleWrongAnswer(models.Model):
     date_update = models.DateTimeField('更新时间',auto_now=True)
 
     # 进入错题集后，若是正确次数>5,且正确/错误 大于3，表明已基本掌握本题
-    correct_times=models.PositiveIntegerField(default=0) # 新增  字段记录正确次数
-    wrong_times=models.PositiveIntegerField(default=0) # 新增  字段记录错误次数
-    first_right_times=models.PositiveIntegerField(default=0) # 第一次答对，是第几次作答
+    correct_times=models.PositiveIntegerField('第一次做对',default=0) # 新增  字段记录正确次数
+    wrong_times=models.PositiveIntegerField('错误次数',default=0) # 新增  字段记录错误次数
+    first_right_times=models.PositiveIntegerField('答对次数',default=0) # 第一次答对，是第几次作答
 
     class Meta:
         verbose_name = '错题本_单选题'
         verbose_name_plural = '错题本_单选题'
+
+    def __str__(self):
+        return self.wrong_answer
+
+    def increase_correct_times(self):
+        self.correct_times += 1
+        self.save(update_fields=['correct_times'])
+
+    def increase_wrong_times(self):
+        self.wrong_times += 1
+        self.save(update_fields=['wrong_times'])
+
+    def count_first_right_times(self):
+        self.first_right_times = self.correct_times + self.wrong_times + 1
+        self.save(update_fields=['first_right_times'])
+
+# 错题表 填空题
+# 相对照于选择题错题集，此题仅多了一个wrong_fill_n字段，以后可以考虑错题集使用同一个模型
+class FillWrongAnswer(models.Model):
+    '''答错的题目信息'''
+    user = models.ForeignKey(User,verbose_name='归属用户')
+    question=models.ForeignKey(Fill_Q,verbose_name='题目')
+    # 记录第几个空答错了,
+    # 这么做,以后填空题错题提取的时候要注意去重了
+    wrong_fill_n=models.PositiveIntegerField(default=0)
+
+    wrong_answer=models.CharField('用户答案',max_length=200,default=u'')
+    date_update = models.DateTimeField('更新时间',auto_now=True)
+
+    # 进入错题集后，若是正确次数>5,且正确/错误 大于3，表明已基本掌握本题
+    correct_times=models.PositiveIntegerField('第一次做对',default=0) # 新增  字段记录正确次数
+    wrong_times=models.PositiveIntegerField('错误次数',default=0) # 新增  字段记录错误次数
+    first_right_times=models.PositiveIntegerField('答对次数',default=0) # 第一次答对，是第几次作答
+
+    class Meta:
+        verbose_name = '错题本_填空题'
+        verbose_name_plural = '错题本_填空题'
 
     def __str__(self):
         return self.wrong_answer
