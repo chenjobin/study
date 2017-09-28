@@ -10773,3 +10773,188 @@ Traceback (most recent call last):
   File "C:\django\study\exam\views.py", line 104, in detail_fill
     fill_q.blank_num+=1
 AttributeError: 'Fill_Q' object has no attribute 'blank_num'
+2017-09-28 15:10:12,764 [Thread-2:7556] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /admin/exam/examinationpaper/add/
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\contrib\admin\options.py", line 551, in wrapper
+    return self.admin_site.admin_view(view)(*args, **kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\utils\decorators.py", line 149, in _wrapped_view
+    response = view_func(request, *args, **kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\views\decorators\cache.py", line 57, in _wrapped_view_func
+    response = view_func(request, *args, **kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\contrib\admin\sites.py", line 224, in inner
+    return view(request, *args, **kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\contrib\admin\options.py", line 1508, in add_view
+    return self.changeform_view(request, None, form_url, extra_context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\utils\decorators.py", line 67, in _wrapper
+    return bound_func(*args, **kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\utils\decorators.py", line 149, in _wrapped_view
+    response = view_func(request, *args, **kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\utils\decorators.py", line 63, in bound_func
+    return func.__get__(self, type(self))(*args2, **kwargs2)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\contrib\admin\options.py", line 1408, in changeform_view
+    return self._changeform_view(request, object_id, form_url, extra_context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\contrib\admin\options.py", line 1450, in _changeform_view
+    change_message = self.construct_change_message(request, form, formsets, add)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\contrib\admin\options.py", line 941, in construct_change_message
+    return construct_change_message(form, formsets, add)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\contrib\admin\utils.py", line 526, in construct_change_message
+    'object': force_text(added_object),
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\utils\encoding.py", line 76, in force_text
+    s = six.text_type(s)
+  File "F:\Django\study\exam\models.py", line 254, in __str__
+    return u'<%s-%s>' % (self.title, self.subject)
+AttributeError: 'ExaminationPaperChapter' object has no attribute 'subject'
+2017-09-28 15:11:17,434 [Thread-2:11136] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /admin/exam/examinationpaper/add/
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\contrib\admin\options.py", line 551, in wrapper
+    return self.admin_site.admin_view(view)(*args, **kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\utils\decorators.py", line 149, in _wrapped_view
+    response = view_func(request, *args, **kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\views\decorators\cache.py", line 57, in _wrapped_view_func
+    response = view_func(request, *args, **kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\contrib\admin\sites.py", line 224, in inner
+    return view(request, *args, **kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\contrib\admin\options.py", line 1508, in add_view
+    return self.changeform_view(request, None, form_url, extra_context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\utils\decorators.py", line 67, in _wrapper
+    return bound_func(*args, **kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\utils\decorators.py", line 149, in _wrapped_view
+    response = view_func(request, *args, **kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\utils\decorators.py", line 63, in bound_func
+    return func.__get__(self, type(self))(*args2, **kwargs2)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\contrib\admin\options.py", line 1408, in changeform_view
+    return self._changeform_view(request, object_id, form_url, extra_context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\contrib\admin\options.py", line 1450, in _changeform_view
+    change_message = self.construct_change_message(request, form, formsets, add)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\contrib\admin\options.py", line 941, in construct_change_message
+    return construct_change_message(form, formsets, add)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\contrib\admin\utils.py", line 526, in construct_change_message
+    'object': force_text(added_object),
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\utils\encoding.py", line 76, in force_text
+    s = six.text_type(s)
+  File "F:\Django\study\exam\models.py", line 254, in __str__
+    return u'<%s-%s>' % (self.title, self.subject)
+AttributeError: 'ExaminationPaperChapter' object has no attribute 'subject'
+2017-09-28 15:11:21,463 [Thread-4:10340] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /admin/exam/examinationpaper/add/
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\contrib\admin\options.py", line 551, in wrapper
+    return self.admin_site.admin_view(view)(*args, **kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\utils\decorators.py", line 149, in _wrapped_view
+    response = view_func(request, *args, **kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\views\decorators\cache.py", line 57, in _wrapped_view_func
+    response = view_func(request, *args, **kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\contrib\admin\sites.py", line 224, in inner
+    return view(request, *args, **kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\contrib\admin\options.py", line 1508, in add_view
+    return self.changeform_view(request, None, form_url, extra_context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\utils\decorators.py", line 67, in _wrapper
+    return bound_func(*args, **kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\utils\decorators.py", line 149, in _wrapped_view
+    response = view_func(request, *args, **kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\utils\decorators.py", line 63, in bound_func
+    return func.__get__(self, type(self))(*args2, **kwargs2)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\contrib\admin\options.py", line 1408, in changeform_view
+    return self._changeform_view(request, object_id, form_url, extra_context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\contrib\admin\options.py", line 1450, in _changeform_view
+    change_message = self.construct_change_message(request, form, formsets, add)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\contrib\admin\options.py", line 941, in construct_change_message
+    return construct_change_message(form, formsets, add)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\contrib\admin\utils.py", line 526, in construct_change_message
+    'object': force_text(added_object),
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\utils\encoding.py", line 76, in force_text
+    s = six.text_type(s)
+  File "F:\Django\study\exam\models.py", line 254, in __str__
+    return u'<%s-%s>' % (self.title, self.subject)
+AttributeError: 'ExaminationPaperChapter' object has no attribute 'subject'
+2017-09-28 15:11:31,899 [Thread-8:14136] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /admin/exam/examinationpaper/add/
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\contrib\admin\options.py", line 551, in wrapper
+    return self.admin_site.admin_view(view)(*args, **kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\utils\decorators.py", line 149, in _wrapped_view
+    response = view_func(request, *args, **kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\views\decorators\cache.py", line 57, in _wrapped_view_func
+    response = view_func(request, *args, **kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\contrib\admin\sites.py", line 224, in inner
+    return view(request, *args, **kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\contrib\admin\options.py", line 1508, in add_view
+    return self.changeform_view(request, None, form_url, extra_context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\utils\decorators.py", line 67, in _wrapper
+    return bound_func(*args, **kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\utils\decorators.py", line 149, in _wrapped_view
+    response = view_func(request, *args, **kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\utils\decorators.py", line 63, in bound_func
+    return func.__get__(self, type(self))(*args2, **kwargs2)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\contrib\admin\options.py", line 1408, in changeform_view
+    return self._changeform_view(request, object_id, form_url, extra_context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\contrib\admin\options.py", line 1450, in _changeform_view
+    change_message = self.construct_change_message(request, form, formsets, add)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\contrib\admin\options.py", line 941, in construct_change_message
+    return construct_change_message(form, formsets, add)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\contrib\admin\utils.py", line 526, in construct_change_message
+    'object': force_text(added_object),
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\utils\encoding.py", line 76, in force_text
+    s = six.text_type(s)
+  File "F:\Django\study\exam\models.py", line 254, in __str__
+    return u'<%s-%s>' % (self.title, self.subject)
+AttributeError: 'ExaminationPaperChapter' object has no attribute 'subject'
+2017-09-28 15:13:53,068 [Thread-7:14236] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /admin/exam/examinationpaper/add/
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\contrib\admin\options.py", line 551, in wrapper
+    return self.admin_site.admin_view(view)(*args, **kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\utils\decorators.py", line 149, in _wrapped_view
+    response = view_func(request, *args, **kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\views\decorators\cache.py", line 57, in _wrapped_view_func
+    response = view_func(request, *args, **kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\contrib\admin\sites.py", line 224, in inner
+    return view(request, *args, **kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\contrib\admin\options.py", line 1508, in add_view
+    return self.changeform_view(request, None, form_url, extra_context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\utils\decorators.py", line 67, in _wrapper
+    return bound_func(*args, **kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\utils\decorators.py", line 149, in _wrapped_view
+    response = view_func(request, *args, **kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\utils\decorators.py", line 63, in bound_func
+    return func.__get__(self, type(self))(*args2, **kwargs2)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\contrib\admin\options.py", line 1408, in changeform_view
+    return self._changeform_view(request, object_id, form_url, extra_context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\contrib\admin\options.py", line 1450, in _changeform_view
+    change_message = self.construct_change_message(request, form, formsets, add)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\contrib\admin\options.py", line 941, in construct_change_message
+    return construct_change_message(form, formsets, add)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\contrib\admin\utils.py", line 526, in construct_change_message
+    'object': force_text(added_object),
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\utils\encoding.py", line 76, in force_text
+    s = six.text_type(s)
+  File "F:\Django\study\exam\models.py", line 254, in __str__
+    return u'<%s-%s>' % (self.title, self.subject)
+AttributeError: 'ExaminationPaperChapter' object has no attribute 'subject'

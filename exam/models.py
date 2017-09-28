@@ -207,3 +207,73 @@ class FillWrongAnswer(models.Model):
     def count_first_right_times(self):
         self.first_right_times = self.correct_times + self.wrong_times + 1
         self.save(update_fields=['first_right_times'])
+
+
+class ExaminationPaperType(models.Model):
+    '''subject type'''
+    type_name = models.CharField(max_length=20)
+    create_time = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return '%s' % (self.type_name)
+
+    class Meta:
+        verbose_name = '试卷类型'
+        verbose_name_plural = '试卷类型'
+
+
+class ExaminationPaper(models.Model):
+    '''subject model'''
+    caption = models.CharField(max_length=20)
+    description = models.TextField()
+
+    author = models.ForeignKey(User, default=1)
+    # 模拟卷 真题卷
+    ExaminationPaper_Type = models.ForeignKey(ExaminationPaperType, default=1)
+
+    create_time = models.DateTimeField(auto_now_add=True)
+    update_time = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return '%s' % self.caption
+
+    class Meta:
+        verbose_name = '试卷'
+        verbose_name_plural = '试卷'
+
+
+class ExaminationPaperChapter(models.Model):
+    '''ExaminationPaper chapter
+        用来划分第一部分第二部分，也可以理解成划分选择题填空题
+    '''
+    title = models.CharField(max_length=250)   #书写模块，本模块答题注意事项
+    examination_paper = models.ForeignKey(ExaminationPaper)
+    create_time = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return u'<%s-%s>' % (self.title, self.examination_paper)
+
+    class Meta:
+        verbose_name = '试卷模块'
+        verbose_name_plural = '试卷模块'
+
+class ExaminationPaperItem(models.Model):
+    '''subject item'''
+    chapter = models.ForeignKey(ExaminationPaperChapter, default=1)
+
+    content_type = models.ForeignKey(ContentType)
+    object_id = models.PositiveIntegerField()
+    content_object = GenericForeignKey(
+        ct_field = "content_type",
+        fk_field = "object_id"
+    )
+
+    create_time = models.DateTimeField(auto_now_add=True)
+    update_time = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return 'subject item %s' % self.id
+
+    class Meta:
+        verbose_name = '试卷具体试题'
+        verbose_name_plural = '试卷具体试题'
