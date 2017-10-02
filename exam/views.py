@@ -2,7 +2,8 @@ from django.shortcuts import render
 from .models import Single_Q,Fill_Q
 from django.http import HttpResponseRedirect,Http404
 from django import http
-from .models import SingleWrongAnswer,FillWrongAnswer
+from .models import SingleWrongAnswer,FillWrongAnswer,ExaminationPaper
+from django.core.urlresolvers import reverse #url逆向解析
 
 #添加返回json的方法，json结构有3个参数（code:返回码,is_success:是否处理成功,message:消息内容）
 def ResponseJson(code, is_success,is_right, message):
@@ -29,6 +30,13 @@ def fill_question(request):
     data = {}
     data['fill_qs'] = fill_qs
     return render(request,'exam/fill_question.html', data)
+
+def exam_paper(request):
+    # subjects = Single_Q.objects.all()
+    exam_papers = ExaminationPaper.objects.order_by('-create_time')
+    data = {}
+    data['exam_papers'] = exam_papers
+    return render(request,'exam/exam_paper_list.html', data)
 
 def detail_selection(request,selection_id):
     try:
@@ -100,7 +108,9 @@ def detail_fill(request,fill_q_id):
         fill_q=Fill_Q.objects.get(id=fill_q_id)
         topic=fill_q.topic
         # 增加一个空格数
-        fill_q.blank_num=fill_q.fill_answer_set.count()
+        blank_num=fill_q.fill_answer_set.count()
+        #将空格数变成一个list,方便前端遍历
+        fill_q.blank_nums=range(1,blank_num+1)
         # for fill_question in fill_q.fill_answer_set.all():
         #     fill_q.blank_num+=1
 
@@ -119,8 +129,7 @@ def detail_fill(request,fill_q_id):
             next_fill_q = next_fill_q[0]
         else:
             next_fill_q = None
-        #将空格数变成一个list,方便前端遍历
-        fill_q.blank_nums=range(1,fill_q.blank_num+1)
+
         context={'topic':topic,'fill_q':fill_q,'pre_fill_q':pre_fill_q,'next_fill_q':next_fill_q}
     except Fill_Q.DoesNotExist:
         raise Http404
@@ -194,3 +203,62 @@ def fill_check_answer(request,fill_q_id):
         return ResponseJson(200, True, right_wrong,right_wrong)
     except:
         return ResponseJson(502, False, False,'you are wrong')
+
+def exam_paper_show(request, exam_paper_id):
+    try:
+        exam_paper = ExaminationPaper.objects.get(id=exam_paper_id)
+        chapters = []
+        #数据统计
+        single_q_num = 0
+        fill_q_num = 0
+
+        #遍历章节
+        for i, chapter in enumerate(exam_paper.examinationpaperchapter_set.all()):
+            #遍历子项
+            items = []
+            for item in chapter.examinationpaperitem_set.all():
+                obj = item.content_type.get_object_for_this_type(id=item.object_id)
+                obj_type = item.content_type.model
+
+                #根据类型不同，设置名称和链接（动态绑定属性）
+                if obj_type == 'single_q':
+                    item.type_name = '单选题'
+                    # item.url = reverse('exam:detail_selection', args = [item.object_id,])
+                    single_q_selections=Single_Q.objects.get(id=item.object_id)
+                    item.select_answers = []
+                    item.select_answers.append(single_q_selections.answer)
+                    item.select_answers.append(single_q_selections.select_2)
+                    item.select_answers.append(single_q_selections.select_3)
+                    item.select_answers.append(single_q_selections.select_4)
+
+                    item.title = obj.title
+                    single_q_num += 1
+                elif obj_type == 'fill_q':
+                    item.type_name = '填空题'
+                    # item.url = reverse('exam:detail_fill', args = [item.object_id,])
+                    fill_answers = Fill_Q.objects.get(id=item.object_id)
+                    # 增加一个空格数
+                    blank_num=fill_answers.fill_answer_set.count()
+                    #将空格数变成一个list,方便前端遍历
+                    item.blank_nums=range(1,blank_num+1)
+                    item.title = obj.title
+                    fill_q_num += 1
+                else:
+                    item.type_name = '未知'
+                    # item.url = '/'
+                    item.title = '<未知的类型>'
+                items.append(item)
+
+            chapter.items = items
+            chapter.sort_num = i + 1
+            chapters.append(chapter)
+
+    except ExaminationPaper.DoesNotExist:
+        raise Http404
+
+    data = {}
+    data['exam_paper'] = exam_paper
+    data['chapters'] = chapters
+    data['count'] = u'该试卷分%s部分，共%s道选择题、%s道填空题' % (len(chapters), single_q_num, fill_q_num)
+
+    return render(request,'exam/exam_paper_1.html', data)

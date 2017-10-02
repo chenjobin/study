@@ -44,7 +44,7 @@ class ExaminationPaperChapterInline(admin.TabularInline):
     extra = 3
 # 试卷
 class ExaminationPaperAdmin(admin.ModelAdmin):
-    list_display=('caption', 'description', 'ExaminationPaper_Type','create_time', 'update_time')
+    list_display=('caption', 'description', 'exam_paper_type','create_time', 'update_time')
     inlines = [ExaminationPaperChapterInline,]
 
 #试卷 各 模块

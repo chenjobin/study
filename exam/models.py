@@ -229,7 +229,7 @@ class ExaminationPaper(models.Model):
 
     author = models.ForeignKey(User, default=1)
     # 模拟卷 真题卷
-    ExaminationPaper_Type = models.ForeignKey(ExaminationPaperType, default=1)
+    exam_paper_type = models.ForeignKey(ExaminationPaperType, default=1)
 
     create_time = models.DateTimeField(auto_now_add=True)
     update_time = models.DateTimeField(auto_now=True)

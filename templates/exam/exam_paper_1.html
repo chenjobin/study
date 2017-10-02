@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% block head %}
+
+<!--emojione v2.1.1 使用bootstrap的cdn-->
+<link rel="stylesheet" type="text/css" href="http://cdn.bootcss.com/emojione/2.1.1/assets/sprites/emojione.sprites.css">
+<script type="text/javascript" src="http://cdn.bootcss.com/emojione/2.1.1/lib/js/emojione.min.js"></script>
+ 
+<!--emojionearea-->
+<link rel="stylesheet" type="text/css" href="/media/emoji_demo_min/css/emojionearea-2.1.3.min.css">
+<script type="text/javascript" src="/media/emoji_demo_min/js/emojionearea-2.1.3.min.js"></script>
+<script>
+$(document).ready(function() {	
+	{# 选择题选项随机排列  #}
+	$("#question #select_li").each(function(){
+			if(parseInt(Math.random()*2)==0){
+				$(this).prependTo($(this).parent());
+			}	
+	});
+	
+});
+</script>
+
+<style>
+	.exam_paper_chapter h4{ font-weight: bold; padding-bottom: 0.5em; display: inline-block;}
+	.exam_paper_chapter ul{ list-style-type:none; counter-reset:sectioncounter; margin-left: 2em;font-size: medium;}
+	.exam_paper_items li:before{ content:counter(sectioncounter) "）"; counter-increment:sectioncounter;}  
+    	
+</style>
+
+{% endblock head %}
+
+{% block header %}	
+
+{% endblock header %}
+
+{% block content %}
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="subject_header">
+                    <h3>{{exam_paper}}</h3>
+                    <span class="clearfix"></span>
+                </div>
+            </div>
+
+            <div class="panel-body">
+                <div class="subject_content">
+                    <div class="alert alert-info">
+                        <div class="subject_description">
+                            <h4 style=" font-weight: bold; margin-top: 10px;">试卷简介</h4>
+                            <p>{{exam_paper.description|safe}}</p>
+                            <p>{{count}}</p>
+                            <p>创建时间：{{exam_paper.create_time|date:'Y-m-d'}}&nbsp;&nbsp;试卷类型：{{exam_paper.exam_paper_type}}</p>
+                            <p></p>
+                        </div>
+                    </div>
+                    
+                    <form id='exam_form'>
+                        <div class="exam_paper_chapter">                            
+                            <ul class="exam_paper_items"> 
+                            {% for chapter in chapters %}
+                            	<h4>{{chapter.title}}</h4>  
+                            	{% for item in chapter.items %}                            	
+                                <li>
+                                {{item.title|safe}}
+							        <ul class="list-unstyled" id="question">
+							        	{% for answer in item.select_answers %}
+							           	<li id="select_li"><label><input name="selections_{{item.id}}" type="radio" value="{{answer|safe}}" />
+							           	&nbsp;{{answer|safe}} </label> </li> 
+										{% endfor %}
+										{% for i in item.blank_nums %}
+											<li><label>第{{i}}空：<input type="text" name="fill_q_{{item.id}}" value="" 
+												style="width: 500px;" placeholder="第{{item.id}}题第{{i}}空请点击此处作答"></label>
+											</li>
+										{% endfor %}
+							        </ul>
+                                </li>
+                                <span class="clearfix"></span>
+                                <hr style="margin:1px;margin-top:0px;height:1px;"/>
+                                {%endfor%}
+                            {%endfor%}
+                            </ul>
+                        </div>
+                        <span class="clearfix"></span>
+                        <div>
+							<input class="btn btn-info" id="submit_btn" type="submit" name="submit" value="交卷"/>
+                        </div>
+                    </form>
+                  
+
+                    <!-- JiaThis Button -->
+                    <div class="share_btns">
+                        <div style="padding-left: 2em;">
+                            <p></p>
+                            <p>
+                            	
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+		</div>
+    
+{% endblock content %}
