@@ -38,8 +38,8 @@
     {% endblock head %}
     
   </head>
-
-  <body>
+<!--body中的data两个属性，仅用于试卷页的附加导航-->
+  <body data-spy="scroll" data-target="#myScrollspy">
   <!-- Fixed navbar -->
     <nav class="navbar navbar-inverse navbar-static-top">
       <div class="container">
@@ -102,7 +102,11 @@
 	<div>
 		{% block extra_footer %}{% endblock extra_footer %}
 	</div>
-	
+	<!--在试卷中使用，用于附加导航，导题目-->
+<div class="">
+	{% block left %}
+	{% endblock left %}
+</div>
 	<div class="jumbotron">
       <div class="row">
           <!-- 部分：一 -->
@@ -144,6 +148,7 @@
 
      </div>
   </div>
+</div>
 
 
 

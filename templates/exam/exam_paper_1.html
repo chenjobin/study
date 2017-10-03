@@ -16,15 +16,48 @@ $(document).ready(function() {
 				$(this).prependTo($(this).parent());
 			}	
 	});
-	
 });
 </script>
 
 <style>
+	/*试卷样式*/
 	.exam_paper_chapter h4{ font-weight: bold; padding-bottom: 0.5em; display: inline-block;}
 	.exam_paper_chapter ul{ list-style-type:none; counter-reset:sectioncounter; margin-left: 2em;font-size: medium;}
 	.exam_paper_items li:before{ content:counter(sectioncounter) "）"; counter-increment:sectioncounter;}  
-    	
+    /*附加导航样式*/
+    ul.nav-tabs{
+        width: 140px;
+        margin-top: 20px;
+        border-radius: 4px;
+        border: 1px solid #ddd;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.067);
+    }
+    ul.nav-tabs li{
+        margin: 0;
+        border-top: 1px solid #ddd;
+    }
+    ul.nav-tabs li:first-child{
+        border-top: none;
+    }
+    ul.nav-tabs li a{
+        margin: 0;
+        padding: 8px 16px;
+        border-radius: 0;
+    }
+    ul.nav-tabs li.active a, ul.nav-tabs li.active a:hover{
+        color: #fff;
+        background: #0088cc;
+        border: 1px solid #0088cc;
+    }
+    ul.nav-tabs li:first-child a{
+        border-radius: 4px 4px 0 0;
+    }
+    ul.nav-tabs li:last-child a{
+        border-radius: 0 0 4px 4px;
+    }
+    ul.nav-tabs.affix{
+        top: 30px; /* Set the top position of pinned element */
+    }
 </style>
 
 {% endblock head %}
@@ -53,14 +86,15 @@ $(document).ready(function() {
                             <p></p>
                         </div>
                     </div>
-                    
-                    <form id='exam_form'>
+                    <div class="row">
+				        <div class="col-xs-9">
+                    <form id='exam_form' >
                         <div class="exam_paper_chapter">                            
                             <ul class="exam_paper_items"> 
                             {% for chapter in chapters %}
                             	<h4>{{chapter.title}}</h4>  
                             	{% for item in chapter.items %}                            	
-                                <li>
+                                <li id="exam_question_{{item.id}}">
                                 {{item.title|safe}}
 							        <ul class="list-unstyled" id="question">
 							        	{% for answer in item.select_answers %}
@@ -85,7 +119,6 @@ $(document).ready(function() {
 							<input class="btn btn-info" id="submit_btn" type="submit" name="submit" value="交卷"/>
                         </div>
                     </form>
-                  
 
                     <!-- JiaThis Button -->
                     <div class="share_btns">
@@ -102,3 +135,29 @@ $(document).ready(function() {
 		</div>
     
 {% endblock content %}
+
+{% block left %}
+                    </div>
+             			<div class="col-xs-2 col-sm-pull-2 col-md-pull-2 col-lg-pull-2" id="myScrollspy">
+				            <ul class="nav nav-tabs nav-stacked" data-spy="affix" data-offset-top="125">
+				                <li class="active"><a href="#exam_question_1">第1题</a></li>
+				                <li><a href="#exam_question_2">第2题</a></li>
+				                <li><a href="#exam_question_3">第3题</a></li>
+				                <li><a href="#exam_question_4">第4题</a></li>
+				                <li><a href="#exam_question_5">第5题</a></li>
+				                <li><a href="#exam_question_6">第6题</a></li>
+				                <li><a href="#exam_question_7">第7题</a></li>
+				                <li><a href="#exam_question_8">第8题</a></li>
+				                <li><a href="#exam_question_9">第9题</a></li>
+				                <li><a href="#exam_question_10">第10题</a></li>
+				                <li><a href="#exam_question_11">第11题</a></li>
+				                <li><a href="#exam_question_12">第12题</a></li>
+				                <li><a href="#exam_question_13">第13题</a></li>
+				                <li><a href="#exam_question_14">第14题</a></li>
+				                <li><a href="#exam_question_15">第15题</a></li>
+				                <li><a href="#exam_question_16">第16题</a></li>
+				                <li><a href="#exam_question_17">第17题</a></li>
+				            </ul>
+				        </div>
+					</div>
+{% endblock left %}
