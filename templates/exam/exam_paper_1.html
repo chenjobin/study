@@ -67,16 +67,16 @@ $(document).ready(function() {
 {% endblock header %}
 
 {% block content %}
-        <div class="panel panel-default">
-            <div class="panel-heading">
+<div class="panel panel-default">
+    <div class="panel-heading">
                 <div class="subject_header">
                     <h3>{{exam_paper}}</h3>
                     <span class="clearfix"></span>
                 </div>
-            </div>
+    </div>
 
-            <div class="panel-body">
-                <div class="subject_content">
+    <div class="panel-body">
+        <div class="subject_content">
                     <div class="alert alert-info">
                         <div class="subject_description">
                             <h4 style=" font-weight: bold; margin-top: 10px;">试卷简介</h4>
@@ -86,30 +86,41 @@ $(document).ready(function() {
                             <p></p>
                         </div>
                     </div>
-                    <div class="row">
-				        <div class="col-xs-9">
+            <div class="row">
+				<div class="col-xs-9">
                     <form id='exam_form' >
                         <div class="exam_paper_chapter">                            
                             <ul class="exam_paper_items"> 
                             {% for chapter in chapters %}
                             	<h4>{{chapter.title}}</h4>  
-                            	{% for item in chapter.items %}                            	
-                                <li id="exam_question_{{item.id}}">
-                                {{item.title|safe}}
-							        <ul class="list-unstyled" id="question">
-							        	{% for answer in item.select_answers %}
-							           	<li id="select_li"><label><input name="selections_{{item.id}}" type="radio" value="{{answer|safe}}" />
-							           	&nbsp;{{answer|safe}} </label> </li> 
-										{% endfor %}
-										{% for i in item.blank_nums %}
-											<li><label>第{{i}}空：<input type="text" name="fill_q_{{item.id}}" value="" 
-												style="width: 500px;" placeholder="第{{item.id}}题第{{i}}空请点击此处作答"></label>
-											</li>
-										{% endfor %}
-							        </ul>
-                                </li>
-                                <span class="clearfix"></span>
-                                <hr style="margin:1px;margin-top:0px;height:1px;"/>
+                            	{% for item in chapter.items %} 
+                            		{% if item.select_answers%}
+                                		<li id="exam_select_{{item.object_id}}">
+                                			{{item.title|safe}}
+									        <ul class="list-unstyled" id="question">
+									        	{% for answer in item.select_answers %}
+									           	<li id="select_li"><label><input name="selections_{{item.object_id}}" type="radio" value="{{answer|safe}}" />
+									           	&nbsp;{{answer|safe}} </label> </li> 
+												{% endfor %}
+									        </ul>
+		                                </li>
+                                		<span class="clearfix"></span>
+                                		<hr style="margin:1px;margin-top:0px;height:1px;"/>
+                                	{% endif%}
+                            		{% if item.blank_nums%}
+                                		<li id="exam_fill_{{item.object_id}}">
+                                			{{item.title|safe}}
+									        <ul class="list-unstyled" id="question">
+		                                		{% for i in item.blank_nums %}
+													<li><label>第{{i}}空：<input type="text" name="fill_q_{{item.object_id}}" value="" 
+														style="width: 500px;" placeholder="第{{item.id}}题第{{i}}空请点击此处作答"></label>
+													</li>
+												{% endfor %}
+									        </ul>
+		                                </li>
+                                		<span class="clearfix"></span>
+                                		<hr style="margin:1px;margin-top:0px;height:1px;"/>
+                                	{% endif%}
                                 {%endfor%}
                             {%endfor%}
                             </ul>
@@ -133,31 +144,27 @@ $(document).ready(function() {
 
             </div>
 		</div>
-    
+    </div>
+</div>
 {% endblock content %}
 
 {% block left %}
-                    </div>
-             			<div class="col-xs-2 col-sm-pull-2 col-md-pull-2 col-lg-pull-2" id="myScrollspy">
-				            <ul class="nav nav-tabs nav-stacked" data-spy="affix" data-offset-top="125">
-				                <li class="active"><a href="#exam_question_1">第1题</a></li>
-				                <li><a href="#exam_question_2">第2题</a></li>
-				                <li><a href="#exam_question_3">第3题</a></li>
-				                <li><a href="#exam_question_4">第4题</a></li>
-				                <li><a href="#exam_question_5">第5题</a></li>
-				                <li><a href="#exam_question_6">第6题</a></li>
-				                <li><a href="#exam_question_7">第7题</a></li>
-				                <li><a href="#exam_question_8">第8题</a></li>
-				                <li><a href="#exam_question_9">第9题</a></li>
-				                <li><a href="#exam_question_10">第10题</a></li>
-				                <li><a href="#exam_question_11">第11题</a></li>
-				                <li><a href="#exam_question_12">第12题</a></li>
-				                <li><a href="#exam_question_13">第13题</a></li>
-				                <li><a href="#exam_question_14">第14题</a></li>
-				                <li><a href="#exam_question_15">第15题</a></li>
-				                <li><a href="#exam_question_16">第16题</a></li>
-				                <li><a href="#exam_question_17">第17题</a></li>
-				            </ul>
-				        </div>
-					</div>
+                    
+    <div class="col-xs-2 col-sm-pull-2 col-md-pull-2 col-lg-pull-2" id="myScrollspy">
+		<ul class="nav nav-tabs nav-stacked" data-spy="affix" data-offset-top="120">
+            {% for chapter in chapters %}
+                {% for item in chapter.items %} 
+                    {% if item.select_answers%}
+						<li><a href="#exam_select_{{item.object_id}}">第{{item.quest_number}}题</a></li>
+                    {% endif%}
+                    {% if item.blank_nums%}
+						<li><a href="#exam_fill_{{item.object_id}}">第{{item.quest_number}}题</a></li>
+                    {% endif%}
+  
+                {% endfor%}
+            {% endfor%}
+
+		</ul>
+	</div>
+					
 {% endblock left %}

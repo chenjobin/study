@@ -211,7 +211,8 @@ def exam_paper_show(request, exam_paper_id):
         #数据统计
         single_q_num = 0
         fill_q_num = 0
-
+        # temp_j是为了前端第1题到第17题附加导航正常显示
+        temp_quest_number=0
         #遍历章节
         for i, chapter in enumerate(exam_paper.examinationpaperchapter_set.all()):
             #遍历子项
@@ -247,6 +248,8 @@ def exam_paper_show(request, exam_paper_id):
                     item.type_name = '未知'
                     # item.url = '/'
                     item.title = '<未知的类型>'
+                temp_quest_number += 1
+                item.quest_number = temp_quest_number
                 items.append(item)
 
             chapter.items = items
