@@ -16,7 +16,19 @@ $(document).ready(function() {
 				$(this).prependTo($(this).parent());
 			}	
 	});
+
 });
+	//选项被选中
+function selection_change(obj){
+	var comment=obj;
+	var $c=$(comment);
+//	$("input[name='selections_6']").attr("disabled",true);
+	var select_id=$c.attr("id").toString();
+	var select_answer=$c.attr("value");	
+	
+	$("#select_"+select_id+" input[name='selected']").val(select_answer);
+	$("#select_"+select_id+" input[name='selected_id']").val(select_id);
+}
 </script>
 
 <style>
@@ -77,7 +89,7 @@ $(document).ready(function() {
 
     <div class="panel-body">
         <div class="subject_content">
-                    <div class="alert alert-info">
+            <div class="alert alert-info">
                         <div class="subject_description">
                             <h4 style=" font-weight: bold; margin-top: 10px;">试卷简介</h4>
                             <p>{{exam_paper.description|safe}}</p>
@@ -85,7 +97,7 @@ $(document).ready(function() {
                             <p>创建时间：{{exam_paper.create_time|date:'Y-m-d'}}&nbsp;&nbsp;试卷类型：{{exam_paper.exam_paper_type}}</p>
                             <p></p>
                         </div>
-                    </div>
+            </div>
             <div class="row">
 				<div class="col-xs-9">
                     <form id='exam_form' >
@@ -99,9 +111,14 @@ $(document).ready(function() {
                                 			{{item.title|safe}}
 									        <ul class="list-unstyled" id="question">
 									        	{% for answer in item.select_answers %}
-									           	<li id="select_li"><label><input name="selections_{{item.object_id}}" type="radio" value="{{answer|safe}}" />
+									           	<li id="select_li"><label><input id="{{item.object_id}}" name="selections_{{item.object_id}}" 
+									           		type="radio" value="{{answer|safe}}" onclick="selection_change(this)"/>
 									           	&nbsp;{{answer|safe}} </label> </li> 
 												{% endfor %}
+												<li id="select_{{item.object_id}}" style="display:none;">
+													<input  name="selected"  value=""/>
+													<input  name="selected_id"  value=""/>
+												</li>
 									        </ul>
 		                                </li>
                                 		<span class="clearfix"></span>

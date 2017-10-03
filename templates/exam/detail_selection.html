@@ -109,13 +109,13 @@ $(document).ready(function() {
 	            {{single_q.title|safe}}  
 	        </h3>
 	        <ul class="list-unstyled" id="question">
-	           	<li><label><input name="selections" type="radio" value="{{single_q.answer|safe}}" onclick="selection_change(this)"/>
+	           	<li><label><input name="selections" type="radio" value="{{single_q.answer|safe}}" />
 	           	&nbsp;{{single_q.answer|safe}} </label> </li> 
-	           	<li><label><input name="selections" type="radio" value="{{single_q.select_2|safe}}" onclick="selection_change(this)"/>
+	           	<li><label><input name="selections" type="radio" value="{{single_q.select_2|safe}}" />
 	           	&nbsp;{{single_q.select_2|safe}} </label> </li>
-	           	<li><label><input name="selections" type="radio" value="{{single_q.select_3|safe}}" onclick="selection_change(this)"/>
+	           	<li><label><input name="selections" type="radio" value="{{single_q.select_3|safe}}" />
 	           	&nbsp;{{single_q.select_3|safe}} </label> </li>
-	           	<li><label><input name="selections" type="radio" value="{{single_q.select_4|safe}}" onclick="selection_change(this)"/>
+	           	<li><label><input name="selections" type="radio" value="{{single_q.select_4|safe}}" />
 	           	&nbsp;{{single_q.select_4|safe}} </label> </li>
 				<input name="selected" type="hidden" value="" />
 				<input style="display:none ;" class="btn btn-info" id="submit_btn" type="submit" name="submit" value="提  交"/>
