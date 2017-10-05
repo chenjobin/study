@@ -16,6 +16,48 @@ $(document).ready(function() {
 				$(this).prependTo($(this).parent());
 			}	
 	});
+	
+	$('#exam_form').submit(function() {
+        $.ajax({
+                type: "POST",
+                data: $('#exam_form').serialize(),
+                url: "{% url 'exam:exam_check' %}",
+                cache: false,
+                dataType: "json",
+                success: function(json, textStatus) {
+			            if(json['success']){
+						    //window.location.reload();
+						    var data=json['right']
+							for(var i in data){  //序号从0开始的
+//								alert(data[i]);
+//								alert(json['message'][1])
+								if(data[i]){
+									$("#answer_right_"+String(json['message'][i])).show();
+									$("#answer_wrong_"+String(json['message'][i])).hide();
+									$("#answer_detail").show();
+								}else{
+									$("#answer_wrong_"+String(json['message'][i])).show();
+									$("#answer_right_"+String(json['message'][i])).hide();
+									$("#answer_detail").show();
+						     	}
+							}
+			            }else{
+			                if(json['code']==501){
+			                    alert('您尚未登录，请先登录才能进行练习。');
+			                }else if(json['code']==502){
+			                    alert('未能将错题放入错题集！');
+			                }else{
+			                    alert('练习出错，请刷新重试\n'+json['message']);
+			                }
+			            }
+			        },
+                error: function (XMLHttpRequest, textStatus,errorThrown) {
+                    alert("练习出错，" + errorThrown);
+                }
+        });            
+        return false;
+    });
+	
 
 });
 	//选项被选中
@@ -101,6 +143,7 @@ function selection_change(obj){
             <div class="row">
 				<div class="col-xs-9">
                     <form id='exam_form' >
+                    	{% csrf_token %}
                         <div class="exam_paper_chapter">                            
                             <ul class="exam_paper_items"> 
                             {% for chapter in chapters %}
@@ -116,15 +159,15 @@ function selection_change(obj){
 									           	&nbsp;{{answer|safe}} </label> </li> 
 												{% endfor %}
 												<li id="select_{{item.object_id}}" style="display:none;">
-													<input  name="selected"  value=""/>
-													<input  name="selected_id"  value=""/>
+													<input  name="selected"  value="dd"/>
+													<input  name="selected_id"  value="{{item.object_id}}"/>
 												</li>
 									        </ul>
-									        	<div id='answer_right_{{item.id}}' class="alert alert-success" style="display: none;">
+									        	<div id='answer_right_{{item.object_id}}' class="alert alert-success" style="display: none;">
 										        	回答正确
 										        </div>
-										        <div id='answer_wrong_{{item.id}}' class="alert alert-danger" style="display:none ;">
-										        	回答错误，正确答案是&nbsp;&nbsp;&nbsp;{{single_q.answer|safe}}
+										        <div id='answer_wrong_{{item.object_id}}' class="alert alert-danger" style="display:none ;">
+										        	回答错误，正确答案是&nbsp;&nbsp;&nbsp;{{item.answer|safe}}
 										        </div>
 		                                </li>
                                 		<span class="clearfix"></span>

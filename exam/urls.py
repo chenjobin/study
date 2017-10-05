@@ -24,4 +24,6 @@ urlpatterns=[
     # 整卷显示，仿专题
     url(r'^exam_paper/$',views.exam_paper,name='exam_paper'),
     url(r'^exam_paper/(?P<exam_paper_id>\d+)/$',views.exam_paper_show,name='exam_paper_show'),
+    url(r'^post3/$',views.exam_check,name='exam_check'),
+
 ]

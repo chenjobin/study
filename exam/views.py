@@ -212,6 +212,7 @@ def exam_paper_show(request, exam_paper_id):
                     item.select_answers.append(single_q_selections.select_4)
 
                     item.title = obj.title
+                    item.answer = obj.answer
                     single_q_num += 1
                 elif obj_type == 'fill_q':
                     item.type_name = '填空题'
@@ -245,7 +246,7 @@ def exam_paper_show(request, exam_paper_id):
 
     return render(request,'exam/exam_paper_1.html', data)
 
-def exam_check_answer(request):
+def exam_check(request):
     data = request.POST.copy()
     try:
         user_is_authenticated = request.user.is_authenticated()
@@ -256,13 +257,20 @@ def exam_check_answer(request):
 
     answers=data.getlist('selected','not have a valid value')
     single_q_ids=data.getlist('selected_id')
+
+    #第一个True 和 2 在前端不被考虑进答案的对错，因为前端的i不能+1，所以
     right_wrong=[True]
+    right_wrong_id_list=[2]
+
     try:
         # 判断选择题
         for single_q_id,answer in zip(single_q_ids,answers):
+            # pass
             context=single_check_answer(request,answer,single_q_id)
             right_wrong.append(context)
-            return ResponseJson(200, False, right_wrong,'you are wrong')
+            right_wrong_id_list.append(single_q_id)
+        return ResponseJson(200, True, right_wrong,right_wrong_id_list)
+        # return ResponseJson(200, False, right_wrong,right_wrong_id_list)
         # # 判断填空题
         # for fill_q_id,fill_answer in zip(single_q_ids,answers):
         #     pass
