@@ -12,7 +12,7 @@ urlpatterns=[
     # 选择题详细页
     url(r'^detail_selection/(?P<selection_id>\d+)$',views.detail_selection,name='detail_selection'),
 
-    url(r'^post/(?P<selection_id>\d+)$',views.selection_check_answer,name='selection_check_answer'),
+    url(r'^post/(?P<selection_id>\d+)$',views.single_check,name='single_check'),
 
     # 填空题页
     url(r'^fill_question/$',views.fill_question,name='fill_question'),

@@ -120,6 +120,12 @@ function selection_change(obj){
 													<input  name="selected_id"  value=""/>
 												</li>
 									        </ul>
+									        	<div id='answer_right_{{item.id}}' class="alert alert-success" style="display: none;">
+										        	回答正确
+										        </div>
+										        <div id='answer_wrong_{{item.id}}' class="alert alert-danger" style="display:none ;">
+										        	回答错误，正确答案是&nbsp;&nbsp;&nbsp;{{single_q.answer|safe}}
+										        </div>
 		                                </li>
                                 		<span class="clearfix"></span>
                                 		<hr style="margin:1px;margin-top:0px;height:1px;"/>

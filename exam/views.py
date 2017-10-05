@@ -64,7 +64,7 @@ def detail_selection(request,selection_id):
         raise Http404
     return render(request,'exam/detail_selection.html',context)
 
-def selection_check_answer(request,selection_id):
+def single_check(request,selection_id):
     data = request.POST.copy()
     try:
         user_is_authenticated = request.user.is_authenticated()
@@ -74,32 +74,11 @@ def selection_check_answer(request,selection_id):
         return ResponseJson(501, False,False, 'No Login')
 
     answer=data.get('selected','not have a valid value')
-    single_q=Single_Q.objects.get(id=selection_id)
-    correct_answer=single_q.answer
-
-    # 不管是否答题错误，都将其收入错题集，通过正确次数与错误次数的判断，来进行判定掌握
+    right_wrong=[]
     try:
-        single_wrong=SingleWrongAnswer.objects.filter(user=request.user,question=single_q)
-        if not single_wrong.count():
-            wrong_q = SingleWrongAnswer(user=request.user,question=single_q)
-            wrong_q.save()
-            # SingleWrongAnswer.objects.get_or_create(user=request.user,question=single_q,wrong_answer=answer)
-
-        # get方法才可以使 类调用内部函数，filter做不到，所以多弄搞了个single_wrong1
-        single_wrong1=SingleWrongAnswer.objects.get(user=request.user,question=single_q)
-
-        if answer==correct_answer:
-            if single_wrong1.first_right_times==0:
-                single_wrong1.count_first_right_times()
-            single_wrong1.increase_correct_times()
-            return ResponseJson(200, True, True,'you are right')
-
-        else:
-            single_wrong.update(wrong_answer=answer)
-            single_wrong1.increase_wrong_times()
-            return ResponseJson(200, True, False,answer)
-        # else:
-        #     return ResponseJson(200, True, False,answer)
+        context=single_check_answer(request,answer,selection_id)
+        right_wrong.append(context)
+        return ResponseJson(200, True, right_wrong,[233,1333])
     except:
         return ResponseJson(502, False, False,'you are wrong')
 
@@ -265,3 +244,55 @@ def exam_paper_show(request, exam_paper_id):
     data['count'] = u'该试卷分%s部分，共%s道选择题、%s道填空题' % (len(chapters), single_q_num, fill_q_num)
 
     return render(request,'exam/exam_paper_1.html', data)
+
+def exam_check_answer(request):
+    data = request.POST.copy()
+    try:
+        user_is_authenticated = request.user.is_authenticated()
+    except TypeError:  # Django >= 1.11
+        user_is_authenticated = request.user.is_authenticated
+    if not user_is_authenticated:
+        return ResponseJson(501, False,False, 'No Login')
+
+    answers=data.getlist('selected','not have a valid value')
+    single_q_ids=data.getlist('selected_id')
+    right_wrong=[True]
+    try:
+        # 判断选择题
+        for single_q_id,answer in zip(single_q_ids,answers):
+            context=single_check_answer(request,answer,single_q_id)
+            right_wrong.append(context)
+            return ResponseJson(200, False, right_wrong,'you are wrong')
+        # # 判断填空题
+        # for fill_q_id,fill_answer in zip(single_q_ids,answers):
+        #     pass
+    except:
+        return ResponseJson(502, False, False,'you are wrong')
+
+# 单选题答案验证，OK
+def single_check_answer(request,answer,single_q_id):
+    single_q=Single_Q.objects.get(id=single_q_id)
+    correct_answer=single_q.answer
+
+    # 不管是否答题错误，都将其收入错题集，通过正确次数与错误次数的判断，来进行判定掌握
+    single_wrong=SingleWrongAnswer.objects.filter(user=request.user,question=single_q)
+    if not single_wrong.count():
+        wrong_q = SingleWrongAnswer(user=request.user,question=single_q)
+        wrong_q.save()
+            # SingleWrongAnswer.objects.get_or_create(user=request.user,question=single_q,wrong_answer=answer)
+
+    # get方法才可以使 类调用内部函数，filter做不到，所以多弄搞了个single_wrong1
+    single_wrong1=SingleWrongAnswer.objects.get(user=request.user,question=single_q)
+
+    if answer==correct_answer:
+        if single_wrong1.first_right_times==0:
+            single_wrong1.count_first_right_times()
+        single_wrong1.increase_correct_times()
+        return True
+
+    else:
+        single_wrong.update(wrong_answer=answer)
+        single_wrong1.increase_wrong_times()
+        return False
+
+

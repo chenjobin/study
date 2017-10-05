@@ -41,21 +41,26 @@ $(document).ready(function() {
         $.ajax({
                 type: "POST",
                 data: $('#selection_form').serialize(),
-                url: "{% url 'exam:selection_check_answer' single_q.id %}",
+                url: "{% url 'exam:single_check' single_q.id %}",
                 cache: false,
                 dataType: "json",
                 success: function(json, textStatus) {
 			            if(json['success']){
 						    //window.location.reload();
-						    if(json['right']){
-						        $("#answer_right").show();
-						        $("#answer_detail").show();
-						        
-						    }else{
-						    	$("#answer_wrong").show();
-						    	$("#answer_detail").show();
-						    	//alert(json['message']);
-						    }
+						    var data=json['right']
+							for(var i in data){  //序号从0开始的
+//								alert(data[i]);
+//								alert(json['message'][1])
+								if(data[i]){
+									$("#answer_right_"+String(i)).show();
+									$("#answer_wrong_"+String(i)).hide();
+									$("#answer_detail").show();
+								}else{
+									$("#answer_wrong_"+String(i)).show();
+									$("#answer_right_"+String(i)).hide();
+									$("#answer_detail").show();
+						     	}
+							}
 			            }else{
 			                if(json['code']==501){
 			                    alert('您尚未登录，请先登录才能进行练习。');
@@ -120,13 +125,14 @@ $(document).ready(function() {
 				<input name="selected" type="hidden" value="" />
 				<input style="display:none ;" class="btn btn-info" id="submit_btn" type="submit" name="submit" value="提  交"/>
 	        </ul>
-        </form>
-        <div id='answer_right' class="alert alert-success" style="display: none;">
+	    <div id='answer_right_0' class="alert alert-success" style="display: none;">
         	回答正确
         </div>
-        <div id='answer_wrong' class="alert alert-danger" style="display:none ;">
+        <div id='answer_wrong_0' class="alert alert-danger" style="display:none ;">
         	回答错误，正确答案是&nbsp;&nbsp;&nbsp;{{single_q.answer|safe}}
         </div>
+        </form>
+
         <div id="answer_detail" style="display: none;">
         	<blockquote>{{single_q.answer_detail|safe}}</blockquote>
         </div>
