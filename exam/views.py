@@ -129,7 +129,8 @@ def fill_check(request,fill_q_id):
     #     return ResponseJson(200, True, True,fill_answers)
     try:
         right_wrong=[True] #第一个True在前端不被考虑进答案的对错，因为前端的i不能+1，所以
-        context=fill_check_answer(request,fill_answers,fill_q_id)
+        # context_n_list是同一个id几个空的列表，id一样，因为exam部分需要用到n_list,所以用了
+        context,context_n_list=fill_check_answer(request,fill_answers,fill_q_id)
         # 因为此处context返回的是list,所以用 + 进行连接
         right_wrong = right_wrong + context
 
@@ -212,6 +213,16 @@ def exam_check(request):
     answers=data.getlist('selected','not have a valid value')
     single_q_ids=data.getlist('selected_id')
 
+    fill_answers=data.getlist('fill_qs')
+    # 搜集每一个空的题目id 和 该空是属于本题第几空
+    fill_q_ids=data.getlist('fill_q_id')
+    fill_q_ns=data.getlist('fill_q_n')
+    # 弄一个去重的fill_q_ids
+    news_ids = []
+    for id in fill_q_ids:
+        if id not in news_ids:
+            news_ids.append(id)
+
     #第一个True 和 2 在前端不被考虑进答案的对错，因为前端的i不能+1，所以
     right_wrong=[True]
     right_wrong_id_list=[2]
@@ -223,14 +234,26 @@ def exam_check(request):
             context=single_check_answer(request,answer,single_q_id)
             right_wrong.append(context)
             right_wrong_id_list.append(single_q_id)
+
+        # 判断填空题
+        i=0     #i和j用来标记fill_answers的起始，也就是找到对应id的对应answer
+        j=0
+        for fill_q_id in news_ids:
+            i = j
+            j = j + fill_q_ids.count(fill_q_id)
+            context,context_n_list=fill_check_answer(request,fill_answers[i:j],fill_q_id)
+            # 因为此处context返回的是list,所以用 + 进行连接
+            right_wrong = right_wrong + context
+            right_wrong_id_list = right_wrong_id_list + context_n_list
+
+
+        # for fill_q_id,fill_q_n in zip(fill_answers,fill_q_ids,fill_q_ns):
+        #     # pass
+        #     context=fill_check_answer(request,fill_answers,fill_q_id)
+        #     # 因为此处context返回的是list,所以用 + 进行连接
+        #     right_wrong = right_wrong + context
+
         return ResponseJson(200, True, right_wrong,right_wrong_id_list)
-        # return ResponseJson(200, False, right_wrong,right_wrong_id_list)
-        # # 判断填空题
-            # 搜集每一个空的题目id 和 该空是属于本题第几空
-            # fill_q_ids=data.getlist('fill_q_id')
-            # fill_q_ns=data.getlist('fill_q_n')
-        # for fill_q_id,fill_answer in zip(single_q_ids,answers):
-        #     pass
     except:
         return ResponseJson(502, False, False,'you are wrong')
 
@@ -265,7 +288,7 @@ def fill_check_answer(request,fill_q_answers,fill_q_id):
     fill_q=Fill_Q.objects.get(id=fill_q_id)
     correct_answer=[]
     right_wrong=[]
-
+    context_n_list=[]
     # obj = answer_item.content_type.get_object_for_this_type(id=answer_item.object_id)
     for i,answer_item in enumerate(fill_q.fill_answer_set.all()):
 
@@ -300,11 +323,13 @@ def fill_check_answer(request,fill_q_answers,fill_q_id):
                 or fill_q_answers[i]==current_correct_answer[2] \
                 or fill_q_answers[i]==current_correct_answer[3]:
             right_wrong.append(True)
+            context_n_list.append('fill_q_'+ fill_q_id + '_' + str(i+1))
             if fill_wrong1.first_right_times==0:
                 fill_wrong1.count_first_right_times()
             fill_wrong1.increase_correct_times()
         else:
             right_wrong.append(False)
+            context_n_list.append('fill_q_'+ fill_q_id + '_' + str(i+1))
             fill_wrong1.increase_wrong_times()
             fill_wrong.update(wrong_answer=fill_q_answers[i])
             # pass
@@ -314,5 +339,5 @@ def fill_check_answer(request,fill_q_answers,fill_q_id):
     #     return ResponseJson(200, True, False,correct_answer)
     # 收入错题集，如果没有全部答对
 
-    return right_wrong
+    return right_wrong,context_n_list
 
