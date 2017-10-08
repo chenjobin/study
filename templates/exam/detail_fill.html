@@ -20,7 +20,7 @@ $(document).ready(function() {
         $.ajax({
                 type: "POST",
                 data: $('#fill_form').serialize(),
-                url: "{% url 'exam:fill_check_answer' fill_q.id %}",
+                url: "{% url 'exam:fill_check' fill_q.id %}",
                 cache: false,
                 dataType: "json",
                 success: function(json, textStatus) {

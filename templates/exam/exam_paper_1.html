@@ -178,8 +178,10 @@ function selection_change(obj){
                                 			{{item.title|safe}}
 									        <ul class="list-unstyled" id="question">
 		                                		{% for i in item.blank_nums %}
-													<li><label>第{{i}}空：<input type="text" name="fill_q_{{item.object_id}}" value="" 
+													<li><label>第{{i}}空：<input type="text" name="fill_qs" value="" 
 														style="width: 500px;" placeholder="第{{item.id}}题第{{i}}空请点击此处作答"></label>
+														<input class="hidden" name="fill_q_id"  value="{{item.object_id}}"/>
+														<input class="hidden" name="fill_q_n"  value="{{i}}"/>
 													</li>
 												{% endfor %}
 									        </ul>

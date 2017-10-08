@@ -114,7 +114,7 @@ def detail_fill(request,fill_q_id):
         raise Http404
     return render(request,'exam/detail_fill.html',context)
 
-def fill_check_answer(request,fill_q_id):
+def fill_check(request,fill_q_id):
     data = request.POST.copy()
     try:
         user_is_authenticated = request.user.is_authenticated()
@@ -124,60 +124,14 @@ def fill_check_answer(request,fill_q_id):
         return ResponseJson(501, False,False, 'No Login')
 
     fill_answers=data.getlist('fill_qs')
+
     # if fill_answers:
     #     return ResponseJson(200, True, True,fill_answers)
     try:
-        fill_q=Fill_Q.objects.get(id=fill_q_id)
-        correct_answer=[]
         right_wrong=[True] #第一个True在前端不被考虑进答案的对错，因为前端的i不能+1，所以
-
-        # obj = answer_item.content_type.get_object_for_this_type(id=answer_item.object_id)
-        for i,answer_item in enumerate(fill_q.fill_answer_set.all()):
-
-            # 不管是否答题错误，都将其收入错题集，通过正确次数与错误次数的判断，来进行判定掌握
-            # 若以后错题集模型合并，可以考虑一下函数抽象出来
-            fill_wrong=FillWrongAnswer.objects.filter(user=request.user,question=fill_q,wrong_fill_n=i+1)
-            if not fill_wrong.count():
-                wrong_q = FillWrongAnswer(user=request.user,question=fill_q,wrong_fill_n=i+1)
-                wrong_q.save()
-
-            # get方法才可以使 类调用内部函数，filter做不到，所以多弄搞了个fill_wrong1
-            fill_wrong1=FillWrongAnswer.objects.get(user=request.user,question=fill_q,wrong_fill_n=i+1)
-
-            correct_answer.append(answer_item.answer1)
-            # 同一空下，答案的四种可能性
-            current_correct_answer=[]
-            current_correct_answer.append(answer_item.answer1)
-            current_correct_answer.append(answer_item.answer2)
-            current_correct_answer.append(answer_item.answer3)
-            current_correct_answer.append(answer_item.answer4)
-            # 去除字符串空格，避免因空格而弄错
-            # 考虑到编程题中，字符串中间可能需要空格，所以，不对中间的空格进行考虑去除
-            # 但又考虑编程题中间可能出现2个空格，决定还是对空格进行过滤
-            current_correct_answer[0]=''.join(current_correct_answer[0].split())
-            current_correct_answer[1]=''.join(current_correct_answer[1].split())
-            current_correct_answer[2]=''.join(current_correct_answer[2].split())
-            current_correct_answer[3]=''.join(current_correct_answer[3].split())
-            fill_answers[i]=''.join(fill_answers[i].split())
-
-            if fill_answers[i]==current_correct_answer[0] \
-                    or fill_answers[i]==current_correct_answer[1] \
-                    or fill_answers[i]==current_correct_answer[2] \
-                    or fill_answers[i]==current_correct_answer[3]:
-                right_wrong.append(True)
-                if fill_wrong1.first_right_times==0:
-                    fill_wrong1.count_first_right_times()
-                fill_wrong1.increase_correct_times()
-            else:
-                right_wrong.append(False)
-                fill_wrong1.increase_wrong_times()
-                fill_wrong.update(wrong_answer=fill_answers[i])
-            # pass
-        # if right_wrong[0]==True:
-        #     return ResponseJson(200, True, True,correct_answer)
-        # else:
-        #     return ResponseJson(200, True, False,correct_answer)
-        # 收入错题集，如果没有全部答对
+        context=fill_check_answer(request,fill_answers,fill_q_id)
+        # 因为此处context返回的是list,所以用 + 进行连接
+        right_wrong = right_wrong + context
 
         return ResponseJson(200, True, right_wrong,right_wrong)
     except:
@@ -272,6 +226,9 @@ def exam_check(request):
         return ResponseJson(200, True, right_wrong,right_wrong_id_list)
         # return ResponseJson(200, False, right_wrong,right_wrong_id_list)
         # # 判断填空题
+            # 搜集每一个空的题目id 和 该空是属于本题第几空
+            # fill_q_ids=data.getlist('fill_q_id')
+            # fill_q_ns=data.getlist('fill_q_n')
         # for fill_q_id,fill_answer in zip(single_q_ids,answers):
         #     pass
     except:
@@ -303,4 +260,59 @@ def single_check_answer(request,answer,single_q_id):
         single_wrong1.increase_wrong_times()
         return False
 
+def fill_check_answer(request,fill_q_answers,fill_q_id):
+    '''填空题答案验证'''
+    fill_q=Fill_Q.objects.get(id=fill_q_id)
+    correct_answer=[]
+    right_wrong=[]
+
+    # obj = answer_item.content_type.get_object_for_this_type(id=answer_item.object_id)
+    for i,answer_item in enumerate(fill_q.fill_answer_set.all()):
+
+        # 不管是否答题错误，都将其收入错题集，通过正确次数与错误次数的判断，来进行判定掌握
+        # 若以后错题集模型合并，可以考虑一下函数抽象出来
+        fill_wrong=FillWrongAnswer.objects.filter(user=request.user,question=fill_q,wrong_fill_n=i+1)
+        if not fill_wrong.count():
+            wrong_q = FillWrongAnswer(user=request.user,question=fill_q,wrong_fill_n=i+1)
+            wrong_q.save()
+
+         # get方法才可以使 类调用内部函数，filter做不到，所以多弄搞了个fill_wrong1
+        fill_wrong1=FillWrongAnswer.objects.get(user=request.user,question=fill_q,wrong_fill_n=i+1)
+
+        correct_answer.append(answer_item.answer1)
+        # 同一空下，答案的四种可能性
+        current_correct_answer=[]
+        current_correct_answer.append(answer_item.answer1)
+        current_correct_answer.append(answer_item.answer2)
+        current_correct_answer.append(answer_item.answer3)
+        current_correct_answer.append(answer_item.answer4)
+        # 去除字符串空格，避免因空格而弄错
+        # 考虑到编程题中，字符串中间可能需要空格，所以，不对中间的空格进行考虑去除
+        # 但又考虑编程题中间可能出现2个空格，决定还是对空格进行过滤
+        current_correct_answer[0]=''.join(current_correct_answer[0].split())
+        current_correct_answer[1]=''.join(current_correct_answer[1].split())
+        current_correct_answer[2]=''.join(current_correct_answer[2].split())
+        current_correct_answer[3]=''.join(current_correct_answer[3].split())
+        fill_q_answers[i]=''.join(fill_q_answers[i].split())
+
+        if fill_q_answers[i]==current_correct_answer[0] \
+                or fill_q_answers[i]==current_correct_answer[1] \
+                or fill_q_answers[i]==current_correct_answer[2] \
+                or fill_q_answers[i]==current_correct_answer[3]:
+            right_wrong.append(True)
+            if fill_wrong1.first_right_times==0:
+                fill_wrong1.count_first_right_times()
+            fill_wrong1.increase_correct_times()
+        else:
+            right_wrong.append(False)
+            fill_wrong1.increase_wrong_times()
+            fill_wrong.update(wrong_answer=fill_q_answers[i])
+            # pass
+    # if right_wrong[0]==True:
+    #     return ResponseJson(200, True, True,correct_answer)
+    # else:
+    #     return ResponseJson(200, True, False,correct_answer)
+    # 收入错题集，如果没有全部答对
+
+    return right_wrong
 
