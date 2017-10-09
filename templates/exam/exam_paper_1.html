@@ -24,6 +24,10 @@ $(document).ready(function() {
                 url: "{% url 'exam:exam_check' %}",
                 cache: false,
                 dataType: "json",
+                beforeSend: function(){
+					$('#warning').click();
+					$("#tishi_pigai").html("正在处理，请稍后查看答题情况（一般不会超过5秒）&hellip;");
+				},
                 success: function(json, textStatus) {
 			            if(json['success']){
 						    //window.location.reload();
@@ -51,6 +55,13 @@ $(document).ready(function() {
 			                }
 			            }
 			        },
+			    complete: function () {
+			    	$('#warning').click();
+			        $("#tishi_pigai").html("<b>批改已完毕，请查看，</b><br><b>各题的正误情况，会提示题目下方或者题目处</b>!");
+			        var speed=200;//滑动的速度
+			        $('body,html').animate({ scrollTop: 0 }, speed);
+			        return false;
+			    },
                 error: function (XMLHttpRequest, textStatus,errorThrown) {
                     alert("练习出错，" + errorThrown);
                 }
@@ -133,7 +144,7 @@ function selection_change(obj){
         <div class="subject_content">
             <div class="alert alert-info">
                         <div class="subject_description">
-                            <h4 style=" font-weight: bold; margin-top: 10px;">试卷简介</h4>
+                            <h4 style=" font-weight: bold; margin-top: 10px;" id="shijuanjianjie">试卷简介</h4>
                             <p>{{exam_paper.description|safe}}</p>
                             <p>{{count}}</p>
                             <p>创建时间：{{exam_paper.create_time|date:'Y-m-d'}}&nbsp;&nbsp;试卷类型：{{exam_paper.exam_paper_type}}</p>
@@ -197,7 +208,7 @@ function selection_change(obj){
                         </div>
                         <span class="clearfix"></span>
                         <div>
-							<input class="btn btn-info" id="submit_btn" type="submit" name="submit" value="交卷"/>
+							<input class="btn btn-info" id="submit_btn" type="submit" name="submit" value="交卷/批改"/>
                         </div>
                     </form>
 
@@ -216,6 +227,26 @@ function selection_change(obj){
 		</div>
     </div>
 </div>
+<button id="warning" type="button" class="hidden" data-toggle="modal" data-target="#myModal">
+  模态框
+</button>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">正在交卷或批改</h4>
+      </div>
+      <div class="modal-body">
+        <p id="tishi_pigai">正在处理，请稍后查看答题情况（一般不会超过5秒）&hellip;</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关 闭</button>
+        <button id="datixiangqing" type="button" class="btn btn-primary" style="display: none;">查看答题详情</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 {% endblock content %}
 
 {% block left %}
