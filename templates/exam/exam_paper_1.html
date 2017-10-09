@@ -89,6 +89,10 @@ function selection_change(obj){
 	.exam_paper_chapter h4{ font-weight: bold; padding-bottom: 0.5em; display: inline-block;}
 	.exam_paper_chapter ul{ list-style-type:none; counter-reset:sectioncounter; margin-left: 2em;font-size: medium;}
 	.exam_paper_items li:before{ content:counter(sectioncounter) "）"; counter-increment:sectioncounter;}  
+	#question label:hover{ 
+    	border-color: red; 
+    	box-shadow: 0 0 10px rgba(0,0,0,.25);
+	}
     /*附加导航样式*/
     ul.nav-tabs{
         width: 140px;
@@ -165,7 +169,7 @@ function selection_change(obj){
                                 			{{item.title|safe}}
 									        <ul class="list-unstyled" id="question">
 									        	{% for answer in item.select_answers %}
-									           	<li id="select_li"><label><input id="{{item.object_id}}" name="selections_{{item.object_id}}" 
+									           	<li id="select_li"><label id="label_li"><input id="{{item.object_id}}" name="selections_{{item.object_id}}" 
 									           		type="radio" value="{{answer|safe}}" onclick="selection_change(this)"/>
 									           	&nbsp;{{answer|safe}} </label> </li> 
 												{% endfor %}
@@ -238,7 +242,7 @@ function selection_change(obj){
         <h4 class="modal-title">正在交卷或批改</h4>
       </div>
       <div class="modal-body">
-        <p id="tishi_pigai">正在处理，请稍后查看答题情况（一般不会超过5秒）&hellip;</p>
+        <p id="tishi_pigai">正在处理，请稍后查看答题情况（一般不会超过10秒）&hellip;</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">关 闭</button>
