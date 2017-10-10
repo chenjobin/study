@@ -199,7 +199,7 @@ def exam_paper_show(request, exam_paper_id):
     data['chapters'] = chapters
     data['count'] = u'该试卷分%s部分，共%s道选择题、%s道填空题' % (len(chapters), single_q_num, fill_q_num)
 
-    return render(request,'exam/exam_paper_1.html', data)
+    return render(request,'exam/exam_paper.html', data)
 
 def exam_check(request):
     data = request.POST.copy()

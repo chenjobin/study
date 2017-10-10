@@ -26,7 +26,7 @@ $(document).ready(function() {
                 dataType: "json",
                 beforeSend: function(){
 					$('#warning').click();
-					$("#tishi_pigai").html("正在处理，请稍后查看答题情况（一般不会超过5秒）&hellip;");
+					$("#tishi_pigai").html("正在处理，请稍后查看答题情况&hellip;");
 				},
                 success: function(json, textStatus) {
 			            if(json['success']){
@@ -89,9 +89,13 @@ function selection_change(obj){
 	.exam_paper_chapter h4{ font-weight: bold; padding-bottom: 0.5em; display: inline-block;}
 	.exam_paper_chapter ul{ list-style-type:none; counter-reset:sectioncounter; margin-left: 2em;font-size: medium;}
 	.exam_paper_items li:before{ content:counter(sectioncounter) "）"; counter-increment:sectioncounter;}  
+	/*选项样式*/
+	#question label{ 
+		display:inline-block;
+    	width:90%;
+	}
 	#question label:hover{ 
-    	border-color: red; 
-    	box-shadow: 0 0 10px rgba(0,0,0,.25);
+    	box-shadow: 0 0 15px rgba(0,0,0,.5);
 	}
     /*附加导航样式*/
     ul.nav-tabs{
@@ -156,7 +160,7 @@ function selection_change(obj){
                         </div>
             </div>
             <div class="row">
-				<div class="col-xs-9">
+				<div class="col-lg-11 col-xs-11 col-md-11">
                     <form id='exam_form' >
                     	{% csrf_token %}
                         <div class="exam_paper_chapter">                            
@@ -191,7 +195,7 @@ function selection_change(obj){
                             		{% if item.blank_nums%}
                                 		<li id="exam_fill_{{item.object_id}}">
                                 			{{item.title|safe}}
-									        <ul class="list-unstyled" id="question">
+									        <ul class="list-unstyled" id="">
 		                                		{% for i in item.blank_nums %}
 													<li><label>第{{i}}空：<input type="text" name="fill_qs" value="" 
 														style="width: 500px;" placeholder="第{{item.id}}题第{{i}}空请点击此处作答"></label>
@@ -231,6 +235,7 @@ function selection_change(obj){
 		</div>
     </div>
 </div>
+
 <button id="warning" type="button" class="hidden" data-toggle="modal" data-target="#myModal">
   模态框
 </button>
@@ -239,10 +244,10 @@ function selection_change(obj){
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">正在交卷或批改</h4>
+        <h4 class="modal-title">交卷或批改</h4>
       </div>
       <div class="modal-body">
-        <p id="tishi_pigai">正在处理，请稍后查看答题情况（一般不会超过10秒）&hellip;</p>
+        <p id="tishi_pigai">正在处理，请稍后查看答题情况&hellip;</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">关 闭</button>
