@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block header %}	
+      <div class="jumbotron">
+        <h1>陈志斌的网站</h1>
+        <p>这里会发布一些博文，然后，在以后的时间，会做一个在线测试系统出来，可以在线测试高中信息技术的知识
+        </p>
+        <p>chenzhibin.vip</p>
+        <p>
+          <a class="btn btn-lg btn-primary" href="{% url 'blog:index1' %}" role="button">看看更多？ &raquo;</a>
+        </p>
+      </div>
+{% endblock header %}
+
+{% block content %}
+  <!-- START THE FEATURETTES -->
+  {% for entry in entries_recommend %}
+      <div class="row featurette">
+        <div class="col-md-7">
+          <h2 class="featurette-heading"><a href="{% url 'blog:detail_entry' entry.id %}">{{entry.title}}
+          	<span class="text-muted">&nbsp;<small>{{entry.date_update}}</small><!-- 留空副标题 --></span></a></h2>
+          <p class="lead">{{entry.text|safe|striptags|truncatechars:200}}
+          </p>
+        </div>
+        <div class="col-md-5">
+        	<a href="{% url 'blog:detail_entry' entry.id %}">
+          <img class="featurette-image img-responsive center-block" id="{{entry.id}}"
+          	src="{{entry.img_url}}" onerror="this.src='/media/2.jpg';"
+          	alt="Generic placeholder image" >
+          </a>
+        </div>
+      </div>
+	
+      <hr class="featurette-divider">
+	{%endfor%}
+  <!-- /END THE FEATURETTES --> 
+    
+{% endblock content %}

@@ -8,7 +8,7 @@ urlpatterns=[
     #主页
     url(r'^$',views.index,name='index'),
     #博客主页 暂时将列表页当主页，以后内容增加了再改UI
-    url(r'^blog/$',views.index1,name='index1'),
+    url(r'^maker/$',views.index1,name='index1'),
     # url(r'^blog_list/$',views.blog_list,name='blog_list'),
 
     #显示所有的主题

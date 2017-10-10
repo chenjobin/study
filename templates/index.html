@@ -1,38 +1,50 @@
 {% extends 'base.html' %}
 
-{% block header %}	
-      <div class="jumbotron">
-        <h1>陈志斌的网站</h1>
-        <p>这里会发布一些博文，然后，在以后的时间，会做一个在线测试系统出来，可以在线测试高中信息技术的知识
-        </p>
-        <p>chenzhibin.vip</p>
-        <p>
-          <a class="btn btn-lg btn-primary" href="{% url 'blog:index1' %}" role="button">看看更多博文？ &raquo;</a>
-        </p>
-      </div>
-{% endblock header %}
+{% block head %}
+<link href="/media/css/timeline.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="/media/js/modernizr.js"></script>
+
+{% endblock head %}	
 
 {% block content %}
-  <!-- START THE FEATURETTES -->
-  {% for entry in entries_recommend %}
-      <div class="row featurette">
-        <div class="col-md-7">
-          <h2 class="featurette-heading"><a href="{% url 'blog:detail_entry' entry.id %}">{{entry.title}}
-          	<span class="text-muted">&nbsp;<small>{{entry.date_update}}</small><!-- 留空副标题 --></span></a></h2>
-          <p class="lead">{{entry.text|safe|striptags|truncatechars:200}}
-          </p>
-        </div>
-        <div class="col-md-5">
-        	<a href="{% url 'blog:detail_entry' entry.id %}">
-          <img class="featurette-image img-responsive center-block" id="{{entry.id}}"
-          	src="{{entry.img_url}}" onerror="this.src='/media/2.jpg';"
-          	alt="Generic placeholder image" >
-          </a>
-        </div>
-      </div>
-	
-      <hr class="featurette-divider">
+
+<section id="cd-timeline" class="cd-container">
+	{% for entry in entries_recommend %}
+		<div class="cd-timeline-block">
+			<div class="cd-timeline-img cd-picture">
+				<img class="img-circle" src="{{entry.img_url}}" onerror="this.src='/media/2.jpg';">
+			</div><!-- cd-timeline-img -->
+
+			<div class="cd-timeline-content">
+				<h2 class="featurette-heading"><a href="{% url 'blog:detail_entry' entry.id %}">{{entry.title}}
+          		<span class="text-muted">&nbsp;<small>{{entry.date_update}}更新</small><!-- 留空副标题 --></span></a></h2>
+				<p class="lead">{{entry.text|safe|striptags|truncatechars:200}}
+          		</p>
+				<a href="{% url 'blog:detail_entry' entry.id %}" class="cd-read-more">阅读更多</a>
+				<span class="cd-date" style="color: white;">{{entry.date_added|date:'Y年 m月 d日'}}</span>
+			</div> <!-- cd-timeline-content -->
+		</div> <!-- cd-timeline-block -->
+
 	{%endfor%}
-  <!-- /END THE FEATURETTES --> 
+</section> <!-- cd-timeline -->
     
+<script>
+$(function(){
+	var $timeline_block = $('.cd-timeline-block');
+	//hide timeline blocks which are outside the viewport
+	$timeline_block.each(function(){
+		if($(this).offset().top > $(window).scrollTop()+$(window).height()*0.75) {
+			$(this).find('.cd-timeline-img, .cd-timeline-content').addClass('is-hidden');
+		}
+	});
+	//on scolling, show/animate timeline blocks when enter the viewport
+	$(window).on('scroll', function(){
+		$timeline_block.each(function(){
+			if( $(this).offset().top <= $(window).scrollTop()+$(window).height()*0.75 && $(this).find('.cd-timeline-img').hasClass('is-hidden') ) {
+				$(this).find('.cd-timeline-img, .cd-timeline-content').removeClass('is-hidden').addClass('bounce-in');
+			}
+		});
+	});
+});
+</script>
 {% endblock content %}
