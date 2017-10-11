@@ -12,15 +12,31 @@
 	{% for entry in entries_recommend %}
 		<div class="cd-timeline-block">
 			<div class="cd-timeline-img cd-picture">
-				<img class="img-circle" src="{{entry.img_url}}" onerror="this.src='/media/2.jpg';">
+				<img class="img-circle" src="{{entry.img_url}}" onerror="this.src='/media/shouye/cd-icon-picture.svg';">
 			</div><!-- cd-timeline-img -->
 
 			<div class="cd-timeline-content">
-				<h2 class="featurette-heading"><a href="{% url 'blog:detail_entry' entry.id %}">{{entry.title}}
-          		<span class="text-muted">&nbsp;<small>{{entry.date_update}}更新</small><!-- 留空副标题 --></span></a></h2>
-				<p class="lead">{{entry.text|safe|striptags|truncatechars:200}}
-          		</p>
-				<a href="{% url 'blog:detail_entry' entry.id %}" class="cd-read-more">阅读更多</a>
+		      <div class="row">
+		        <div class="col-md-7 col-sm-7 col-xs-7">
+		          <h2 class="featurette-heading"><a href="{% url 'blog:detail_entry' entry.id %}">{{entry.title}}
+		          	<span class="text-muted"></span></a></h2>
+		          <p class="lead">{{entry.text|safe|striptags|truncatechars:120}}
+		          </p>
+		        </div>
+		        <div class="col-md-5 col-sm-5 col-xs-5">
+		        	<a href="{% url 'blog:detail_entry' entry.id %}">
+		          <img class="featurette-image img-responsive center-block" id="{{entry.id}}"
+		          	src="{{entry.img_url}}" onerror="this.src='/media/2.jpg';"
+		          	alt="糟糕，图片好像不见了" >
+		          <hr  />
+		          {% if entry.img_url2 %}
+		          <img class="featurette-image img-responsive center-block" id="{{entry.id}}"
+		          	src="{{entry.img_url2}}" alt="糟糕，图片好像不见了" >
+		          {% endif %}
+		          </a>
+		        </div>
+		      </div>
+				<!--<a href="{% url 'blog:detail_entry' entry.id %}" class="cd-read-more">阅读更多</a>-->
 				<span class="cd-date" style="color: white;">{{entry.date_added|date:'Y年 m月 d日'}}</span>
 			</div> <!-- cd-timeline-content -->
 		</div> <!-- cd-timeline-block -->

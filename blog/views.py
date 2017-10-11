@@ -15,7 +15,7 @@ import re
 def index(request):
     '''网站主页'''
     # return render(request,'blog/index.html') # 制作多个项目时，index,base等放templates根目录
-    entries_recommend=Entry.objects.filter(recommend=1).order_by('-date_update')[:10]
+    entries_recommend=Entry.objects.filter(recommend=1).order_by('-date_added')[:10]
     for entry in entries_recommend:
         html = entry.text
         # pat = '[p|/]>\n*<img src="(.*?)"' #这个方法可能获取的图片不对
@@ -26,7 +26,9 @@ def index(request):
             for img_url in img_urls:
                 if i==1:
                     entry.img_url=img_url
-                    i=2
+                    i = 2
+                elif i==2:
+                    entry.img_url2=img_url
         except:
             pass
     context={'entries_recommend':entries_recommend}
