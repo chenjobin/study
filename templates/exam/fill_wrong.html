@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{%block header%}
+	<h1>填空题错题集</h1>
+{%endblock header%}
+
+
+{%block content%}
+    	<div id='' class="alert alert-info" >
+        	错题TIPS:
+        	<ol>
+        		<li>第一次答题时答错并答对次数少于2倍答错次数的试题</li>
+        		<li>第一次答题答对但后来答对次数少于答错次数</li>
+        	</ol>
+        </div>
+<ul class="list-unstyled">
+    {% for fill_wrong_q in fill_wrong_qs %}
+        <li>
+        	<h3>
+            <a href="{% url 'exam:detail_fill_wrong' fill_wrong_q.question.id fill_wrong_q.id %}">{{fill_wrong_q.question|safe}}</a>
+            </h3>
+
+        </li>
+    {%empty%}
+        <li>No 填空题错题  have been added yet</li>
+    {%endfor%}
+</ul>
+
+{%endblock content%}
