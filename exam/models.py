@@ -148,9 +148,9 @@ class SingleWrongAnswer(models.Model):
     date_update = models.DateTimeField('更新时间',auto_now=True)
 
     # 进入错题集后，若是正确次数>5,且正确/错误 大于3，表明已基本掌握本题
-    correct_times=models.PositiveIntegerField('第一次做对',default=0) # 新增  字段记录正确次数
+    correct_times=models.PositiveIntegerField('答对次数',default=0) # 新增  字段记录正确次数
     wrong_times=models.PositiveIntegerField('错误次数',default=0) # 新增  字段记录错误次数
-    first_right_times=models.PositiveIntegerField('答对次数',default=0) # 第一次答对，是第几次作答
+    first_right_times=models.PositiveIntegerField('第一次做对',default=0) # 第一次答对，是第几次作答
 
     class Meta:
         verbose_name = '错题本_单选题'
@@ -185,9 +185,9 @@ class FillWrongAnswer(models.Model):
     date_update = models.DateTimeField('更新时间',auto_now=True)
 
     # 进入错题集后，若是正确次数>5,且正确/错误 大于3，表明已基本掌握本题
-    correct_times=models.PositiveIntegerField('第一次做对',default=0) # 新增  字段记录正确次数
+    correct_times=models.PositiveIntegerField('答对次数',default=0) # 新增  字段记录正确次数
     wrong_times=models.PositiveIntegerField('错误次数',default=0) # 新增  字段记录错误次数
-    first_right_times=models.PositiveIntegerField('答对次数',default=0) # 第一次答对，是第几次作答
+    first_right_times=models.PositiveIntegerField('第一次做对',default=0) # 第一次答对，是第几次作答
 
     class Meta:
         verbose_name = '错题本_填空题'

@@ -341,3 +341,35 @@ def fill_check_answer(request,fill_q_answers,fill_q_id):
 
     return right_wrong,context_n_list
 
+def single_wrong(request):
+    # 考虑以后要鉴别对错的次数，决定显示那些错题，此处要改，detail_single_wrong中的前一个后一个也需要改
+    single_wrong_qs = SingleWrongAnswer.objects.order_by('-date_update')
+    data = {}
+    data['single_wrong_qs'] = single_wrong_qs
+    return render(request,'exam/single_wrong.html', data)
+
+def detail_single_wrong(request,single_q_id,single_wrong_q_id):
+    try:
+        single_q=Single_Q.objects.get(id=single_q_id)
+        topic=single_q.topic
+
+        # 获取前后各一篇博文,QuerySet的写法，毕竟SQL查询可读性不强,所以没有使用。
+        #__gt和__lt分别是大于和小于的意思。可以修饰到判断条件的字段上
+        next_single_wrong_q = SingleWrongAnswer.objects.filter(id__gt=single_wrong_q_id).order_by('id')
+        pre_single_wrong_q = SingleWrongAnswer.objects.filter(id__lt=single_wrong_q_id).order_by('-id')
+
+        #取第1条记录
+        if pre_single_wrong_q.count() > 0:
+            pre_single_wrong_q = pre_single_wrong_q[0]
+        else:
+            pre_single_wrong_q = None
+
+        if next_single_wrong_q.count() > 0:
+            next_single_wrong_q = next_single_wrong_q[0]
+        else:
+            next_single_wrong_q = None
+
+        context={'topic':topic,'single_q':single_q,'pre_single_wrong_q':pre_single_wrong_q,'next_single_wrong_q':next_single_wrong_q}
+    except Single_Q.DoesNotExist:
+        raise Http404
+    return render(request,'exam/detail_single_wrong.html',context)

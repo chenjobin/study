@@ -26,4 +26,7 @@ urlpatterns=[
     url(r'^exam_paper/(?P<exam_paper_id>\d+)/$',views.exam_paper_show,name='exam_paper_show'),
     url(r'^post3/$',views.exam_check,name='exam_check'),
 
+    # 错题集
+    url(r'^single_wrong/$',views.single_wrong,name='single_wrong'),
+    url(r'^detail_single_wrong/(?P<single_q_id>\d+),(?P<single_wrong_q_id>\d+)$',views.detail_single_wrong,name='detail_single_wrong'),
 ]

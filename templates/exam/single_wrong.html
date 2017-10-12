@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{%block header%}
+	<h1>单选题错题集</h1>
+{%endblock header%}
+
+
+{%block content%}
+    	<div id='' class="alert alert-info" >
+        	TIPS:1、错题定性：答对次数少于2倍答错次数的试题
+        </div>
+<ul class="list-unstyled">
+    {% for single_wrong_q in single_wrong_qs %}
+        <li>
+        	<h3>
+            <a href="{% url 'exam:detail_single_wrong' single_wrong_q.question.id single_wrong_q.id %}">{{single_wrong_q.question|safe}}</a>
+            </h3>
+
+        </li>
+    {%empty%}
+        <li>No 单选题错题  have been added yet</li>
+    {%endfor%}
+</ul>
+
+{%endblock content%}
