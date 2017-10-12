@@ -11,18 +11,35 @@
 <section id="cd-timeline" class="cd-container">
 	{% for entry in entries_recommend %}
 		<div class="cd-timeline-block">
-			<div class="cd-timeline-img cd-picture">
-				<img class="img-circle" src="{{entry.img_url}}" onerror="this.src='/media/shouye/cd-icon-picture.svg';">
-			</div><!-- cd-timeline-img -->
-
+			<!--根据情况显示不同的时间轴图片标志-->
+			{% if entry.img_url2 %}
+				<div class="cd-timeline-img cd-movie">					
+					<img src="/media/shouye/cd-icon-movie.svg">		
+				</div><!-- cd-timeline-img -->
+			{% else %}
+				{% if entry.img_url %}
+					<div class="cd-timeline-img cd-picture">					
+						<img src="/media/shouye/cd-icon-picture.svg">		
+					</div><!-- cd-timeline-img -->
+				{% else %}
+					<div class="cd-timeline-img cd-location">					
+						<img src="/media/shouye/cd-icon-location.svg">		
+					</div><!-- cd-timeline-img -->
+				{% endif %}
+			{% endif %}
 			<div class="cd-timeline-content">
 		      <div class="row">
+		      	{% if entry.img_url %}
 		        <div class="col-md-7 col-sm-7 col-xs-7">
+		        {% else %}
+		        <div class="col-md-12 col-sm-12 col-xs-12">
+		        {% endif %}
 		          <h2 class="featurette-heading"><a href="{% url 'blog:detail_entry' entry.id %}">{{entry.title}}
 		          	<span class="text-muted"></span></a></h2>
 		          <p class="lead">{{entry.text|safe|striptags|truncatechars:120}}
 		          </p>
 		        </div>
+		        {% if entry.img_url %}
 		        <div class="col-md-5 col-sm-5 col-xs-5">
 		        	<a href="{% url 'blog:detail_entry' entry.id %}">
 		          <img class="featurette-image img-responsive center-block" id="{{entry.id}}"
@@ -35,6 +52,7 @@
 		          {% endif %}
 		          </a>
 		        </div>
+		        {% endif %}
 		      </div>
 				<!--<a href="{% url 'blog:detail_entry' entry.id %}" class="cd-read-more">阅读更多</a>-->
 				<span class="cd-date" style="color: white;">{{entry.date_added|date:'Y年 m月 d日'}}</span>
