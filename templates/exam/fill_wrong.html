@@ -25,5 +25,17 @@
         <li>No 填空题错题  have been added yet</li>
     {%endfor%}
 </ul>
+<p>dafdafadf</p>
+<ul class="list-unstyled">
+    {% for fill_q in fill_qs %}
+        <li>
+        	<h3>
+            <a href="{% url 'exam:detail_fill_wrong' fill_q.id fill_q.wrongs_id %}">{{fill_q.title|safe|striptags|truncatechars:50}}</a>
+            </h3>
 
+        </li>
+    {%empty%}
+        <li>No 填空题错题  have been added yet</li>
+    {%endfor%}
+</ul>
 {%endblock content%}

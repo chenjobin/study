@@ -350,20 +350,41 @@ def single_wrong(request):
     data['single_wrong_qs'] = single_wrong_qs
     return render(request,'exam/single_wrong.html', data)
 
+# 因填空题错题集单个题目可能有多个错题记录（每个空都算一条记录）
+def filter_fill_wrong(fill_wrong_qs):    #去重
+    fill_q_id_list=[]
+    fill_wrong_q_id_list=[]
+    for fill_wrong_q in fill_wrong_qs:
+        fill_q_id_list.append(fill_wrong_q.question.id)
+        fill_wrong_q_id_list.append(fill_wrong_q.id)
+    # 构建fill_qs为QuerySet,且空的
+    fill_qs=Fill_Q.objects.filter(id=None)
+    # fill_wrong_q_id_list = list(set(fill_wrong_q_id_list)) #去重，但未保持原顺序
+    # 新方式去重，保持原顺序
+    new_fill_q_id_list = []
+    news_fill_wrong_q_id_list = []
+    for q_id,wrong_id in zip(fill_q_id_list,fill_wrong_q_id_list):
+        if q_id not in new_fill_q_id_list:
+            new_fill_q_id_list.append(q_id)
+            news_fill_wrong_q_id_list.append(wrong_id)
+
+    for fill_id in new_fill_q_id_list:
+        fill_qs1=Fill_Q.objects.filter(id=fill_id)
+        fill_qs=fill_qs|fill_qs1
+    # fill_qs.distinct()
+    for fill_q,fill_id in zip(fill_qs,news_fill_wrong_q_id_list):
+        fill_q.wrongs_id=fill_id
+    # fill_qs.order_by('-date_update')
+    return fill_qs
+
 def fill_wrong(request):
     # 考虑以后要鉴别对错的次数，决定显示那些错题，此处要改，detail_single_wrong中的前一个后一个也需要改
     fill_wrong_qs = FillWrongAnswer.objects.filter(is_show=True,user=request.user).order_by('-date_update')
-    # fill_qs=Fill_Q.objects.filter()
-    # question1=fill_wrong_qs[0].question
-    # for fill_wrong_q in fill_wrong_qs:
-    #     question=fill_wrong_q.question
-    #     if question==question:
-    #         fill_wrong_q.delete()
-    # fill_wrong_qs = fill_wrong_qs.values('question').distinct().order_by('question')    #去重
-    # fill_wrong_qs = fill_wrong_qs.distinct().order_by('-date_update')
+    fill_qs=filter_fill_wrong(fill_wrong_qs)
+
     data = {}
     data['fill_wrong_qs'] = fill_wrong_qs
-    # data['fill_qs'] = fill_qs
+    data['fill_qs'] = fill_qs
     return render(request,'exam/fill_wrong.html', data)
 
 def detail_single_wrong(request,single_q_id,single_wrong_q_id):
