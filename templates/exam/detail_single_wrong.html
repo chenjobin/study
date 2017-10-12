@@ -117,7 +117,7 @@ $(document).ready(function() {
     		{% csrf_token %}
 		 
 			<h3 style="color:dodgerblue;"> 
-	            {{single_q.title|safe}}  
+	            {{single_q.title|safe}} 
 	        </h3>
 	        <ul class="list-unstyled" id="question">
 	           	<li><label><input name="selections" type="radio" value="{{single_q.answer|safe}}" />

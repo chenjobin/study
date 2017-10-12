@@ -13141,3 +13141,101 @@ Traceback (most recent call last):
   File "C:\Anaconda3\envs\web\lib\site-packages\django\urls\resolvers.py", line 497, in _reverse_with_prefix
     raise NoReverseMatch(msg)
 django.urls.exceptions.NoReverseMatch: Reverse for 'detail_fill_wrong' with arguments '(2, '')' not found. 1 pattern(s) tried: ['detail_fill_wrong/(?P<fill_q_id>\\d+),(?P<fill_wrong_q_id>\\d+)$']
+2017-10-12 19:17:45,482 [Thread-18:16220] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /fill_wrong/
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\django\study\exam\views.py", line 382, in fill_wrong
+    fill_wrong_qs = FillWrongAnswer.objects.filter(is_show=True,user=request.user).order_by('-date_update')
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\db\models\query.py", line 784, in filter
+    return self._filter_or_exclude(False, *args, **kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\db\models\query.py", line 802, in _filter_or_exclude
+    clone.query.add_q(Q(*args, **kwargs))
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\db\models\sql\query.py", line 1250, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\db\models\sql\query.py", line 1276, in _add_q
+    allow_joins=allow_joins, split_subq=split_subq,
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\db\models\sql\query.py", line 1179, in build_filter
+    self.check_related_objects(field, value, opts)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\db\models\sql\query.py", line 1078, in check_related_objects
+    for v in value:
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\utils\functional.py", line 239, in inner
+    return func(self._wrapped, *args)
+TypeError: 'AnonymousUser' object is not iterable
+2017-10-12 19:18:57,045 [Thread-2:14004] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /fill_wrong/
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\django\study\exam\views.py", line 382, in fill_wrong
+    fill_wrong_qs = FillWrongAnswer.objects.filter(is_show=True,user=request.user).order_by('-date_update')
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\db\models\query.py", line 784, in filter
+    return self._filter_or_exclude(False, *args, **kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\db\models\query.py", line 802, in _filter_or_exclude
+    clone.query.add_q(Q(*args, **kwargs))
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\db\models\sql\query.py", line 1250, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\db\models\sql\query.py", line 1276, in _add_q
+    allow_joins=allow_joins, split_subq=split_subq,
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\db\models\sql\query.py", line 1179, in build_filter
+    self.check_related_objects(field, value, opts)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\db\models\sql\query.py", line 1078, in check_related_objects
+    for v in value:
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\utils\functional.py", line 239, in inner
+    return func(self._wrapped, *args)
+TypeError: 'AnonymousUser' object is not iterable
+2017-10-12 19:37:39,089 [Thread-2:6404] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /fill_wrong/
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\django\study\exam\views.py", line 392, in fill_wrong
+    data['fill_qs'] = fill_qs
+NameError: name 'fill_qs' is not defined
+2017-10-12 19:37:49,873 [Thread-4:21624] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /fill_wrong/
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\django\study\exam\views.py", line 392, in fill_wrong
+    # data['fill_qs'] = fill_qs
+NameError: name 'fill_qs' is not defined
+2017-10-12 19:38:03,025 [Thread-5:13332] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /fill_wrong/
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\django\study\exam\views.py", line 392, in fill_wrong
+    # data['fill_qs'] = fill_qs
+NameError: name 'fill_qs' is not defined
+2017-10-12 19:38:21,618 [Thread-6:17464] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /fill_wrong/
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\django\study\exam\views.py", line 392, in fill_wrong
+    # data['fill_qs'] = fill_qs
+NameError: name 'fill_qs' is not defined

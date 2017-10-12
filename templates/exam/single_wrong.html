@@ -17,7 +17,9 @@
     {% for single_wrong_q in single_wrong_qs %}
         <li>
         	<h3>
-            <a href="{% url 'exam:detail_single_wrong' single_wrong_q.question.id single_wrong_q.id %}">{{single_wrong_q.question|safe}}</a>
+            <a href="{% url 'exam:detail_single_wrong' single_wrong_q.question.id single_wrong_q.id %}">
+            	{{single_wrong_q.question|safe}}
+            	<small>(该题你曾经做对了{{single_wrong_q.correct_times}}次，做错过{{single_wrong_q.wrong_times}}次)</small> </a>
             </h3>
 
         </li>
