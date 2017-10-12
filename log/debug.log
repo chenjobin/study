@@ -12130,3 +12130,29 @@ Traceback (most recent call last):
   File "F:\Django\study\exam\views.py", line 346, in single_wrong
     single_wrong_qs = SingleWrongAnswer.objects.filter(correct_times<2*wrong_times).order_by('-date_update')
 NameError: name 'correct_times' is not defined
+2017-10-12 11:36:26,857 [Thread-2:5784] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /single_wrong/
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Django\study\exam\views.py", line 361, in single_wrong
+    single_wrong_qs = wrong_question_filter(single_wrong_qs)
+  File "F:\Django\study\exam\views.py", line 354, in wrong_question_filter
+    wrong_qs.remove(None)
+AttributeError: 'QuerySet' object has no attribute 'remove'
+2017-10-12 11:49:28,615 [Thread-2:12476] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /single_wrong/
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Django\study\exam\views.py", line 365, in single_wrong
+    single_wrong_qs = wrong_question_filter(single_wrong_qs)
+  File "F:\Django\study\exam\views.py", line 357, in wrong_question_filter
+    wrong_q_list.remove(wrong_q)
+AttributeError: 'QuerySet' object has no attribute 'remove'

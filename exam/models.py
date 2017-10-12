@@ -152,6 +152,8 @@ class SingleWrongAnswer(models.Model):
     wrong_times=models.PositiveIntegerField('错误次数',default=0) # 新增  字段记录错误次数
     first_right_times=models.PositiveIntegerField('第一次做对',default=0) # 第一次答对，是第几次作答
 
+    is_show=models.BooleanField('显示',default=True) #标记该错题是否显示在错题集
+
     class Meta:
         verbose_name = '错题本_单选题'
         verbose_name_plural = '错题本_单选题'
@@ -161,15 +163,27 @@ class SingleWrongAnswer(models.Model):
 
     def increase_correct_times(self):
         self.correct_times += 1
+        # self.show_determine()
         self.save(update_fields=['correct_times'])
 
     def increase_wrong_times(self):
         self.wrong_times += 1
+        # self.show_determine()
         self.save(update_fields=['wrong_times'])
 
     def count_first_right_times(self):
         self.first_right_times = self.correct_times + self.wrong_times + 1
+        # self.show_determine()
         self.save(update_fields=['first_right_times'])
+
+    def show_determine(self):
+        if self.correct_times>=self.wrong_times*2:
+            self.is_show=False
+        elif self.first_right_times == 1 and self.correct_times>=self.wrong_times:
+            self.is_show=False
+        else:
+            self.is_show=True
+        self.save(update_fields=['is_show'])
 
 # 错题表 填空题
 # 相对照于选择题错题集，此题仅多了一个wrong_fill_n字段，以后可以考虑错题集使用同一个模型
@@ -189,6 +203,8 @@ class FillWrongAnswer(models.Model):
     wrong_times=models.PositiveIntegerField('错误次数',default=0) # 新增  字段记录错误次数
     first_right_times=models.PositiveIntegerField('第一次做对',default=0) # 第一次答对，是第几次作答
 
+    is_show=models.BooleanField('显示',default=True) #标记该错题是否显示在错题集
+
     class Meta:
         verbose_name = '错题本_填空题'
         verbose_name_plural = '错题本_填空题'
@@ -198,16 +214,27 @@ class FillWrongAnswer(models.Model):
 
     def increase_correct_times(self):
         self.correct_times += 1
+        # self.show_determine()
         self.save(update_fields=['correct_times'])
 
     def increase_wrong_times(self):
         self.wrong_times += 1
+        # self.show_determine()
         self.save(update_fields=['wrong_times'])
 
     def count_first_right_times(self):
         self.first_right_times = self.correct_times + self.wrong_times + 1
+        # self.show_determine()
         self.save(update_fields=['first_right_times'])
 
+    def show_determine(self):
+        if self.correct_times>=self.wrong_times*2:
+            self.is_show=False
+        elif self.first_right_times == 1 and self.correct_times>=self.wrong_times:
+            self.is_show=False
+        else:
+            self.is_show=True
+        self.save(update_fields=['is_show'])
 
 class ExaminationPaperType(models.Model):
     '''subject type'''

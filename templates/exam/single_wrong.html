@@ -7,7 +7,11 @@
 
 {%block content%}
     	<div id='' class="alert alert-info" >
-        	TIPS:1、错题定性：答对次数少于2倍答错次数的试题
+        	错题TIPS:
+        	<ol>
+        		<li>第一次答题时答错并答对次数少于2倍答错次数的试题</li>
+        		<li>第一次答题答对但后来答对次数少于答错次数</li>
+        	</ol>
         </div>
 <ul class="list-unstyled">
     {% for single_wrong_q in single_wrong_qs %}

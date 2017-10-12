@@ -276,11 +276,13 @@ def single_check_answer(request,answer,single_q_id):
         if single_wrong1.first_right_times==0:
             single_wrong1.count_first_right_times()
         single_wrong1.increase_correct_times()
+        single_wrong1.show_determine()
         return True
 
     else:
         single_wrong.update(wrong_answer=answer)
         single_wrong1.increase_wrong_times()
+        single_wrong1.show_determine()
         return False
 
 def fill_check_answer(request,fill_q_answers,fill_q_id):
@@ -343,7 +345,7 @@ def fill_check_answer(request,fill_q_answers,fill_q_id):
 
 def single_wrong(request):
     # 考虑以后要鉴别对错的次数，决定显示那些错题，此处要改，detail_single_wrong中的前一个后一个也需要改
-    single_wrong_qs = SingleWrongAnswer.objects.order_by('-date_update')
+    single_wrong_qs = SingleWrongAnswer.objects.filter(is_show=True,user=request.user).order_by('-date_update')
     data = {}
     data['single_wrong_qs'] = single_wrong_qs
     return render(request,'exam/single_wrong.html', data)
@@ -355,8 +357,10 @@ def detail_single_wrong(request,single_q_id,single_wrong_q_id):
 
         # 获取前后各一篇博文,QuerySet的写法，毕竟SQL查询可读性不强,所以没有使用。
         #__gt和__lt分别是大于和小于的意思。可以修饰到判断条件的字段上
-        next_single_wrong_q = SingleWrongAnswer.objects.filter(id__gt=single_wrong_q_id).order_by('id')
-        pre_single_wrong_q = SingleWrongAnswer.objects.filter(id__lt=single_wrong_q_id).order_by('-id')
+        next_single_wrong_q = SingleWrongAnswer.objects.filter(id__gt=single_wrong_q_id,is_show=True,
+                                                               user=request.user).order_by('id')
+        pre_single_wrong_q = SingleWrongAnswer.objects.filter(id__lt=single_wrong_q_id,is_show=True,
+                                                              user=request.user).order_by('-id')
 
         #取第1条记录
         if pre_single_wrong_q.count() > 0:
@@ -369,7 +373,8 @@ def detail_single_wrong(request,single_q_id,single_wrong_q_id):
         else:
             next_single_wrong_q = None
 
-        context={'topic':topic,'single_q':single_q,'pre_single_wrong_q':pre_single_wrong_q,'next_single_wrong_q':next_single_wrong_q}
+        context={'topic':topic,'single_q':single_q,'pre_single_wrong_q':pre_single_wrong_q,
+                 'next_single_wrong_q':next_single_wrong_q}
     except Single_Q.DoesNotExist:
         raise Http404
     return render(request,'exam/detail_single_wrong.html',context)
