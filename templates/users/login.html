@@ -2,7 +2,7 @@
 {% load bootstrap3 %}
 
 {%block header%}
-	<h2>Log in to your account</h2>
+	<h2>登录你的账户，本站测试等模块一般都需要登录方可访问</h2>
 {%endblock header%}
 
 {%block content%}
@@ -16,7 +16,7 @@
 		{% bootstrap_form form %}
 		
 		{% buttons %}
-		<button type="submit" class="btn btn-primary">Sign in</button>
+		<button type="submit" class="btn btn-primary">登  录</button>
 		{% endbuttons %}
 		<input type="hidden" name="next" value="{% url 'blog:index' %}" />
 

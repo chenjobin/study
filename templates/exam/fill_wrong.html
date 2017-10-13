@@ -17,12 +17,13 @@
     {% for fill_wrong_q in fill_wrong_qs %}
         <li>
         	<h3>
-            <a href="{% url 'exam:detail_fill_wrong' fill_wrong_q.question.id fill_wrong_q.id %}">{{fill_wrong_q.question|safe}}</a>
+            <a href="{% url 'exam:detail_fill_wrong' fill_wrong_q.question.id fill_wrong_q.id %}">
+            	{{fill_wrong_q.question.title|safe|striptags|truncatechars:120}}</a>
             </h3>
 
         </li>
     {%empty%}
-        <li>No 填空题错题  have been added yet</li>
+        <li>你暂时没有错题</li>
     {%endfor%}
 </ul>
 

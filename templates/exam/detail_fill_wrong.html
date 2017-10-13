@@ -79,10 +79,12 @@ $(document).ready(function() {
 	            {{fill_q.title|safe}}  
 	      	</h3>
 	      	<h3>请在下方输入框内作答</h3>
+	      	以下各空曾经分别做对过{{fill_q.correct_times}}次，做错过{{fill_q.wrong_times}}次
 	      	<ul class="list-unstyled" id="fill_answer" style="font-size:large;">
 				{% for i in fill_q.blank_nums %}
 					<li><label>第{{i}}空：<input type="text" name="fill_qs" value="" 
 						style="width: 500px;" placeholder="第{{i}}空请点击此处作答"></label>
+						
 						<span id='answer_right_{{i}}' class="glyphicon glyphicon-ok" style="color: green;display: none;"></span>
 						<span id='answer_wrong_{{i}}' class="glyphicon glyphicon-remove" style="color: red;display: none;"></span>
 					</li>

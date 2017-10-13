@@ -4,6 +4,7 @@ from django.http import HttpResponseRedirect,Http404
 from django import http
 from .models import SingleWrongAnswer,FillWrongAnswer,ExaminationPaper
 from django.core.urlresolvers import reverse #url逆向解析
+from django.contrib.auth.decorators import login_required
 
 #添加返回json的方法，json结构有3个参数（code:返回码,is_success:是否处理成功,message:消息内容）
 def ResponseJson(code, is_success,is_right, message):
@@ -138,6 +139,7 @@ def fill_check(request,fill_q_id):
     except:
         return ResponseJson(502, False, False,'you are wrong')
 
+@login_required
 def exam_paper_show(request, exam_paper_id):
     try:
         exam_paper = ExaminationPaper.objects.get(id=exam_paper_id)
@@ -197,10 +199,11 @@ def exam_paper_show(request, exam_paper_id):
     data = {}
     data['exam_paper'] = exam_paper
     data['chapters'] = chapters
-    data['count'] = u'该试卷分%s部分，共%s道选择题、%s道填空题' % (len(chapters), single_q_num, fill_q_num)
+    data['count'] = u'该试卷为技术卷信息技术科目，分%s部分，共%s道选择题、%s道填空题' % (len(chapters), single_q_num, fill_q_num)
 
     return render(request,'exam/exam_paper.html', data)
 
+@login_required
 def exam_check(request):
     data = request.POST.copy()
     try:
@@ -344,6 +347,7 @@ def fill_check_answer(request,fill_q_answers,fill_q_id):
     return right_wrong,context_n_list
 
 # 错题 选择题页面
+@login_required
 def single_wrong(request):
     # 考虑以后要鉴别对错的次数，决定显示那些错题，此处要改，detail_single_wrong中的前一个后一个也需要改
     single_wrong_qs = SingleWrongAnswer.objects.filter(is_show=True,user=request.user).order_by('-date_update')
@@ -351,6 +355,7 @@ def single_wrong(request):
     data['single_wrong_qs'] = single_wrong_qs
     return render(request,'exam/single_wrong.html', data)
 
+@login_required
 def detail_single_wrong(request,single_q_id,single_wrong_q_id):
     try:
         single_q=Single_Q.objects.get(id=single_q_id)
@@ -381,6 +386,7 @@ def detail_single_wrong(request,single_q_id,single_wrong_q_id):
     return render(request,'exam/detail_single_wrong.html',context)
 
 # 错题 填空题页面
+@login_required
 def fill_wrong(request):
     # 考虑以后要鉴别对错的次数，决定显示那些错题，此处要改，detail_single_wrong中的前一个后一个也需要改
     # 为了 填空题去重 试了一下午的方法，想不到其实只要 wrong_fill_n=1 就可以解决
@@ -390,16 +396,22 @@ def fill_wrong(request):
     data['fill_wrong_qs'] = fill_wrong_qs
     return render(request,'exam/fill_wrong.html', data)
 
+@login_required
 def detail_fill_wrong(request,fill_q_id,fill_wrong_q_id):
     try:
         fill_q=Fill_Q.objects.get(id=fill_q_id)
         topic=fill_q.topic
         # 增加一个空格数
         blank_num=fill_q.fill_answer_set.count()
-        #将空格数变成一个list,方便前端遍历
+        # 将空格数变成一个list,方便前端遍历
         fill_q.blank_nums=range(1,blank_num+1)
-        # for fill_question in fill_q.fill_answer_set.all():
-        #     fill_q.blank_num+=1
+        # 计算每空的 答对与答错次数
+        fill_answer=fill_q.fillwronganswer_set.all()
+        fill_q.wrong_times=[]
+        fill_q.correct_times=[]
+        for fill_a in fill_answer:
+            fill_q.wrong_times.append(fill_a.wrong_times)
+            fill_q.correct_times.append(fill_a.correct_times)
 
         # 获取前后各一篇博文,QuerySet的写法，毕竟SQL查询可读性不强,所以没有使用。
         #__gt和__lt分别是大于和小于的意思。可以修饰到判断条件的字段上
