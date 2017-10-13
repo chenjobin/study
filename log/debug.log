@@ -13463,3 +13463,65 @@ Traceback (most recent call last):
   File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 700, in __init__
     "from '%s'" % (token[upto:], token))
 django.template.exceptions.TemplateSyntaxError: Could not parse the remainder: '[{{i' from 'fill_q.correct_times[{{i'
+2017-10-13 16:14:29,024 [Thread-15:5232] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /detail_fill_wrong/8,69
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "C:\django\study\exam\views.py", line 402, in detail_fill_wrong
+    fill_q=Fill_Q.objects.get(id=fill_q_id,user=request.user)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\db\models\query.py", line 371, in get
+    clone = self.filter(*args, **kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\db\models\query.py", line 784, in filter
+    return self._filter_or_exclude(False, *args, **kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\db\models\query.py", line 802, in _filter_or_exclude
+    clone.query.add_q(Q(*args, **kwargs))
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\db\models\sql\query.py", line 1250, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\db\models\sql\query.py", line 1276, in _add_q
+    allow_joins=allow_joins, split_subq=split_subq,
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\db\models\sql\query.py", line 1154, in build_filter
+    lookups, parts, reffed_expression = self.solve_lookup_type(arg)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\db\models\sql\query.py", line 1034, in solve_lookup_type
+    _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta())
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\db\models\sql\query.py", line 1352, in names_to_path
+    "Choices are: %s" % (name, ", ".join(available)))
+django.core.exceptions.FieldError: Cannot resolve keyword 'user' into field. Choices are: answer_detail, author, author_id, caption, date_added, date_update, fill_answer, fillwronganswer, id, recommend, tags, title, topic, topic_id, topic_second
+2017-10-13 16:14:30,354 [Thread-16:9924] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /detail_fill_wrong/8,69
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\contrib\auth\decorators.py", line 23, in _wrapped_view
+    return view_func(request, *args, **kwargs)
+  File "C:\django\study\exam\views.py", line 402, in detail_fill_wrong
+    fill_q=Fill_Q.objects.get(id=fill_q_id,user=request.user)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\db\models\manager.py", line 85, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\db\models\query.py", line 371, in get
+    clone = self.filter(*args, **kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\db\models\query.py", line 784, in filter
+    return self._filter_or_exclude(False, *args, **kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\db\models\query.py", line 802, in _filter_or_exclude
+    clone.query.add_q(Q(*args, **kwargs))
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\db\models\sql\query.py", line 1250, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\db\models\sql\query.py", line 1276, in _add_q
+    allow_joins=allow_joins, split_subq=split_subq,
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\db\models\sql\query.py", line 1154, in build_filter
+    lookups, parts, reffed_expression = self.solve_lookup_type(arg)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\db\models\sql\query.py", line 1034, in solve_lookup_type
+    _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta())
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\db\models\sql\query.py", line 1352, in names_to_path
+    "Choices are: %s" % (name, ", ".join(available)))
+django.core.exceptions.FieldError: Cannot resolve keyword 'user' into field. Choices are: answer_detail, author, author_id, caption, date_added, date_update, fill_answer, fillwronganswer, id, recommend, tags, title, topic, topic_id, topic_second

@@ -76,9 +76,15 @@ $(document).ready(function() {
 </style>
 {% endblock head %}
 {% block header %}	
-      <div class="jumbotron">
-        <h1>欢迎来到创客</h1>
-        <p>你可以通过筛选，排序来查看不同类别创客文章</p>
+      <div class="jumbotron row">
+      	<div class="col-md-7 ">
+            <h1>欢迎来到创客</h1>
+        	<p>你可以通过筛选，排序来查看不同类别创客文章</p>		
+      	</div>
+      	<div class="col-md-5 text-right">
+      		<img width="200" src="/media/chuang.png" >
+      	</div>
+
       </div>
 {% endblock header %}
 {% block content %}

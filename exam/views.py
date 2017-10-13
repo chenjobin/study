@@ -406,7 +406,7 @@ def detail_fill_wrong(request,fill_q_id,fill_wrong_q_id):
         # 将空格数变成一个list,方便前端遍历
         fill_q.blank_nums=range(1,blank_num+1)
         # 计算每空的 答对与答错次数
-        fill_answer=fill_q.fillwronganswer_set.all()
+        fill_answer=fill_q.fillwronganswer_set.filter(user=request.user).all()
         fill_q.wrong_times=[]
         fill_q.correct_times=[]
         for fill_a in fill_answer:
