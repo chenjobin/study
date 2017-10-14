@@ -83,7 +83,7 @@ $(document).ready(function() {
             </li>
             {% else %}
         				<li><a href="{% url 'users:register' %}">注册</a></li>
-       					<li><a href="{% url 'users:login' %}">登录</a></li>
+       					<li><a href="{% url 'users:login' %}?next={{ request.path }}">登录</a></li>
     				{% endif %}
           </ul>
           <form action="/search/" class="navbar-form navbar-right">

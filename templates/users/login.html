@@ -18,7 +18,7 @@
 		{% buttons %}
 		<button type="submit" class="btn btn-primary">登  录</button>
 		{% endbuttons %}
-		<input type="hidden" name="next" value="{% url 'blog:index' %}" />
+		<input type="hidden" name="next" value="{{ next }}"/>
 
 	</form>
 	<a href="{% url 'users:password_lost' %}">忘记密码？</a>
