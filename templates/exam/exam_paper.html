@@ -31,11 +31,13 @@ $(document).ready(function() {
 								if(data[i]){
 									$("#answer_right_"+String(json['message'][i])).show();
 									$("#answer_wrong_"+String(json['message'][i])).hide();
-									$("#answer_detail").show();
+									$("#answer_right_ce_"+String(json['message'][i])).show();
+									$("#answer_wrong_ce_"+String(json['message'][i])).hide();
 								}else{
 									$("#answer_wrong_"+String(json['message'][i])).show();
 									$("#answer_right_"+String(json['message'][i])).hide();
-									$("#answer_detail").show();
+									$("#answer_wrong_ce_"+String(json['message'][i])).show();
+									$("#answer_right_ce_"+String(json['message'][i])).hide();
 						     	}
 							}
 			            }else{
@@ -92,7 +94,7 @@ function selection_change(obj){
 	}
     /*附加导航样式*/
     ul.nav-tabs{
-        width: 75px;
+        width: 80px;
         margin-top: 5px;
         border-radius: 4px;
         border: 1px solid #ddd;
@@ -122,7 +124,7 @@ function selection_change(obj){
         border-radius: 0 0 4px 4px;
     }
     ul.nav-tabs.affix{
-        top: 20px; /* Set the top position of pinned element */
+        top: 10px; /* Set the top position of pinned element */
     }
 </style>
 
@@ -253,15 +255,19 @@ function selection_change(obj){
 
 {% block left %}
                     
-    <div class="col-xs-2 col-sm-pull-1 col-md-pull-1 col-lg-pull-1" id="myScrollspy">
+    <div class="col-xs-2 col-sm-pull-2 col-md-pull-2 col-lg-pull-1" id="myScrollspy">
 		<ul class="nav nav-tabs nav-stacked" data-spy="affix" data-offset-top="20">
             {% for chapter in chapters %}
                 {% for item in chapter.items %} 
                     {% if item.select_answers%}
-						<li><a href="#exam_select_{{item.object_id}}">第{{item.quest_number}}题</a></li>
+						<li><a href="#exam_select_{{item.object_id}}">第{{item.quest_number}}题
+						<span id='answer_right_ce_{{item.object_id}}' class="glyphicon glyphicon-ok" style="color: green;display: none;"></span>
+						<span id='answer_wrong_ce_{{item.object_id}}' class="glyphicon glyphicon-remove" style="color: red;display: none;"></span>
+						</a></li>							
                     {% endif%}
                     {% if item.blank_nums%}
-						<li><a href="#exam_fill_{{item.object_id}}">第{{item.quest_number}}题</a></li>
+						<li><a href="#exam_fill_{{item.object_id}}">第{{item.quest_number}}题
+						</a></li>
                     {% endif%}
   
                 {% endfor%}
