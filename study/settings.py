@@ -33,7 +33,8 @@ if socket.gethostbyname(socket.gethostname())[:3]=='192' or '127':
     DEBUG = TEMPLATE_DEBUG = True
 else:
     DEBUG = TEMPLATE_DEBUG = False
-
+# 方便服务器端修改DEBUG
+# DEBUG = TEMPLATE_DEBUG = False
 ALLOWED_HOSTS = ['chenzhibin.vip','www.chenzhibin.vip','127.0.0.1']
 #DEBUG动态开启
 
