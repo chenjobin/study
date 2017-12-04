@@ -96,6 +96,20 @@
 				    
 				$(this).html(emojione.toImage(code));
 			});
+			
+			//用于页面中部分答案可以根据需要展开显示隐藏
+			$(".flip1").click(function(){
+				$(".flip_answer1").toggle();
+			});
+			$(".flip2").click(function(){
+				$(".flip_answer2").toggle();
+			});
+			$(".flip3").click(function(){
+				$(".flip_answer3").toggle();
+			});
+			$(".flip4").click(function(){
+				$(".flip_answer4").toggle();
+			});
     });
 		 
 		//回复按钮点击触发的方法

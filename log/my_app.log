@@ -176,3 +176,5 @@ OSError: [Errno 22] Invalid argument
 OSError: [Errno 22] Invalid argument
 2017-09-02 14:23:11.330410: Running on_exit tasks
 2017-09-02 14:23:11.330410: wfastcgi.py 3.0.0 closed
+2017-12-04 23:45:31.697520: wfastcgi.py will restart when files in F:\Django\study\ are changed: .*((\.py)|(\.config))$
+2017-12-04 23:45:31.697520: wfastcgi.py 3.0.0 initialized
