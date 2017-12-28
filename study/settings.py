@@ -28,13 +28,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'dcs^-wyqx)h9iw7hig_+-vvy07k48k(e)u759p!xqvi9fy+p72'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True  测试时在图书馆'192' or '127'即可。考虑到学校10 部分企业局域网172，故添加
-if socket.gethostbyname(socket.gethostname())[:3]=='192' or '127':
-    DEBUG = TEMPLATE_DEBUG = True
-else:
-    DEBUG = TEMPLATE_DEBUG = False
-# 方便服务器端修改DEBUG
-# DEBUG = TEMPLATE_DEBUG = False
+
+DEBUG = TEMPLATE_DEBUG = False
 ALLOWED_HOSTS = ['chenzhibin.vip','www.chenzhibin.vip','127.0.0.1']
 #DEBUG动态开启
 
@@ -227,7 +222,7 @@ ADMINS = (
 #Email
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST= 'smtp.qq.com'#QQ邮箱SMTP服务器
-EMAIL_PORT= 25		 #QQ邮箱SMTP服务端口
+EMAIL_PORT= 587		 #QQ邮箱SMTP服务端口
 EMAIL_HOST_USER = '923869988@qq.com'  #我的邮箱帐号
 EMAIL_HOST_PASSWORD = 'tekgzsgjnijwbcjj' #密码
 EMAIL_SUBJECT_PREFIX = 'chenzhibin.vip' #为邮件标题的前缀,默认是'[django]'
