@@ -193,7 +193,7 @@ function selection_change(obj){
 									        <ul class="list-unstyled" id="">
 		                                		{% for i in item.blank_nums %}
 													<li><label>第{{i}}空：<input type="text" name="fill_qs" value="" 
-														style="width: 500px;" placeholder="第{{item.id}}题第{{i}}空请点击此处作答"></label>
+														style="width: 500px;" placeholder="第{{item.quest_number}}题第{{i}}空请点击此处作答"></label>
 														<span id='answer_right_fill_q_{{item.object_id}}_{{i}}' class="glyphicon glyphicon-ok" style="color: green;display: none;"></span>
 														<span id='answer_wrong_fill_q_{{item.object_id}}_{{i}}' class="glyphicon glyphicon-remove" style="color: red;display: none;"></span>
 														<input class="hidden" name="fill_q_id"  value="{{item.object_id}}"/>

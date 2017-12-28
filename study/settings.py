@@ -29,6 +29,8 @@ SECRET_KEY = 'dcs^-wyqx)h9iw7hig_+-vvy07k48k(e)u759p!xqvi9fy+p72'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
+# 服务器端修改debug为False
+# DEBUG = TEMPLATE_DEBUG = True
 DEBUG = TEMPLATE_DEBUG = False
 ALLOWED_HOSTS = ['chenzhibin.vip','www.chenzhibin.vip','127.0.0.1']
 #DEBUG动态开启
