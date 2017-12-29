@@ -3833,3 +3833,198 @@ OSError: [Errno 22] Invalid argument
 2017-12-28 22:27:56.398116: wfastcgi.py 3.0.0 initialized
 2017-12-28 22:35:01.320029: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
 2017-12-28 22:35:01.320029: wfastcgi.py 3.0.0 initialized
+2017-12-28 22:54:53.148119: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-28 22:54:53.163732: wfastcgi.py 3.0.0 initialized
+2017-12-28 23:04:53.054371: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-28 23:04:53.054371: wfastcgi.py 3.0.0 initialized
+2017-12-28 23:04:53.241870: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-28 23:04:53.241870: wfastcgi.py 3.0.0 initialized
+2017-12-28 23:14:53.194984: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-28 23:14:53.194984: wfastcgi.py 3.0.0 initialized
+2017-12-28 23:14:53.304361: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-28 23:14:53.304361: wfastcgi.py 3.0.0 initialized
+2017-12-28 23:14:53.694977: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-28 23:14:53.694977: wfastcgi.py 3.0.0 initialized
+2017-12-28 23:14:53.866860: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-28 23:14:53.866860: wfastcgi.py 3.0.0 initialized
+2017-12-29 00:14:37.023142: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-29 00:14:37.023142: wfastcgi.py 3.0.0 initialized
+2017-12-29 00:24:53.507476: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-29 00:24:53.507476: wfastcgi.py 3.0.0 initialized
+2017-12-29 00:34:53.523116: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-29 00:34:53.523116: wfastcgi.py 3.0.0 initialized
+2017-12-29 00:44:53.570003: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-29 00:44:53.570003: wfastcgi.py 3.0.0 initialized
+2017-12-29 00:54:53.757492: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-29 00:54:53.773117: wfastcgi.py 3.0.0 initialized
+2017-12-29 01:44:39.882495: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-29 01:44:39.882495: wfastcgi.py 3.0.0 initialized
+2017-12-29 02:44:37.819982: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-29 02:44:37.819982: wfastcgi.py 3.0.0 initialized
+2017-12-29 02:54:54.273122: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-29 02:54:54.273122: wfastcgi.py 3.0.0 initialized
+2017-12-29 03:04:54.179359: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-29 03:04:54.179359: wfastcgi.py 3.0.0 initialized
+2017-12-29 03:04:59.194994: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-29 03:04:59.194994: wfastcgi.py 3.0.0 initialized
+2017-12-29 03:15:22.726244: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-29 03:15:22.726244: wfastcgi.py 3.0.0 initialized
+2017-12-29 03:24:37.163735: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-29 03:24:37.163735: wfastcgi.py 3.0.0 initialized
+2017-12-29 03:37:25.679364: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-29 03:37:25.679364: wfastcgi.py 3.0.0 initialized
+2017-12-29 04:04:37.819994: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-29 04:04:37.819994: wfastcgi.py 3.0.0 initialized
+2017-12-29 04:14:37.695007: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-29 04:14:37.695007: wfastcgi.py 3.0.0 initialized
+2017-12-29 04:24:37.991872: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-29 04:24:37.991872: wfastcgi.py 3.0.0 initialized
+2017-12-29 04:44:57.976215: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-29 04:44:57.976215: wfastcgi.py 3.0.0 initialized
+2017-12-29 04:54:54.929362: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-29 04:54:54.929362: wfastcgi.py 3.0.0 initialized
+2017-12-29 05:04:38.116869: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-29 05:04:38.116869: wfastcgi.py 3.0.0 initialized
+2017-12-29 05:24:38.101240: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-29 05:24:38.101240: wfastcgi.py 3.0.0 initialized
+2017-12-29 05:34:55.194992: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-29 05:34:55.194992: wfastcgi.py 3.0.0 initialized
+2017-12-29 05:44:39.273120: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-29 05:44:39.273120: wfastcgi.py 3.0.0 initialized
+2017-12-29 06:04:55.444995: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-29 06:04:55.444995: wfastcgi.py 3.0.0 initialized
+2017-12-29 06:05:00.413767: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-29 06:05:00.429377: wfastcgi.py 3.0.0 initialized
+2017-12-29 06:14:55.632489: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-29 06:14:55.632489: wfastcgi.py 3.0.0 initialized
+2017-12-29 06:14:55.835636: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-29 06:14:55.835636: wfastcgi.py 3.0.0 initialized
+2017-12-29 06:14:56.023113: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-29 06:14:56.023113: wfastcgi.py 3.0.0 initialized
+2017-12-29 06:14:56.116883: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-29 06:14:56.116883: wfastcgi.py 3.0.0 initialized
+2017-12-29 06:24:55.913768: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-29 06:24:55.913768: wfastcgi.py 3.0.0 initialized
+2017-12-29 06:24:55.929380: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-29 06:24:55.929380: wfastcgi.py 3.0.0 initialized
+2017-12-29 06:24:56.069999: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-29 06:24:56.069999: wfastcgi.py 3.0.0 initialized
+2017-12-29 06:24:56.241877: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-29 06:24:56.241877: wfastcgi.py 3.0.0 initialized
+2017-12-29 06:34:37.944988: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-29 06:34:37.944988: wfastcgi.py 3.0.0 initialized
+2017-12-29 06:41:32.945006: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-29 06:41:32.945006: wfastcgi.py 3.0.0 initialized
+2017-12-29 07:14:55.991855: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-29 07:14:55.991855: wfastcgi.py 3.0.0 initialized
+2017-12-29 07:24:56.101244: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-29 07:24:56.101244: wfastcgi.py 3.0.0 initialized
+2017-12-29 07:44:43.382488: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-29 07:44:43.382488: wfastcgi.py 3.0.0 initialized
+2017-12-29 08:17:05.523123: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-29 08:17:05.523123: wfastcgi.py 3.0.0 initialized
+2017-12-29 08:35:01.304396: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-29 08:35:01.304396: wfastcgi.py 3.0.0 initialized
+2017-12-29 08:35:01.491874: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-29 08:35:01.491874: wfastcgi.py 3.0.0 initialized
+2017-12-29 08:43:39.507479: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-29 08:43:39.507479: wfastcgi.py 3.0.0 initialized
+2017-12-29 08:44:56.351265: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-29 08:44:56.351265: wfastcgi.py 3.0.0 initialized
+2017-12-29 08:54:38.398102: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-29 08:54:38.398102: wfastcgi.py 3.0.0 initialized
+2017-12-29 09:04:56.382473: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-29 09:04:56.382473: wfastcgi.py 3.0.0 initialized
+2017-12-29 09:04:56.382473: wfastcgi.py 3.0.0 initialized
+2017-12-29 09:24:56.413739: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-29 09:24:56.413739: wfastcgi.py 3.0.0 initialized
+2017-12-29 09:24:56.710608: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-29 09:24:56.710608: wfastcgi.py 3.0.0 initialized
+2017-12-29 09:24:56.726234: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-29 09:24:56.726234: wfastcgi.py 3.0.0 initialized
+2017-12-29 09:37:18.257487: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-29 09:37:18.257487: wfastcgi.py 3.0.0 initialized
+2017-12-29 10:04:56.476241: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-29 10:04:56.476241: wfastcgi.py 3.0.0 initialized
+2017-12-29 10:14:35.632501: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-29 10:14:35.632501: wfastcgi.py 3.0.0 initialized
+2017-12-29 10:24:40.366863: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-29 10:24:40.366863: wfastcgi.py 3.0.0 initialized
+2017-12-29 10:38:43.976255: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-29 10:38:43.976255: wfastcgi.py 3.0.0 initialized
+2017-12-29 10:48:07.632497: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-29 10:48:07.632497: wfastcgi.py 3.0.0 initialized
+2017-12-29 11:07:23.616878: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-29 11:07:23.616878: wfastcgi.py 3.0.0 initialized
+2017-12-29 11:07:54.788749: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-29 11:07:54.804371: wfastcgi.py 3.0.0 initialized
+2017-12-29 11:14:56.788763: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-29 11:14:56.788763: wfastcgi.py 3.0.0 initialized
+2017-12-29 11:14:57.101247: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-29 11:14:57.101247: wfastcgi.py 3.0.0 initialized
+2017-12-29 11:14:57.163822: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-29 11:14:57.163822: wfastcgi.py 3.0.0 initialized
+2017-12-29 11:14:57.179387: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-29 11:14:57.179387: wfastcgi.py 3.0.0 initialized
+2017-12-29 11:24:39.616866: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-29 11:24:39.616866: wfastcgi.py 3.0.0 initialized
+2017-12-29 11:24:56.663722: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-29 11:24:56.663722: wfastcgi.py 3.0.0 initialized
+2017-12-29 11:33:27.851233: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-29 11:33:27.851233: wfastcgi.py 3.0.0 initialized
+2017-12-29 11:34:56.710604: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-29 11:34:56.710604: wfastcgi.py 3.0.0 initialized
+2017-12-29 11:44:56.773164: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-29 11:44:56.773164: wfastcgi.py 3.0.0 initialized
+2017-12-29 11:44:56.835629: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-29 11:44:56.835629: wfastcgi.py 3.0.0 initialized
+2017-12-29 11:44:57.366887: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-29 11:44:57.366887: wfastcgi.py 3.0.0 initialized
+2017-12-29 11:44:57.601249: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-29 11:44:57.601249: wfastcgi.py 3.0.0 initialized
+2017-12-29 11:44:57.741871: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-29 11:44:57.741871: wfastcgi.py 3.0.0 initialized
+2017-12-29 12:04:39.304383: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-29 12:04:39.304383: wfastcgi.py 3.0.0 initialized
+2017-12-29 12:46:10.741857: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-29 12:46:10.741857: wfastcgi.py 3.0.0 initialized
+2017-12-29 13:45:02.398102: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-29 13:45:02.398102: wfastcgi.py 3.0.0 initialized
+2017-12-29 13:54:57.429386: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-29 13:54:57.429386: wfastcgi.py 3.0.0 initialized
+2017-12-29 13:54:57.429386: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-29 13:54:57.429386: wfastcgi.py 3.0.0 initialized
+2017-12-29 14:04:57.507508: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-29 14:04:57.507508: wfastcgi.py 3.0.0 initialized
+2017-12-29 14:14:57.523143: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-29 14:14:57.788767: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-29 14:14:57.788767: wfastcgi.py 3.0.0 initialized
+2017-12-29 14:14:58.023126: wfastcgi.py 3.0.0 initialized
+2017-12-29 14:14:58.226236: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-29 14:14:58.226236: wfastcgi.py 3.0.0 initialized
+2017-12-29 14:14:58.335637: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-29 14:14:58.335637: wfastcgi.py 3.0.0 initialized
+2017-12-29 14:47:23.335606: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-29 14:47:23.335606: wfastcgi.py 3.0.0 initialized
+2017-12-29 14:54:57.663726: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-29 14:54:57.663726: wfastcgi.py 3.0.0 initialized
+2017-12-29 15:24:57.773118: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-29 15:24:57.773118: wfastcgi.py 3.0.0 initialized
+2017-12-29 15:24:57.835603: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-29 15:24:57.851226: wfastcgi.py 3.0.0 initialized
+2017-12-29 15:34:42.569979: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-29 15:34:42.585604: wfastcgi.py 3.0.0 initialized
+2017-12-29 15:54:41.882500: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-29 15:54:41.882500: wfastcgi.py 3.0.0 initialized
+2017-12-29 16:14:59.929366: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-29 16:14:59.929366: wfastcgi.py 3.0.0 initialized
+2017-12-29 16:23:45.569974: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-29 16:23:45.569974: wfastcgi.py 3.0.0 initialized
+2017-12-29 16:34:57.960621: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-29 16:34:57.960621: wfastcgi.py 3.0.0 initialized
+2017-12-29 16:34:58.054354: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-29 16:34:58.054354: wfastcgi.py 3.0.0 initialized
+2017-12-29 16:34:58.523125: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-29 16:34:58.523125: wfastcgi.py 3.0.0 initialized
+2017-12-29 16:46:55.069996: wfastcgi.py will restart when files in C:\Users\study\ are changed: .*((\.py)|(\.config))$
+2017-12-29 16:46:55.069996: wfastcgi.py 3.0.0 initialized
