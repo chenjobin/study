@@ -30,9 +30,9 @@ SECRET_KEY = 'dcs^-wyqx)h9iw7hig_+-vvy07k48k(e)u759p!xqvi9fy+p72'
 # SECURITY WARNING: don't run with debug turned on in production!
 
 # 服务器端修改debug为False
-# DEBUG = TEMPLATE_DEBUG = True
-DEBUG = TEMPLATE_DEBUG = False
-ALLOWED_HOSTS = ['chenzhibin.vip','www.chenzhibin.vip','127.0.0.1']
+DEBUG = TEMPLATE_DEBUG = True
+# DEBUG = TEMPLATE_DEBUG = False
+ALLOWED_HOSTS = ['chenzhibin.vip','www.chenzhibin.vip','127.0.0.1','localhost']
 #DEBUG动态开启
 
 # Application definition
@@ -152,7 +152,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # 公共的 static 文件，比如 jquery.js 可以放这里，这里面的文件夹不能包含 STATIC_ROOT
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, "common_static"),
+    os.path.join(BASE_DIR, "static_common"),
 )
 
 # upload folder
