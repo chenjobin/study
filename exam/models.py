@@ -44,6 +44,12 @@ class Exam_Topic_Second(models.Model):
 # 单项选择题
 class Single_Q(models.Model):
     '''单选题模型'''
+    STATUS_CHOICES = (
+        ('A', 'A'),
+        ('B', 'B'),
+        ('C', 'C'),
+        ('D', 'D'),
+    )
     topic = models.ForeignKey(Exam_Topic,verbose_name='归属主题')
     topic_second = models.ManyToManyField(Exam_Topic_Second,blank=True,verbose_name='归属二级主题')
 
@@ -55,10 +61,14 @@ class Single_Q(models.Model):
     title = UEditorField('题目', height=300, width=1000,
         default=u'', blank=True, imagePath="exam/uploads/images/",
         toolbars='besttome', filePath='exam/uploads/files/')
-    answer = models.CharField('正确选项',max_length=200,default=u'')
-    select_2 = models.CharField('选项2',max_length=200,default=u'')
-    select_3 = models.CharField('选项3',max_length=200,default=u'')
-    select_4 = models.CharField('选项4',max_length=200,default=u'')
+
+    answer = models.CharField('正确选项',max_length=10,
+                                choices=STATUS_CHOICES,
+                                default='')
+    # answer = models.CharField('正确选项',max_length=200,default=u'')
+    # select_2 = models.CharField('选项2',max_length=200,default=u'')
+    # select_3 = models.CharField('选项3',max_length=200,default=u'')
+    # select_4 = models.CharField('选项4',max_length=200,default=u'')
     answer_detail = UEditorField('答案解析', height=300, width=1000,
         default=u'', blank=True, imagePath="exam/uploads/images/",
         toolbars='besttome', filePath='exam/uploads/files/')

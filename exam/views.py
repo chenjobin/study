@@ -162,11 +162,16 @@ def exam_paper_show(request, exam_paper_id):
                     item.type_name = '单选题'
                     # item.url = reverse('exam:detail_selection', args = [item.object_id,])
                     single_q_selections=Single_Q.objects.get(id=item.object_id)
+                    # 下面五行是试卷页选择题answer选项，因为不在使用以往的直接答案，而是ABCD，所以也就用ABCD了
                     item.select_answers = []
-                    item.select_answers.append(single_q_selections.answer)
-                    item.select_answers.append(single_q_selections.select_2)
-                    item.select_answers.append(single_q_selections.select_3)
-                    item.select_answers.append(single_q_selections.select_4)
+                    # item.select_answers.append(single_q_selections.answer)
+                    # item.select_answers.append(single_q_selections.select_2)
+                    # item.select_answers.append(single_q_selections.select_3)
+                    # item.select_answers.append(single_q_selections.select_4)
+                    item.select_answers.append('A')
+                    item.select_answers.append('B')
+                    item.select_answers.append('C')
+                    item.select_answers.append('D')
 
                     item.title = obj.title
                     item.answer = obj.answer
@@ -264,6 +269,7 @@ def exam_check(request):
 def single_check_answer(request,answer,single_q_id):
     single_q=Single_Q.objects.get(id=single_q_id)
     correct_answer=single_q.answer
+    correct_answer=''.join(correct_answer.split())   #去除空格
 
     # 不管是否答题错误，都将其收入错题集，通过正确次数与错误次数的判断，来进行判定掌握
     single_wrong=SingleWrongAnswer.objects.filter(user=request.user,question=single_q)

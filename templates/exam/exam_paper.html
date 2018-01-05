@@ -3,12 +3,12 @@
  
 <script>
 $(document).ready(function() {	
-	{# 选择题选项随机排列  #}
-	$("#question #select_li").each(function(){
-			if(parseInt(Math.random()*2)==0){
-				$(this).prependTo($(this).parent());
-			}	
-	});
+//	{# 选择题选项随机排列  #}
+//	$("#question #select_li").each(function(){
+//			if(parseInt(Math.random()*2)==0){
+//				$(this).prependTo($(this).parent());
+//			}	
+//	});
 	
 	$('#exam_form').submit(function() {
         $.ajax({

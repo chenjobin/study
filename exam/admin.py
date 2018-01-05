@@ -16,7 +16,7 @@ class Single_QAdmin(admin.ModelAdmin):
     list_display = ('caption','id','author','topic','date_added', 'date_update','recommend')
     list_per_page = 15
     fields = (('topic', 'author','recommend'),( 'topic_second','tags'),'caption','title',
-              'answer',('select_2','select_3','select_4'),'answer_detail')
+              'answer','answer_detail')
 
 class Fill_AnswerInline(admin.TabularInline):
     model = Fill_Answer

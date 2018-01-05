@@ -10,12 +10,12 @@
 <script type="text/javascript" src="/media/emoji_demo_min/js/emojionearea-2.1.3.min.js"></script>
 <script>
 $(document).ready(function() {	
-	{# 选择题选项随机排列  #}
-	$("#question #select_li").each(function(){
-			if(parseInt(Math.random()*2)==0){
-				$(this).prependTo($(this).parent());
-			}	
-	});
+	//{# 选择题选项随机排列  #}
+	//$("#question #select_li").each(function(){
+		//	if(parseInt(Math.random()*2)==0){
+			//	$(this).prependTo($(this).parent());
+			//}	
+	//});
 	
 	$('#exam_form').submit(function() {
         $.ajax({
