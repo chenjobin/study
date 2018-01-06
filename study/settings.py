@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'users',
     'subject',
     'exam',
+    'shop',
 ]
 
 SITE_ID = 1 #django-contrib-comments模块引入
