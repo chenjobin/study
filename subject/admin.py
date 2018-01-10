@@ -28,4 +28,8 @@ class SubjectItemInline(admin.TabularInline):
 @admin.register(SubjectChapter)
 class SubjectChapterAdmin(admin.ModelAdmin):
     list_display=('subject', 'title', 'create_time')
+    # 筛选器
+    search_fields =['subject__caption'] #搜索所属专题caption字段
+    date_hierarchy = 'subject__create_time'    # 按专题创建时间分层筛选
+
     inlines = [SubjectItemInline,]

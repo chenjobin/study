@@ -15,13 +15,21 @@ class Exam_Topic_SecondAdmin(admin.ModelAdmin):
 class Single_QAdmin(admin.ModelAdmin):
     list_display = ('title_format','id','topic','author','recommend','date_added')
     list_per_page = 15
-    fields = (('topic', 'author','recommend'),( 'topic_second','tags'),'title',
+    fields = (('topic','recommend'),'topic_second','tags','title',
               'answer','answer_detail')
     list_editable = ['topic', 'recommend']
     # 筛选器
     list_filter =('topic', 'recommend','author__username') # 过滤器
     search_fields =['title'] #搜索字段
     date_hierarchy = 'date_added'    # 详细时间分层筛选
+
+    filter_horizontal=('topic_second','tags')
+
+    # 若author字段为空，则定义author当前操作的用户
+    def save_model(self, request, obj, form, change):
+        if not obj.author:
+            obj.author = request.user
+        obj.save()
 
 class Fill_AnswerInline(admin.TabularInline):
     model = Fill_Answer
@@ -30,14 +38,22 @@ class Fill_AnswerInline(admin.TabularInline):
 class Fill_QAdmin(admin.ModelAdmin):
     list_display = ('title_format','id','topic','author','recommend','date_added')
     list_per_page = 15
-    fields = (('topic', 'author','recommend'), ( 'topic_second','tags'),'title','answer_detail')
+    fields = (('topic','recommend'), 'topic_second','tags','title','answer_detail')
     list_editable = ['topic', 'recommend']
     # 筛选器
     list_filter =('topic', 'recommend','author__username') # 过滤器
     search_fields =['title'] #搜索字段
     date_hierarchy = 'date_added'    # 详细时间分层筛选
 
+    filter_horizontal=('topic_second','tags')
+
     inlines=[Fill_AnswerInline]
+
+    # 若author字段为空，则定义author当前操作的用户
+    def save_model(self, request, obj, form, change):
+        if not obj.author:
+            obj.author = request.user
+        obj.save()
 
 class SingleWrongAnswerAdmin(admin.ModelAdmin):
     list_display = ('question','user','first_right_times','correct_times','wrong_times')
@@ -74,6 +90,10 @@ class ExaminationPaperItemInline(admin.TabularInline):
 class ExaminationPaperChapterAdmin(admin.ModelAdmin):
     list_display=('examination_paper', 'title', 'create_time')
     inlines = [ExaminationPaperItemInline,]
+    # 筛选器
+    list_filter =('examination_paper__exam_paper_type', ) # 以试卷类型作为过滤器
+    search_fields =['examination_paper__caption'] #搜索所属试卷caption字段
+    date_hierarchy = 'examination_paper__create_time'    # 按试卷创建时间分层筛选
 
 admin.site.register(Exam_Topic,Exam_TopicAdmin)
 admin.site.register(Exam_Topic_Second,Exam_Topic_SecondAdmin)
