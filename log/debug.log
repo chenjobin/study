@@ -13861,3 +13861,554 @@ Traceback (most recent call last):
   File "C:\Anaconda3\envs\web\lib\site-packages\django\contrib\admin\options.py", line 651, in get_form
     % (e, self.__class__.__name__)
 django.core.exceptions.FieldError: Unknown field(s) (select_2, select_3, select_4) specified for Single_Q. Check fields/fieldsets/exclude attributes of class Single_QAdmin.
+2018-01-10 15:34:28,883 [Thread-3:12256] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /admin/exam/fill_q/
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\db\models\options.py", line 617, in get_field
+    return self.fields_map[field_name]
+KeyError: 'title_format'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\contrib\admin\utils.py", line 283, in lookup_field
+    f = _get_non_gfk_field(opts, name)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\contrib\admin\utils.py", line 317, in _get_non_gfk_field
+    field = opts.get_field(name)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\db\models\options.py", line 619, in get_field
+    raise FieldDoesNotExist("%s has no field named '%s'" % (self.object_name, field_name))
+django.core.exceptions.FieldDoesNotExist: Fill_Q has no field named 'title_format'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 217, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 215, in _get_response
+    response = response.render()
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\response.py", line 107, in render
+    self.content = self.rendered_content
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\response.py", line 84, in rendered_content
+    content = template.render(context, self._request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\backends\django.py", line 66, in render
+    return self.template.render(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 207, in render
+    return self._render(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 990, in render
+    bit = node.render_annotated(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 957, in render_annotated
+    return self.render(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\loader_tags.py", line 177, in render
+    return compiled_parent._render(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 990, in render
+    bit = node.render_annotated(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 957, in render_annotated
+    return self.render(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\loader_tags.py", line 177, in render
+    return compiled_parent._render(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 990, in render
+    bit = node.render_annotated(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 957, in render_annotated
+    return self.render(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\loader_tags.py", line 72, in render
+    result = block.nodelist.render(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 990, in render
+    bit = node.render_annotated(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 957, in render_annotated
+    return self.render(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\loader_tags.py", line 72, in render
+    result = block.nodelist.render(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 990, in render
+    bit = node.render_annotated(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 957, in render_annotated
+    return self.render(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\library.py", line 225, in render
+    _dict = self.func(*resolved_args, **resolved_kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\contrib\admin\templatetags\admin_list.py", line 340, in result_list
+    'results': list(results(cl))}
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\contrib\admin\templatetags\admin_list.py", line 316, in results
+    yield ResultList(None, items_for_result(cl, res, None))
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\contrib\admin\templatetags\admin_list.py", line 307, in __init__
+    super(ResultList, self).__init__(*items)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\contrib\admin\templatetags\admin_list.py", line 218, in items_for_result
+    f, attr, value = lookup_field(field_name, result, cl.model_admin)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\contrib\admin\utils.py", line 299, in lookup_field
+    value = attr()
+  File "F:\Django\study\exam\models.py", line 130, in title_format
+    return format_html(self.title[:300]+'...',)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\utils\html.py", line 100, in format_html
+    return mark_safe(format_string.format(*args_safe, **kwargs_safe))
+IndexError: tuple index out of range
+2018-01-10 15:34:55,866 [Thread-2:8680] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /admin/exam/fill_q/
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\db\models\options.py", line 617, in get_field
+    return self.fields_map[field_name]
+KeyError: 'title_format'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\contrib\admin\utils.py", line 283, in lookup_field
+    f = _get_non_gfk_field(opts, name)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\contrib\admin\utils.py", line 317, in _get_non_gfk_field
+    field = opts.get_field(name)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\db\models\options.py", line 619, in get_field
+    raise FieldDoesNotExist("%s has no field named '%s'" % (self.object_name, field_name))
+django.core.exceptions.FieldDoesNotExist: Fill_Q has no field named 'title_format'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 217, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 215, in _get_response
+    response = response.render()
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\response.py", line 107, in render
+    self.content = self.rendered_content
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\response.py", line 84, in rendered_content
+    content = template.render(context, self._request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\backends\django.py", line 66, in render
+    return self.template.render(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 207, in render
+    return self._render(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 990, in render
+    bit = node.render_annotated(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 957, in render_annotated
+    return self.render(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\loader_tags.py", line 177, in render
+    return compiled_parent._render(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 990, in render
+    bit = node.render_annotated(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 957, in render_annotated
+    return self.render(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\loader_tags.py", line 177, in render
+    return compiled_parent._render(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 990, in render
+    bit = node.render_annotated(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 957, in render_annotated
+    return self.render(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\loader_tags.py", line 72, in render
+    result = block.nodelist.render(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 990, in render
+    bit = node.render_annotated(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 957, in render_annotated
+    return self.render(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\loader_tags.py", line 72, in render
+    result = block.nodelist.render(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 990, in render
+    bit = node.render_annotated(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 957, in render_annotated
+    return self.render(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\library.py", line 225, in render
+    _dict = self.func(*resolved_args, **resolved_kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\contrib\admin\templatetags\admin_list.py", line 340, in result_list
+    'results': list(results(cl))}
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\contrib\admin\templatetags\admin_list.py", line 316, in results
+    yield ResultList(None, items_for_result(cl, res, None))
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\contrib\admin\templatetags\admin_list.py", line 307, in __init__
+    super(ResultList, self).__init__(*items)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\contrib\admin\templatetags\admin_list.py", line 218, in items_for_result
+    f, attr, value = lookup_field(field_name, result, cl.model_admin)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\contrib\admin\utils.py", line 299, in lookup_field
+    value = attr()
+  File "F:\Django\study\exam\models.py", line 130, in title_format
+    return format_html(self.title[:200]+'...',)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\utils\html.py", line 100, in format_html
+    return mark_safe(format_string.format(*args_safe, **kwargs_safe))
+IndexError: tuple index out of range
+2018-01-10 15:35:11,587 [Thread-16:7560] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /admin/exam/fill_q/
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\db\models\options.py", line 617, in get_field
+    return self.fields_map[field_name]
+KeyError: 'title_format'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\contrib\admin\utils.py", line 283, in lookup_field
+    f = _get_non_gfk_field(opts, name)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\contrib\admin\utils.py", line 317, in _get_non_gfk_field
+    field = opts.get_field(name)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\db\models\options.py", line 619, in get_field
+    raise FieldDoesNotExist("%s has no field named '%s'" % (self.object_name, field_name))
+django.core.exceptions.FieldDoesNotExist: Fill_Q has no field named 'title_format'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 217, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 215, in _get_response
+    response = response.render()
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\response.py", line 107, in render
+    self.content = self.rendered_content
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\response.py", line 84, in rendered_content
+    content = template.render(context, self._request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\backends\django.py", line 66, in render
+    return self.template.render(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 207, in render
+    return self._render(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 990, in render
+    bit = node.render_annotated(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 957, in render_annotated
+    return self.render(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\loader_tags.py", line 177, in render
+    return compiled_parent._render(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 990, in render
+    bit = node.render_annotated(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 957, in render_annotated
+    return self.render(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\loader_tags.py", line 177, in render
+    return compiled_parent._render(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 990, in render
+    bit = node.render_annotated(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 957, in render_annotated
+    return self.render(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\loader_tags.py", line 72, in render
+    result = block.nodelist.render(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 990, in render
+    bit = node.render_annotated(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 957, in render_annotated
+    return self.render(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\loader_tags.py", line 72, in render
+    result = block.nodelist.render(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 990, in render
+    bit = node.render_annotated(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 957, in render_annotated
+    return self.render(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\library.py", line 225, in render
+    _dict = self.func(*resolved_args, **resolved_kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\contrib\admin\templatetags\admin_list.py", line 340, in result_list
+    'results': list(results(cl))}
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\contrib\admin\templatetags\admin_list.py", line 316, in results
+    yield ResultList(None, items_for_result(cl, res, None))
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\contrib\admin\templatetags\admin_list.py", line 307, in __init__
+    super(ResultList, self).__init__(*items)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\contrib\admin\templatetags\admin_list.py", line 218, in items_for_result
+    f, attr, value = lookup_field(field_name, result, cl.model_admin)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\contrib\admin\utils.py", line 299, in lookup_field
+    value = attr()
+  File "F:\Django\study\exam\models.py", line 130, in title_format
+    return format_html(self.title[:200]+'...',)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\utils\html.py", line 100, in format_html
+    return mark_safe(format_string.format(*args_safe, **kwargs_safe))
+IndexError: tuple index out of range
+2018-01-10 15:35:12,781 [Thread-17:14268] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /admin/exam/fill_q/
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\db\models\options.py", line 617, in get_field
+    return self.fields_map[field_name]
+KeyError: 'title_format'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\contrib\admin\utils.py", line 283, in lookup_field
+    f = _get_non_gfk_field(opts, name)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\contrib\admin\utils.py", line 317, in _get_non_gfk_field
+    field = opts.get_field(name)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\db\models\options.py", line 619, in get_field
+    raise FieldDoesNotExist("%s has no field named '%s'" % (self.object_name, field_name))
+django.core.exceptions.FieldDoesNotExist: Fill_Q has no field named 'title_format'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 217, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 215, in _get_response
+    response = response.render()
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\response.py", line 107, in render
+    self.content = self.rendered_content
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\response.py", line 84, in rendered_content
+    content = template.render(context, self._request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\backends\django.py", line 66, in render
+    return self.template.render(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 207, in render
+    return self._render(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 990, in render
+    bit = node.render_annotated(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 957, in render_annotated
+    return self.render(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\loader_tags.py", line 177, in render
+    return compiled_parent._render(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 990, in render
+    bit = node.render_annotated(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 957, in render_annotated
+    return self.render(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\loader_tags.py", line 177, in render
+    return compiled_parent._render(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 990, in render
+    bit = node.render_annotated(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 957, in render_annotated
+    return self.render(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\loader_tags.py", line 72, in render
+    result = block.nodelist.render(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 990, in render
+    bit = node.render_annotated(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 957, in render_annotated
+    return self.render(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\loader_tags.py", line 72, in render
+    result = block.nodelist.render(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 990, in render
+    bit = node.render_annotated(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 957, in render_annotated
+    return self.render(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\library.py", line 225, in render
+    _dict = self.func(*resolved_args, **resolved_kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\contrib\admin\templatetags\admin_list.py", line 340, in result_list
+    'results': list(results(cl))}
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\contrib\admin\templatetags\admin_list.py", line 316, in results
+    yield ResultList(None, items_for_result(cl, res, None))
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\contrib\admin\templatetags\admin_list.py", line 307, in __init__
+    super(ResultList, self).__init__(*items)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\contrib\admin\templatetags\admin_list.py", line 218, in items_for_result
+    f, attr, value = lookup_field(field_name, result, cl.model_admin)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\contrib\admin\utils.py", line 299, in lookup_field
+    value = attr()
+  File "F:\Django\study\exam\models.py", line 130, in title_format
+    return format_html(self.title[:200]+'...',)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\utils\html.py", line 100, in format_html
+    return mark_safe(format_string.format(*args_safe, **kwargs_safe))
+IndexError: tuple index out of range
+2018-01-10 15:36:04,504 [Thread-2:12392] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /admin/exam/fill_q/
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\db\models\options.py", line 617, in get_field
+    return self.fields_map[field_name]
+KeyError: 'title_format'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\contrib\admin\utils.py", line 283, in lookup_field
+    f = _get_non_gfk_field(opts, name)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\contrib\admin\utils.py", line 317, in _get_non_gfk_field
+    field = opts.get_field(name)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\db\models\options.py", line 619, in get_field
+    raise FieldDoesNotExist("%s has no field named '%s'" % (self.object_name, field_name))
+django.core.exceptions.FieldDoesNotExist: Fill_Q has no field named 'title_format'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 217, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 215, in _get_response
+    response = response.render()
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\response.py", line 107, in render
+    self.content = self.rendered_content
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\response.py", line 84, in rendered_content
+    content = template.render(context, self._request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\backends\django.py", line 66, in render
+    return self.template.render(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 207, in render
+    return self._render(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 990, in render
+    bit = node.render_annotated(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 957, in render_annotated
+    return self.render(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\loader_tags.py", line 177, in render
+    return compiled_parent._render(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 990, in render
+    bit = node.render_annotated(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 957, in render_annotated
+    return self.render(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\loader_tags.py", line 177, in render
+    return compiled_parent._render(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 990, in render
+    bit = node.render_annotated(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 957, in render_annotated
+    return self.render(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\loader_tags.py", line 72, in render
+    result = block.nodelist.render(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 990, in render
+    bit = node.render_annotated(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 957, in render_annotated
+    return self.render(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\loader_tags.py", line 72, in render
+    result = block.nodelist.render(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 990, in render
+    bit = node.render_annotated(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 957, in render_annotated
+    return self.render(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\library.py", line 225, in render
+    _dict = self.func(*resolved_args, **resolved_kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\contrib\admin\templatetags\admin_list.py", line 340, in result_list
+    'results': list(results(cl))}
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\contrib\admin\templatetags\admin_list.py", line 316, in results
+    yield ResultList(None, items_for_result(cl, res, None))
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\contrib\admin\templatetags\admin_list.py", line 307, in __init__
+    super(ResultList, self).__init__(*items)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\contrib\admin\templatetags\admin_list.py", line 218, in items_for_result
+    f, attr, value = lookup_field(field_name, result, cl.model_admin)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\contrib\admin\utils.py", line 299, in lookup_field
+    value = attr()
+  File "F:\Django\study\exam\models.py", line 130, in title_format
+    return format_html(self.title[:200]+'...',)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\utils\html.py", line 100, in format_html
+    return mark_safe(format_string.format(*args_safe, **kwargs_safe))
+IndexError: tuple index out of range
+2018-01-10 16:09:59,970 [Thread-13:11728] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /admin/blog/entry/
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\contrib\admin\options.py", line 551, in wrapper
+    return self.admin_site.admin_view(view)(*args, **kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\utils\decorators.py", line 149, in _wrapped_view
+    response = view_func(request, *args, **kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\views\decorators\cache.py", line 57, in _wrapped_view_func
+    response = view_func(request, *args, **kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\contrib\admin\sites.py", line 224, in inner
+    return view(request, *args, **kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\utils\decorators.py", line 67, in _wrapper
+    return bound_func(*args, **kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\utils\decorators.py", line 149, in _wrapped_view
+    response = view_func(request, *args, **kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\utils\decorators.py", line 63, in bound_func
+    return func.__get__(self, type(self))(*args2, **kwargs2)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\contrib\admin\options.py", line 1542, in changelist_view
+    self.list_max_show_all, self.list_editable, self,
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\contrib\admin\views\main.py", line 78, in __init__
+    self.queryset = self.get_queryset(request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\contrib\admin\views\main.py", line 351, in get_queryset
+    qs, search_use_distinct = self.model_admin.get_search_results(request, qs, self.query)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\contrib\admin\options.py", line 910, in get_search_results
+    queryset = queryset.filter(reduce(operator.or_, or_queries))
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\db\models\query.py", line 784, in filter
+    return self._filter_or_exclude(False, *args, **kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\db\models\query.py", line 802, in _filter_or_exclude
+    clone.query.add_q(Q(*args, **kwargs))
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\db\models\sql\query.py", line 1250, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\db\models\sql\query.py", line 1270, in _add_q
+    current_negated, allow_joins, split_subq)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\db\models\sql\query.py", line 1276, in _add_q
+    allow_joins=allow_joins, split_subq=split_subq,
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\db\models\sql\query.py", line 1201, in build_filter
+    raise FieldError('Related Field got invalid lookup: {}'.format(lookups[0]))
+django.core.exceptions.FieldError: Related Field got invalid lookup: icontains
+2018-01-10 16:37:40,690 [Thread-2:11052] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /admin/exam/fillwronganswer/
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\db\models\options.py", line 617, in get_field
+    return self.fields_map[field_name]
+KeyError: 'question_format'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\contrib\admin\utils.py", line 283, in lookup_field
+    f = _get_non_gfk_field(opts, name)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\contrib\admin\utils.py", line 317, in _get_non_gfk_field
+    field = opts.get_field(name)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\db\models\options.py", line 619, in get_field
+    raise FieldDoesNotExist("%s has no field named '%s'" % (self.object_name, field_name))
+django.core.exceptions.FieldDoesNotExist: FillWrongAnswer has no field named 'question_format'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 217, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 215, in _get_response
+    response = response.render()
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\response.py", line 107, in render
+    self.content = self.rendered_content
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\response.py", line 84, in rendered_content
+    content = template.render(context, self._request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\backends\django.py", line 66, in render
+    return self.template.render(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 207, in render
+    return self._render(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 990, in render
+    bit = node.render_annotated(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 957, in render_annotated
+    return self.render(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\loader_tags.py", line 177, in render
+    return compiled_parent._render(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 990, in render
+    bit = node.render_annotated(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 957, in render_annotated
+    return self.render(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\loader_tags.py", line 177, in render
+    return compiled_parent._render(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 199, in _render
+    return self.nodelist.render(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 990, in render
+    bit = node.render_annotated(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 957, in render_annotated
+    return self.render(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\loader_tags.py", line 72, in render
+    result = block.nodelist.render(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 990, in render
+    bit = node.render_annotated(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 957, in render_annotated
+    return self.render(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\loader_tags.py", line 72, in render
+    result = block.nodelist.render(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 990, in render
+    bit = node.render_annotated(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 957, in render_annotated
+    return self.render(context)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\library.py", line 225, in render
+    _dict = self.func(*resolved_args, **resolved_kwargs)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\contrib\admin\templatetags\admin_list.py", line 340, in result_list
+    'results': list(results(cl))}
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\contrib\admin\templatetags\admin_list.py", line 316, in results
+    yield ResultList(None, items_for_result(cl, res, None))
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\contrib\admin\templatetags\admin_list.py", line 307, in __init__
+    super(ResultList, self).__init__(*items)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\contrib\admin\templatetags\admin_list.py", line 218, in items_for_result
+    f, attr, value = lookup_field(field_name, result, cl.model_admin)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\contrib\admin\utils.py", line 299, in lookup_field
+    value = attr()
+  File "F:\Django\study\exam\models.py", line 259, in question_format
+    return format_html(self.question[:100]+'...',)
+TypeError: 'Fill_Q' object is not subscriptable

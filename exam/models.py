@@ -4,6 +4,7 @@ from DjangoUeditor.models import UEditorField
 from blog.models import Tag
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericForeignKey
+from django.utils.html import format_html
 
 class Exam_Topic(models.Model):
     '''题目的主题'''
@@ -57,7 +58,7 @@ class Single_Q(models.Model):
     tags = models.ManyToManyField(Tag,blank=True,verbose_name='标签') #多对多字段，绑定下面的Tag模型
     recommend = models.BooleanField('重点题目',default=False) #布尔字段，我用于标记是否是重点题
     # 考虑到HTML的影响，加入简化版，其实是和title一样
-    caption = models.CharField('题目简化版',max_length=200)
+    # caption = models.CharField('题目简化版',max_length=200)
     title = UEditorField('题目', height=300, width=1000,
         default=u'', blank=True, imagePath="exam/uploads/images/",
         toolbars='besttome', filePath='exam/uploads/files/')
@@ -70,7 +71,7 @@ class Single_Q(models.Model):
     # select_3 = models.CharField('选项3',max_length=200,default=u'')
     # select_4 = models.CharField('选项4',max_length=200,default=u'')
     answer_detail = UEditorField('答案解析', height=300, width=1000,
-        default=u'', blank=True, imagePath="exam/uploads/images/",
+        default=u'略', blank=True, imagePath="exam/uploads/images/",
         toolbars='besttome', filePath='exam/uploads/files/')
 
     date_added = models.DateTimeField('发布时间',auto_now_add=True)
@@ -82,10 +83,14 @@ class Single_Q(models.Model):
 
     def __str__(self):
         '''返回模型的字符串表示'''
-        if len(self.caption)>50:
-            return self.caption[:50] + '...'
+        if len(self.title)>50:
+            return format_html(self.title[:50]+'...',)
         else:
-            return self.caption[:50]
+            return format_html(self.title,)
+    #  admin页面，题目 html代码解析
+    def title_format(self):
+        return format_html(self.title[:200]+'...',)
+    title_format.short_description='题目内容'
 
 # 填空题
 class Fill_Q(models.Model):
@@ -96,13 +101,13 @@ class Fill_Q(models.Model):
     tags = models.ManyToManyField(Tag,blank=True,verbose_name='标签') #多对多字段，绑定下面的Tag模型
     recommend = models.BooleanField('重点题目',default=False) #布尔字段，我用于标记是否是重点题
     # 考虑到HTML的影响，加入简化版，其实是和title一样
-    caption = models.CharField('题目简化版',max_length=200)
+    # caption = models.CharField('题目简化版',max_length=200)
     # blank_num=models.PositiveIntegerField(default=1,verbose_name='空白数') # 记录填空的数量
     title = UEditorField('题目', height=300, width=1000,
         default=u'', blank=True, imagePath="exam/uploads/images/",
         toolbars='besttome', filePath='exam/uploads/files/')
     answer_detail = UEditorField('答案解析', height=300, width=1000,
-        default=u'', blank=True, imagePath="exam/uploads/images/",
+        default=u'略', blank=True, imagePath="exam/uploads/images/",
         toolbars='besttome', filePath='exam/uploads/files/')
 
 
@@ -115,17 +120,21 @@ class Fill_Q(models.Model):
 
     def __str__(self):
         '''返回模型的字符串表示'''
-        if len(self.caption)>50:
-            return self.caption[:50] + '...'
+        if len(self.title)>50:
+            return format_html(self.title[:50]+'...',)
         else:
-            return self.caption[:50]
+            return format_html(self.title,)
+    #  admin页面，题目 html代码解析
+    def title_format(self):
+        return format_html(self.title[:100]+'...',)
+    title_format.short_description=u'题目内容'
 
 # 填空题答案
 class Fill_Answer(models.Model):
     '''填空题模型答案'''
     fill_q = models.ForeignKey(Fill_Q,verbose_name='归属填空题')
     # 增加属性，区分本题是否为仅有几种有限的答案
-    is_only=models.BooleanField('答案形式确定',default=False)
+    is_only=models.BooleanField('答案形式确定',default=True)
     # 一般情况下，只有一个answer
     answer1=models.CharField('正确答案1',max_length=200,default=u'')
     answer2=models.CharField('正确答案2',max_length=200,default=u'')
@@ -245,6 +254,7 @@ class FillWrongAnswer(models.Model):
         else:
             self.is_show=True
         self.save(update_fields=['is_show'])
+
 
 class ExaminationPaperType(models.Model):
     '''subject type'''

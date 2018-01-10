@@ -4058,3 +4058,5 @@ OSError: [Errno 22] Invalid argument
 2017-12-31 17:33:25.950807: wfastcgi.py 3.0.0 initialized
 2017-12-31 17:37:48.222110: wfastcgi.py will restart when files in F:\Django\study\ are changed: .*((\.py)|(\.config))$
 2017-12-31 17:37:48.223109: wfastcgi.py 3.0.0 initialized
+2018-01-07 21:17:26.415282: wfastcgi.py will restart when files in F:\Django\study\ are changed: .*((\.py)|(\.config))$
+2018-01-07 21:17:26.431144: wfastcgi.py 3.0.0 initialized

@@ -2,7 +2,6 @@ from django.contrib import admin
 
 from blog.models import Topic,Entry,Tag
 
-# Register your models here.
 
 class TopicAdmin(admin.ModelAdmin):
     list_display = ('text', 'date_added', 'date_update','owner')
@@ -17,9 +16,14 @@ class TopicAdmin(admin.ModelAdmin):
 
 
 class EntryAdmin(admin.ModelAdmin):
-    list_display = ('title','id','author','topic','date_added', 'date_update','recommend')
+    list_display = ('title','id','author','topic','recommend','date_added', 'date_update')
     list_per_page = 15
     fields = (('topic', 'author'), 'tags',('recommend','top_in'),'title','text')
+    list_editable = ['topic', 'recommend']
+    # 筛选器
+    list_filter =('topic', 'recommend','author__username') # 过滤器
+    search_fields =['title'] #搜索字段
+    date_hierarchy = 'date_update'    # 详细时间分层筛选
     # 将prepopulated_fields设置为将字段名称映射到其应预先填充的字段的字典：
     # prepopulated_fields = {'author': ('title',)}
 

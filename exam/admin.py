@@ -13,26 +13,45 @@ class Exam_Topic_SecondAdmin(admin.ModelAdmin):
     fields = (('topic', 'recommend'), 'caption','description')
 
 class Single_QAdmin(admin.ModelAdmin):
-    list_display = ('caption','id','author','topic','date_added', 'date_update','recommend')
+    list_display = ('title_format','id','topic','author','recommend','date_added')
     list_per_page = 15
-    fields = (('topic', 'author','recommend'),( 'topic_second','tags'),'caption','title',
+    fields = (('topic', 'author','recommend'),( 'topic_second','tags'),'title',
               'answer','answer_detail')
+    list_editable = ['topic', 'recommend']
+    # 筛选器
+    list_filter =('topic', 'recommend','author__username') # 过滤器
+    search_fields =['title'] #搜索字段
+    date_hierarchy = 'date_added'    # 详细时间分层筛选
 
 class Fill_AnswerInline(admin.TabularInline):
     model = Fill_Answer
     extra = 3
 
 class Fill_QAdmin(admin.ModelAdmin):
-    list_display = ('caption','author','id','topic','date_added', 'date_update','recommend')
+    list_display = ('title_format','id','topic','author','recommend','date_added')
     list_per_page = 15
-    fields = (('topic', 'author','recommend'), ( 'topic_second','tags'),'caption','title','answer_detail')
+    fields = (('topic', 'author','recommend'), ( 'topic_second','tags'),'title','answer_detail')
+    list_editable = ['topic', 'recommend']
+    # 筛选器
+    list_filter =('topic', 'recommend','author__username') # 过滤器
+    search_fields =['title'] #搜索字段
+    date_hierarchy = 'date_added'    # 详细时间分层筛选
+
     inlines=[Fill_AnswerInline]
 
 class SingleWrongAnswerAdmin(admin.ModelAdmin):
     list_display = ('question','user','first_right_times','correct_times','wrong_times')
+    # 筛选器
+    list_filter =['user__username'] # 过滤器
+    search_fields =['title'] #搜索字段
+    date_hierarchy = 'date_update'    # 详细时间分层筛选
 
 class FillWrongAnswerAdmin(admin.ModelAdmin):
     list_display = ('question','user','wrong_fill_n','first_right_times','correct_times','wrong_times')
+    # 筛选器
+    list_filter =['user__username'] # 过滤器
+    search_fields =['title'] #搜索字段
+    date_hierarchy = 'date_update'    # 详细时间分层筛选
 
 # 试卷分类
 class ExaminationPaperTypeAdmin(admin.ModelAdmin):
