@@ -3,10 +3,67 @@
 {% block title %}
     {% if category %}{{ category.name }}{% else %}Products{% endif %}
 {% endblock title%}
+{% block head %}
+<style>
+	/*抄自专题，直接用了*/
+.subject_list{ overflow: hidden; min-height: 400px}
+.subject{ float: left; width: 259px; padding: 10px; margin: 8px; border: 1px solid #ddd; border-radius: 6px; box-shadow: 0 0 5px rgba(0,0,0,0.10);}
+.subject a:hover{ text-decoration: none;}
+.subject a:active{ text-decoration: none;}
+
+.subject_img{ width: 237px; height: 200px;margin-bottom: 15px; border: 1px solid #ddd;}
+.subject_number{
+    text-align: right;
+    position: relative;
+    top: -37px;
+    padding: 3px 8px 1px;
+    font-size: smaller;
+
+    -webkit-transition:all 0.5s ease-in-out;
+    -moz-transition:all 0.5s ease-in-out;
+    -ms-transition:all 0.5s ease-in-out;
+    -o-transition:all 0.5s ease-in-out;
+    transition:all 0.5s ease-in-out;
+
+    background: rgba(0,0,0,0);
+    color: rgba(0,0,0,0);
+}
+.subject a:hover .subject_number{
+    -webkit-transition:all 0.5s ease-in-out;
+    -moz-transition:all 0.5s ease-in-out;
+    -ms-transition:all 0.5s ease-in-out;
+    -o-transition:all 0.5s ease-in-out;
+    transition:all 0.5s ease-in-out;
+
+    background: rgba(255, 255, 255, 0.5);
+    color: #000;
+}
+
+.subject_text{ margin-left: 6px;}
+.subject_title{ margin: 4px 0; margin-top: -26px; color: #000;}
+.subject_descript{ margin: 0; font-size: 85%; color: #777; border-top: 1px dashed #aaa; padding-top: 10px;}
+.subject_type{ font-size: smaller; color: #777;}
+.subject_static{ color: #4caf50; font-weight: bold; }
+.subject_static_red{ color: #FF5722;}
+
+@media (max-width: 768px){
+    .subject{ width: 152px;}
+    .subject_img{ width: 130px;}
+    .subject_title{ font-size: 1em;}
+}
+</style>
+{% endblock head %}
+{% block header %}	
+      <div class="jumbotron">
+        <h1>商城</h1>
+        <p>列出一些教程或者书籍</p>
+      </div>
+{% endblock header %}
 
 {% block content %}
-    <div id="sidebar">
-        <h3>Categories</h3>
+    <div id="sidebar" class="col-xs-12 col-md-3">
+        <h1 class="title">目录</h1>
+        <div class="panel-body">
         <ul>
             <li {% if not category %}class="selected"{% endif %}>
                 <a href="{% url "shop:product_list" %}">All</a>
@@ -17,17 +74,28 @@
             </li>
         {% endfor %}
         </ul>
+        </div>
     </div>
-    <div id="main" class="product-list">
-        <h1>{% if category %}{{ category.name }}{% else %}Products{% endif %}</h1>
+    <div id="main" class="col-xs-12 col-md-9">
+        <h1>{% if category %}{{ category.name }}{% else %}商品{% endif %}</h1>
         {% for product in products %}
-            <div class="item">
-                <a href="{{ product.get_absolute_url }}">
-                    <img src="{% if product.image %}{{ product.image.url }}{% else %}/media/2.jpg{% endif %}">
-                </a>
-                <a href="{{ product.get_absolute_url }}">{{ product.name }}</a><br>
-                ${{ product.price }}
-            </div>
+    	    <div class="subject">
+			  <a href="{{ product.get_absolute_url }}">
+			    <img class="subject_img" src="{% if product.image %}{{ product.image.url }}{% else %}/media/2.jpg{% endif %}" alt="{{ product.name }}">
+				<p class="subject_number">
+						<span>库存剩余：{{product.stock}}件</span>&nbsp;
+			      <span class="hidden-xs"></span>
+			    </p>
+			    <div class="subject_text">
+			      <h4 class="subject_title">{{ product.name }}</h4>
+			        <p class="subject_type">
+			          <span class="hidden-xs">价格：</span>
+			            （<span class="subject_static ">￥{{ product.price }}</span>）
+			        </p>        
+			        <p class="subject_descript hidden-xs">{{ product.description|linebreaks|truncatechars:50}}</p>
+			    </div>
+			  </a>
+			</div>   
         {% endfor %}
     </div>
 {% endblock content %}
