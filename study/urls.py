@@ -27,7 +27,9 @@ urlpatterns = [
     url(r'^comments/', include('django_comments.urls')),
     url(r'',include('subject.urls',namespace='subject')),
     url(r'',include('exam.urls',namespace='exam')),
+    url(r'^cart/', include('cart.urls', namespace='cart')),
     url(r'', include('shop.urls', namespace='shop')),
+
 ]
 
 # DjangoUeditor额外引入 ------use Django server /media/ files---------------------

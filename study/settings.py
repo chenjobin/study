@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'subject',
     'exam',
     'shop',
+    'cart',
 ]
 
 SITE_ID = 1 #django-contrib-comments模块引入
@@ -232,3 +233,6 @@ EMAIL_SUBJECT_PREFIX = 'chenzhibin.vip' #为邮件标题的前缀,默认是'[dja
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = SERVER_EMAIL = EMAIL_HOST_USER
 #日志配置- 包括邮箱---实现邮箱发送错误日志---------------------------------------------------
+
+# shop模型添加购物车
+CART_SESSION_ID = 'cart'
