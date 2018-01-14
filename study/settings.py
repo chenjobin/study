@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'exam',
     'shop',
     'cart',
+    'orders',
 ]
 
 SITE_ID = 1 #django-contrib-comments模块引入
@@ -83,6 +84,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'cart.context_processors.cart',    # 把购物车添加进请求上下文中
             ],
         },
     },

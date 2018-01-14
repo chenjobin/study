@@ -56,7 +56,19 @@
 {% block header %}	
       <div class="jumbotron">
         <h1>商城</h1>
-        <p>列出一些教程或者书籍</p>
+        <p>
+        {% with total_items=cart|length %}
+	        {% if cart|length > 0 %}
+	                        你的购物车:
+	            <a href="{% url "cart:cart_detail" %}">
+	                {{ total_items }} item{{ total_items|pluralize }},
+	               	 ￥{{ cart.get_total_price }}
+	            </a>
+	        {% else %}
+	            	空空如也
+	        {% endif %}
+	    {% endwith %}
+		</p>
       </div>
 {% endblock header %}
 

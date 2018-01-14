@@ -29,7 +29,7 @@ urlpatterns = [
     url(r'',include('exam.urls',namespace='exam')),
     url(r'^cart/', include('cart.urls', namespace='cart')),
     url(r'', include('shop.urls', namespace='shop')),
-
+    url(r'^orders/', include('orders.urls', namespace='orders')),
 ]
 
 # DjangoUeditor额外引入 ------use Django server /media/ files---------------------
