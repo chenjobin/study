@@ -222,7 +222,7 @@ LOGGING = {
 }
 #邮箱部分
 ADMINS = (
-    ('zhibin chen','405633660@qq.com'),#设置管理员邮箱
+    ('zhibin chen','923869955@qq.com'),#设置管理员邮箱
 )
 
 #Email
