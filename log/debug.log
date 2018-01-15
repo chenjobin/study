@@ -14808,3 +14808,14 @@ Traceback (most recent call last):
   File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 565, in invalid_block_tag
     get_text_list(["'%s'" % p for p in parse_until], 'or'),
 django.template.exceptions.TemplateSyntaxError: Invalid block tag on line 44: 'endfor', expected 'endwith'. Did you forget to register or load this tag?
+2018-01-15 20:22:16,318 [Thread-2:9272] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /orders/create/
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\django\study\orders\views.py", line 24, in order_create
+    order_created.delay(6)
+AttributeError: 'function' object has no attribute 'delay'
