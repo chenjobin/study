@@ -15,11 +15,14 @@ Including another URLconf
 """
 from django.conf.urls import url,include
 from django.contrib import admin
+from django.contrib.auth import views as auth_views
 
 
 from DjangoUeditor import urls as DjangoUeditor_urls
 
 urlpatterns = [
+    url(r'^accounts/login/$', auth_views.login, name='login'),
+    url(r'^accounts/logout/$', auth_views.logout, name='logout'),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^ueditor/', include(DjangoUeditor_urls)),
     url(r'^users/',include('users.urls',namespace='users')),

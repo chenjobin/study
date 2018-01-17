@@ -38,6 +38,7 @@ ALLOWED_HOSTS = ['chenzhibin.vip','www.chenzhibin.vip','127.0.0.1','localhost']
 # Application definition
 
 INSTALLED_APPS = [
+    'courses',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

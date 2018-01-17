@@ -1,0 +1,34 @@
+[
+{
+  "model": "courses.subject",
+  "pk": 1,
+  "fields": {
+    "title": "\u6570\u5b66",
+    "slug": "math"
+  }
+},
+{
+  "model": "courses.subject",
+  "pk": 2,
+  "fields": {
+    "title": "\u82f1\u8bed",
+    "slug": "English"
+  }
+},
+{
+  "model": "courses.subject",
+  "pk": 3,
+  "fields": {
+    "title": "\u8bed\u6587",
+    "slug": "Chinese"
+  }
+},
+{
+  "model": "courses.subject",
+  "pk": 4,
+  "fields": {
+    "title": "\u4fe1\u606f\u6280\u672f",
+    "slug": "InfoTech"
+  }
+}
+]
