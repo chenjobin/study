@@ -14819,3 +14819,85 @@ Traceback (most recent call last):
   File "D:\django\study\orders\views.py", line 24, in order_create
     order_created.delay(6)
 AttributeError: 'function' object has no attribute 'delay'
+2018-01-17 15:13:46,828 [Thread-51:2372] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /shop/
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Django\study\shop\views.py", line 16, in product_list
+    'products': products})
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\shortcuts.py", line 30, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\loader.py", line 67, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\loader.py", line 21, in get_template
+    return engine.get_template(template_name)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\backends\django.py", line 39, in get_template
+    return Template(self.engine.get_template(template_name), self)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\engine.py", line 162, in get_template
+    template, origin = self.find_template(template_name)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\engine.py", line 136, in find_template
+    name, template_dirs=dirs, skip=skip,
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\loaders\base.py", line 44, in get_template
+    contents, origin, origin.template_name, self.engine,
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 191, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 230, in compile_nodelist
+    return parser.parse()
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 515, in parse
+    raise self.error(token, e)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 513, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\loader_tags.py", line 312, in do_extends
+    nodelist = parser.parse()
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 515, in parse
+    raise self.error(token, e)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 513, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\loader_tags.py", line 251, in do_block
+    raise TemplateSyntaxError("'%s' tag with name '%s' appears more than once" % (bits[0], block_name))
+django.template.exceptions.TemplateSyntaxError: 'block' tag with name 'header' appears more than once
+2018-01-17 15:14:56,613 [Thread-52:8288] [django.request:135] [exception:handle_uncaught_exception] [ERROR]- Internal Server Error: /shop/
+Traceback (most recent call last):
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\exception.py", line 41, in inner
+    response = get_response(request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 187, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\core\handlers\base.py", line 185, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "F:\Django\study\shop\views.py", line 16, in product_list
+    'products': products})
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\shortcuts.py", line 30, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\loader.py", line 67, in render_to_string
+    template = get_template(template_name, using=using)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\loader.py", line 21, in get_template
+    return engine.get_template(template_name)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\backends\django.py", line 39, in get_template
+    return Template(self.engine.get_template(template_name), self)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\engine.py", line 162, in get_template
+    template, origin = self.find_template(template_name)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\engine.py", line 136, in find_template
+    name, template_dirs=dirs, skip=skip,
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\loaders\base.py", line 44, in get_template
+    contents, origin, origin.template_name, self.engine,
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 191, in __init__
+    self.nodelist = self.compile_nodelist()
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 230, in compile_nodelist
+    return parser.parse()
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 515, in parse
+    raise self.error(token, e)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 513, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\loader_tags.py", line 312, in do_extends
+    nodelist = parser.parse()
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 515, in parse
+    raise self.error(token, e)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\base.py", line 513, in parse
+    compiled_result = compile_func(self, token)
+  File "C:\Anaconda3\envs\web\lib\site-packages\django\template\loader_tags.py", line 251, in do_block
+    raise TemplateSyntaxError("'%s' tag with name '%s' appears more than once" % (bits[0], block_name))
+django.template.exceptions.TemplateSyntaxError: 'block' tag with name 'head' appears more than once

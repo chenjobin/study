@@ -1,5 +1,9 @@
 {% extends 'base.html' %}
 
+{%block header%}
+<link rel="stylesheet" href="/static/css/shopbase.css" >
+{% endblock %}
+
 {% block title %}
     {% if category %}{{ category.title }}{% else %}Products{% endif %}
 {% endblock title%}
