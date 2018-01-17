@@ -3,3 +3,4 @@ django-bootstrap3==9.1.0
 Pillow==5.0.0
 wfastcgi==3.0.0
 celery==3.1.25
+flower==0.9.2
