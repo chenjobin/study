@@ -63,9 +63,10 @@ $(document).ready(function() {
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
             <li ><a href="{% url 'blog:index1' %}"><span class="glyphicon glyphicon-wrench"></span>&nbsp;创客</a></li>
-            <li><a href="{% url 'subject:index' %}"><span class="glyphicon glyphicon-tasks"></span>&nbsp;专题</a></li>
+            <li><a href="{% url 'subject:index' %}"><span class="glyphicon glyphicon-book"></span>&nbsp;专题</a></li>
 						<li><a href="{% url 'exam:index' %}"><span class="glyphicon glyphicon-pencil"></span>&nbsp;测试</a></li>
 						<li><a href="{% url 'shop:product_list' %}"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;商城</a></li>
+						<li><a href="{% url 'course:manage_course_list' %}"><span class="glyphicon glyphicon-tasks"></span>&nbsp;课程</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             {% if user.is_authenticated %}
