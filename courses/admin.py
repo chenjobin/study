@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Subject, Course, Module
+from .models import Subject, Course, Module,Content
 
 
 # 我们使用@admin.register()装饰器替代了admin.site.register()方法。它们都提供了相同的功能。
@@ -25,3 +25,7 @@ class CourseAdmin(admin.ModelAdmin):
         if not obj.owner:
             obj.owner = request.user
         obj.save()
+
+@admin.register(Content)
+class ContentAdmin(admin.ModelAdmin):
+    pass

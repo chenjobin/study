@@ -1,6 +1,9 @@
 {% extends "base.html" %}
 
 {% block title %}My courses{% endblock %}
+{%block head%}
+<link rel="stylesheet" href="/static/css/educabase.css" >
+{% endblock %}
 
 {% block content %}
      <h1>My courses</h1>
@@ -11,6 +14,10 @@
            <p>
              <a href="{% url 'course:course_edit' course.id %}">Edit</a>
              <a href="{% url 'course:course_delete' course.id %}">Delete</a>
+			 <a href="{% url 'course:course_module_update' course.id %}">Edit modules</a>
+			 {% if course.modules.count > 0 %}
+		     <a href="{% url 'course:module_content_list' course.modules.first.id %}">Manage contents</a>
+			 {% endif %}
            </p>
          </div>
        {% empty %}

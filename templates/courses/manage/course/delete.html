@@ -1,5 +1,10 @@
 {% extends "base.html" %}
    {% block title %}Delete course{% endblock %}
+   
+{%block head%}
+<link rel="stylesheet" href="/static/css/educabase.css" >
+{% endblock %}
+
    {% block content %}
      <h1>Delete course "{{ object.title }}"</h1>
      <div class="module">
