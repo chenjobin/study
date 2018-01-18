@@ -18,3 +18,10 @@ class CourseAdmin(admin.ModelAdmin):
     search_fields = ['title', 'overview']
     prepopulated_fields = {'slug': ('title',)}
     inlines = [ModuleInline]
+
+    exclude = ('owner',) #排除该字段
+    # 若owner字段为空，则定义owner当前操作的用户
+    def save_model(self, request, obj, form, change):
+        if not obj.owner:
+            obj.owner = request.user
+        obj.save()

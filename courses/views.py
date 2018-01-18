@@ -4,7 +4,7 @@ from django.views.generic.edit import CreateView, UpdateView, \
                                          DeleteView
 from .models import Course
 # django1.9开始包含权限mixins给基于类的视图,所以和django BY example不同
-from django.contrib.auth.mixins import LoginRequiredMixin,PermissionRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 
 class OwnerMixin(object):
     def get_queryset(self):
@@ -18,14 +18,22 @@ class OwnerEditMixin(object):
         return super(OwnerEditMixin, self).form_valid(form)
 
 
-class OwnerCourseMixin(OwnerMixin):
+# class OwnerCourseMixin(OwnerMixin):
+#     model = Course
+#
+#
+# class OwnerCourseEditMixin(OwnerMixin,OwnerEditMixin, LoginRequiredMixin):
+#     model = Course
+#     success_url = reverse_lazy('course:manage_course_list')
+#     fields = ['subject', 'title', 'slug', 'overview']
+class OwnerCourseMixin(OwnerMixin, LoginRequiredMixin):
     model = Course
 
 
-class OwnerCourseEditMixin(OwnerMixin, LoginRequiredMixin):
-    model = Course
+class OwnerCourseEditMixin(OwnerCourseMixin, OwnerEditMixin):
     fields = ['subject', 'title', 'slug', 'overview']
-    success_url = reverse_lazy('manage_course_list')
+    success_url = reverse_lazy('course:manage_course_list')
+    template_name = 'courses/manage/course/form.html'
 
 
 class ManageCourseListView(OwnerCourseMixin, ListView):
@@ -49,6 +57,6 @@ class CourseDeleteView(PermissionRequiredMixin,
                        OwnerCourseMixin,
                        DeleteView):
     template_name = 'courses/manage/course/delete.html'
-    success_url = reverse_lazy('manage_course_list')
+    success_url = reverse_lazy('course:manage_course_list')
     permission_required = 'courses.delete_course'
 

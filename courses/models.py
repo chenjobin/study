@@ -16,7 +16,7 @@ class Subject(models.Model):
 
 
 class Course(models.Model):
-    owner = models.ForeignKey(User,
+    owner = models.ForeignKey(User,blank=True, null=True, verbose_name='作者',
                                  related_name='courses_created')
     subject = models.ForeignKey(Subject,
                                    related_name='courses')
