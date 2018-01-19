@@ -66,7 +66,7 @@ $(document).ready(function() {
             <li><a href="{% url 'subject:index' %}"><span class="glyphicon glyphicon-book"></span>&nbsp;专题</a></li>
 						<li><a href="{% url 'exam:index' %}"><span class="glyphicon glyphicon-pencil"></span>&nbsp;测试</a></li>
 						<li><a href="{% url 'shop:product_list' %}"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;商城</a></li>
-						<li><a href="{% url 'course:manage_course_list' %}"><span class="glyphicon glyphicon-tasks"></span>&nbsp;课程</a></li>
+						<li><a href="{% url 'course:course_list' %}"><span class="glyphicon glyphicon-tasks"></span>&nbsp;课程</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             {% if user.is_authenticated %}
@@ -78,6 +78,7 @@ $(document).ready(function() {
               <ul class="dropdown-menu">
                 <li><a href="{%url 'users:user_info'%}">用户中心</a></li>
                 <li><a href="{%url 'users:avatar_change'%}">修改头像</a></li>
+                <li><a href="{%url 'course:manage_course_list'%}">管理课程</a></li>
                 <li role="separator" class="divider"></li>
                 <li><a href="{%url 'users:logout'%}">注销</a></li>
               </ul>
