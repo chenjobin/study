@@ -6,6 +6,8 @@ from django.contrib.contenttypes.fields import GenericForeignKey
 
 from .fields import OrderField   #导入定制字段
 from django.template.loader import render_to_string
+# 渲染不同类型的内容
+from django.utils.safestring import mark_safe
 
 class Subject(models.Model):
     title = models.CharField(max_length=200)
@@ -25,6 +27,9 @@ class Course(models.Model):
     slug = models.SlugField(max_length=200, unique=True)
     overview = models.TextField()
     date_added = models.DateTimeField(auto_now_add=True)
+    # 添加学生
+    students = models.ManyToManyField(User,related_name='courses_joined',blank=True)
+
     class Meta:
         ordering = ('-date_added',)
     def __str__(self):
@@ -74,9 +79,9 @@ class ItemBase(models.Model):
         abstract = True
     def __str__(self):
         return self.title
+    # 渲染不同类型的内容
     def render(self):
         return render_to_string('courses/content/{}.html'.format(self._meta.model_name), {'item': self})
-
 
 class Text(ItemBase):
     content = models.TextField()
@@ -92,4 +97,5 @@ class Image(ItemBase):
 
 class Video(ItemBase):
     url = models.URLField()
+
 

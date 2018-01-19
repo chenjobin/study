@@ -240,3 +240,7 @@ DEFAULT_FROM_EMAIL = SERVER_EMAIL = EMAIL_HOST_USER
 
 # shop模型添加购物车
 CART_SESSION_ID = 'cart'
+
+# 给用户在成功的登录之后重定向的设置，如果请求中没有 next 参数的话
+from django.core.urlresolvers import reverse_lazy
+LOGIN_REDIRECT_URL = reverse_lazy('student_course_list')

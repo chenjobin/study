@@ -79,12 +79,13 @@ $(document).ready(function() {
                 <li><a href="{%url 'users:user_info'%}">用户中心</a></li>
                 <li><a href="{%url 'users:avatar_change'%}">修改头像</a></li>
                 <li><a href="{%url 'course:manage_course_list'%}">管理课程</a></li>
+                <li><a href="{%url 'student:student_course_list'%}">我的课程</a></li>
                 <li role="separator" class="divider"></li>
                 <li><a href="{%url 'users:logout'%}">注销</a></li>
               </ul>
             </li>
             {% else %}
-        				<li><a href="{% url 'users:register' %}">注册</a></li>
+        				<li><a href="{% url 'users:register' %}?next={{ request.path }}">注册</a></li>
        					<li><a href="{% url 'users:login' %}?next={{ request.path }}">登录</a></li>
     				{% endif %}
           </ul>

@@ -30,6 +30,7 @@ urlpatterns = [
     url(r'', include('shop.urls', namespace='shop')),
     url(r'^orders/', include('orders.urls', namespace='orders')),
     url(r'^course/', include('courses.urls', namespace='course')),
+    url(r'^students/', include('students.urls',namespace='student')),
 ]
 
 # DjangoUeditor额外引入 ------use Django server /media/ files---------------------
