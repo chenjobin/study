@@ -60,14 +60,14 @@ class StudentCourseDetailView(DetailView):
         qs = super(StudentCourseDetailView, self).get_queryset()
         return qs.filter(students__in=[self.request.user])
     # 这段代码会出错。原因不明，待解决
-    # def get_context_data(self, **kwargs):
-    #     context = super(StudentCourseDetailView, self).get_context_data(**kwargs)
-    #     # get course object
-    #     course = self.get_object()
-    #     if 'module_id' in self.kwargs:
-    #         # get current module
-    #         context['module'] = course.modules.get(id=self.kwargs['module_id'])
-    #     else:
-    #         # get first module
-    #         context['module'] = course.modules.all()[0]
-    #     return context
+    def get_context_data(self, **kwargs):
+        context = super(StudentCourseDetailView, self).get_context_data(**kwargs)
+        # # get course object
+        course = self.get_object()
+        if 'module_id' in self.kwargs:
+            # get current module
+            context['module'] = course.modules.get(id=self.kwargs['module_id'])
+        else:
+            # get first module
+            context['module'] = course.modules.all()[0]
+        return context

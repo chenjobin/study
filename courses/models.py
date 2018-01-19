@@ -96,6 +96,7 @@ class Image(ItemBase):
 
 
 class Video(ItemBase):
+    # 利用了Ueditor里的<embed>可以播放，但src用其替代就有问题。所以打算弃Video了。直接用Ueditor
     url = models.URLField()
 
 
