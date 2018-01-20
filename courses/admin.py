@@ -25,7 +25,3 @@ class CourseAdmin(admin.ModelAdmin):
         if not obj.owner:
             obj.owner = request.user
         obj.save()
-
-@admin.register(Content)
-class ContentAdmin(admin.ModelAdmin):
-    pass

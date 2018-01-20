@@ -56,6 +56,7 @@
        <hr>
        <h3>Add new content:</h3>
        <ul class="content-types">
+       	 <li><a href="{% url 'course:module_content_create' module.id "richtext" %}">富文本(推荐)</a></li>
          <li><a href="{% url 'course:module_content_create' module.id "text" %}">Text</a></li>
          <li><a href="{% url 'course:module_content_create' module.id "image" %}">Image</a></li>
          <li><a href="{% url 'course:module_content_create' module.id "video" %}">Video</a></li>

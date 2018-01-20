@@ -23,11 +23,13 @@
             </p>
             {{ object.overview|linebreaks }}
             {% if request.user.is_authenticated %}
+
 			    <form action="{% url "student:student_enroll_course" %}" method="post">
 			        {{ enroll_form }}
 			        {% csrf_token %}
 			        <input type="submit" class="button" value="Enroll now">
 			    </form>
+			    
 			{% else %}
 			    <a href="{% url "users:register" %}" class="button">
 			        Register to enroll

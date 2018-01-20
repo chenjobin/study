@@ -9,6 +9,8 @@ from django.template.loader import render_to_string
 # 渲染不同类型的内容
 from django.utils.safestring import mark_safe
 
+from DjangoUeditor.models import UEditorField
+
 class Subject(models.Model):
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200, unique=True)
@@ -56,9 +58,7 @@ class Content(models.Model):
     # 添加一个limit_choices_to参数来限制ContentType对象可以被通用关系使用
     content_type = models.ForeignKey(ContentType,
                       limit_choices_to={'model__in':('text',
-                                           'video',
-                                           'image',
-                                           'file')})
+                                           'video','image','file','RichText')})
     object_id = models.PositiveIntegerField()
     item = GenericForeignKey('content_type', 'object_id')
 
@@ -88,11 +88,11 @@ class Text(ItemBase):
 
 
 class File(ItemBase):
-    file = models.FileField(upload_to='files')
+    file = models.FileField(upload_to='course/files/')
 
 
 class Image(ItemBase):
-    file = models.FileField(upload_to='images')
+    file = models.FileField(upload_to='course/images/')
 
 
 class Video(ItemBase):
@@ -100,3 +100,7 @@ class Video(ItemBase):
     # url = models.URLField()
     url = models.TextField()
 
+class RichText(ItemBase):
+    content = UEditorField('内容', height=300, width=1000,
+        default=u'', blank=True, imagePath="course/images/",
+        toolbars='besttome', filePath='course/files/')   #尽量不用这个来传视频，排版可能会有些小问题
