@@ -83,6 +83,16 @@ def single_check(request,selection_id):
     except:
         return ResponseJson(502, False, False,'you are wrong')
 
+@login_required
+def single_wrong_kill(request,single_wrong_q_id):    #斩掉错题
+    try:
+        single_wrong1=SingleWrongAnswer.objects.get(user=request.user,id=single_wrong_q_id)
+        single_wrong1.increase_killed_times()
+        single_wrong1.show_determine()
+        return ResponseJson(200, True, True,[233,1333])
+    except:
+        return ResponseJson(503, False, False,'kill question is failed')
+
 def detail_fill(request,fill_q_id):
     try:
         fill_q=Fill_Q.objects.get(id=fill_q_id)
@@ -388,7 +398,7 @@ def detail_single_wrong(request,single_q_id,single_wrong_q_id):
             next_single_wrong_q = None
 
         context={'topic':topic,'single_q':single_q,'pre_single_wrong_q':pre_single_wrong_q,
-                 'next_single_wrong_q':next_single_wrong_q}
+                 'next_single_wrong_q':next_single_wrong_q,'single_wrong_q_id':single_wrong_q_id}
     except Single_Q.DoesNotExist:
         raise Http404
     return render(request,'exam/detail_single_wrong.html',context)

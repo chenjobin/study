@@ -52,6 +52,7 @@ $(document).ready(function() {
 									$("#answer_right_"+String(i)).show();
 									$("#answer_wrong_"+String(i)).hide();
 									$("#answer_detail").show();
+									$("#kill_btn").show();
 								}else{
 									$("#answer_wrong_"+String(i)).show();
 									$("#answer_right_"+String(i)).hide();
@@ -74,7 +75,30 @@ $(document).ready(function() {
         });            
         return false;
     });
-	
+	$('#selection_form_kill').submit(function() {
+        $.ajax({
+                type: "POST",
+                data: $('#selection_form_kill').serialize(),
+                url: "{% url 'exam:single_wrong_kill' single_wrong_q_id %}",
+                cache: false,
+                dataType: "json",
+                success: function(json, textStatus) {
+			            if(json['success']){
+							alert('成功斩掉错题，但不代表错题一定不会出现哦（如果你错了实在太多次了）！');
+			            }else{
+			                if(json['code']==503){
+			                    alert('斩题过程失败，请重试。');
+			                }else{
+			                    alert('斩题出错，请刷新重试\n'+json['message']);
+			                }
+			            }
+			        },
+                error: function (XMLHttpRequest, textStatus,errorThrown) {
+                    alert("斩题出错，" + errorThrown);
+                }
+        });            
+        return false;
+    });
 });
 	//选项被选中
 //function selection_change(obj){
@@ -138,7 +162,10 @@ $(document).ready(function() {
         	回答错误，正确答案是&nbsp;&nbsp;&nbsp;{{single_q.answer|safe}}
         </div>
         </form>
-
+    	<form id='selection_form_kill'>
+    		{% csrf_token %}
+    		<input style="display:none ;" class="btn btn-info" id="kill_btn" type="submit" name="submit" value="斩"/>
+    	</form>
         <div id="answer_detail" style="display: none;">
         	<blockquote>{{single_q.answer_detail|safe}}</blockquote>
         </div>

@@ -31,4 +31,6 @@ urlpatterns=[
     url(r'^detail_single_wrong/(?P<single_q_id>\d+),(?P<single_wrong_q_id>\d+)$',views.detail_single_wrong,name='detail_single_wrong'),
     url(r'^fill_wrong/$',views.fill_wrong,name='fill_wrong'),
     url(r'^detail_fill_wrong/(?P<fill_q_id>\d+),(?P<fill_wrong_q_id>\d+)$',views.detail_fill_wrong,name='detail_fill_wrong'),
+    # 斩错题集
+    url(r'^post4/(?P<single_wrong_q_id>\d+)$',views.single_wrong_kill,name='single_wrong_kill'),
 ]

@@ -195,6 +195,11 @@ class SingleWrongAnswer(models.Model):
         # self.show_determine()
         self.save(update_fields=['wrong_times'])
 
+    def increase_killed_times(self):
+        self.killed_times += 1
+        # self.show_determine()
+        self.save(update_fields=['killed_times'])
+
     def count_first_right_times(self):
         self.first_right_times = self.correct_times + self.wrong_times + 1
         # self.show_determine()
@@ -248,6 +253,11 @@ class FillWrongAnswer(models.Model):
         self.wrong_times += 1
         # self.show_determine()
         self.save(update_fields=['wrong_times'])
+
+    def increase_killed_times(self):
+        self.killed_times += 1
+        # self.show_determine()
+        self.save(update_fields=['killed_times'])
 
     def count_first_right_times(self):
         self.first_right_times = self.correct_times + self.wrong_times + 1
