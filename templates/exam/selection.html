@@ -11,12 +11,12 @@
     {% for single_q in single_qs %}
         <li>
         	<h3>
-            <a href="{% url 'exam:detail_selection' single_q.id %}">{{single_q.caption|safe}}</a>
+            <a href="{% url 'exam:detail_selection' single_q.id %}">{{single_q.title|safe|striptags|truncatechars:100}}</a>
             </h3>
 
         </li>
     {%empty%}
-        <li>No 单选题  have been added yet</li>
+        <li>No 单选题  have been added yet11</li>
     {%endfor%}
 </ul>
 

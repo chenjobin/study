@@ -338,10 +338,12 @@ def fill_check_answer(request,fill_q_answers,fill_q_id):
             if fill_wrong1.first_right_times==0:
                 fill_wrong1.count_first_right_times()
             fill_wrong1.increase_correct_times()
+            fill_wrong1.show_determine()
         else:
             right_wrong.append(False)
             context_n_list.append('fill_q_'+ fill_q_id + '_' + str(i+1))
             fill_wrong1.increase_wrong_times()
+            fill_wrong1.show_determine()
             fill_wrong.update(wrong_answer=fill_q_answers[i])
             # pass
     # if right_wrong[0]==True:

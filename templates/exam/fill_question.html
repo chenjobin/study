@@ -11,7 +11,7 @@
     {% for fill_q in fill_qs %}
         <li>
         	<h3>
-            <a href="{% url 'exam:detail_fill' fill_q.id %}">{{fill_q.caption|safe}}</a>
+            <a href="{% url 'exam:detail_fill' fill_q.id %}">{{fill_q.title|safe|striptags|truncatechars:150}}</a>
             </h3>
 
         </li>

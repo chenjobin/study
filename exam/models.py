@@ -53,7 +53,7 @@ class Single_Q(models.Model):
     )
     topic = models.ForeignKey(Exam_Topic,verbose_name='归属主题')
     topic_second = models.ManyToManyField(Exam_Topic_Second,blank=True,verbose_name='归属二级主题')
-
+    # star_it = models.ManyToManyField(User,blank=True,verbose_name='用户收藏')  放在用户那可能更合适
     author = models.ForeignKey(User, blank=True, null=True, verbose_name='作者')
     tags = models.ManyToManyField(Tag,blank=True,verbose_name='标签') #多对多字段，绑定下面的Tag模型
     recommend = models.BooleanField('重点题目',default=False) #布尔字段，我用于标记是否是重点题
@@ -83,10 +83,12 @@ class Single_Q(models.Model):
 
     def __str__(self):
         '''返回模型的字符串表示'''
-        if len(self.title)>50:
-            return format_html(self.title[:50]+'...',)
-        else:
-            return format_html(self.title,)
+        # if len(self.title)>50:
+        #     return format_html(self.title[:50]+'...',)
+        # else:
+        #     return format_html(self.title,)
+        # 发现如果title中如果table，那么会对错题列表造成错误，所以，
+        return format_html(self.title,)
     #  admin页面，题目 html代码解析
     def title_format(self):
         return format_html(self.title[:200]+'...',)
@@ -120,10 +122,12 @@ class Fill_Q(models.Model):
 
     def __str__(self):
         '''返回模型的字符串表示'''
-        if len(self.title)>50:
-            return format_html(self.title[:50]+'...',)
-        else:
-            return format_html(self.title,)
+        # if len(self.title)>50:
+        #     return format_html(self.title[:50]+'...',)
+        # else:
+        #     return format_html(self.title,)
+        # 发现如果title中如果table，那么会对错题列表造成错误，所以，
+        return format_html(self.title,)
     #  admin页面，题目 html代码解析
     def title_format(self):
         return format_html(self.title[:100]+'...',)
@@ -172,6 +176,7 @@ class SingleWrongAnswer(models.Model):
     first_right_times=models.PositiveIntegerField('第一次做对',default=0) # 第一次答对，是第几次作答
 
     is_show=models.BooleanField('显示',default=True) #标记该错题是否显示在错题集
+    killed_times=models.PositiveIntegerField('斩掉次数',default=1) #斩掉此题次数，提高使之不出现在错题集的权重，
 
     class Meta:
         verbose_name = '错题本_单选题'
@@ -196,10 +201,12 @@ class SingleWrongAnswer(models.Model):
         self.save(update_fields=['first_right_times'])
 
     def show_determine(self):
-        if self.correct_times>=self.wrong_times*2:
+        if self.correct_times*self.killed_times>=self.wrong_times:
             self.is_show=False
-        elif self.first_right_times == 1 and self.correct_times>=self.wrong_times:
-            self.is_show=False
+        # elif self.first_right_times == 1 and self.correct_times>=self.wrong_times:
+        #     self.is_show=False
+        # elif self.correct_times>=self.wrong_times *2:
+        #     self.is_show=False
         else:
             self.is_show=True
         self.save(update_fields=['is_show'])
@@ -223,6 +230,7 @@ class FillWrongAnswer(models.Model):
     first_right_times=models.PositiveIntegerField('第一次做对',default=0) # 第一次答对，是第几次作答
 
     is_show=models.BooleanField('显示',default=True) #标记该错题是否显示在错题集
+    killed_times=models.PositiveIntegerField('斩掉次数',default=1) #斩掉此题次数，提高使之不出现在错题集的权重，
 
     class Meta:
         verbose_name = '错题本_填空题'
@@ -247,10 +255,12 @@ class FillWrongAnswer(models.Model):
         self.save(update_fields=['first_right_times'])
 
     def show_determine(self):
-        if self.correct_times>=self.wrong_times*2:
+        if self.correct_times*self.killed_times>=self.wrong_times:
             self.is_show=False
-        elif self.first_right_times == 1 and self.correct_times>=self.wrong_times:
-            self.is_show=False
+        # elif self.first_right_times == 1 and self.correct_times>=self.wrong_times:
+        #     self.is_show=False
+        # elif self.correct_times>=self.wrong_times *2:
+        #     self.is_show=False
         else:
             self.is_show=True
         self.save(update_fields=['is_show'])
