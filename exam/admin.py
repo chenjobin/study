@@ -73,10 +73,10 @@ class FillWrongAnswerAdmin(admin.ModelAdmin):
 class ExaminationPaperTypeAdmin(admin.ModelAdmin):
     list_display=('id', 'type_name', 'create_time')
 
-#试卷 部分
-class ExaminationPaperChapterInline(admin.TabularInline):
+#试卷 部分 class ExaminationPaperChapterInline(admin.TabularInline): 界面会紧凑些
+class ExaminationPaperChapterInline(admin.StackedInline):
     model = ExaminationPaperChapter
-    extra = 3
+    extra = 1
 # 试卷
 class ExaminationPaperAdmin(admin.ModelAdmin):
     list_display=('caption', 'description', 'exam_paper_type','create_time', 'update_time')

@@ -313,7 +313,8 @@ class ExaminationPaperChapter(models.Model):
     '''ExaminationPaper chapter
         用来划分第一部分第二部分，也可以理解成划分选择题填空题
     '''
-    title = models.CharField(max_length=250)   #书写模块，本模块答题注意事项
+    title = models.CharField('标题',max_length=250)   #书写模块，本模块答题注意事项
+    description = models.TextField('模块描述',max_length=200,default=u'')
     examination_paper = models.ForeignKey(ExaminationPaper)
     create_time = models.DateTimeField(auto_now_add=True)
 
@@ -327,7 +328,7 @@ class ExaminationPaperChapter(models.Model):
 class ExaminationPaperItem(models.Model):
     '''subject item'''
     chapter = models.ForeignKey(ExaminationPaperChapter, default=1)
-
+    question_value = models.PositiveIntegerField('本题分值',default=2)
     content_type = models.ForeignKey(ContentType)
     object_id = models.PositiveIntegerField()
     content_object = GenericForeignKey(
