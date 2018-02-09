@@ -83,15 +83,6 @@ def single_check(request,selection_id):
     except:
         return ResponseJson(502, False, False,'you are wrong')
 
-@login_required
-def single_wrong_kill(request,single_wrong_q_id):    #斩掉错题
-    try:
-        single_wrong1=SingleWrongAnswer.objects.get(user=request.user,id=single_wrong_q_id)
-        single_wrong1.increase_killed_times()
-        single_wrong1.show_determine()
-        return ResponseJson(200, True, True,[233,1333])
-    except:
-        return ResponseJson(503, False, False,'kill question is failed')
 
 def detail_fill(request,fill_q_id):
     try:
@@ -403,6 +394,28 @@ def detail_single_wrong(request,single_q_id,single_wrong_q_id):
         raise Http404
     return render(request,'exam/detail_single_wrong.html',context)
 
+#斩掉选择题错题
+@login_required
+def single_wrong_kill(request,single_wrong_q_id):
+    try:
+        single_wrong1=SingleWrongAnswer.objects.get(user=request.user,id=single_wrong_q_id)
+        single_wrong1.increase_killed_times()
+        single_wrong1.show_determine()
+        return ResponseJson(200, True, True,[233,1333])
+    except:
+        return ResponseJson(503, False, False,'kill question is failed')
+
+#斩掉选择题错题
+@login_required
+def fill_wrong_kill(request,fill_wrong_q_id):
+    try:
+        fill_wrong1=FillWrongAnswer.objects.get(user=request.user,id=fill_wrong_q_id)
+        fill_wrong1.increase_killed_times()
+        fill_wrong1.show_determine()
+        return ResponseJson(200, True, True,[233,1333])
+    except:
+        return ResponseJson(503, False, False,'kill question is failed')
+
 # 错题 填空题页面
 @login_required
 def fill_wrong(request):
@@ -449,7 +462,8 @@ def detail_fill_wrong(request,fill_q_id,fill_wrong_q_id):
         else:
             next_fill_wrong_q = None
 
-        context={'topic':topic,'fill_q':fill_q,'pre_fill_wrong_q':pre_fill_wrong_q,'next_fill_wrong_q':next_fill_wrong_q}
+        context={'topic':topic,'fill_q':fill_q,'pre_fill_wrong_q':pre_fill_wrong_q,
+                 'next_fill_wrong_q':next_fill_wrong_q,'fill_wrong_q_id':fill_wrong_q_id}
     except Fill_Q.DoesNotExist:
         raise Http404
     return render(request,'exam/detail_fill_wrong.html',context)

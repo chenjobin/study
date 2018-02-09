@@ -33,6 +33,7 @@ $(document).ready(function() {
 								if(data[i]){
 									$("#answer_right_"+String(i)).show();
 									$("#answer_wrong_"+String(i)).hide();
+									$("#warning").show();
 								}else{
 									$("#answer_wrong_"+String(i)).show();
 									$("#answer_right_"+String(i)).hide();
@@ -55,7 +56,39 @@ $(document).ready(function() {
         });            
         return false;
     });
-	
+	$('#selection_form_kill').submit(function() {
+        $.ajax({
+                type: "POST",
+                data: $('#selection_form_kill').serialize(),
+                url: "{% url 'exam:fill_wrong_kill' fill_wrong_q_id %}",
+                cache: false,
+                dataType: "json",
+                success: function(json, textStatus) {
+			            if(json['success']){
+							$("#warning").hide();
+			            }else{
+			                if(json['code']==503){
+			                    alert('斩题过程失败，请重试。');
+			                }else{
+			                    alert('斩题出错，请刷新重试\n'+json['message']);
+			                }
+			            }
+			        },
+			    complete: function () {
+//			    	$('#warning').click();
+			        $("#tishi_kill").html("<b>已经成功斩掉错题，</b><br>但是若你该题错误次数实在太多，也可能会继续出现在错题中哦！");
+					$("#kill_cancel_btn").html("关 闭");
+					$("#kill_btn").hide();
+//			        var speed=200;//滑动的速度   exam页用到
+//			        $('body,html').animate({ scrollTop: 0 }, speed);
+//			        return false;
+			    },
+                error: function (XMLHttpRequest, textStatus,errorThrown) {
+                    alert("斩题出错，" + errorThrown);
+                }
+        });            
+        return false;
+    });
 });
 
 </script>
@@ -93,7 +126,14 @@ $(document).ready(function() {
 			<input class="btn btn-info" id="submit_btn" type="submit" name="submit" value="提  交"/>
 			<input class="btn" id="reset_btn" type="reset" name="submit" value="清空"/>
         </form>
-		<p>&nbsp;</p>
+        <p></p>
+        <div>
+        {# 模态框 触发按钮 #}
+		<button class="btn btn-info" id="warning" type="button" style="display:none ;" data-toggle="modal" data-target="#myModal">
+		  斩掉此题
+		</button>
+    	</div>
+		<p></p>
         <div id="answer_detail" style="display: none;">
         	<blockquote>{{fill_q.answer_detail|safe}}</blockquote>
         </div>
@@ -117,7 +157,28 @@ $(document).ready(function() {
 		</p>
 		<p>&nbsp;</p>
     </div>
-
 </div>
 
+{# 模态框 本体 #}
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h3 class="modal-title">斩 题</h3>
+      </div>
+      <div class="modal-body">
+        <p id="tishi_kill"><b>是否将此题斩掉，斩掉后，该题将不会出现在错题集中&hellip;</b></p>
+      </div>
+      <div class="modal-footer">
+      	<form id='selection_form_kill'>
+    		{% csrf_token %}
+    		<input class="btn btn-info" id="kill_btn" type="submit" name="submit" value=" 斩 "/>
+    		<button id="kill_cancel_btn" type="button" class="btn btn-default" data-dismiss="modal">取 消</button>
+    	</form>
+        
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 {%endblock content%}
