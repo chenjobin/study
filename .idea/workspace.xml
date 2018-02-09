@@ -4,9 +4,6 @@
     <list default="true" id="642163d4-ae2e-4a05-8563-5dbc2a1dbcd0" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db.sqlite3" afterPath="$PROJECT_DIR$/db.sqlite3" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/exam/models.py" afterPath="$PROJECT_DIR$/exam/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/exam/urls.py" afterPath="$PROJECT_DIR$/exam/urls.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/exam/views.py" afterPath="$PROJECT_DIR$/exam/views.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/exam/detail_single_wrong.html" afterPath="$PROJECT_DIR$/templates/exam/detail_single_wrong.html" />
     </list>
     <ignored path="study.iws" />
@@ -61,7 +58,7 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/exam/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5944056">
+            <state vertical-scroll-proportion="0.613986">
               <caret line="91" column="55" selection-start-line="91" selection-start-column="55" selection-end-line="91" selection-end-column="55" />
               <folding />
             </state>
@@ -189,6 +186,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -450,7 +448,6 @@
         </subPane>
       </pane>
       <pane id="Scratches" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -606,9 +603,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2287706" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2287706" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32974428" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32974428" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1003,7 +1000,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/exam/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5944056">
+        <state vertical-scroll-proportion="0.613986">
           <caret line="91" column="55" selection-start-line="91" selection-start-column="55" selection-end-line="91" selection-end-column="55" />
           <folding />
         </state>

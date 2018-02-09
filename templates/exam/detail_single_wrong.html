@@ -52,7 +52,7 @@ $(document).ready(function() {
 									$("#answer_right_"+String(i)).show();
 									$("#answer_wrong_"+String(i)).hide();
 									$("#answer_detail").show();
-									$("#kill_btn").show();
+									$("#warning").show();
 								}else{
 									$("#answer_wrong_"+String(i)).show();
 									$("#answer_right_"+String(i)).hide();
@@ -84,7 +84,7 @@ $(document).ready(function() {
                 dataType: "json",
                 success: function(json, textStatus) {
 			            if(json['success']){
-							alert('成功斩掉错题，但不代表错题一定不会出现哦（如果你错了实在太多次了）！');
+							$("#warning").hide();
 			            }else{
 			                if(json['code']==503){
 			                    alert('斩题过程失败，请重试。');
@@ -93,6 +93,15 @@ $(document).ready(function() {
 			                }
 			            }
 			        },
+			    complete: function () {
+//			    	$('#warning').click();
+			        $("#tishi_kill").html("<b>已经成功斩掉错题，</b><br>但是若你该题错误次数实在太多，也可能会继续出现在错题中哦！");
+					$("#kill_cancel_btn").html("关 闭");
+					$("#kill_btn").hide();
+//			        var speed=200;//滑动的速度   exam页用到
+//			        $('body,html').animate({ scrollTop: 0 }, speed);
+//			        return false;
+			    },
                 error: function (XMLHttpRequest, textStatus,errorThrown) {
                     alert("斩题出错，" + errorThrown);
                 }
@@ -162,26 +171,30 @@ $(document).ready(function() {
         	回答错误，正确答案是&nbsp;&nbsp;&nbsp;{{single_q.answer|safe}}
         </div>
         </form>
-    	<form id='selection_form_kill'>
-    		{% csrf_token %}
-    		<input style="display:none ;" class="btn btn-info" id="kill_btn" type="submit" name="submit" value="斩"/>
-    	</form>
+        <div>
+        {# 模态框 触发按钮 #}
+		<button class="btn btn-info" id="warning" type="button" style="display:none ;" data-toggle="modal" data-target="#myModal">
+		  斩掉此题
+		</button>
+		
+    	</div>
         <div id="answer_detail" style="display: none;">
         	<blockquote>{{single_q.answer_detail|safe}}</blockquote>
         </div>
     </div>
+    
     <div class="panel-footer">
     	<p>
     	<div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
 		    {% if pre_single_wrong_q %}
-		        <a href="{%url 'exam:detail_single_wrong' pre_single_wrong_q.question.id pre_single_wrong_q.id%}">上一题：{{pre_single_wrong_q.question}}</a>
+		        <a href="{%url 'exam:detail_single_wrong' pre_single_wrong_q.question.id pre_single_wrong_q.id%}">上一题</a>
 		    {% else %}
 		         	上一题：没有了
 		    {% endif %}
 		</div>
 		<div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 ">
 		    {% if next_single_wrong_q %}
-		        <a href="{%url 'exam:detail_single_wrong' next_single_wrong_q.question.id next_single_wrong_q.id%}">下一题：{{next_single_wrong_q.question}}</a>
+		        <a href="{%url 'exam:detail_single_wrong' next_single_wrong_q.question.id next_single_wrong_q.id%}">下一题</a>
 		    {% else %}
 		        	下一题：没有了
 		    {% endif %}
@@ -189,7 +202,28 @@ $(document).ready(function() {
 		</p>
 		<p>&nbsp;</p>
     </div>
-
 </div>
 
+{# 模态框 本体 #}
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h3 class="modal-title">斩 题</h3>
+      </div>
+      <div class="modal-body">
+        <p id="tishi_kill"><b>是否将此题斩掉，斩掉后，该题将不会出现在错题集中&hellip;</b></p>
+      </div>
+      <div class="modal-footer">
+      	<form id='selection_form_kill'>
+    		{% csrf_token %}
+    		<input class="btn btn-info" id="kill_btn" type="submit" name="submit" value=" 斩 "/>
+    		<button id="kill_cancel_btn" type="button" class="btn btn-default" data-dismiss="modal">取 消</button>
+    	</form>
+        
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 {%endblock content%}
