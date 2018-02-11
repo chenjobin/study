@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import Exam_Topic,Exam_Topic_Second,Single_Q,Fill_Q,Fill_Answer,SingleWrongAnswer,FillWrongAnswer,\
-    ExaminationPaperType,ExaminationPaper,ExaminationPaperChapter,ExaminationPaperItem
+    ExaminationPaperType,ExaminationPaper,ExaminationPaperChapter,ExaminationPaperItem,ExamRecordRound,ExamRecordSingleDetail
 
 class Exam_TopicAdmin(admin.ModelAdmin):
     list_display = ('caption','id','date_added', 'date_update')
@@ -106,3 +106,13 @@ admin.site.register(ExaminationPaperType,ExaminationPaperTypeAdmin)
 admin.site.register(ExaminationPaper,ExaminationPaperAdmin)
 admin.site.register(ExaminationPaperChapter,ExaminationPaperChapterAdmin)
 
+# 我们使用@admin.register()装饰器替代了admin.site.register()方法。它们都提供了相同的功能。
+# 考试场次
+@admin.register(ExamRecordRound)
+class ExamRecordRoundAdmin(admin.ModelAdmin):
+    list_display = ['title', 'examination_paper','date_begin','time_limit','user']
+
+# 考试记录 单选题
+@admin.register(ExamRecordSingleDetail)
+class ExamRecordSingleDetailAdmin(admin.ModelAdmin):
+    list_display = ['user', 'exam_round','examination_paper','score','answer']
