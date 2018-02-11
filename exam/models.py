@@ -355,15 +355,45 @@ class ExamRecordRound(models.Model):
     date_end = models.DateTimeField('考试结束时间')
     time_limit=models.PositiveIntegerField('考试限制时间（分钟）',default=60)  #单位是分钟
 
+    def __str__(self):
+        if len(self.title)>50:
+            return self.title[:50] + '...'
+        else:
+            return self.title[:50]
+
     class Meta:
         verbose_name = '考试场次'
         verbose_name_plural = '考试场次'
+
+class ExamRecord(models.Model):
+    '''创建考试场次，以区分各次考试'''
+    user = models.ForeignKey(User,verbose_name='考生')
+    exam_round=models.ForeignKey(ExamRecordRound,verbose_name='考试场次')
+    examination_paper = models.ForeignKey(ExaminationPaper,verbose_name='所属试卷')
+    date_added = models.DateTimeField('试卷提交时间',auto_now_add=True)
+
+    exam_value = models.PositiveIntegerField('试卷总分值',default=0)
+    exam_score = models.PositiveIntegerField('试卷得分',default=0)
+    value_single = models.PositiveIntegerField('单选题分值',default=0)
+    score_single = models.PositiveIntegerField('单选题得分',default=0)
+    value_fill = models.PositiveIntegerField('填空题分值',default=0)
+    score_fill = models.PositiveIntegerField('填空题得分',default=0)
+
+    can_reexamine=models.BooleanField('重考',default=False)  #标记该试卷是否可以重考
+    reexamine_times = models.PositiveIntegerField('重考次数',default=0)
+    reexamine_remark=models.CharField('重考备注',max_length=200,default=u'')
+
+    class Meta:
+        verbose_name = '考试记录'
+        verbose_name_plural = '考试记录'
 
 class ExamRecordSingleDetail(models.Model):
     '''考试情况的具体各题目信息'''
     user = models.ForeignKey(User,verbose_name='用户')
     examination_paper = models.ForeignKey(ExaminationPaper,verbose_name='所属试卷')
     exam_round=models.ForeignKey(ExamRecordRound,verbose_name='考试场次')
+    # 所属考试记录
+    exam_record = models.ForeignKey(ExamRecord,verbose_name='所属考试')
 
     question=models.ForeignKey(Single_Q,verbose_name='题目')
     answer=models.CharField('用户答案',max_length=200,default=u'')
@@ -371,9 +401,6 @@ class ExamRecordSingleDetail(models.Model):
     score=models.PositiveIntegerField('本题得分',default=2)
     is_right=models.BooleanField('正误',default=True)  #标记该题是否答对了
 
-    date_added = models.DateTimeField('试卷提交时间',auto_now_add=True)
-    date_update = models.DateTimeField('更新时间',auto_now=True)
-
     class Meta:
-        verbose_name = '考试记录单选题'
-        verbose_name_plural = '考试记录单选题'
+        verbose_name = '考试记录-单选题'
+        verbose_name_plural = '考试记录-单选题'

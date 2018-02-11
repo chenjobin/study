@@ -1,6 +1,7 @@
 from django.contrib import admin
 from .models import Exam_Topic,Exam_Topic_Second,Single_Q,Fill_Q,Fill_Answer,SingleWrongAnswer,FillWrongAnswer,\
-    ExaminationPaperType,ExaminationPaper,ExaminationPaperChapter,ExaminationPaperItem,ExamRecordRound,ExamRecordSingleDetail
+    ExaminationPaperType,ExaminationPaper,ExaminationPaperChapter,ExaminationPaperItem,\
+    ExamRecordRound,ExamRecordSingleDetail,ExamRecord
 
 class Exam_TopicAdmin(admin.ModelAdmin):
     list_display = ('caption','id','date_added', 'date_update')
@@ -112,7 +113,18 @@ admin.site.register(ExaminationPaperChapter,ExaminationPaperChapterAdmin)
 class ExamRecordRoundAdmin(admin.ModelAdmin):
     list_display = ['title', 'examination_paper','date_begin','time_limit','user']
 
+# 考试记录 总括
+@admin.register(ExamRecord)
+class ExamRecordAdmin(admin.ModelAdmin):
+    list_display = ['exam_round','examination_paper','user', 'exam_value','exam_score','value_single','score_single',
+                    'value_fill','score_fill','reexamine_times']
+
+    fields = ['exam_round','examination_paper','user', ('exam_value','exam_score'),
+                    ('value_single','score_single'),('value_fill','score_fill'),'reexamine_times',
+              ('can_reexamine','reexamine_remark')]
+
 # 考试记录 单选题
 @admin.register(ExamRecordSingleDetail)
 class ExamRecordSingleDetailAdmin(admin.ModelAdmin):
     list_display = ['user', 'exam_round','examination_paper','score','answer']
+
