@@ -2,7 +2,7 @@ from django.shortcuts import render
 from .models import Single_Q,Fill_Q
 from django.http import HttpResponseRedirect,Http404
 from django import http
-from .models import SingleWrongAnswer,FillWrongAnswer,ExaminationPaper
+from .models import SingleWrongAnswer,FillWrongAnswer,ExaminationPaper,ExamRecordRound
 from django.core.urlresolvers import reverse #url逆向解析
 from django.contrib.auth.decorators import login_required
 
@@ -38,6 +38,15 @@ def exam_paper(request):
     data = {}
     data['exam_papers'] = exam_papers
     return render(request,'exam/exam_paper_list.html', data)
+
+# 模拟考试 列表页
+@login_required
+def exam_simulate(request):
+    exam_simulates = ExamRecordRound.objects.order_by('-date_begin')
+
+    data = {}
+    data['exam_simulates'] = exam_simulates
+    return render(request,'exam/exam_simulate_list.html', data)
 
 def detail_selection(request,selection_id):
     try:
@@ -142,6 +151,31 @@ def fill_check(request,fill_q_id):
 
 @login_required
 def exam_paper_show(request, exam_paper_id):
+    exam_paper,chapters,single_q_num, fill_q_num=exam_paper_show_process(request, exam_paper_id)
+    data = {}
+    data['exam_paper'] = exam_paper
+    data['chapters'] = chapters
+    data['count'] = u'该试卷为技术卷信息技术科目，分%s部分，共%s道选择题、%s道填空题' % \
+                    (len(chapters), single_q_num, fill_q_num)
+
+    return render(request,'exam/exam_paper.html', data)
+
+# 模拟考试 试卷显示
+@login_required
+def exam_simulate_show(request, exam_simulate_id,exam_paper_id):
+    exam_paper,chapters,single_q_num, fill_q_num=exam_paper_show_process(request, exam_paper_id)
+    data = {}
+    data['exam_paper'] = exam_paper
+    data['chapters'] = chapters
+    data['count'] = u'该试卷为技术卷信息技术科目，分%s部分，共%s道选择题、%s道填空题' % \
+                    (len(chapters), single_q_num, fill_q_num)
+    data['exam_simulate_id'] = exam_simulate_id
+
+    return render(request,'exam/exam_paper_simulate.html', data)
+
+# 试卷显示 具体过程 因两处地方用到，就做个独立函数出来
+@login_required
+def exam_paper_show_process(request, exam_paper_id):
     try:
         exam_paper = ExaminationPaper.objects.get(id=exam_paper_id)
         chapters = []
@@ -165,10 +199,7 @@ def exam_paper_show(request, exam_paper_id):
                     single_q_selections=Single_Q.objects.get(id=item.object_id)
                     # 下面五行是试卷页选择题answer选项，因为不在使用以往的直接答案，而是ABCD，所以也就用ABCD了
                     item.select_answers = []
-                    # item.select_answers.append(single_q_selections.answer)
-                    # item.select_answers.append(single_q_selections.select_2)
-                    # item.select_answers.append(single_q_selections.select_3)
-                    # item.select_answers.append(single_q_selections.select_4)
+
                     item.select_answers.append('A')
                     item.select_answers.append('B')
                     item.select_answers.append('C')
@@ -198,16 +229,10 @@ def exam_paper_show(request, exam_paper_id):
             chapter.items = items
             chapter.sort_num = i + 1
             chapters.append(chapter)
+            return exam_paper,chapters, single_q_num, fill_q_num
 
     except ExaminationPaper.DoesNotExist:
         raise Http404
-
-    data = {}
-    data['exam_paper'] = exam_paper
-    data['chapters'] = chapters
-    data['count'] = u'该试卷为技术卷信息技术科目，分%s部分，共%s道选择题、%s道填空题' % (len(chapters), single_q_num, fill_q_num)
-
-    return render(request,'exam/exam_paper.html', data)
 
 @login_required
 def exam_check(request):
@@ -467,3 +492,4 @@ def detail_fill_wrong(request,fill_q_id,fill_wrong_q_id):
     except Fill_Q.DoesNotExist:
         raise Http404
     return render(request,'exam/detail_fill_wrong.html',context)
+

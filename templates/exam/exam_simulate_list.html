@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{%block header%}
+	<h1>模拟考试</h1>
+{%endblock header%}
+
+
+{%block content%}
+
+<ul class="list-unstyled">
+    {% for exam_simulate in exam_simulates %}
+        <li>
+        	<h3>
+            <a href="{% url 'exam:exam_simulate_show' exam_simulate.id exam_simulate.examination_paper_id %}">{{exam_simulate.title|safe}}</a>
+            </h3>
+
+        </li>
+    {%empty%}
+        <li>No 试卷  have been added yet</li>
+    {%endfor%}
+</ul>
+
+{%endblock content%}

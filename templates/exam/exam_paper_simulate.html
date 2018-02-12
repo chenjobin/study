@@ -1,0 +1,279 @@
+{% extends 'base.html' %}
+{% block head %}
+ 
+<script>
+$(document).ready(function() {	
+//	{# 选择题选项随机排列  #}
+//	$("#question #select_li").each(function(){
+//			if(parseInt(Math.random()*2)==0){
+//				$(this).prependTo($(this).parent());
+//			}	
+//	});
+	
+	$('#exam_form').submit(function() {
+        $.ajax({
+                type: "POST",
+                data: $('#exam_form').serialize(),
+                url: "{% url 'exam:exam_check' %}",
+                cache: false,
+                dataType: "json",
+                beforeSend: function(){
+					$('#warning').click();
+					$("#tishi_pigai").html("正在处理，请稍后查看答题情况&hellip;");
+				},
+                success: function(json, textStatus) {
+			            if(json['success']){
+						    //window.location.reload();
+						    var data=json['right']
+							for(var i in data){  //序号从0开始的
+//								alert(data[i]);
+//								alert(json['message'])
+								if(data[i]){
+									$("#answer_right_"+String(json['message'][i])).show();
+									$("#answer_wrong_"+String(json['message'][i])).hide();
+									$("#answer_right_ce_"+String(json['message'][i])).show();
+									$("#answer_wrong_ce_"+String(json['message'][i])).hide();
+								}else{
+									$("#answer_wrong_"+String(json['message'][i])).show();
+									$("#answer_right_"+String(json['message'][i])).hide();
+									$("#answer_wrong_ce_"+String(json['message'][i])).show();
+									$("#answer_right_ce_"+String(json['message'][i])).hide();
+						     	}
+							}
+			            }else{
+			                if(json['code']==501){
+			                    alert('您尚未登录，请先登录才能进行练习。');
+			                }else if(json['code']==502){
+			                    alert('未能将错题放入错题集！');
+			                }else{
+			                    alert('练习出错，请刷新重试\n'+json['message']);
+			                }
+			            }
+			        },
+			    complete: function () {
+			    	$('#warning').click();
+			        $("#tishi_pigai").html("<b>批改已完毕，请查看，</b><br><b>各题的正误情况，会提示题目下方或者题目处</b>!");
+			        var speed=200;//滑动的速度
+			        $('body,html').animate({ scrollTop: 0 }, speed);
+			        return false;
+			    },
+                error: function (XMLHttpRequest, textStatus,errorThrown) {
+                    alert("练习出错，" + errorThrown);
+                }
+        });            
+        return false;
+    });
+	
+
+});
+	//选项被选中
+function selection_change(obj){
+	var comment=obj;
+	var $c=$(comment);
+//	$("input[name='selections_6']").attr("disabled",true);
+	var select_id=$c.attr("id").toString();
+	var select_answer=$c.attr("value");	
+	
+	$("#select_"+select_id+" input[name='selected']").val(select_answer);
+	$("#select_"+select_id+" input[name='selected_id']").val(select_id);
+}
+</script>
+
+<style>
+	/*试卷样式*/
+	.exam_paper_chapter h4{ font-weight: bold; padding-bottom: 0.5em; display: inline-block;}
+	.exam_paper_chapter ul{ list-style-type:none; counter-reset:sectioncounter; margin-left: 2em;font-size: medium;}
+	.exam_paper_items li:before{ content:counter(sectioncounter) "）"; counter-increment:sectioncounter;}  
+	/*选项样式*/
+	#question label{ 
+		display:inline-block;
+    	width:90%;
+	}
+	#question label:hover{ 
+    	box-shadow: 0 0 15px rgba(0,0,0,.5);
+	}
+    /*附加导航样式*/
+    ul.nav-tabs{
+        width: 80px;
+        margin-top: 5px;
+        border-radius: 4px;
+        border: 1px solid #ddd;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.067);
+    }
+    ul.nav-tabs li{
+        margin: 0;
+        border-top: 1px solid #ddd;
+    }
+    ul.nav-tabs li:first-child{
+        border-top: none;
+    }
+    ul.nav-tabs li a{
+        margin: 0;
+        padding: 7px 11px;
+        border-radius: 0;
+    }
+    ul.nav-tabs li.active a, ul.nav-tabs li.active a:hover{
+        color: #fff;
+        background: #0088cc;
+        border: 1px solid #0088cc;
+    }
+    ul.nav-tabs li:first-child a{
+        border-radius: 4px 4px 0 0;
+    }
+    ul.nav-tabs li:last-child a{
+        border-radius: 0 0 4px 4px;
+    }
+    ul.nav-tabs.affix{
+        top: 10px; /* Set the top position of pinned element */
+    }
+</style>
+
+{% endblock head %}
+
+{% block header %}	
+
+{% endblock header %}
+
+{% block content %}
+<div class="panel panel-default">
+    <div class="panel-heading">
+                <div class="subject_header">
+                    <h3>模拟考试：{{exam_paper}}</h3>
+                    <span class="clearfix"></span>
+                </div>
+    </div>
+
+    <div class="panel-body">
+        <div class="subject_content">
+            <div class="alert alert-info">
+                        <div class="subject_description">
+                            <h4 style=" font-weight: bold; margin-top: 10px;" id="shijuanjianjie">试卷简介</h4>
+                            <p>{{exam_paper.description|safe}}</p>
+                            <p>{{count}}</p>
+                            <p>创建时间：{{exam_paper.create_time|date:'Y-m-d'}}&nbsp;&nbsp;试卷类型：{{exam_paper.exam_paper_type}}</p>
+                            <p></p>
+                        </div>
+            </div>
+            <div class="row">
+				<div class="col-lg-11 col-xs-11 col-md-11">
+                    <form id='exam_form' >
+                    	{% csrf_token %}
+                        <div class="exam_paper_chapter">                            
+                            <ul class="exam_paper_items"> 
+                            {% for chapter in chapters %}
+                            	<h4>{{chapter.title}}</h4>  
+                            	{% for item in chapter.items %} 
+                            		{% if item.select_answers%}
+                                		<li id="exam_select_{{item.object_id}}">
+                                			{{item.title|safe}}
+									        <ul class="list-unstyled" id="question">
+									        	{% for answer in item.select_answers %}
+									           	<li id="select_li"><label id="label_li"><input id="{{item.object_id}}" name="selections_{{item.object_id}}" 
+									           		type="radio" value="{{answer|safe}}" onclick="selection_change(this)"/>
+									           	&nbsp;{{answer|safe}} </label> </li> 
+												{% endfor %}
+												<li id="select_{{item.object_id}}" style="display:none;">
+													<input  name="selected"  value="dd"/>
+													<input  name="selected_id"  value="{{item.object_id}}"/>
+												</li>
+									        </ul>
+									        	<div id='answer_right_{{item.object_id}}' class="alert alert-success" style="display: none;">
+										        	回答正确
+										        </div>
+										        <div id='answer_wrong_{{item.object_id}}' class="alert alert-danger" style="display:none ;">
+										        	回答错误
+										        </div>
+		                                </li>
+                                		<span class="clearfix"></span>
+                                		<hr style="margin:1px;margin-top:0px;height:1px;"/>
+                                	{% endif%}
+                            		{% if item.blank_nums%}
+                                		<li id="exam_fill_{{item.object_id}}">
+                                			{{item.title|safe}}
+									        <ul class="list-unstyled" id="">
+		                                		{% for i in item.blank_nums %}
+													<li><label>第{{i}}空：<input type="text" name="fill_qs" value="" 
+														style="width: 500px;" placeholder="第{{item.quest_number}}题第{{i}}空请点击此处作答"></label>
+														<span id='answer_right_fill_q_{{item.object_id}}_{{i}}' class="glyphicon glyphicon-ok" style="color: green;display: none;"></span>
+														<span id='answer_wrong_fill_q_{{item.object_id}}_{{i}}' class="glyphicon glyphicon-remove" style="color: red;display: none;"></span>
+														<input class="hidden" name="fill_q_id"  value="{{item.object_id}}"/>
+														<input class="hidden" name="fill_q_n"  value="{{i}}"/>
+													</li>
+												{% endfor %}
+									        </ul>
+		                                </li>
+                                		<span class="clearfix"></span>
+                                		<hr style="margin:1px;margin-top:0px;height:1px;"/>
+                                	{% endif%}
+                                {%endfor%}
+                            {%endfor%}
+                            </ul>
+                        </div>
+                        <span class="clearfix"></span>
+                        <div class="text-center">
+							<input class="btn btn-info" id="submit_btn" type="submit" name="submit" value="交卷/批改"/>
+                        </div>
+                    </form>
+
+                    <!-- JiaThis Button -->
+                    <div class="share_btns">
+                        <div style="padding-left: 2em;">
+                            <p></p>
+                            <p>
+                            	
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+		</div>
+    </div>
+</div>
+
+<button id="warning" type="button" class="hidden" data-toggle="modal" data-target="#myModal">
+  模态框
+</button>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">交卷或批改</h4>
+      </div>
+      <div class="modal-body">
+        <p id="tishi_pigai">正在处理，请稍后查看答题情况&hellip;</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关 闭</button>
+        <button id="datixiangqing" type="button" class="btn btn-primary" style="display: none;">查看答题详情</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+{% endblock content %}
+
+{% block left %}
+                    
+    <div class="col-xs-2 col-sm-pull-2 col-md-pull-2 col-lg-pull-1" id="myScrollspy">
+		<ul class="nav nav-tabs nav-stacked" data-spy="affix" data-offset-top="20">
+            {% for chapter in chapters %}
+                {% for item in chapter.items %} 
+                    {% if item.select_answers%}
+						<li><a href="#exam_select_{{item.object_id}}">第{{item.quest_number}}题
+						<span id='answer_right_ce_{{item.object_id}}' class="glyphicon glyphicon-ok" style="color: green;display: none;"></span>
+						<span id='answer_wrong_ce_{{item.object_id}}' class="glyphicon glyphicon-remove" style="color: red;display: none;"></span>
+						</a></li>							
+                    {% endif%}
+                    {% if item.blank_nums%}
+						<li><a href="#exam_fill_{{item.object_id}}">第{{item.quest_number}}题
+						</a></li>
+                    {% endif%}
+  
+                {% endfor%}
+            {% endfor%}
+
+		</ul>
+	</div>
+					
+{% endblock left %}
