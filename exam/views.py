@@ -249,6 +249,7 @@ def exam_check(request,exam_simulate_id=0,exam_paper_id=1):  #exam_simulate_id�
 
     answers=data.getlist('selected','not have a valid value')
     single_q_ids=data.getlist('selected_id')
+    single_question_values=data.getlist('selected_question_value')
 
     fill_answers=data.getlist('fill_qs')
     # 搜集每一个空的题目id 和 该空是属于本题第几空
@@ -264,27 +265,33 @@ def exam_check(request,exam_simulate_id=0,exam_paper_id=1):  #exam_simulate_id�
     right_wrong=[True]
     right_wrong_id_list=[2]
 
+    flag=False    #这个是用来判断是不是新生成的考试记录
     # 若为考试，则创建考试记录
     if exam_simulate_id !=0:
         exam_round=ExamRecordRound.objects.get(id=exam_simulate_id)
         exam_paper=ExaminationPaper.objects.get(id=exam_paper_id)
-        exam_records=ExamRecord.objects.filter(user=request.user,exam_round=exam_round,examination_paper=exam_paper)
-        if not exam_records.count():
-            exam_record = ExamRecord(user=request.user,exam_round=exam_round,examination_paper=exam_paper)
-            exam_record.save()
-
+        exam_record=ExamRecord.objects.filter(user=request.user,exam_round=exam_round,examination_paper=exam_paper)
+        if not exam_record.count():
+            exam_r = ExamRecord(user=request.user,exam_round=exam_round,examination_paper=exam_paper)
+            exam_r.save()
+            flag=True   #这个是用来判断是不是新生成的记录
         exam_record1=ExamRecord.objects.get(user=request.user,exam_round=exam_round,examination_paper=exam_paper)
+
+    # 预设总分值 总得分
+    single_question_value_total=0
+    single_question_score_total=0
 
     try:
         # 判断选择题
-        for single_q_id,answer in zip(single_q_ids,answers):
+        for single_q_id,answer,single_question_value in zip(single_q_ids,answers,single_question_values):
             context=single_check_answer(request,answer,single_q_id)
-            if exam_simulate_id != 0:
-                if context:
-                    score=2      #关于具体得分，后续在添加
-                else:
-                    score=0
-                single_record_add(request,answer,score,single_q_id,exam_simulate_id,exam_record1)
+            if flag:       # 如果是考试，放入考试记录-选择题
+                single_record_add(request,answer,single_question_value,context,
+                                  single_q_id,exam_simulate_id,exam_record1)
+            # 算出总分值、总得分
+            single_question_value_total=single_question_value_total+int(single_question_value)
+            if context:
+                single_question_score_total=single_question_score_total+int(single_question_value)
 
             right_wrong.append(context)
             right_wrong_id_list.append(single_q_id)
@@ -307,21 +314,29 @@ def exam_check(request,exam_simulate_id=0,exam_paper_id=1):  #exam_simulate_id�
         #     # 因为此处context返回的是list,所以用 + 进行连接
         #     right_wrong = right_wrong + context
 
+        #更新考试记录中的单选题得分、填空题得分
+        if flag:
+            exam_record.update(value_single=single_question_value_total,score_single=single_question_score_total)
+
         return ResponseJson(200, True, right_wrong,right_wrong_id_list)
     except:
         return ResponseJson(502, False, False,'you are wrong')
 
 # 添加考试记录-单选题
-def single_record_add(request,answer,score,single_q_id,exam_simulate_id=0,exam_record=None): #exam_simulate_id为0说明普通试卷校验，没有练习或模拟考试
+def single_record_add(request,answer,single_question_value,is_right,single_q_id,exam_simulate_id=0,exam_record=None): #exam_simulate_id为0说明普通试卷校验，没有练习或模拟考试
     single_q=Single_Q.objects.get(id=single_q_id)
-
-    # 如果是考试，放入考试记录-选择题
+    if is_right:
+        score=single_question_value
+    else:
+        score=0
     if exam_simulate_id !=0:
         single_records=ExamRecordSingleDetail.objects.filter(user=request.user,question=single_q,
                                     exam_record=exam_record)
+        # 收入考试记录-单选题
         if not single_records.count():
             single_record = ExamRecordSingleDetail(user=request.user,question=single_q,exam_record=exam_record,
-                                                   answer=answer,score=score)
+                                                   answer=answer,score=score,question_value=single_question_value,
+                                                   is_right=is_right)
             single_record.save()
 
 # 单选题答案验证，OK

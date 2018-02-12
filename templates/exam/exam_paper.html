@@ -173,7 +173,8 @@ function selection_change(obj){
 									           	&nbsp;{{answer|safe}} </label> </li> 
 												{% endfor %}
 												<li id="select_{{item.object_id}}" style="display:none;">
-													<input  name="selected"  value="未填写"/>
+													<input  name="selected"  value=""/>
+													<input  name="selected_question_value"  value="{{item.question_value}}"/>
 													<input  name="selected_id"  value="{{item.object_id}}"/>
 												</li>
 									        </ul>

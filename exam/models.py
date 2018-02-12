@@ -399,7 +399,7 @@ class ExamRecordSingleDetail(models.Model):
     answer=models.CharField('用户答案',max_length=200,default=u'')
     question_value = models.PositiveIntegerField('本题分值',default=2)
     score=models.PositiveIntegerField('本题得分',default=2)
-    is_right=models.BooleanField('正误',default=True)  #标记该题是否答对了
+    is_right=models.BooleanField('正误',default=False)  #标记该题是否答对了
 
     class Meta:
         verbose_name = '考试记录-单选题'
