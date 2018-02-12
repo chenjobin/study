@@ -14,7 +14,7 @@ $(document).ready(function() {
         $.ajax({
                 type: "POST",
                 data: $('#exam_form').serialize(),
-                url: "{% url 'exam:exam_check' %}",
+                url: "{% url 'exam:exam_check' exam_round.id %}",
                 cache: false,
                 dataType: "json",
                 beforeSend: function(){
@@ -138,7 +138,7 @@ function selection_change(obj){
 <div class="panel panel-default">
     <div class="panel-heading">
                 <div class="subject_header">
-                    <h3>模拟考试：{{exam_paper}}</h3>
+                    <h3>模拟考试：{{exam_round.title}}</h3>
                     <span class="clearfix"></span>
                 </div>
     </div>
@@ -148,7 +148,7 @@ function selection_change(obj){
             <div class="alert alert-info">
                         <div class="subject_description">
                             <h4 style=" font-weight: bold; margin-top: 10px;" id="shijuanjianjie">试卷简介</h4>
-                            <p>{{exam_paper.description|safe}}</p>
+                            <p>{{exam_paper|safe}}</p>
                             <p>{{count}}</p>
                             <p>创建时间：{{exam_paper.create_time|date:'Y-m-d'}}&nbsp;&nbsp;试卷类型：{{exam_paper.exam_paper_type}}</p>
                             <p></p>

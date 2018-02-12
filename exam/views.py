@@ -169,7 +169,9 @@ def exam_simulate_show(request, exam_simulate_id,exam_paper_id):
     data['chapters'] = chapters
     data['count'] = u'该试卷为技术卷信息技术科目，分%s部分，共%s道选择题、%s道填空题' % \
                     (len(chapters), single_q_num, fill_q_num)
-    data['exam_simulate_id'] = exam_simulate_id
+
+    exam_round=ExamRecordRound.objects.get(id=exam_simulate_id)
+    data['exam_round'] = exam_round
 
     return render(request,'exam/exam_paper_simulate.html', data)
 
@@ -229,13 +231,13 @@ def exam_paper_show_process(request, exam_paper_id):
             chapter.items = items
             chapter.sort_num = i + 1
             chapters.append(chapter)
-            return exam_paper,chapters, single_q_num, fill_q_num
+        return exam_paper,chapters, single_q_num, fill_q_num
 
     except ExaminationPaper.DoesNotExist:
         raise Http404
 
 @login_required
-def exam_check(request):
+def exam_check(request,exam_simulate_id=0):  #exam_simulate_id为0说明普通试卷校验，没有练习或模拟考试
     data = request.POST.copy()
     try:
         user_is_authenticated = request.user.is_authenticated()
