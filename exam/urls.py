@@ -27,7 +27,7 @@ urlpatterns=[
     url(r'^post3/$',views.exam_check,name='exam_check'),
     url(r'^exam_simulate/$',views.exam_simulate,name='exam_simulate'),
     url(r'^exam_simulate/(?P<exam_simulate_id>\d+),(?P<exam_paper_id>\d+)/$',views.exam_simulate_show,name='exam_simulate_show'),
-    url(r'^post3/(?P<exam_simulate_id>\d+)$',views.exam_check,name='exam_check'),
+    url(r'^post3/(?P<exam_simulate_id>\d+),(?P<exam_paper_id>\d+)$',views.exam_check,name='exam_check'),
 
     # 错题集
     url(r'^single_wrong/$',views.single_wrong,name='single_wrong'),

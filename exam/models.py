@@ -366,7 +366,7 @@ class ExamRecordRound(models.Model):
         verbose_name_plural = '考试场次'
 
 class ExamRecord(models.Model):
-    '''创建考试场次，以区分各次考试'''
+    '''考试记录，以区分各次考试'''
     user = models.ForeignKey(User,verbose_name='考生')
     exam_round=models.ForeignKey(ExamRecordRound,verbose_name='考试场次')
     examination_paper = models.ForeignKey(ExaminationPaper,verbose_name='所属试卷')
@@ -381,7 +381,7 @@ class ExamRecord(models.Model):
 
     can_reexamine=models.BooleanField('重考',default=False)  #标记该试卷是否可以重考
     reexamine_times = models.PositiveIntegerField('重考次数',default=0)
-    reexamine_remark=models.CharField('重考备注',max_length=200,default=u'')
+    reexamine_remark=models.CharField('重考备注',max_length=200,default=u'无')
 
     class Meta:
         verbose_name = '考试记录'
@@ -390,8 +390,8 @@ class ExamRecord(models.Model):
 class ExamRecordSingleDetail(models.Model):
     '''考试情况的具体各题目信息'''
     user = models.ForeignKey(User,verbose_name='用户')
-    examination_paper = models.ForeignKey(ExaminationPaper,verbose_name='所属试卷')
-    exam_round=models.ForeignKey(ExamRecordRound,verbose_name='考试场次')
+    # examination_paper = models.ForeignKey(ExaminationPaper,verbose_name='所属试卷')
+    # exam_round=models.ForeignKey(ExamRecordRound,verbose_name='考试场次')
     # 所属考试记录
     exam_record = models.ForeignKey(ExamRecord,verbose_name='所属考试')
 
@@ -404,3 +404,7 @@ class ExamRecordSingleDetail(models.Model):
     class Meta:
         verbose_name = '考试记录-单选题'
         verbose_name_plural = '考试记录-单选题'
+
+    def question_format(self):
+        return format_html(self.question[:100]+'...',)
+    question_format.short_description=u'题目'

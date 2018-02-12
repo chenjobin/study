@@ -2,7 +2,8 @@ from django.shortcuts import render
 from .models import Single_Q,Fill_Q
 from django.http import HttpResponseRedirect,Http404
 from django import http
-from .models import SingleWrongAnswer,FillWrongAnswer,ExaminationPaper,ExamRecordRound
+from .models import SingleWrongAnswer,FillWrongAnswer,ExaminationPaper,\
+    ExamRecordRound,ExamRecordSingleDetail,ExamRecord
 from django.core.urlresolvers import reverse #url逆向解析
 from django.contrib.auth.decorators import login_required
 
@@ -237,7 +238,7 @@ def exam_paper_show_process(request, exam_paper_id):
         raise Http404
 
 @login_required
-def exam_check(request,exam_simulate_id=0):  #exam_simulate_id为0说明普通试卷校验，没有练习或模拟考试
+def exam_check(request,exam_simulate_id=0,exam_paper_id=1):  #exam_simulate_id为0说明普通试卷校验，没有练习或模拟考试
     data = request.POST.copy()
     try:
         user_is_authenticated = request.user.is_authenticated()
@@ -263,11 +264,28 @@ def exam_check(request,exam_simulate_id=0):  #exam_simulate_id为0说明普通�
     right_wrong=[True]
     right_wrong_id_list=[2]
 
+    # 若为考试，则创建考试记录
+    if exam_simulate_id !=0:
+        exam_round=ExamRecordRound.objects.get(id=exam_simulate_id)
+        exam_paper=ExaminationPaper.objects.get(id=exam_paper_id)
+        exam_records=ExamRecord.objects.filter(user=request.user,exam_round=exam_round,examination_paper=exam_paper)
+        if not exam_records.count():
+            exam_record = ExamRecord(user=request.user,exam_round=exam_round,examination_paper=exam_paper)
+            exam_record.save()
+
+        exam_record1=ExamRecord.objects.get(user=request.user,exam_round=exam_round,examination_paper=exam_paper)
+
     try:
         # 判断选择题
         for single_q_id,answer in zip(single_q_ids,answers):
-            # pass
             context=single_check_answer(request,answer,single_q_id)
+            if exam_simulate_id != 0:
+                if context:
+                    score=2      #关于具体得分，后续在添加
+                else:
+                    score=0
+                single_record_add(request,answer,score,single_q_id,exam_simulate_id,exam_record1)
+
             right_wrong.append(context)
             right_wrong_id_list.append(single_q_id)
 
@@ -293,8 +311,21 @@ def exam_check(request,exam_simulate_id=0):  #exam_simulate_id为0说明普通�
     except:
         return ResponseJson(502, False, False,'you are wrong')
 
+# 添加考试记录-单选题
+def single_record_add(request,answer,score,single_q_id,exam_simulate_id=0,exam_record=None): #exam_simulate_id为0说明普通试卷校验，没有练习或模拟考试
+    single_q=Single_Q.objects.get(id=single_q_id)
+
+    # 如果是考试，放入考试记录-选择题
+    if exam_simulate_id !=0:
+        single_records=ExamRecordSingleDetail.objects.filter(user=request.user,question=single_q,
+                                    exam_record=exam_record)
+        if not single_records.count():
+            single_record = ExamRecordSingleDetail(user=request.user,question=single_q,exam_record=exam_record,
+                                                   answer=answer,score=score)
+            single_record.save()
+
 # 单选题答案验证，OK
-def single_check_answer(request,answer,single_q_id):
+def single_check_answer(request,answer,single_q_id): #exam_simulate_id为0说明普通试卷校验，没有练习或模拟考试
     single_q=Single_Q.objects.get(id=single_q_id)
     correct_answer=single_q.answer
     correct_answer=''.join(correct_answer.split())   #去除空格
@@ -308,6 +339,15 @@ def single_check_answer(request,answer,single_q_id):
 
     # get方法才可以使 类调用内部函数，filter做不到，所以多弄搞了个single_wrong1
     single_wrong1=SingleWrongAnswer.objects.get(user=request.user,question=single_q)
+
+    # # 如果是考试，放入考试记录-选择题
+    # if exam_simulate_id !=0:
+    #     single_records=ExamRecordSingleDetail.objects.filter(user=request.user,question=single_q,
+    #                                 exam_record=exam_record)
+    #     if not single_records.count():
+    #         single_record = ExamRecordSingleDetail(user=request.user,question=single_q,exam_record=exam_record,
+    #                                                answer=answer)
+    #         single_record.save()
 
     if answer==correct_answer:
         if single_wrong1.first_right_times==0:

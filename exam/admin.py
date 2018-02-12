@@ -126,5 +126,5 @@ class ExamRecordAdmin(admin.ModelAdmin):
 # 考试记录 单选题
 @admin.register(ExamRecordSingleDetail)
 class ExamRecordSingleDetailAdmin(admin.ModelAdmin):
-    list_display = ['user', 'exam_round','examination_paper','score','answer']
+    list_display = ['user', 'question_value','score','answer','question']
 
