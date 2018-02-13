@@ -255,6 +255,7 @@ def exam_check(request,exam_simulate_id=0,exam_paper_id=1):  #exam_simulate_id�
     # 搜集每一个空的题目id 和 该空是属于本题第几空
     fill_q_ids=data.getlist('fill_q_id')
     fill_q_ns=data.getlist('fill_q_n')
+    fill_question_values=data.getlist('fill_question_value')
     # 弄一个去重的fill_q_ids
     news_ids = []
     for id in fill_q_ids:
@@ -275,11 +276,13 @@ def exam_check(request,exam_simulate_id=0,exam_paper_id=1):  #exam_simulate_id�
             exam_r = ExamRecord(user=request.user,exam_round=exam_round,examination_paper=exam_paper)
             exam_r.save()
             flag=True   #这个是用来判断是不是新生成的记录
+
         exam_record1=ExamRecord.objects.get(user=request.user,exam_round=exam_round,examination_paper=exam_paper)
 
-    # 预设总分值 总得分
+    # 预设各模块总分值 总得分
     single_question_value_total=0
     single_question_score_total=0
+    fill_question_value_total=0
 
     try:
         # 判断选择题
@@ -288,10 +291,10 @@ def exam_check(request,exam_simulate_id=0,exam_paper_id=1):  #exam_simulate_id�
             if flag:       # 如果是考试，放入考试记录-选择题
                 single_record_add(request,answer,single_question_value,context,
                                   single_q_id,exam_simulate_id,exam_record1)
-            # 算出总分值、总得分
-            single_question_value_total=single_question_value_total+int(single_question_value)
-            if context:
-                single_question_score_total=single_question_score_total+int(single_question_value)
+                # 算出总分值、总得分
+                single_question_value_total=single_question_value_total+int(single_question_value)
+                if context:
+                    single_question_score_total=single_question_score_total+int(single_question_value)
 
             right_wrong.append(context)
             right_wrong_id_list.append(single_q_id)
@@ -316,7 +319,15 @@ def exam_check(request,exam_simulate_id=0,exam_paper_id=1):  #exam_simulate_id�
 
         #更新考试记录中的单选题得分、填空题得分
         if flag:
-            exam_record.update(value_single=single_question_value_total,score_single=single_question_score_total)
+            for fill_question_value in fill_question_values:
+                fill_question_value_total=fill_question_value_total+int(fill_question_value)
+            exam_record.update(value_single=single_question_value_total,score_single=single_question_score_total,
+                                   value_fill=fill_question_value_total,)
+                                   # exam_value=single_question_value_total+fill_question_value_total,
+                                   # exam_score=single_question_score_total)
+            # get方法才可以使 类调用内部函数
+            exam_record2=ExamRecord.objects.get(user=request.user,exam_round=exam_round,examination_paper=exam_paper)
+            exam_record2.sum_value_score()    #算出总分值 、总分
 
         return ResponseJson(200, True, right_wrong,right_wrong_id_list)
     except:

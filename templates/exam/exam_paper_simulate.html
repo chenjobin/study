@@ -44,7 +44,7 @@ $(document).ready(function() {
 			                if(json['code']==501){
 			                    alert('您尚未登录，请先登录才能进行练习。');
 			                }else if(json['code']==502){
-			                    alert('未能将错题放入错题集！');
+			                    alert('提交试卷运行出错了！');
 			                }else{
 			                    alert('练习出错，请刷新重试\n'+json['message']);
 			                }
@@ -191,6 +191,7 @@ function selection_change(obj){
                             		{% if item.blank_nums%}
                                 		<li id="exam_fill_{{item.object_id}}">
                                 			{{item.title|safe}}
+                                			<input class="hidden" name="fill_question_value"  value="{{item.question_value}}"/>
 									        <ul class="list-unstyled" id="">
 		                                		{% for i in item.blank_nums %}
 													<li><label>第{{i}}空：<input type="text" name="fill_qs" value="" 

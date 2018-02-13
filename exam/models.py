@@ -387,6 +387,11 @@ class ExamRecord(models.Model):
         verbose_name = '考试记录'
         verbose_name_plural = '考试记录'
 
+    def sum_value_score(self):    #用起来没有效果，不知原因
+        self.exam_value = self.value_single + self.value_fill
+        self.exam_score = self.score_single + self.score_fill
+        self.save(update_fields=['exam_value','exam_score'])
+
 class ExamRecordSingleDetail(models.Model):
     '''考试情况的具体各题目信息'''
     user = models.ForeignKey(User,verbose_name='用户')
