@@ -3,7 +3,7 @@ from .models import Single_Q,Fill_Q
 from django.http import HttpResponseRedirect,Http404
 from django import http
 from .models import SingleWrongAnswer,FillWrongAnswer,ExaminationPaper,\
-    ExamRecordRound,ExamRecordSingleDetail,ExamRecord
+    ExamRecordRound,ExamRecordSingleDetail,ExamRecord,ExamRecordFillDetail
 from django.core.urlresolvers import reverse #url逆向解析
 from django.contrib.auth.decorators import login_required
 
@@ -302,10 +302,13 @@ def exam_check(request,exam_simulate_id=0,exam_paper_id=1):  #exam_simulate_id�
         # 判断填空题
         i=0     #i和j用来标记fill_answers的起始，也就是找到对应id的对应answer
         j=0
+        k=0
         for fill_q_id in news_ids:
             i = j
             j = j + fill_q_ids.count(fill_q_id)
-            context,context_n_list=fill_check_answer(request,fill_answers[i:j],fill_q_id)
+            context,context_n_list=fill_check_answer(request,fill_answers[i:j],fill_q_id,
+                                                     fill_question_values[k],flag,exam_record1)
+            k += 1
             # 因为此处context返回的是list,所以用 + 进行连接
             right_wrong = right_wrong + context
             right_wrong_id_list = right_wrong_id_list + context_n_list
@@ -350,6 +353,23 @@ def single_record_add(request,answer,single_question_value,is_right,single_q_id=
                                                    is_right=is_right)
         single_record.save()
 
+# 添加考试记录-填空题
+def fill_record_add(request,answer,fill_question_value,is_right,fill_q,fill_n,exam_record=None): #exam_simulate_id为0说明普通试卷校验，没有练习或模拟考试
+    # fill_q=Fill_Q.objects.get(id=fill_q_id)
+    if is_right:
+        score=2  #预设得分为2，后续再变
+    else:
+        score=0
+
+    fill_records=ExamRecordFillDetail.objects.filter(user=request.user,question=fill_q,fill_n=fill_n,
+                                        exam_record=exam_record)
+    # 收入考试记录-填空题
+    if not fill_records.count():
+        fill_record = ExamRecordFillDetail(user=request.user,question=fill_q,exam_record=exam_record,
+                                                       answer=answer,score=score,question_value=fill_question_value,
+                                                       is_right=is_right,fill_n=fill_n)
+        fill_record.save()
+
 # 单选题答案验证，OK
 def single_check_answer(request,answer,single_q_id): #exam_simulate_id为0说明普通试卷校验，没有练习或模拟考试
     single_q=Single_Q.objects.get(id=single_q_id)
@@ -379,7 +399,7 @@ def single_check_answer(request,answer,single_q_id): #exam_simulate_id为0说明
         single_wrong1.show_determine()
         return False
 
-def fill_check_answer(request,fill_q_answers,fill_q_id):
+def fill_check_answer(request,fill_q_answers,fill_q_id,fill_question_value,flag=False,exam_record=None):
     '''填空题答案验证'''
     fill_q=Fill_Q.objects.get(id=fill_q_id)
     correct_answer=[]
@@ -414,10 +434,12 @@ def fill_check_answer(request,fill_q_answers,fill_q_id):
         current_correct_answer[3]=''.join(current_correct_answer[3].split())
         fill_q_answers[i]=''.join(fill_q_answers[i].split())
 
+        is_right=False
         if fill_q_answers[i]==current_correct_answer[0] \
                 or fill_q_answers[i]==current_correct_answer[1] \
                 or fill_q_answers[i]==current_correct_answer[2] \
                 or fill_q_answers[i]==current_correct_answer[3]:
+            is_right=True
             right_wrong.append(True)
             context_n_list.append('fill_q_'+ fill_q_id + '_' + str(i+1))
             if fill_wrong1.first_right_times==0:
@@ -431,11 +453,9 @@ def fill_check_answer(request,fill_q_answers,fill_q_id):
             fill_wrong1.show_determine()
             fill_wrong.update(wrong_answer=fill_q_answers[i])
             # pass
-    # if right_wrong[0]==True:
-    #     return ResponseJson(200, True, True,correct_answer)
-    # else:
-    #     return ResponseJson(200, True, False,correct_answer)
-    # 收入错题集，如果没有全部答对
+        # 收入 考试记录-填空题
+        if flag:
+            fill_record_add(request,fill_q_answers[i],fill_question_value,is_right,fill_q,i+1,exam_record)
 
     return right_wrong,context_n_list
 
