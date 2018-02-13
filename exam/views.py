@@ -290,7 +290,7 @@ def exam_check(request,exam_simulate_id=0,exam_paper_id=1):  #exam_simulate_id�
             context=single_check_answer(request,answer,single_q_id)
             if flag:       # 如果是考试，放入考试记录-选择题
                 single_record_add(request,answer,single_question_value,context,
-                                  single_q_id,exam_simulate_id,exam_record1)
+                                  single_q_id,exam_record1)
                 # 算出总分值、总得分
                 single_question_value_total=single_question_value_total+int(single_question_value)
                 if context:
@@ -334,21 +334,21 @@ def exam_check(request,exam_simulate_id=0,exam_paper_id=1):  #exam_simulate_id�
         return ResponseJson(502, False, False,'you are wrong')
 
 # 添加考试记录-单选题
-def single_record_add(request,answer,single_question_value,is_right,single_q_id,exam_simulate_id=0,exam_record=None): #exam_simulate_id为0说明普通试卷校验，没有练习或模拟考试
+def single_record_add(request,answer,single_question_value,is_right,single_q_id=0,exam_record=None): #exam_simulate_id为0说明普通试卷校验，没有练习或模拟考试
     single_q=Single_Q.objects.get(id=single_q_id)
     if is_right:
         score=single_question_value
     else:
         score=0
-    if exam_simulate_id !=0:
-        single_records=ExamRecordSingleDetail.objects.filter(user=request.user,question=single_q,
+
+    single_records=ExamRecordSingleDetail.objects.filter(user=request.user,question=single_q,
                                     exam_record=exam_record)
-        # 收入考试记录-单选题
-        if not single_records.count():
-            single_record = ExamRecordSingleDetail(user=request.user,question=single_q,exam_record=exam_record,
+    # 收入考试记录-单选题
+    if not single_records.count():
+        single_record = ExamRecordSingleDetail(user=request.user,question=single_q,exam_record=exam_record,
                                                    answer=answer,score=score,question_value=single_question_value,
                                                    is_right=is_right)
-            single_record.save()
+        single_record.save()
 
 # 单选题答案验证，OK
 def single_check_answer(request,answer,single_q_id): #exam_simulate_id为0说明普通试卷校验，没有练习或模拟考试
@@ -365,15 +365,6 @@ def single_check_answer(request,answer,single_q_id): #exam_simulate_id为0说明
 
     # get方法才可以使 类调用内部函数，filter做不到，所以多弄搞了个single_wrong1
     single_wrong1=SingleWrongAnswer.objects.get(user=request.user,question=single_q)
-
-    # # 如果是考试，放入考试记录-选择题
-    # if exam_simulate_id !=0:
-    #     single_records=ExamRecordSingleDetail.objects.filter(user=request.user,question=single_q,
-    #                                 exam_record=exam_record)
-    #     if not single_records.count():
-    #         single_record = ExamRecordSingleDetail(user=request.user,question=single_q,exam_record=exam_record,
-    #                                                answer=answer)
-    #         single_record.save()
 
     if answer==correct_answer:
         if single_wrong1.first_right_times==0:

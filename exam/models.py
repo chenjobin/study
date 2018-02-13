@@ -83,12 +83,12 @@ class Single_Q(models.Model):
 
     def __str__(self):
         '''返回模型的字符串表示'''
-        # if len(self.title)>50:
-        #     return format_html(self.title[:50]+'...',)
-        # else:
-        #     return format_html(self.title,)
+        if len(self.title)>20:
+            return format_html(self.title[:20]+'...',)
+        else:
+            return format_html(self.title,)
         # 发现如果title中如果table，那么会对错题列表造成错误，所以，
-        return format_html(self.title,)
+        # return format_html(self.title,)
     #  admin页面，题目 html代码解析
     def title_format(self):
         return format_html(self.title[:200]+'...',)
@@ -122,12 +122,12 @@ class Fill_Q(models.Model):
 
     def __str__(self):
         '''返回模型的字符串表示'''
-        # if len(self.title)>50:
-        #     return format_html(self.title[:50]+'...',)
-        # else:
-        #     return format_html(self.title,)
+        if len(self.title)>20:
+            return format_html(self.title[:20]+'...',)
+        else:
+            return format_html(self.title,)
         # 发现如果title中如果table，那么会对错题列表造成错误，所以，
-        return format_html(self.title,)
+        # return format_html(self.title,)
     #  admin页面，题目 html代码解析
     def title_format(self):
         return format_html(self.title[:100]+'...',)
@@ -383,6 +383,14 @@ class ExamRecord(models.Model):
     reexamine_times = models.PositiveIntegerField('重考次数',default=0)
     reexamine_remark=models.CharField('重考备注',max_length=200,default=u'无')
 
+    #这个获取外键的某个值，记住
+    def __str__(self):
+        '''返回模型的字符串表示'''
+        if len(self.exam_round.title)>50:
+            return self.exam_round.title[:50]+'...'
+        else:
+            return self.exam_round.title
+
     class Meta:
         verbose_name = '考试记录'
         verbose_name_plural = '考试记录'
@@ -403,7 +411,7 @@ class ExamRecordSingleDetail(models.Model):
     question=models.ForeignKey(Single_Q,verbose_name='题目')
     answer=models.CharField('用户答案',max_length=200,default=u'')
     question_value = models.PositiveIntegerField('本题分值',default=2)
-    score=models.PositiveIntegerField('本题得分',default=2)
+    score=models.PositiveIntegerField('本题得分',default=0)
     is_right=models.BooleanField('正误',default=False)  #标记该题是否答对了
 
     class Meta:
@@ -413,3 +421,20 @@ class ExamRecordSingleDetail(models.Model):
     def question_format(self):
         return format_html(self.question[:100]+'...',)
     question_format.short_description=u'题目'
+
+class ExamRecordFillDetail(models.Model):
+    '''考试情况的具体各题目信息'''
+    user = models.ForeignKey(User,verbose_name='用户')
+    exam_record = models.ForeignKey(ExamRecord,verbose_name='所属考试')
+
+    question=models.ForeignKey(Fill_Q,verbose_name='题目')
+    question_value = models.PositiveIntegerField('本题分值',default=2)
+
+    answer=models.CharField('用户答案',max_length=200,default=u'')
+    fill_n=models.PositiveIntegerField('第N空',default=0)
+    score=models.PositiveIntegerField('本空得分',default=0)
+    is_right=models.BooleanField('正误',default=False)  #标记该题该空是否答对了
+
+    class Meta:
+        verbose_name = '考试记录-填空题'
+        verbose_name_plural = '考试记录-填空题'

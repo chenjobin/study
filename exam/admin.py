@@ -1,7 +1,7 @@
 from django.contrib import admin
 from .models import Exam_Topic,Exam_Topic_Second,Single_Q,Fill_Q,Fill_Answer,SingleWrongAnswer,FillWrongAnswer,\
     ExaminationPaperType,ExaminationPaper,ExaminationPaperChapter,ExaminationPaperItem,\
-    ExamRecordRound,ExamRecordSingleDetail,ExamRecord
+    ExamRecordRound,ExamRecordSingleDetail,ExamRecord,ExamRecordFillDetail
 
 class Exam_TopicAdmin(admin.ModelAdmin):
     list_display = ('caption','id','date_added', 'date_update')
@@ -126,5 +126,9 @@ class ExamRecordAdmin(admin.ModelAdmin):
 # 考试记录 单选题
 @admin.register(ExamRecordSingleDetail)
 class ExamRecordSingleDetailAdmin(admin.ModelAdmin):
-    list_display = ['user', 'question_value','score','answer','question']
+    list_display = ['user','exam_record','question_value','score','answer','is_right','question']
 
+# 考试记录 填空题
+@admin.register(ExamRecordFillDetail)
+class ExamRecordFillDetailAdmin(admin.ModelAdmin):
+    list_display = ['user','exam_record','question_value','fill_n','score','answer','is_right','question']
